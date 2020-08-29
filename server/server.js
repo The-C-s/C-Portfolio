@@ -27,11 +27,7 @@ app.get('/api', (req, res) => {
 });
 
 // Start the server
-<<<<<<< HEAD
-const server = app.listen(port, (error) => {
-=======
 const server = app.listen(process.env.PORT, (error) => {
->>>>>>> vic_deployment_testing
     if (error) return console.log(`Error: ${error}`);
  
     console.log(`Server listening on port ${server.address().port}`);
