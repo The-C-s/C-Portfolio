@@ -1,7 +1,40 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {MongoClient} = require('mongodb');
 const port = 3000;
 const app = express();
+
+
+//mongoDB access
+async function testMongoDB() {
+  const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
+  const client = new MongoClient(uri);
+  await client.connect();
+  await listDatabases(client);
+  try {
+      //Connect to the MongoDB cluster
+      await client.connect();
+
+      //Make the appropriate DB calls
+      await listDatabases(client);
+
+  } catch (e) {
+    console.error(e);
+  } finally {
+      await client.close();
+  }
+
+}
+
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
+
+
 
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
@@ -16,6 +49,21 @@ app.get('/', (req, res) => {
     	message: '👀'
     });
 });
+
+app.get('/test', (req, res) => {
+    console.log(`URL: ${req.url}`);
+
+    res.send({
+    	message: '👀'
+    });
+});
+
+app.get('/database', (req, res) => {
+    testMongoDB().catch(console.error);
+    res.send({
+        message: 'Testing the Database'
+    });
+}); 
 
 app.get('/api', (req, res) => {
 	console.log(`URL: ${req.url}`);
