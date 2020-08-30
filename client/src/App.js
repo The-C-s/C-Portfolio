@@ -5,13 +5,14 @@ import {Provider} from 'react-redux';
 import './App.css';
 
 import Navbar from "./components/Navbar";
+import Landing from "./components/Landing";
  
 function App() {
  return (
     <Router>
       <div className="App">
         <Navbar/>
-        <Route/>
+        <Route path="/" component = {Landing} exact />
         <Switch>
         </Switch>   
       </div>
