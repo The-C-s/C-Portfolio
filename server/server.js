@@ -75,7 +75,7 @@ app.get('/api', (req, res) => {
 });
 
 // Start the server
-const server = app.listen(port, (error) => {
+const server = app.listen(process.env.PORT, (error) => {
     if (error) return console.log(`Error: ${error}`);
  
     console.log(`Server listening on port ${server.address().port}`);
