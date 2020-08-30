@@ -8,7 +8,7 @@ class Landing extends Component {
         <div className="row">
           <div className="col-sm-12 ">
             <h1>
-              Introducting, the one-stop Portfolio Network :  {" "}
+              Introducing, the one-stop Portfolio Network :  {" "}
               <span style={{ fontFamily: "sans-serif" }}>cPortfolio</span>
             </h1>
             <p><i>Showcase your your own personalised projects, achievements, journals and other interesting 
