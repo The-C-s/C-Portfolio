@@ -7,7 +7,7 @@ const app = express();
 
 //mongoDB access
 async function testMongoDB() {
-  const uri = "mongodb+srv://TheCs:sJHIy1dptoVHPT1d@c-portfolio.surpd.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
+  const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
   const client = new MongoClient(uri);
   await client.connect();
   await listDatabases(client);
@@ -58,7 +58,7 @@ app.get('/test', (req, res) => {
     });
 });
 
-app.get('/Mongo', (req, res) => {
+app.get('/database', (req, res) => {
     testMongoDB().catch(console.error);
     res.send({
         message: 'Testing the Database'
