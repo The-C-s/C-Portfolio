@@ -3,8 +3,7 @@ const bodyParser = require('body-parser');
 const {MongoClient} = require('mongodb');
 const port = 3000;
 const app = express();
-const path = require('path'); 
-
+const path = require('path');
 //mongoDB access
 async function testMongoDB() {
   const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
@@ -42,7 +41,8 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }));
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+//Used to run react
+app.use(express.static('client/build'));
 
 app.get('/', (req, res) => {
     console.log(`URL: ${req.url}`);
