@@ -4,6 +4,9 @@ const {MongoClient} = require('mongodb');
 const port = 3000;
 const app = express();
 const path = require('path');
+const cors = require('cors');
+const jwt = require('./_helpers/jwt');
+
 //mongoDB access
 async function testMongoDB() {
   const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
@@ -32,14 +35,16 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
-
-
-
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true,
 }));
+app.use(cors());
+
+// use JWT auth to secure the api
+app.use(jwt());
+
 
 //Used to run react
 app.use(express.static('client/build'));
@@ -67,14 +72,8 @@ app.get('/database', (req, res) => {
     });
 }); 
 
-app.get('/api', (req, res) => {
-	console.log(`URL: ${req.url}`);
-	res.send({
-    	team: 'C#s',
-    	project: 'cPortfolio',
-    	finalGrade: '100%'
-    });
-});
+// user functions
+app.use('/users', require('./users/users.controller'));
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
