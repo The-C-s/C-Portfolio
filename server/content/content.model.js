@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('../users/user.model');
+const User = db.User; 
 const Schema = mongoose.Schema;
 const List = require("collections/list");
 const { Int32 } = require('mongodb');
@@ -18,5 +18,15 @@ const ContentSchema = mongoose.Schema({
     tags:{type: [{type:String}]}, 
     viewPermissions:{type: String, Enum: ["Public", "Private", "InviteOnly"] }
 }); 
+
+//Sets the schema to a json doc? 
+schema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) {
+        //delete ret._id;
+        delete ret.hash;
+    }
+});
 
 module.export = mongoose.model('Content', ContentSchema); 
