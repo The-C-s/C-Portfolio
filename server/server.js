@@ -6,6 +6,7 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const jwt = require('./_helpers/jwt');
+const errorHandler = require('./_helpers/error-handler');
 
 //mongoDB access
 async function testMongoDB() {
@@ -45,7 +46,6 @@ app.use(cors());
 // use JWT auth to secure the api
 app.use(jwt());
 
-
 //Used to run react
 app.use(express.static('client/build'));
 
@@ -74,6 +74,8 @@ app.get('/database', (req, res) => {
 
 // user functions
 app.use('/users', require('./users/users.controller'));
+
+app.use(errorHandler);
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {

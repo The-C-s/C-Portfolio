@@ -29,48 +29,48 @@ async function getAll() {
 }
 
 async function getById(id) {
-    try {
-        return await User.findById(id);
-    } catch(error) {
-        //error thrown when user isn't found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
-    }
+    return await User.findById(id);
 }
 
 async function create(userParam) {
     // validate
-    const existingUser = await User.findOne({ email: userParam.email });
-    if (!existingUser) {
-        
-        const user = new User(userParam);
-
-        // hash password
-        if (userParam.password) {
-            user.hash = bcrypt.hashSync(userParam.password, 10);
-        }
-
-        // save user
-        await user.save();
+    if (!userParam.email) {
+        throw 'Email is a required field';
+    }
+    if (!userParam.username) {
+        throw 'Username is a required field';
     }
 
-    return existingUser;
+    if (await User.findOne({ email: userParam.email })) {
+        throw 'Email "' + userParam.email + '" is already taken';
+    }
+    if (await User.findOne({ username: userParam.username })) {
+        throw 'Username "' + userParam.username + '" is already taken';
+    }
+
+    const user = new User(userParam);
+
+    // hash password
+    if (userParam.password) {
+        user.hash = bcrypt.hashSync(userParam.password, 10);
+    }
+
+    // save user
+    await user.save();
 }
 
 async function update(id, userParam) {
-    //attempt to get user, return null if error getting user
-    let user;
-    try {
-        user = await User.findById(id);
-    } catch(error) {
-        //error thrown when user isn't found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
-    }
+    const user = await User.findById(id);
 
-    //if request gave new email and email isn't the same as the stored email and the email is already taken
+    // validate
+    if (!user) throw new Error('UserNotFoundError');
+    //if request gave username and username isn't the same as it was and the username is in the database
+    if (userParam.username && user.username !== userParam.username && await User.findOne({ username: userParam.username })) {
+        throw 'Username "' + userParam.username + '" is already taken';
+    }
+    //if request gave email and email isn't the same as it was and the email is in the database
     if (userParam.email && user.email !== userParam.email && await User.findOne({ email: userParam.email })) {
-        throw 'email "' + userParam.email + '" is already taken';
+        throw 'Email "' + userParam.email + '" is already taken';
     }
 
     // hash password if it was entered
@@ -82,18 +82,8 @@ async function update(id, userParam) {
     Object.assign(user, userParam);
 
     await user.save();
-
-    return user;
-}
-
+} 
 async function _delete(id) {
-    try {
-        return await User.findByIdAndRemove(id);
-    } catch(error) {
-        //error thrown when user isn't found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
-    }
+    await User.findByIdAndRemove(id);
 }
-
 //based on github.com/cornflourblue/node-mongo-registration-login-api/

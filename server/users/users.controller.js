@@ -7,9 +7,8 @@ router.post('/authenticate', authenticate);
 router.post('/register', register);
 router.get('/', getAll);
 router.get('/current', getCurrent);
-router.get('/:id', getById);
-router.put('/:id', update);
-router.delete('/:id', _delete);
+router.put('/update', update);
+router.delete('/delete', _delete);
 
 module.exports = router;
 
@@ -20,9 +19,9 @@ accessed with POST to /users/authenticate
 body should be email and password
 no authentication token required
 
-returns 200 OK and the user (with JWS token) on success
-returns 400 Bad Request and empty json if email or password is incorrect
-returns 500 Internal Server Error and the error as HTML if there is an error
+- returns 200 OK and the user (with JWS token) on success
+- returns 400 Bad Request and JSON message if credentials are incorrect
+- returns 500 Internal Server Error and JSON message on server error
 */
 function authenticate(req, res, next) {
     userService.authenticate(req.body)
@@ -37,9 +36,11 @@ accessed with a POST to /users/register
 body should be an email, password, and other required user information
 no authentication token required
 
-returns 200 OK and empty JSON on success
-returns 400 Bad Requent and "Email already taken" if email is taken
-returns 500 Internal Server Error and the error as HTML if there is an error
+- returns 200 OK and empty JSON on success
+- returns 400 Bad Request and JSON message if;
+    unique field is already taken, OR
+    required field is missing
+- returns 500 Internal Server Error and JSON message on server error
 */
 function register(req, res, next) {
     userService.create(req.body)
@@ -55,8 +56,8 @@ accessed with a GET to /users/
 no body required
 no authentication token required
 
-returns 200 OK and array of users in JSON format on success
-returns 500 Internal Server Error and the error as HTML if there is an error
+- returns 200 OK and array of users as JSON object on success
+- returns 500 Internal Server Error and JSON message on server error
 */
 function getAll(req, res, next) {
     userService.getAll()
@@ -72,9 +73,9 @@ accessed with a GET to /users/current
 no body required
 authentication token required
 
-returns 200 OK and current user as JSON object on success
-returns 404 Not Found if user not found
-returns 500 Internal Server Error and the error as HTML if there is an error
+- returns 200 OK and current user as JSON object on success
+- returns 404 Not Found if token belongs to no user
+- returns 500 Internal Server Error and JSON message on server error
 */
 function getCurrent(req, res, next) {
     userService.getById(req.user.sub)
@@ -82,23 +83,6 @@ function getCurrent(req, res, next) {
         .catch(err => next(err));
 }
 
-/*
-get user by ID
-(for debugging, should probably be removed before being given to client)
-
-accessed with a GET to /users/<user id>
-no body required
-authentication token required
-
-returns 200 OK and current user as JSON object on success
-returns 404 Not Found if user not found
-returns 500 Internal Server Error and the error as HTML if there is an error
-*/
-function getById(req, res, next) {
-    userService.getById(req.params.id)
-        .then(user => user ? res.json(user) : res.status(404).json({message: "user not found"}))
-        .catch(err => next(err));
-}
 
 /*
 updates details of user of given id
@@ -107,13 +91,14 @@ access with a PUT to /users/<user id>
 body should be the fields to be updated in JSON
 authentication required
 
-returns 200 OK and empty JSON object on success
-returns 404 Not Found if user not found
-returns 500 Internal Server Error and the error as HTML if there is an error 
+- returns 200 OK and empty JSON object on success
+- returns 401 Unauthorized if token is not valid
+- returns 404 Not Found if token belongs to no user
+- returns 500 Internal Server Error and JSON message on server error
 */
 function update(req, res, next) {
-    userService.update(req.params.id, req.body)
-        .then(user => user ? res.json({}) : res.status(404).json({message: "user not found"}))
+    userService.update(req.user.sub, req.body)
+        .then(() => res.json({}))
         .catch(err => next(err));
 }
 
@@ -124,13 +109,14 @@ access with a DELETE to /users/<user id>
 no body required
 authentication required
 
-returns 200 OK and empty JSON object on success
-returns 404 Not Found if user not found
-returns 500 Internal Server Error and the error as HTML if there is an error 
+- returns 200 OK and empty JSON object on success
+- returns 401 Unauthorized if token is not valid
+- returns 404 Not Found if token belongs to no user
+- returns 500 Internal Server Error and JSON message on server error
 */
 function _delete(req, res, next) {
-    userService.delete(req.params.id)
-        .then(user => user ? res.json({}) : res.status(404).json({message: "user not found"}))
+    userService.delete(req.user.sub)
+        .then(() => res.json({}))
         .catch(err => next(err));
 }
 
