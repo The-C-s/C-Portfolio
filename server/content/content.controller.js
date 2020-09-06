@@ -8,13 +8,13 @@ router.get('/', getAll);
 router.get('/:id', getById);
 router.put('/:id', update);
 router.delete('/:id', _delete);
-router.get('/test', test); 
 
 //module.exports = router;
 function test(req,res,next){ 
     res.send('Testing'); 
 }
-function create(req, res, next){ 
+
+function create(req, res, next) { 
     contentService.create(user.id,req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
