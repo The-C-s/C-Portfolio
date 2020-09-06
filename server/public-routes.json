@@ -5,6 +5,8 @@
 		"/",
 		"/test",
 		"/database",
-		"/users/"
+		"/users/", 
+		"/content/",
+		"/content/create"
 	]
 }
