@@ -72,6 +72,9 @@ app.get('/database', (req, res) => {
         message: 'Testing the Database'});
 }); 
 
+app.post('/yeet', (req, res) => {
+    res.send('pls work');
+}); 
 // user functions
 app.use('/users', userRoute);
 

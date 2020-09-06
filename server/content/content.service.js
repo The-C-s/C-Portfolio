@@ -53,6 +53,9 @@ async function create(userid, userParam) {
     } catch(error) {
         //Otherwise throws error if post not created 
         if (error.name == "CastError") { return null; }
+        res.status(400).send({
+            error: `Unable to create post`
+        });
         throw error;
     }
 }
