@@ -6,7 +6,8 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const jwt = require('./_helpers/jwt');
-
+const contentRoute = require('./content/content.controller'); 
+const userRoute = require('./users/users.controller'); 
 //mongoDB access
 async function testMongoDB() {
   const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
@@ -57,7 +58,7 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/test', (req, res) => {
+app.post('/test', (req, res) => {
     console.log(`URL: ${req.url}`);
 
     res.send({
@@ -68,12 +69,14 @@ app.get('/test', (req, res) => {
 app.get('/database', (req, res) => {
     testMongoDB().catch(console.error);
     res.send({
-        message: 'Testing the Database'
-    });
+        message: 'Testing the Database'});
 }); 
 
 // user functions
-app.use('/users', require('./users/users.controller'));
+app.use('/users', userRoute);
+
+//Redirects anything with /content into our post routes folder 
+app.use('/content', contentRoute);
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
