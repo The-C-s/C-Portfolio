@@ -46,16 +46,15 @@ async function create(userid, userParam) {
         //Create a new post 
         const post = new Content(userParam); 
         //Sets the user of the post to the person who created it 
+        //const user = User.findById(userid); 
+        //post.user = user.email; 
+        //FIX: temporary as using email is giving me a headache 
         post.user = userid; 
         //Saves post and returns a status message and the post 
         await post.save(); 
-        res.status(201).send(post.toObject());
     } catch(error) {
         //Otherwise throws error if post not created 
         if (error.name == "CastError") { return null; }
-        res.status(400).send({
-            error: `Unable to create post`
-        });
         throw error;
     }
 }
@@ -75,9 +74,7 @@ async function update(userid, postid, userParam) {
         }
         //Otherwise return an error (should I be throwing this?)
         else{ 
-            res.status(400).send({
-                error: `You do not have permissions to edit this post`
-            });
+            return (error)
         }
     } catch(error) {
         //error thrown when not found in database
@@ -95,9 +92,7 @@ async function _delete(userid, postid) {
             return await Content.findByIdAndRemove(id);
         }
         else{ 
-            res.status(400).send({
-                error: `You do not have permissions to delete this post`
-            });
+            return error; 
         }
     } catch(error) {
         if (error.name == "CastError") { return null; }

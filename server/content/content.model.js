@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const { Int32 } = require('mongodb');
 //Defining the content schema 
 //FIX: Unsure about _id and delete ret._id if we're using the mongo id 
-const ContentSchema = mongoose.Schema({
+const contentSchema = new Schema({
     _id: {type: Number, required:true},
     //Data about the content 
     displayDate: { type: Date, default: Date.now},
@@ -19,7 +19,7 @@ const ContentSchema = mongoose.Schema({
 }); 
 
 //Sets the schema to a json file
-ContentSchema.set('toJSON', {
+contentSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
@@ -28,4 +28,4 @@ ContentSchema.set('toJSON', {
     }
 });
 
-module.export = mongoose.model('Content', ContentSchema); 
+module.exports = mongoose.model('Content', contentSchema); 
