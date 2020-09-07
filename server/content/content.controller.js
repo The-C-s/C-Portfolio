@@ -12,10 +12,8 @@ router.delete('/:id', _delete);
 
 //module.exports = router;
 
-
-
 function create(req, res, next) { 
-    contentService.create(req.user.id,req.body)
+    contentService.create(user.id,req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
@@ -44,5 +42,4 @@ function _delete(req, res, next) {
         .catch(err => next(err));
 }
 
-module.exports = getById; 
 module.exports = router; 

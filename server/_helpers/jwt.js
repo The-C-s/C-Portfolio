@@ -4,7 +4,7 @@ const publicRoutes = require('../public-routes.json')
 const userService = require('../users/user.service');
 
 module.exports = jwt;
- 
+
 function jwt() {
     const secret = config.secret;
     return expressJwt({ secret, algorithms: ['HS256'], isRevoked }).unless({

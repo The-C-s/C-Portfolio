@@ -2,8 +2,6 @@ const config = require('../config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
-const passport = require('passport'); 
-const passportInit = require('../_helpers/passport'); 
 const User = db.User;
 
 module.exports = {
@@ -19,8 +17,6 @@ async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.hash)) {
         const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
-        //Sends details to the passport 
-        //passportInit.initialize(password, email, user.id); 
         return {
             ...user.toJSON(),
             token
