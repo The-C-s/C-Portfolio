@@ -2,11 +2,12 @@
 	"routes": [
 		"/users/authenticate",
 		"/users/register",
+		" ",
 		"/",
 		"/test",
 		"/database",
-		"/users/", 
-		"/content/",
+		"/users", 
+		"/content",
 		"/content/create"
 	]
 }

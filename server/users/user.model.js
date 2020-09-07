@@ -9,7 +9,6 @@ const schema = new Schema({
     createdDate: { type: Date, default: Date.now }
 });
 
-//I think the delete ret._id removes the mongo generated id which we need 
 schema.set('toJSON', {
     virtuals: true,
     versionKey: false,

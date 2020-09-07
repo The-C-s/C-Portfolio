@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const app = express(); 
 const userService = require('./user.service');
+const passport = require('passport');
 
 // routes
 router.post('/authenticate', authenticate);
@@ -10,7 +12,7 @@ router.get('/current', getCurrent);
 router.get('/:id', getById);
 router.put('/:id', update);
 router.delete('/:id', _delete);
-
+router.post('/login', passport.authenticate('local', { successRedirect: '/content', failureRedirect: '/'})); 
 module.exports = router;
 
 /*
