@@ -4,7 +4,8 @@
   "description": "An academic e-portfolio application for COMP30022 IT Project.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
