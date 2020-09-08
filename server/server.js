@@ -8,6 +8,7 @@ const cors = require('cors');
 const jwt = require('./_helpers/jwt');
 const contentRoute = require('./content/content.controller'); 
 const userRoute = require('./users/users.controller'); 
+
 //mongoDB access
 async function testMongoDB() {
   const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
@@ -44,37 +45,12 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // use JWT auth to secure the api
-app.use(jwt());
+app.use(jwt.jwt());
 
 
 //Used to run react
 app.use(express.static('client/build'));
 
-app.get('/', (req, res) => {
-    console.log(`URL: ${req.url}`);
-
-    res.send({
-    	message: '👀'
-    });
-});
-
-app.post('/test', (req, res) => {
-    console.log(`URL: ${req.url}`);
-
-    res.send({
-    	message: '👀'
-    });
-});
-
-app.get('/database', (req, res) => {
-    testMongoDB().catch(console.error);
-    res.send({
-        message: 'Testing the Database'});
-}); 
-
-app.post('/yeet', (req, res) => {
-    res.send('pls work');
-}); 
 // user functions
 app.use('/users', userRoute);
 
