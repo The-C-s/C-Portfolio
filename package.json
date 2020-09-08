@@ -1,7 +1,6 @@
 {
   "name": "c-portfolio",
   "version": "0.0.1",
-  "private": true,
   "description": "An academic e-portfolio application for COMP30022 IT Project.",
   "main": "server/server.js",
   "scripts": {
