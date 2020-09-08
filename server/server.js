@@ -49,7 +49,7 @@ app.use(jwt.jwt());
 
 
 //Used to run react
-app.use(express.static('./client/build'));
+app.use(express.static('client/build'));
 
 //Think i need something here to run the home page? 
 app.get('/', (req, res) => {
