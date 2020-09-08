@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { Int32 } = require('mongodb');
+
 //Defining the content schema 
-//FIX: Unsure about _id and delete ret._id if we're using the mongo id 
 const contentSchema = new Schema({
-    _id: {type: Number, required:true},
     //Data about the content 
     displayDate: { type: Date, default: Date.now},
     createdDate: { type: Date, default: Date.now},
@@ -12,7 +11,7 @@ const contentSchema = new Schema({
     description: { type: String}, 
     //File doesn't exist in Node, so will need to fix when we read the data in 
     content:{ type: String}, 
-    user: {type: String, required: true },
+    user: {type: String},
     //List of strings
     tags:{type: [{type:String}]}, 
     viewPermissions:{type: String, Enum: ["Public", "Private", "InviteOnly"] }

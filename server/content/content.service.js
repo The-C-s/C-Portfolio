@@ -20,8 +20,10 @@ module.exports = {
 //call this function 
 async function getAll(userid) {
     try{ 
-        //Returns all content with the specified userid 
-        const posts = await Content.find({user: userid});
+        //Finds a user, then returns all content with their email  
+        const user = User.findById(userid); 
+        console.log(user.email); 
+        return await Content.find({user: user.email});
     } catch(error) {
         if (error.name == "CastError") { return null; }
         throw error;
@@ -46,12 +48,11 @@ async function create(userid, userParam) {
         //Create a new post 
         const post = new Content(userParam); 
         //Sets the user of the post to the person who created it 
-        //const user = User.findById(userid); 
-        //post.user = user.email; 
-        //FIX: temporary as using email is giving me a headache 
-        post.user = userid; 
-        //Saves post and returns a status message and the post 
-        await post.save(); 
+        const user = User.findById(userid); 
+        post.user = user.email; 
+        //Saves post and returns a post 
+        await post.save();
+        return post;  
     } catch(error) {
         //Otherwise throws error if post not created 
         if (error.name == "CastError") { return null; }
