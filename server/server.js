@@ -51,6 +51,15 @@ app.use(jwt.jwt());
 //Used to run react
 app.use(express.static('./client/build'));
 
+//Think i need something here to run the home page? 
+app.get('/', (req, res) => {
+    console.log(`URL: ${req.url}`);
+
+    res.send({
+    	message: '👀'
+    });
+});
+
 // user functions
 app.use('/users', userRoute);
 
