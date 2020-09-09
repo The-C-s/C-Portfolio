@@ -24,7 +24,10 @@ returns 200 OK and the user (with JWS token) on success
 returns 400 Bad Request and empty json if email or password is incorrect
 returns 500 Internal Server Error and the error as HTML if there is an error
 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> hugh-user-functions-backend
 function authenticate(req, res, next) {
     userService.authenticate(req.body)
         .then(user => user ? res.json(user) : res.status(400).json({ message: 'Email or password is incorrect' }))
