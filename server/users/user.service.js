@@ -16,11 +16,7 @@ module.exports = {
 async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.hash)) {
-<<<<<<< HEAD
         const token = jwt.sign({sub: user.id}, config.secret, { expiresIn: '7d' });
-=======
-        const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
->>>>>>> hugh-user-functions-backend
         return {
             ...user.toJSON(),
             token
