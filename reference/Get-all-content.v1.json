@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Get-all-content",
+    "version": "1.0",
+    "description": "Gets all content from a specific user",
+    "contact": {
+      "name": "Victoria"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/content": {
+      "get": {
+        "description": "returns all posts made by a user",
+        "summary": "getAll",
+        "responses": {
+          "200": {
+            "description": "OK, returns list of content"
+          },
+          "400": {
+            "description": "Authorization Error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-content",
+        "tags": [
+          "GET"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "tags": [
+    {
+      "name": "GET"
+    }
+  ]
+}

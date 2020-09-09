@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Update-content",
+    "version": "1.0",
+    "contact": {
+      "name": "Victoria"
+    },
+    "description": "Updates a post, requires authorization"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/content/:id": {
+      "put": {
+        "summary": "updates post and responds with post",
+        "tags": [
+          "PUT"
+        ],
+        "description": "updates a post",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "displayDate": {
+                      "type": "string",
+                      "description": "date used for display"
+                    },
+                    "createdDate": {
+                      "type": "string",
+                      "description": "date content was created, can be used for search"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "description": "array of strings for tags",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "viewPermissions": {
+                      "type": "string",
+                      "description": "ENUM of Public, Private or InviteOnly"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "put-content-update"
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "tags": [
+    {
+      "name": "PUT"
+    }
+  ]
+}

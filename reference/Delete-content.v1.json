@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Delete-content",
+    "version": "1.0", "contact": {"name": "Victoria"},
+    "description": "deletes content, requires verification"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/content/:id": {
+      "delete": {
+        "description": "deletes a post if authorized",
+        "summary": "_delete",
+        "tags": [
+          "DELETE"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "delete-content-:id"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "tags": [
+    {
+      "name": "DELETE"
+    }
+  ]
+}

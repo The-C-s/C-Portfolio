@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Get-content",
+    "version": "1.0", 
+    "contact": {"name": "Victoria"},
+    "description": "gets a post by ID"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/content/:id": {
+      "get": {
+        "description": "returns post",
+        "summary": "getContent",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "displayDate": {
+                      "type": "string",
+                      "description": "date used for display"
+                    },
+                    "createdDate": {
+                      "type": "string",
+                      "description": "date content was created, can be used for search"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "description": "array of strings for tags",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "viewPermissions": {
+                      "type": "string",
+                      "description": "ENUM of Public, Private or InviteOnly"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "id",
+                    "user"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "displayDate": "2020-09-08T03:16:45.379+00:00",
+                      "createdDate": "2020-09-08T03:16:45.379+00:00",
+                      "title": "Hello",
+                      "description": "World",
+                      "user": "uwu@gmail.com",
+                      "tags": [
+                        "hi",
+                        "hello"
+                      ],
+                      "id": "1234567890",
+                      "viewPermissions": "Public"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unauthorised"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-:id",
+        "tags": [
+          "GET"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "tags": [
+    {
+      "name": "GET"
+    }
+  ]
+}
