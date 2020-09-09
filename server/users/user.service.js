@@ -45,6 +45,10 @@ async function create(userParam) {
       throw 'Password is a required field';
     }
 
+    if(userParam.hash) {
+      throw 'Hash is an illegal field';
+    }
+
     if (await User.findOne({ email: userParam.email })) {
         throw 'Email "' + userParam.email + '" is already taken';
     }
