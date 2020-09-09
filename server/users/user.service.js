@@ -41,6 +41,10 @@ async function create(userParam) {
         throw 'Username is a required field';
     }
 
+    if (!userParam.password) {
+      throw 'Password is a required field';
+    }
+
     if (await User.findOne({ email: userParam.email })) {
         throw 'Email "' + userParam.email + '" is already taken';
     }
@@ -82,7 +86,7 @@ async function update(id, userParam) {
     Object.assign(user, userParam);
 
     await user.save();
-} 
+}
 async function _delete(id) {
     await User.findByIdAndRemove(id);
 }
