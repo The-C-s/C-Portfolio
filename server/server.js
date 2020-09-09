@@ -37,6 +37,9 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
+//Used to run react
+app.use(express.static('client/build'));
+
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -45,11 +48,8 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // use JWT auth to secure the api
-app.use(jwt.jwt());
+app.use(jwt.jwt);
 
-
-//Used to run react
-app.use('/',express.static('client/build'));
 
 //Think i need something here to run the home page? 
 app.get('/', (req, res) => {
