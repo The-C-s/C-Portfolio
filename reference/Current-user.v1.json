@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Current-user",
+    "version": "1.0",
+    "description": "gets the current user from the database",
+    "contact": {
+      "name": "Hugh"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users/current": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "GET"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "userInformation": {
+                      "type": "string",
+                      "description": "userInformation ID"
+                    },
+                    "content": {
+                      "type": "array",
+                      "description": "array of user's content IDs",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "the ID of this user"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "userInformation",
+                    "content",
+                    "username",
+                    "createdDate",
+                    "id"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "email": "user@domain.com",
+                      "userInformation": "5f54c7c12b056e04147979c8",
+                      "content": [
+                        "5f54c7c12b056e0414797952"
+                      ],
+                      "username": "username",
+                      "createdDate": "2020-09-06T11:28:01.053Z",
+                      "id": "5f54c7c12b056e0414797919"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found\nReturned if user couldn't be found\n(token is probably from a deleted user)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "message": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "message": "<some internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users-current",
+        "description": "gets information for the current user",
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "GET"
+    }
+  ]
+}
