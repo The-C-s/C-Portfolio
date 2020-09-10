@@ -8,7 +8,7 @@ export default class Feed extends Component {
 
   state = {
     content: [],
-    showEdit: true
+    showEdit: false
   };
 
   async componentDidMount() {
@@ -24,7 +24,9 @@ export default class Feed extends Component {
     return(
       <React.Fragment>
         <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Your Content</h1>
+          <div className="row">
+            <h1 class="h2">Your Content</h1>
+          </div>
           {content.map(item => <ContentItem content={item}/>)}
         </div>
         {showEdit ?
