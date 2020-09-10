@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Authenticate-user",
+    "version": "1.0",
+    "description": "authenticates given email and password and returns a JWT if successful",
+    "contact": {
+      "name": "Hugh"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users/authenticate": {
+      "post": {
+        "summary": "Authenticate a user",
+        "tags": [
+          "POST"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "User object",
+                  "properties": {
+                    "email": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "userInformation": {
+                      "description": "userInformation ID",
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "array",
+                      "description": "array of content IDs",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "createdDate": {
+                      "type": "string",
+                      "description": "date user was created"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "the _id of this user"
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "JWT token for this session"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "token"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request\nReturned if credentials are incorrect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "message": "Email or password is incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "message": "<some internal server error>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-users-authenticate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          },
+          "description": "JSON object with email and password to login with"
+        },
+        "description": "receives user infomration and returns a JWT on successful authentication"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "tags": [
+    {
+      "name": "POST"
+    }
+  ]
+}

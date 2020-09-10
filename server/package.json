@@ -1,11 +1,10 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
+  "name": "c-portfolio",
+  "version": "0.0.1",
+  "description": "An academic e-portfolio application for COMP30022 IT Project.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "install": "cd client && npm install && npm run build"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

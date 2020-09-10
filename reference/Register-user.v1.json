@@ -1,0 +1,144 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Register user",
+    "version": "1.0",
+    "description": "registers a new user in the database",
+    "contact": {
+      "name": "Hugh"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "summary": "register a user",
+        "tags": [
+          "POST"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request\nA unique field is already taken or a required field is missing\n(message will be specific)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "email taken": {
+                    "value": {
+                      "message": "Email \"user@domain.com\" is already taken"
+                    }
+                  },
+                  "no username provided": {
+                    "value": {
+                      "message": "User validation failed: email: Path `username` is required."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "HTML Describing the error",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "message": "<some internal server error>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-users-register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password",
+                  "username"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "email": "user@domain.com",
+                    "password": "password",
+                    "username": "username123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [],
+        "description": "registers a new user to the database"
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "POST"
+    }
+  ]
+}

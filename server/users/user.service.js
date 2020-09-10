@@ -36,6 +36,7 @@ async function getById(id) {
         if (error.name == "CastError") { return null; }
         throw error;
     }
+    return await User.findById(id);
 }
 
 async function create(userParam) {
@@ -57,20 +58,19 @@ async function create(userParam) {
     return existingUser;
 }
 
-async function update(id, userParam) {
-    //attempt to get user, return null if error getting user
-    let user;
-    try {
-        user = await User.findById(id);
-    } catch(error) {
-        //error thrown when user isn't found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
-    }
 
-    //if request gave new email and email isn't the same as the stored email and the email is already taken
+async function update(id, userParam) {
+    const user = await User.findById(id);
+
+    // validate
+    if (!user) throw new Error('UserNotFoundError');
+    //if request gave username and username isn't the same as it was and the username is in the database
+    if (userParam.username && user.username !== userParam.username && await User.findOne({ username: userParam.username })) {
+        throw 'Username "' + userParam.username + '" is already taken';
+    }
+    //if request gave email and email isn't the same as it was and the email is in the database
     if (userParam.email && user.email !== userParam.email && await User.findOne({ email: userParam.email })) {
-        throw 'email "' + userParam.email + '" is already taken';
+        throw 'Email "' + userParam.email + '" is already taken';
     }
 
     // hash password if it was entered
@@ -87,13 +87,6 @@ async function update(id, userParam) {
 }
 
 async function _delete(id) {
-    try {
-        return await User.findByIdAndRemove(id);
-    } catch(error) {
-        //error thrown when user isn't found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
-    }
+    await User.findByIdAndRemove(id);
 }
-
 //based on github.com/cornflourblue/node-mongo-registration-login-api/
