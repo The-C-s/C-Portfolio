@@ -46,8 +46,8 @@ class Login extends Component{
         }
 
         // Bypass auth for debug
-        this.props.history.push('/dashboard');
-        //this.props.loginUser(userData);
+        // this.props.history.push('/dashboard');
+        this.props.loginUser(userData);
     }
     render(){
         const {email, password, errors} = this.state;

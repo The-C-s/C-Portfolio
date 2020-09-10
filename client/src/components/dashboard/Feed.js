@@ -23,11 +23,11 @@ export default class Feed extends Component {
 
     return(
       <React.Fragment>
-        <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div className="flex-wrap pt-3 pb-2 mb-3">
           <div className="row">
-            <h1 class="h2">Your Content</h1>
+            <h1 className="h2 ml-5 mt-5">Your Content</h1>
           </div>
-          {content.map(item => <ContentItem content={item}/>)}
+          {content.map(item => <ContentItem content={item} key={item.id}/>)}
         </div>
         {showEdit ?
           <EditContent/>

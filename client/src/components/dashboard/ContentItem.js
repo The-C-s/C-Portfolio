@@ -7,12 +7,12 @@ export default class ContentItem extends Component {
 
     return(
       <div className="row">
-        <div class="card mt-5 ml-5 mr-5">
-          <div class="card-body">
-            <h4 class="card-title">{title}</h4>
-            <p class="card-text">{body}</p>
-            <a href="#" class="card-link">Edit</a>
-            <a href="#" class="card-link">Delete</a>
+        <div className="flex-fill card mt-5 ml-5 mr-5">
+          <div className="card-body">
+            <h4 className="card-title">{title}</h4>
+            <p className="card-text">{body}</p>
+            <a href="#" className="card-link float-right ml-3">Edit</a>
+            <a href="#" className="card-link float-right text-danger">Delete</a>
           </div>
         </div>
       </div>
