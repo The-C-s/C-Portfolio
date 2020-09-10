@@ -6,6 +6,8 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const jwt = require('./_helpers/jwt');
+const contentRoute = require('./content/content.controller'); 
+const userRoute = require('./users/users.controller'); 
 const errorHandler = require('./_helpers/error-handler');
 
 //mongoDB access
@@ -36,6 +38,9 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
+//Used to run react
+app.use(express.static('client/build'));
+
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -44,11 +49,10 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // use JWT auth to secure the api
-app.use(jwt());
+app.use(jwt.jwt);
 
-//Used to run react
-app.use(express.static('client/build'));
 
+//Think i need something here to run the home page? 
 app.get('/', (req, res) => {
     console.log(`URL: ${req.url}`);
 
@@ -57,21 +61,11 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/test', (req, res) => {
-    console.log(`URL: ${req.url}`);
+// user functions
+app.use('/users', userRoute);
 
-    res.send({
-    	message: '👀'
-    });
-});
-
-app.get('/database', (req, res) => {
-    testMongoDB().catch(console.error);
-    res.send({
-        message: 'Testing the Database'
-    });
-}); 
-
+//Redirects anything with /content into our post routes folder 
+app.use('/content', contentRoute);
 // user functions
 app.use('/users', require('./users/users.controller'));
 

@@ -3,6 +3,7 @@
 		"/users/authenticate",
 		"/users/register",
 		"/",
+		" ",
 		"/test",
 		"/database",
 		"/users/"

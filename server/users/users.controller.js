@@ -36,6 +36,7 @@ accessed with a POST to /users/register
 body should be an email, password, and other required user information
 no authentication token required
 
+
 - returns 200 OK and empty JSON on success
 - returns 400 Bad Request and JSON message if;
     unique field is already taken, OR
@@ -84,12 +85,14 @@ function getCurrent(req, res, next) {
 }
 
 
+
 /*
 updates details of user of given id
 
 access with a PUT to /users/<user id>
 body should be the fields to be updated in JSON
 authentication required
+
 
 - returns 200 OK and empty JSON object on success
 - returns 401 Unauthorized if token is not valid
