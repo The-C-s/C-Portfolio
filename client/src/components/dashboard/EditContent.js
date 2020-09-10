@@ -1,27 +1,44 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
-export default class EditContent extends Component {
-  render() {
-    return(
-      <div class="modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Edit content</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Edit content</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Save changes</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+import { EDIT } from '../../actions/types';
+
+export default function EditContent(props) {
+
+  const [content, updateContent] = useState(props.content);
+  const dispatch = useDispatch();
+  const { show, closeHandler } = props;
+
+  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
+
+  const editClickHandler = () => {
+
+    dispatch({ type: EDIT, payload: content });
+
+    closeHandler();
   }
+
+  return(
+    <Modal size="lg" show={show} onHide={closeHandler}>
+      <Modal.Header><Modal.Title>Edit Content</Modal.Title></Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group controlId="title">
+            <Form.Label>Title</Form.Label>
+            <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
+          </Form.Group>
+          <Form.Group controlId="body">
+            <Form.Label>Body</Form.Label>
+            <Form.Control as="textarea" rows="5" value={content.body} onChange={onChangeHandler}/>
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <button className="btn btn-primary" onClick={closeHandler}>Cancel</button>
+        <button className="btn btn-warning" onClick={editClickHandler}>Save changes</button>
+      </Modal.Footer>
+    </Modal>
+  )
 }

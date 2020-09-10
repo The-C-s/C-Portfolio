@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-
+import EditContent from './EditContent';
 import DeleteContent from './DeleteContent';
 
 export default function ContentItem({ content }) {
@@ -11,10 +11,11 @@ export default function ContentItem({ content }) {
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
 
-  const { id, title, body } = content;
+  const { title, body } = content;
 
   return(
     <React.Fragment>
+      <EditContent content={content} show={showEdit} closeHandler={handleEditClose}/>
       <DeleteContent content={content} show={showDelete} closeHandler={handleDeleteClose}/>
       <div className="row">
         <div className="flex-fill card mt-5 ml-5 mr-5">
