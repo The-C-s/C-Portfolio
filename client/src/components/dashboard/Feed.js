@@ -1,38 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import ContentItem from './ContentItem';
-import EditContent from './EditContent';
 
-export default class Feed extends Component {
+export default function Feed() {
 
-  state = {
-    content: [],
-    showEdit: false
-  };
+  const [content, getContent] = useState([]);
 
-  async componentDidMount() {
+  useEffect(() => {
 
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(res => this.setState({ content: res.data }));
-  }
+    async function getData() {
 
-  render() {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      getContent(res.data);
+    }
+    getData();
+  });
 
-    const { content, showEdit } = this.state;
-
-    return(
-      <React.Fragment>
-        <div className="flex-wrap pt-3 pb-2 mb-3">
-          <div className="row">
-            <h1 className="h2 ml-5 mt-5">Your Content</h1>
-          </div>
-          {content.map(item => <ContentItem content={item} key={item.id}/>)}
+  return(
+    <React.Fragment>
+      <div className="flex-wrap pt-3 pb-2 mb-3">
+        <div className="row">
+          <h1 className="h2 ml-5 mt-5">Your Content</h1>
         </div>
-        {showEdit ?
-          <EditContent/>
-        : null}
-      </React.Fragment>
-    );
-  }
+        {content.map(item => <ContentItem content={item} key={item.id}/>)}
+      </div>
+    </React.Fragment>
+  )
 }

@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-export default class ContentItem extends Component {
-  render() {
+export default function ContentItem({ content }) {
 
-    const { id, title, body } = this.props.content;
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+
+    const { id, title, body } = content;
 
     return(
       <div className="row">
@@ -17,5 +19,4 @@ export default class ContentItem extends Component {
         </div>
       </div>
     );
-  }
 }
