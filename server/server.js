@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // use JWT auth to secure the api
-app.use(jwt.jwt);
+app.use(jwt.jwt());
 
 
 //Think i need something here to run the home page? 
