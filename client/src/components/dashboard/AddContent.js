@@ -14,7 +14,9 @@ export default function AddContent() {
 
   const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = e => {
+
+    e.preventDefault();
 
     dispatch({
       type: CREATE,
