@@ -1,0 +1,4 @@
+{
+    "connectionString": "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority",
+    "secret": "LfcHHqCnlDFEMkQhNUoJkSO13QeNFYD2WqI8SMBVuGqXcQ8OFYB6UF6nGJrFXtc"
+}
