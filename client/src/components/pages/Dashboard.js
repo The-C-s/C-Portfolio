@@ -4,7 +4,7 @@ import Navbar from '../layout/Navbar';
 import SideNavBar from '../layout/SideNavbar';
 import Feed from '../dashboard/Feed';
 
-const Dashboard = () => {
+export default function Dashboard() {
   return(
     <React.Fragment>
       <Navbar/>
@@ -19,5 +19,3 @@ const Dashboard = () => {
     </React.Fragment>
   );
 }
-
-export default Dashboard;

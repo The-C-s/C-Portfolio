@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import ContentItem from './ContentItem';
 
+import { FETCH } from '../../actions/types';
+
 export default function Feed() {
 
-  const [content, getContent] = useState([]);
+  const content = useSelector(state => state.content);
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
     async function getData() {
 
       const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      getContent(res.data);
+      dispatch({ type: FETCH, payload: res.data });
     }
     getData();
-  });
+  }, []);
 
   return(
     <React.Fragment>
