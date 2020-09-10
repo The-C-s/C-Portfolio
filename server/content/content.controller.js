@@ -12,13 +12,13 @@ router.delete('/:id', verify.auth, _delete);
 
 
 function create(req, res, next) { 
-    contentService.create(req.user.id, req.body)
+    contentService.create(req.user.sub, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
 
 function getAll(req, res, next) {
-    contentService.getAll(req.user.id)
+    contentService.getAll(req.user.sub)
         .then(content => res.json(content))
         .catch(err => next(err));
 }
@@ -30,13 +30,13 @@ function getById(req, res, next){
 }
 
 function update(req, res, next) {
-    contentService.update(req.user.id, req.params.id, req.body)
+    contentService.update(req.user.sub, req.params.id, req.body)
         .then(content => content ? res.json({}) : res.status(404).json({message: "Post not found"}))
         .catch(err => next(err));
 }
 
 function _delete(req, res, next) {
-    contentService.delete(req.user.id, req.params.id)
+    contentService.delete(req.user.sub, req.params.id)
         .then(content => content ? res.json({}) : res.status(404).json({message: "Post not found"}))
         .catch(err => next(err));
 }

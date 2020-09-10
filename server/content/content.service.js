@@ -21,7 +21,7 @@ module.exports = {
 async function getAll(userid) {
     try{ 
         //Finds a user, then returns all content with their email  
-        const user = User.findById(userid); 
+        const user = await User.findById(userid); 
         console.log(user.email); 
         return await Content.find({user: user.email});
     } catch(error) {
@@ -48,7 +48,7 @@ async function create(userid, userParam) {
         //Create a new post 
         const post = new Content(userParam); 
         //Sets the user of the post to the person who created it 
-        const user = User.findById(userid); 
+        const user = await User.findById(userid); 
         post.user = user.email; 
         //Saves post and returns a post 
         await post.save();
@@ -64,10 +64,12 @@ async function create(userid, userParam) {
 async function update(userid, postid, userParam) {
     //attempt to get user, return null if error getting user
     let post;
+    let user;
     try {
         post = await Content.findById(postid);
+        user = await User.findById(userid);
         //Checks if the person editing is the the user of the post 
-        if(userid == post.user){ 
+        if(user.email == post.user){ 
             //Updates the specified post with the input 
             Object.assign(post, userParam);
             await post.save();
@@ -86,11 +88,14 @@ async function update(userid, postid, userParam) {
 
 //Deletes a post
 async function _delete(userid, postid) {
+    let post;
+    let user;
     try {
-        post = Content.findbyId(postid); 
+        post = await Content.findById(postid);
+        user = await User.findById(userid);
         //Checks that the user accessing is the same as the creator 
-        if(userid == post.user){
-            return await Content.findByIdAndRemove(id);
+        if(user.email == post.user){
+            return await Content.findByIdAndRemove(postid);
         }
         else{ 
             return error; 

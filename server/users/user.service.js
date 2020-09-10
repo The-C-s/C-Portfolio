@@ -16,7 +16,7 @@ module.exports = {
 async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.hash)) {
-        const token = jwt.sign({sub: user.id}, config.secret, { expiresIn: '7d' });
+        const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
         return {
             ...user.toJSON(),
             token
@@ -29,35 +29,43 @@ async function getAll() {
 }
 
 async function getById(id) {
-    try {
-        return await User.findById(id);
-    } catch(error) {
-        //error thrown when user isn't found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
-    }
     return await User.findById(id);
 }
 
 async function create(userParam) {
     // validate
-    const existingUser = await User.findOne({ email: userParam.email });
-    if (!existingUser) {
-        
-        const user = new User(userParam);
-
-        // hash password
-        if (userParam.password) {
-            user.hash = bcrypt.hashSync(userParam.password, 10);
-        }
-
-        // save user
-        await user.save();
+    if (!userParam.email) {
+        throw 'Email is a required field';
+    }
+    if (!userParam.username) {
+        throw 'Username is a required field';
     }
 
-    return existingUser;
-}
+    if (!userParam.password) {
+      throw 'Password is a required field';
+    }
 
+    if(userParam.hash) {
+      throw 'Hash is an illegal field';
+    }
+
+    if (await User.findOne({ email: userParam.email })) {
+        throw 'Email "' + userParam.email + '" is already taken';
+    }
+    if (await User.findOne({ username: userParam.username })) {
+        throw 'Username "' + userParam.username + '" is already taken';
+    }
+
+    const user = new User(userParam);
+
+    // hash password
+    if (userParam.password) {
+        user.hash = bcrypt.hashSync(userParam.password, 10);
+    }
+
+    // save user
+    await user.save();
+}
 
 async function update(id, userParam) {
     const user = await User.findById(id);
@@ -82,10 +90,7 @@ async function update(id, userParam) {
     Object.assign(user, userParam);
 
     await user.save();
-
-    return user;
 }
-
 async function _delete(id) {
     await User.findByIdAndRemove(id);
 }
