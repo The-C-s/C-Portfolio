@@ -1,15 +1,22 @@
 import React from 'react';
+
+import { Provider } from 'react-redux';
+import store from './store';
+
 import Login from './Login';
 
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="container">
-        <Login />
+const App = () => {
+  return(
+    // Provider provides Redux state management
+    <Provider store={store}>
+      <div className="App">
+        <div className="container">
+          <Login/>
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 }
 
