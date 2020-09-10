@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authenticatedActions";
-import classnames from "classnames";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/authActions';
+import classnames from 'classnames';
 
 class Login extends Component{
     constructor(){
@@ -22,7 +23,7 @@ class Login extends Component{
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.auth.isAuthenticated) {
-          this.props.history.push("/dashboard"); 
+          this.props.history.push("/dashboard");
         }
         
     if (nextProps.errors) {
@@ -41,9 +42,12 @@ class Login extends Component{
 
         const userData = {
             email:this.state.email,
-            password:this.state.password,
+            password:this.state.password
         }
-        this.props.loginUser(userData);
+
+        // Bypass auth for debug
+        this.props.history.push('/dashboard');
+        //this.props.loginUser(userData);
     }
     render(){
         const {email, password, errors} = this.state;
@@ -85,9 +89,6 @@ class Login extends Component{
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Login</button>
                 </div>
-                <div className="text-center">Don't have an account? <Link to="/register">Register</Link></div>
-
-
             </form>
         </div>
         )
@@ -100,12 +101,12 @@ Login.propTypes = {
     errors: PropTypes.object.isRequired
   };
   
-  const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-  });
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
 
-  export default connect(
-    mapStateToProps,
-    { loginUser }
-  )(Login);
+export default compose(
+  withRouter,
+  connect( mapStateToProps, { loginUser })
+)(Login);

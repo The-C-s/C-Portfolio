@@ -1,1 +1,14 @@
+.splash-container,
+body > #root > div {
+  min-height: 100vh;
+}
 
+.splash-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-box {
+  width: 80%;
+}
