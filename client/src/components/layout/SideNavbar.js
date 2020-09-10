@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export default class SideNavbar extends Component {
-  render() {
-    return(
-      <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-        <div className="sidebar-sticky">
-          <ul className="nav flex-column">
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                <span data-feather="home"></span>
-                Dashboard <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <span data-feather="file"></span>
-                New Post
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    );
-  }
+import Nav from 'react-bootstrap/Nav';
+
+export default function SideNavbar() {
+
+  const [active, setActive] = useState('dashboard');
+
+  return(
+    <Nav className="col-md-2 d-none d-md-block bg-light sidebar" activeKey={active} onSelect={eventKey => setActive(eventKey)}>
+      <div className="sidebar-sticky">
+        <ul className="nav flex-column">
+          <li className="nav-item">
+            <Nav.Link as={Link} to="/dashboard" eventKey="dashboard">
+              Dashboard
+            </Nav.Link>
+          </li>
+          <li className="nav-item">
+            <Nav.Link as={Link} to="/create" eventKey="add-content">
+              Add Content
+            </Nav.Link>
+          </li>
+        </ul>
+      </div>
+    </Nav>
+  );
 }
