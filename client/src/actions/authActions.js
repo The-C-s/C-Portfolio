@@ -2,9 +2,6 @@ import axios from 'axios';
 
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
-// const authpoint = '/users/authenticate';
-const authpoint = 'http://localhost:8000/auth/login';
-
 //Register User
 export const registerUser = (userData, history) => dispatch => {
   axios.post('/users/register', userData)
@@ -17,7 +14,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 //Login
 export const loginUser = (userData) => dispatch => {
-  axios.post(authpoint, userData)
+  axios.post('http://localhost:49294/users/authenticate', userData)
   .then( res => {
       const {token} = res.data;
       // Set token to localStorage
