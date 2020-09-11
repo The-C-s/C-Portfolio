@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-export const getCurrentUserContent = () => {
-
+export const createContent = () => {
+  
 }
 
 export const deleteContentItem = async id => {

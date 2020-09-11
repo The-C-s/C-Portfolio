@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
       return state.map(content => content.id === action.payload.id ? action.payload : content);
     
     case CREATE:
-      return [action.payload, ...state];
+      return [...state, action.payload];
 
     default:
       return state;

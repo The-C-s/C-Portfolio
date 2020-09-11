@@ -10,23 +10,28 @@ import AddContent from '../dashboard/AddContent';
 export default function Dashboard() {
 
   const history = useHistory();
+  const [view, setView] = useState('dashboard');
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
   useEffect(() => { if (!isAuthenticated) history.push('/') });
+
+  const setViewHandler = eventKey => setView(eventKey);
 
   return(
     <React.Fragment>
       <Navbar/>
       <div className="container-fluid">
         <div className="row">
-          <SideNavBar/>
+          <SideNavBar setView={setViewHandler}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <Router>
+            {(view === 'dashboard') && <Feed/>}
+            {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
+            {/*<Router>
               <Switch>
                 <Route exact path="/dashboard" component={Feed}/>
                 <Route exact path="/create" component={AddContent}/>
               </Switch>
-            </Router>
+            </Router>*/}
           </main>
         </div>
       </div>
