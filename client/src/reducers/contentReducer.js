@@ -7,10 +7,9 @@ export default function(state = initialState, action) {
   switch(action.type) {
 
     case FETCH:
-      return action.payload;
+      return [...action.payload];
 
     case DELETE:
-      axios.delete(`http://cportfolio.herokuapp.com/content/${action.payload}`, { headers: { 'Authorization': `Bearer ${token}` } })
       return state.filter(content => content.id !== action.payload);
 
     case EDIT:

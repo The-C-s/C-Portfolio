@@ -1,112 +1,54 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { loginUser } from '../actions/authActions';
-import classnames from 'classnames';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-class Login extends Component{
-    constructor(){
-        super()
-        this.state = {
-            email:"",
-            password:"",
-            errors:{}
-        }
-    }
-    componentDidMount() {
-        if (this.props.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }
-      }
+import { login } from '../features/user/userSlice';
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }
-        
-    if (nextProps.errors) {
-          this.setState({
-            errors: nextProps.errors
-          });
-        }
-      }
+export default function Login() {
 
-    onChange = e => {
-        this.setState({[e.target.id]:e.target.value})
-    }
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const [form, updateForm] = useState({ email: '', password: '' });
 
-    onSubmit = e => {
-        e.preventDefault();
+  const onSubmitHandler = e => {
 
-        const userData = {
-            email:this.state.email,
-            password:this.state.password
-        }
+    e.preventDefault();
 
-        // Bypass auth for debug
-        //this.props.history.push('/dashboard');
-        this.props.loginUser(userData);
-    }
-    render(){
-        const {email, password, errors} = this.state;
+    dispatch(login(form));
+  }
+
+  const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
+
+  useEffect(() => { if (isAuthenticated) history.push('/dashboard') });
+
         return(
             <div className="form-box">
-            <form className="login-form" onSubmit={this.onSubmit}>
+            <form className="login-form" onSubmit={onSubmitHandler}>
                 <h2>Login</h2>
                 <hr/>
                 <div className="form-group">
                     <input type="email" 
                            id="email"
                            placeholder="Email Address" 
-                           value={email} 
-                           error={errors}
-                           onChange={this.onChange}
-                           className={classnames("form-control", {
-                            invalid: errors.email || errors.emailnotfound
-                          })}/>
-                          <span className="red-text">
-                            {errors.email}
-                            {errors.emailnotfound}
-                        </span>
+                           value={form.email}
+                           onChange={onChangeHandler}
+                           className="form-control"
+                           />
                 </div>
                 <div className="form-group">
                     <input type="password"  
                            id="password" 
                            placeholder="Password" 
-                           value={password} 
-                           error={errors}
-                           onChange={this.onChange}
-                           className={classnames("form-control", {
-                            invalid: errors.password || errors.passwordincorrect })}
+                           value={form.password}
+                           onChange={onChangeHandler}
+                           className="form-control"
                             />
-                    <span className="red-text">
-                        {errors.password}
-                        {errors.passwordincorrect}
-                    </span>
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Login</button>
                 </div>
             </form>
         </div>
-        )
-    }
+        );
 }
-
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-  };
-  
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
-
-export default compose(
-  withRouter,
-  connect( mapStateToProps, { loginUser })
-)(Login);
