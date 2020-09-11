@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 
 import Navbar from '../layout/Navbar';
 import SideNavBar from '../layout/SideNavbar';
@@ -21,12 +21,12 @@ export default function Dashboard() {
         <div className="row">
           <SideNavBar/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            
+            <Router>
               <Switch>
                 <Route exact path="/dashboard" component={Feed}/>
                 <Route exact path="/create" component={AddContent}/>
               </Switch>
-            
+            </Router>
           </main>
         </div>
       </div>

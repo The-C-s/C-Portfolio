@@ -13,7 +13,6 @@ const user = createSlice({
   },
   reducers: {
     logout: (state, action) => {
-      
       localStorage.removeItem('token');
 
       return { isAuthenticated: false }
