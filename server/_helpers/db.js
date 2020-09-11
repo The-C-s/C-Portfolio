@@ -5,7 +5,8 @@ mongoose.connect(process.env.MONGODB_URI || config.connectionString, connectionO
 mongoose.Promise = global.Promise;
 
 module.exports = {
-    User: require('../users/user.model')
+    User: require('../users/user.model'), 
+    Content: require('../content/content.model')
 };
 
 //based on https://github.com/cornflourblue/node-mongo-registration-login-api/
