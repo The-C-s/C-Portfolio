@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Navbar from '../layout/Navbar';
@@ -7,23 +8,6 @@ import Feed from '../dashboard/Feed';
 import AddContent from '../dashboard/AddContent';
 
 export default function Dashboard() {
-
-  // const [view, changeView] = useState(<Feed/>);
-
-  // const viewChangeHandler = navKey => {
-  //   switch(navKey) {
-
-  //     case 'dashboard':
-  //       changeView(<Feed/>);
-      
-  //     case 'add-content':
-  //       changeView(<AddContent/>);
-      
-  //     default:
-  //       changeView(<Feed/>);
-  //   }
-  // }
-
   return(
     <React.Fragment>
       <Navbar/>

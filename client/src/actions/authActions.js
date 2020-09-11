@@ -14,13 +14,13 @@ export const registerUser = (userData, history) => dispatch => {
 
 //Login
 export const loginUser = (userData) => dispatch => {
-  axios.post('http://localhost:49294/users/authenticate', userData)
+  axios.post('http://cportfolio.herokuapp.com/users/authenticate', userData)
   .then( res => {
-      const {token} = res.data;
+      const { token } = res.data;
       // Set token to localStorage
       localStorage.setItem("token", token);
 
-      dispatch(setCurrentUser(userData));
+      dispatch(setCurrentUser(res.data));
    }
   )
   .catch(err=> dispatch({

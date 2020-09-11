@@ -9,13 +9,17 @@ import { FETCH } from '../../actions/types';
 export default function Feed() {
 
   const content = useSelector(state => state.content);
+  const token = useSelector(state => state.auth.user.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
 
     async function getData() {
 
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      // const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      //http://localhost:49294/content/
+
+      const res = await axios.get('http://cportfolio.herokuapp.com/content/', { headers: { 'Authorization': `Bearer ${token}` } });
       dispatch({ type: FETCH, payload: res.data });
     }
     getData();

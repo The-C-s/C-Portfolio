@@ -1,4 +1,5 @@
 import { FETCH, DELETE, EDIT, CREATE } from '../actions/types';
+import axios from 'axios';
 
 const initialState = [];
 
@@ -9,6 +10,7 @@ export default function(state = initialState, action) {
       return action.payload;
 
     case DELETE:
+      axios.delete(`http://cportfolio.herokuapp.com/content/${action.payload}`, { headers: { 'Authorization': `Bearer ${token}` } })
       return state.filter(content => content.id !== action.payload);
 
     case EDIT:
