@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import api from '../../common/api';
+
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
@@ -8,6 +10,7 @@ import { EDIT } from '../../actions/types';
 export default function EditContent(props) {
 
   const [content, updateContent] = useState(props.content);
+  const { authType, token } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { show, closeHandler } = props;
 
@@ -15,7 +18,11 @@ export default function EditContent(props) {
 
   const editClickHandler = () => {
 
-    dispatch({ type: EDIT, payload: content });
+    const { id, ...newContent } = content;
+
+    api.editContent(id, newContent, authType, token)
+      .then(res => dispatch({ type: EDIT, payload: { id, ...res.data }}))
+      .catch(err => console.log(err));
 
     closeHandler();
   }
@@ -29,9 +36,9 @@ export default function EditContent(props) {
             <Form.Label>Title</Form.Label>
             <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
           </Form.Group>
-          <Form.Group controlId="body">
-            <Form.Label>Body</Form.Label>
-            <Form.Control as="textarea" rows="5" value={content.body} onChange={onChangeHandler}/>
+          <Form.Group controlId="description">
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" rows="5" value={content.description} onChange={onChangeHandler}/>
           </Form.Group>
         </Form>
       </Modal.Body>
