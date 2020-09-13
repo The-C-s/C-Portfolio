@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import EditContent from './EditContent';
+import EditContent from '../../features/content/EditContent';
 import DeleteContent from './DeleteContent';
 
 export default function ContentItem({ content }) {

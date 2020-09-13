@@ -27,7 +27,7 @@ const content = createSlice({
   initialState: [], // A list! Not an object
   reducers: {},
   extraReducers: {
-    'user/logout': () => { return [] }, // Make content reset itself when user logs out
+    'user/logout': () => { return [] }, // Trigger content to reset itself when user logs out
     [getContent.fulfilled]: (_, action) => { return [...action.payload.data] }
   }
 });

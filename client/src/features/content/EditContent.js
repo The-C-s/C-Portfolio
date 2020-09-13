@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { editContent, getContent } from '../../features/content/contentSlice';
+import { editContent, getContent } from './contentSlice';
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';

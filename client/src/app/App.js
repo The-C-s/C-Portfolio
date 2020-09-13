@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import Landing from './components/pages/Landing';
-import Dashboard from './components/pages/Dashboard';
+import api from '../common/api';
+import { setUser } from '../features/user/userSlice';
+
+import Landing from '../features/pages/Landing';
+import Dashboard from '../features/dashboard/Dashboard';
 
 import './App.css';
-import api from './common/api';
-import { setUser } from './features/user/userSlice';
 
 const App = () => {
 
@@ -23,8 +24,7 @@ const App = () => {
       api.setAuthHeader(_token);
 
       api.getUser()
-        .then(res => dispatch(setUser(res)))
-        .catch(err => console.log(err));
+        .then(res => dispatch(setUser(res)));
     }
   });
 

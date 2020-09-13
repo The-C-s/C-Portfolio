@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import Navbar from '../layout/Navbar';
-import SideNavBar from '../layout/SideNavbar';
-import Feed from '../dashboard/Feed';
-import AddContent from '../dashboard/AddContent';
+import Navbar from '../../components/layout/Navbar';
+import SideNavBar from './SideNavbar';
+import Feed from '../../components/dashboard/Feed';
+import AddContent from '../../components/dashboard/AddContent';
 
 export default function Dashboard() {
 
