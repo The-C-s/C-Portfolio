@@ -1,32 +1,26 @@
-import React, { useState, useEffect } from 'react';
+// node imports
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-import API from '../../common/api';
 
+// App imports
+import { getContent } from '../../features/content/contentSlice';
+
+// Components
 import ContentItem from './ContentItem';
 
-import { FETCH } from '../../actions/types';
-
+/*
+ * Component: Feed
+ *
+ * Contains the user's content in a feed/wall format.
+ */
 export default function Feed() {
 
-  const content = useSelector(state => state.content);
-  const authType = useSelector(state => state.user.authType);
+  // Redux hooks
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token');
+  const content = useSelector(state => state.content);
 
-  useEffect(() => {
-
-    async function getData() {
-
-      try {
-        const res = await API.getAllContent(authType, token);
-        dispatch({ type: FETCH, payload: res.data });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getData();
-  }, []);
+  // Reload content
+  useEffect(async () => dispatch(getContent()), []);
 
   return(
     <React.Fragment>
