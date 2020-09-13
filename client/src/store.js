@@ -3,10 +3,10 @@
  * Boilerplate code. Redux store that controls application state.
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './reducers'; // reducers/index.js
+import rootReducer from './app/reducers';
 
 const initialState = {};
 

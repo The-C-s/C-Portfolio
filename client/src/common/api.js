@@ -20,7 +20,7 @@ const getAllContent = async () => await axios.get(CONTENT);
 
 const createContent = async content => await axios.post(CREATE_CONTENT, content);
 
-const editContent = async (id, content, authType, token) => await axios.put(`${CONTENT}${id}`, content, { headers: { 'Authorization': `${authType} ${token}` } });
+const editContent = async content => await axios.put(`${CONTENT}${content.id}`, content);
 
 const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 

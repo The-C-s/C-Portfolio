@@ -1,31 +1,26 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import api from '../../common/api';
+import { useDispatch } from 'react-redux';
+
+import { editContent, getContent } from '../../features/content/contentSlice';
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-import { EDIT } from '../../actions/types';
-
 export default function EditContent(props) {
 
-  const [content, updateContent] = useState(props.content);
-  const { authType, token } = useSelector(state => state.user);
-  const dispatch = useDispatch();
   const { show, closeHandler } = props;
-
-  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
+  const [content, updateContent] = useState(props.content);
+  const dispatch = useDispatch();
 
   const editClickHandler = () => {
 
-    const { id, ...newContent } = content;
-
-    api.editContent(id, newContent, authType, token)
-      .then(res => dispatch({ type: EDIT, payload: { id, ...res.data }}))
-      .catch(err => console.log(err));
-
-    closeHandler();
+    // Wait until content is updated before dismissing the component
+    dispatch(editContent(content))
+      .then(() => dispatch(getContent()))
+      .then(() => closeHandler());
   }
+
+  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
 
   return(
     <Modal size="lg" show={show} onHide={closeHandler}>

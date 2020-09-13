@@ -12,6 +12,11 @@ export const createContent = createAsyncThunk(
   api.createContent
 );
 
+export const editContent = createAsyncThunk(
+  'content/editContent',
+  api.editContent
+);
+
 export const deleteContent = createAsyncThunk(
   'content/deleteContent',
   api.deleteContent

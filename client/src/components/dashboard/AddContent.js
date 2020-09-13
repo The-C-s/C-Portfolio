@@ -11,8 +11,6 @@ export default function AddContent({ setView }) {
   const [content, updateContent] = useState({});
   const dispatch = useDispatch();
 
-  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
-
   const onSubmitHandler = e => {
 
     e.preventDefault();
@@ -22,6 +20,8 @@ export default function AddContent({ setView }) {
       .then(() => dispatch(getContent()))
       .then(() => setView('dashboard'));
   }
+
+  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
 
   return(
     <React.Fragment>
