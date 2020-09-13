@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import API from '../../common/api';
+import { useDispatch } from 'react-redux';
+
+import { createContent, getContent } from '../../features/content/contentSlice';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { CREATE } from '../../actions/types';
-
 export default function AddContent({ setView }) {  
 
   const [content, updateContent] = useState({});
-  const { email, authType, token } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
@@ -19,23 +17,10 @@ export default function AddContent({ setView }) {
 
     e.preventDefault();
 
-    const payload = {
-      user: email,
-      title: content.title,
-      description: content.description
-    }
-
-    API.createContent(payload, authType, token)
-      .then(res => {
-
-        dispatch({
-          type: CREATE,
-          payload: res.data
-        });
-
-        setView('dashboard');
-      })
-      .catch(err => console.log(err));
+    // Send API call, then re-fetch content and change dashboard view back to default
+    dispatch(createContent(content))
+      .then(() => dispatch(getContent()))
+      .then(() => setView('dashboard'));
   }
 
   return(

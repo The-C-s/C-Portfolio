@@ -4,7 +4,17 @@ import api from '../../common/api';
 
 export const getContent = createAsyncThunk(
   'content/getContent',
-  () => api.getAllContent()
+  api.getAllContent
+);
+
+export const createContent = createAsyncThunk(
+  'content/createContent',
+  api.createContent
+);
+
+export const deleteContent = createAsyncThunk(
+  'content/deleteContent',
+  api.deleteContent
 );
 
 const content = createSlice({
@@ -12,7 +22,7 @@ const content = createSlice({
   initialState: [], // A list! Not an object
   reducers: {},
   extraReducers: {
-    'user/logout': () => { return {} }, // Make content reset itself when user logs out
+    'user/logout': () => { return [] }, // Make content reset itself when user logs out
     [getContent.fulfilled]: (_, action) => { return [...action.payload.data] }
   }
 });

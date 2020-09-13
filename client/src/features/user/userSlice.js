@@ -4,7 +4,7 @@ import api from '../../common/api';
 
 export const login = createAsyncThunk(
   'user/authenticate',
-  credentials => api.authenticateUser(credentials)
+  api.authenticateUser
 );
 
 const user = createSlice({
@@ -15,7 +15,6 @@ const user = createSlice({
   },
   reducers: {
     setUser: (state, action) => {
-      console.log('Setting user');
       return {
         ...state,
         ...action.payload.data,
@@ -26,6 +25,7 @@ const user = createSlice({
     logout: () => {
 
       localStorage.removeItem('token');
+      api.setAuthHeader('');
 
       return { isAuthenticated: false }
     }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Navbar from '../layout/Navbar';
 import SideNavBar from '../layout/SideNavbar';
@@ -26,12 +26,6 @@ export default function Dashboard() {
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
-            {/*<Router>
-              <Switch>
-                <Route exact path="/dashboard" component={Feed}/>
-                <Route exact path="/create" component={AddContent}/>
-              </Switch>
-            </Router>*/}
           </main>
         </div>
       </div>

@@ -1,21 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { getContent, deleteContent } from '../../features/content/contentSlice';
 
 import Modal from 'react-bootstrap/Modal';
-
-import { DELETE } from '../../actions/types';
-import api from '../../common/api';
 
 export default function DeleteContent({ content, show, closeHandler }) {
 
   const dispatch = useDispatch();
-  const { authType, token } = useSelector(state => state.user);
 
   const deleteClickHandler = () => {
 
-    api.deleteContent(content.id, authType, token)
-      .then(dispatch({ type: DELETE, payload: content.id }))
-      .catch(err => console.log(err));
+    dispatch(deleteContent(content.id))
+      .then(() => dispatch(getContent()));
       
     closeHandler();
   }

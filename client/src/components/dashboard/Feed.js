@@ -1,11 +1,8 @@
-// node imports
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// App imports
 import { getContent } from '../../features/content/contentSlice';
 
-// Components
 import ContentItem from './ContentItem';
 
 /*
@@ -19,8 +16,11 @@ export default function Feed() {
   const dispatch = useDispatch();
   const content = useSelector(state => state.content);
 
-  // Reload content
-  useEffect(async () => dispatch(getContent()), []);
+  // Reload content on state change
+  useEffect(() => {
+    async function fetch() { dispatch(getContent()) }
+    fetch();
+  }, []);
 
   return(
     <React.Fragment>
