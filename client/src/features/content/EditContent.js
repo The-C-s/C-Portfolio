@@ -6,21 +6,19 @@ import { editContent, getContent } from './contentSlice';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-export default function EditContent(props) {
+export default function EditContent({ content, show, closeHandler }) {
 
-  const { show, closeHandler } = props;
-  const [content, updateContent] = useState(props.content);
+  const [_content, updateContent] = useState(content);
   const dispatch = useDispatch();
 
   const editClickHandler = () => {
 
-    // Wait until content is updated before dismissing the component
-    dispatch(editContent(content))
+    dispatch(editContent(_content))
       .then(() => dispatch(getContent()))
       .then(() => closeHandler());
   }
 
-  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
+  const onChangeHandler = e => updateContent({ ..._content, [e.target.id]: e.target.value });
 
   return(
     <Modal size="lg" show={show} onHide={closeHandler}>
@@ -29,11 +27,11 @@ export default function EditContent(props) {
         <Form>
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
+            <Form.Control type="text" value={_content.title} onChange={onChangeHandler}/>
           </Form.Group>
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" rows="5" value={content.description} onChange={onChangeHandler}/>
+            <Form.Control as="textarea" rows="5" value={_content.description} onChange={onChangeHandler}/>
           </Form.Group>
         </Form>
       </Modal.Body>

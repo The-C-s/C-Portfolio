@@ -1,19 +1,28 @@
+// Imports for framework and functionality
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+// Imports for custom app functionality
 import api from '../common/api';
 import { setUser } from '../features/user/userSlice';
 
+// Imports for React components
 import Landing from '../features/pages/Landing';
 import Dashboard from '../features/dashboard/Dashboard';
 
+// For when css is being a b and you need to override some rules
 import './App.css';
 
-const App = () => {
+// React component is its main function
+// Pls don't use classes! Unless there is a *really* good reason
+export default function App() {
 
+  // Allow us to dispatch actions to Redux
   const dispatch = useDispatch();
 
+  // React hook, nothing to do with Redux.
+  // Gets called whenever there is a change related to the component that its inside of
   useEffect(() => {
 
     // Check if user is already logged in
@@ -39,5 +48,3 @@ const App = () => {
     </Router>
   );
 }
-
-export default App;

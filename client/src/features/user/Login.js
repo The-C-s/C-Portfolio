@@ -6,10 +6,10 @@ import { login } from './userSlice';
 
 export default function Login() {
 
-  const history = useHistory();
-  const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const [form, updateForm] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmitHandler = e => {
 
@@ -18,9 +18,9 @@ export default function Login() {
     dispatch(login(form));
   }
 
-  const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
-
   useEffect(() => { if (isAuthenticated) history.push('/dashboard') });
+
+  const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
 
   return(
     <div className="form-box">

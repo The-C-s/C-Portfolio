@@ -51,6 +51,7 @@ const user = createSlice({
   }
 });
 
+// Explicitly export the non-async reducers
 export const { logout, setUser } = user.actions;
 
 export default user.reducer;
