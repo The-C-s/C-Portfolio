@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 /*
  * Having EditContent and DeleteContent created by ContentItem
  * helps keep Dashboard complexity as simple as possible and
  * can be called wherever in the app we decide to put a ContentItem.
  */
-import EditContent from '.EditContent';
+import EditContent from './EditContent';
 import DeleteContent from './DeleteContent';
 
 export default function ContentItem({ content }) {
@@ -28,16 +32,16 @@ export default function ContentItem({ content }) {
     <React.Fragment>
       <EditContent content={content} show={showEdit} closeHandler={handleEditClose}/>
       <DeleteContent content={content} show={showDelete} closeHandler={handleDeleteClose}/>
-      <div className="row">
-        <div className="flex-fill card mt-5 ml-5 mr-5">
-          <div className="card-body">
+      <Row>
+        <Card className="flex-fill mt-5 ml-5 mr-5">
+          <Card.Body>
             <h4 className="card-title">{title}</h4>
             <p className="card-text">{description}</p>
-            <button className="btn btn-link float-right" onClick={() => setShowEdit(true)}>Edit</button>
-            <button className="btn btn-link float-right text-danger" onClick={() => setShowDelete(true)}>Delete</button>
-          </div>
-        </div>
-      </div>
+            <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
+            <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
+          </Card.Body>
+        </Card>
+      </Row>
     </React.Fragment>
   );
 }

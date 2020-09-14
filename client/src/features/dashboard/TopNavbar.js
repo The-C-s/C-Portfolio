@@ -2,22 +2,23 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { logout } from '../../features/user/userSlice';
+import { logout } from '../user/userSlice';
 
+import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-export default function Navbar() {
+export default function TopNavbar() {
 
   const dispatch = useDispatch();
 
   return(
-    <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <Navbar variant="dark" className="fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <Nav.Link as={Link} to="/dashboard" className="navbar-brand col-sm-3 col-md-2 mr-0">Dashboard</Nav.Link>
-      <ul className="navbar-nav px-3">
-        <li className="nav-item text-nowrap">
+      <Nav className="px-3">
+        <Nav.Item className="text-nowrap">
           <Nav.Link as={Link} to="/" onClick={() => dispatch(logout())}>Sign out</Nav.Link>
-        </li>
-      </ul>
-    </nav>
+        </Nav.Item>
+      </Nav>
+    </Navbar>
   );
 }

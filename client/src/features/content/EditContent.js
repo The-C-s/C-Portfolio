@@ -5,6 +5,7 @@ import { editContent, getContent } from './contentSlice';
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export default function EditContent({ content, show, closeHandler }) {
 
@@ -36,8 +37,8 @@ export default function EditContent({ content, show, closeHandler }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn btn-primary" onClick={closeHandler}>Cancel</button>
-        <button className="btn btn-warning" onClick={editClickHandler}>Save changes</button>
+        <Button variant="primary" onClick={closeHandler}>Cancel</Button>
+        <Button variant="warning" onClick={editClickHandler}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   )

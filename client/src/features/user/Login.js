@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom';
 
 import { login } from './userSlice';
 
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 export default function Login() {
 
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
@@ -24,11 +27,11 @@ export default function Login() {
 
   return(
     <div className="form-box">
-      <form className="login-form" onSubmit={onSubmitHandler}>
+      <Form className="login-form" onSubmit={onSubmitHandler}>
         <h2>Login</h2>
         <hr/>
-        <div className="form-group">
-          <input
+        <Form.Group>
+          <Form.Control
             type="email" 
             id="email"
             placeholder="Email Address" 
@@ -36,9 +39,9 @@ export default function Login() {
             onChange={onChangeHandler}
             className="form-control"
           />
-        </div>
-        <div className="form-group">
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
             type="password"  
             id="password" 
             placeholder="Password" 
@@ -46,11 +49,9 @@ export default function Login() {
             onChange={onChangeHandler}
             className="form-control"
           />
-        </div>
-        <div className="form-group">
-          <button type="submit" className="btn btn-primary btn-block btn-lg">Login</button>
-        </div>
-      </form>
+        </Form.Group>
+        <Button type="submit" variant="primary">Login</Button>
+      </Form>
     </div>
   );
 }

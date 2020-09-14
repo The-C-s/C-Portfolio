@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getContent, deleteContent } from '../../features/content/contentSlice';
+import { getContent, deleteContent } from './contentSlice';
 
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export default function DeleteContent({ content, show, closeHandler }) {
 
@@ -22,8 +23,8 @@ export default function DeleteContent({ content, show, closeHandler }) {
       <Modal.Header><Modal.Title>Delete Content</Modal.Title></Modal.Header>
       <Modal.Body>Are you sure you want to delete <b>{content.title}</b>?</Modal.Body>
       <Modal.Footer>
-        <button className="btn btn-primary" onClick={closeHandler}>No, cancel</button>
-        <button className="btn btn-danger" onClick={deleteClickHandler}>Yes, delete</button>
+        <Button variant="primary" onClick={closeHandler}>No, cancel</Button>
+        <Button variant="danger" onClick={deleteClickHandler}>Yes, delete</Button>
       </Modal.Footer>
     </Modal>
   )

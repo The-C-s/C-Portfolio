@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import Navbar from '../../components/layout/Navbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+import TopNavbar from './TopNavbar';
 import SideNavBar from './SideNavbar';
-import Feed from '../../components/dashboard/Feed';
-import AddContent from '../../components/dashboard/AddContent';
+import Feed from './Feed';
+import AddContent from '../content/AddContent';
 
 export default function Dashboard() {
 
@@ -26,16 +29,16 @@ export default function Dashboard() {
 
   return(
     <React.Fragment>
-      <Navbar/>
-      <div className="container-fluid">
-        <div className="row">
+      <TopNavbar/>
+      <Container fluid>
+        <Row>
           <SideNavBar setView={setViewHandler}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
           </main>
-        </div>
-      </div>
+        </Row>
+      </Container>
     </React.Fragment>
   );
 }

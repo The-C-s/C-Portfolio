@@ -12,7 +12,7 @@ import Landing from '../features/pages/Landing';
 import Dashboard from '../features/dashboard/Dashboard';
 
 // For when css is being a b and you need to override some rules
-import './App.css';
+import '../App.css';
 
 // React component is its main function
 // Pls don't use classes! Unless there is a *really* good reason
