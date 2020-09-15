@@ -65,7 +65,7 @@ app.get('/dashboard', (req, res) => {
 
     console.log(`URL: ${req.url}`);
 
-    res.status(200);
+    res.send('OK');
 });
 
 // user functions
