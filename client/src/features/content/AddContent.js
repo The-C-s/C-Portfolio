@@ -1,42 +1,34 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import API from '../../common/api';
+import { useDispatch } from 'react-redux';
+
+import { createContent, getContent } from '../content/contentSlice';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { CREATE } from '../../actions/types';
-
 export default function AddContent({ setView }) {  
 
+  /*
+   * useState is a React hook and unrelated to Redux. Creates a little
+   * private state inside the component, in this case is used to just handle
+   * what's in the input fields before we send it off to Redux.
+   */
   const [content, updateContent] = useState({});
-  const { email, authType, token } = useSelector(state => state.user);
   const dispatch = useDispatch();
-
-  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
 
   const onSubmitHandler = e => {
 
+    // Prevent 'Submit' from actually doing a traditional submit
     e.preventDefault();
 
-    const payload = {
-      user: email,
-      title: content.title,
-      description: content.description
-    }
-
-    API.createContent(payload, authType, token)
-      .then(res => {
-
-        dispatch({
-          type: CREATE,
-          payload: res.data
-        });
-
-        setView('dashboard');
-      })
-      .catch(err => console.log(err));
+    // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
+    dispatch(createContent(content))
+      .then(() => dispatch(getContent()))
+      .then(() => setView('dashboard'));
   }
+
+  // Input fields are based on state, so typing in them won't work unless we also change the state
+  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
 
   return(
     <React.Fragment>

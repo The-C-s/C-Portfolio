@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import Nav from 'react-bootstrap/Nav';
 
@@ -13,20 +12,20 @@ export default function SideNavbar({ setView }) {
   }
 
   return(
-    <Nav className="col-md-2 d-none d-md-block bg-light sidebar" activeKey={active} onSelect={onSelectHandler}>
+    <Nav className="col-md-2 d-none d-md-block bg-light sidebar">
       <div className="sidebar-sticky">
-        <ul className="nav flex-column">
-          <li className="nav-item">
+        <Nav className="flex-column" activeKey={active} onSelect={onSelectHandler}>
+          <Nav.Item>
             <Nav.Link eventKey="dashboard">
               Dashboard
             </Nav.Link>
-          </li>
-          <li className="nav-item">
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link eventKey="add-content">
               Add Content
             </Nav.Link>
-          </li>
-        </ul>
+          </Nav.Item>
+        </Nav>
       </div>
     </Nav>
   );
