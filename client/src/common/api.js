@@ -9,9 +9,6 @@ const CURRENT_USER = '/users/current';
 const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create';
 
-// Automatically attach current auth token to all API requests
-const setAuthHeader = token => axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
 // Takes email and password as an object and returns the user's details and token
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
 
@@ -19,10 +16,7 @@ const authenticateUser = async user => await axios.post(AUTH_USER, user);
 const getUser = async token => await axios.get(CURRENT_USER, token);
 
 // Uses an existing token if user is logged in and returns all their content (as a list, not an object)
-const getAllContent = async () => {
-  setAuthHeader(localStorage.getItem('token'));
-  return await axios.get(CONTENT);
-}
+const getAllContent = async () => await axios.get(CONTENT);
 
 // Takes a content object and authorises with existing token
 const createContent = async content => await axios.post(CREATE_CONTENT, content);
@@ -35,7 +29,6 @@ const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 
 // Make functions available to other components
 export default {
-  setAuthHeader,
   authenticateUser,
   getUser,
   getAllContent,

@@ -22,16 +22,9 @@ export default function App() {
   const dispatch = useDispatch();
 
   // React hook, nothing to do with Redux.
-  // Gets called whenever there is a change related to the component that its inside of
+  // Gets called whenever there is a change related to the component that it's inside of
   useEffect(() => {
-
-    // Check if user is already logged in
-    const _token = localStorage.getItem('token');
-
-    if (_token !== null) {
-
-      api.setAuthHeader(_token);
-
+    if (localStorage.getItem('token')) {
       api.getUser()
         .then(res => dispatch(setUser(res)));
     }

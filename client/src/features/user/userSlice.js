@@ -25,7 +25,6 @@ const user = createSlice({
     logout: () => {
 
       localStorage.removeItem('token');
-      api.setAuthHeader('');
 
       return { isAuthenticated: false }
     }
@@ -33,14 +32,8 @@ const user = createSlice({
   extraReducers: {
     [login.fulfilled]: (state, action) => {
 
-      // Clear any existing token
-      localStorage.removeItem('token');
-
       // Persist JWT to local storage
       localStorage.setItem('token', action.payload.data.token);
-
-      // Tell axios to send auth token with every future request
-      api.setAuthHeader(action.payload.data.token);
 
       return {
         ...state,
