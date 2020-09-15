@@ -61,6 +61,13 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/dashboard', (req, res) => {
+
+    console.log(`URL: ${req.url}`);
+
+    res.send('OK');
+});
+
 // user functions
 app.use('/users', userRoute);
 
