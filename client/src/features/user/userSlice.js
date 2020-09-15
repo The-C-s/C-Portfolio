@@ -10,7 +10,7 @@ export const login = createAsyncThunk(
 const user = createSlice({
   name: 'user',
   initialState: {
-    isAuthenticated: false,
+    isAuthenticated: (localStorage.getItem('token') !== null),
     authType: 'Bearer'
   },
   reducers: {
