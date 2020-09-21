@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //const BASE = 'http://cportfolio.herokuapp.com';
-const BASE = 'http://localhost:39921';
+const BASE = 'http://localhost:50156';
 const AUTH_USER = `${BASE}/users/authenticate`;
 const GET_ALL_CONTENT = `${BASE}/content/`;
 const CREATE_CONTENT = `${BASE}/content/create`;
