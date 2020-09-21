@@ -14,7 +14,8 @@ cloudinary.config({
 
 // Storage for files 
 const storage = new CloudinaryStorage({ 
-    cloudinary
+    cloudinary, 
+    folder: 'CPortfolio'
 }); 
 
 //Used to upload files

@@ -20,8 +20,7 @@ async function getAll(userid) {
         const user = await User.findById(userid); 
         return await Content.find({user: user.email});
     } catch(error) {
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "User does not exist";
     }
 }
 
@@ -32,8 +31,7 @@ async function getById(id) {
         return await Content.findById(id);
     } catch(error) {
         //error thrown if not in db
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "Post does not exist"; 
     }
 }
 
@@ -52,8 +50,7 @@ async function create(userid, userParam, file) {
         return post;  
     } catch(error) {
         //Otherwise throws error if post not created 
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "Post not created"; 
     }
 }
 
@@ -75,14 +72,12 @@ async function update(userid, postid, userParam, file) {
             await post.save();
                 return post;    
         }
-        //Otherwise return an error (should I be throwing this?)
+        //Otherwise return an error 
         else{ 
-            return (error)
+            throw "Invalid User Details";
         }
     } catch(error) {
-        //error thrown when not found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "Post not found"; 
     }
 }
 
@@ -96,10 +91,10 @@ async function _delete(userid, postid) {
             return await Content.findByIdAndRemove(id);
         }
         else{ 
-            return error; 
+            throw "Invalid User Details"; 
         }
     } catch(error) {
-        if (error.name == "CastError") { return null; }
-        throw error;
+
+        throw "Post not found";
     }
 }

@@ -5,7 +5,6 @@ const verify = require('../_helpers/jwt');
 const uploadFile = require('../_helpers/file-upload'); 
 
 //FIX: Can only store one file per post, think upload.array?  
-//Currently file is the upload input required 
 // Routes
 router.post('/create',verify.auth, uploadFile.single('file'), create);
 router.get('/', verify.auth, getAll);
