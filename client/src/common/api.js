@@ -1,11 +1,10 @@
 import axios from 'axios';
-
-//const BASE = 'http://cportfolio.herokuapp.com';
-const BASE = 'http://localhost:50156';
+const BASE = 'http://cportfolio.herokuapp.com';
+//const BASE = 'http://localhost:50156';
 const AUTH_USER = `${BASE}/users/authenticate`;
 const GET_ALL_CONTENT = `${BASE}/content/`;
 const CREATE_CONTENT = `${BASE}/content/create`;
-const EDIT_CONTENT = `${BASE}/content`;
+const EDIT_CONTENT = `${BASE}/content`; 
 const DELETE_CONTENT = `${BASE}/content`;
 
 const authenticateUser = async user => await axios.post(AUTH_USER, user);

@@ -1,8 +1,4 @@
-const config = require('../config.json');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
-const cloudinary = require('../_helpers/file-upload'); 
 const Content = db.Content; 
 const User = db.User;
 

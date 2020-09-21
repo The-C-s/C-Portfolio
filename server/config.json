@@ -1,8 +1,8 @@
 {
     "connectionString": "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority",
     "secret": "LfcHHqCnlDFEMkQhNUoJkSO13QeNFYD2WqI8SMBVuGqXcQ8OFYB6UF6nGJrFXtc", 
-    "environmentVariable": "cloudinary://245773415742616:gQEDBTTP6rRq-A0D48GqZ94vr0o@dlh0pcycr", 
     "cloudName": "dlh0pcycr", 
     "apiName": "245773415742616",
     "apiSecret": "gQEDBTTP6rRq-A0D48GqZ94vr0o"
+ 
 }

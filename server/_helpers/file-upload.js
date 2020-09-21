@@ -2,8 +2,6 @@ const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const {CloudinaryStorage} = require('multer-storage-cloudinary');
 const config = require('../config.json');
-// cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
-// cloudinary.image("sample", {"crop":"fill","gravity":"faces","width":300,"height":200,"format":"jpg"});
 
 //Documentation for cloudinary 
 //https://cloudinary.com//documentation/node_integration 
@@ -26,3 +24,7 @@ const upload = multer({storage: storage,
 });
 
 module.exports = upload; 
+
+//How to use middleware, add in between path "/create" and function create
+//Call by using upload.single('file') where file is the name of the field which gets the image/file
+//.single is a function that uploads a single file (as part of multer) 
