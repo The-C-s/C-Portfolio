@@ -31,10 +31,10 @@ jobs:
       
       # Push new build along with any pushes to master that affect client
       - name: Push build to master
-        if: github.event == 'push'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add build
           git commit -m "Build client"
           git push
+        if: github.event == 'push'
