@@ -1,18 +1,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import API from '../../common/api';
+
+import api from '../../common/api';
 
 export const login = createAsyncThunk(
   'user/authenticate',
-  user => API.authenticateUser(user)
+  api.authenticateUser
 );
 
 const user = createSlice({
   name: 'user',
   initialState: {
-    isAuthenticated: false
+    isAuthenticated: (localStorage.getItem('token') !== null),
+    authType: 'Bearer'
   },
   reducers: {
-    logout: (state, action) => {
+    setUser: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.data,
+        token: localStorage.getItem('token'),
+        isAuthenticated: true
+      }
+    },
+    logout: () => {
+
       localStorage.removeItem('token');
 
       return { isAuthenticated: false }
@@ -21,18 +32,19 @@ const user = createSlice({
   extraReducers: {
     [login.fulfilled]: (state, action) => {
 
+      // Persist JWT to local storage
       localStorage.setItem('token', action.payload.data.token);
 
       return {
         ...state,
         ...action.payload.data,
-        isAuthenticated: true,
-        authType: 'Bearer'
+        isAuthenticated: true
       }
     }
   }
 });
 
-export const { logout } = user.actions;
+// Explicitly export the non-async reducers
+export const { logout, setUser } = user.actions;
 
 export default user.reducer;

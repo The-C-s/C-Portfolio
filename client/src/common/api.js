@@ -1,20 +1,38 @@
 import axios from 'axios';
-const BASE = 'http://cportfolio.herokuapp.com';
-//const BASE = 'http://localhost:50156';
-const AUTH_USER = `${BASE}/users/authenticate`;
-const GET_ALL_CONTENT = `${BASE}/content/`;
-const CREATE_CONTENT = `${BASE}/content/create`;
-const EDIT_CONTENT = `${BASE}/content`; 
-const DELETE_CONTENT = `${BASE}/content`;
 
+// API not working locally? This will be why
+// TODO: set using env vars instead (will still need to set localhost port)
+axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
+
+const AUTH_USER = '/users/authenticate';
+const CURRENT_USER = '/users/current';
+const CONTENT = '/content/';
+const CREATE_CONTENT = '/content/create';
+
+// Takes email and password as an object and returns the user's details and token
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
 
-const getAllContent = async (authType, token) => await axios.get(GET_ALL_CONTENT, { headers: { 'Authorization': `${authType} ${token}` } });
+// Takes a token string and returns the user's details
+const getUser = async token => await axios.get(CURRENT_USER, token);
 
-const createContent = async (content, authType, token) => await axios.post(CREATE_CONTENT, content, { headers: { 'Authorization': `${authType} ${token}` } });
+// Uses an existing token if user is logged in and returns all their content (as a list, not an object)
+const getAllContent = async () => await axios.get(CONTENT);
 
-const editContent = async (id, content, authType, token) => await axios.put(`${EDIT_CONTENT}/${id}`, content, { headers: { 'Authorization': `${authType} ${token}` } });
+// Takes a content object and authorises with existing token
+const createContent = async content => await axios.post(CREATE_CONTENT, content);
 
-const deleteContent = async (id, authType, token) => await axios.delete(`${DELETE_CONTENT}/${id}`, { headers: { 'Authorization': `${authType} ${token}` } });
+// Takes a content object (that must include the id field) and authorises with existing token
+const editContent = async content => await axios.put(`${CONTENT}${content.id}`, content);
 
-export default { authenticateUser, getAllContent, createContent, editContent, deleteContent };
+// Takes just the content id (as a string) and authorises with existing token
+const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
+
+// Make functions available to other components
+export default {
+  authenticateUser,
+  getUser,
+  getAllContent,
+  createContent,
+  editContent,
+  deleteContent
+};

@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Add Resume",
+    "version": "1.0",
+    "contact": {
+      "name": "Victoria"
+    }, 
+    "description": "Uploads a resume file to an already existing profile"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/:id/addResume": {
+      "put": {
+        "description": "uploads a file and saves link to resume",
+        "summary": "addResume",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "object",
+                      "description": "Uploads a file under 'file' params, and converts to URL which is stored in 'resume' params"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "put-:id-addResume",
+        "tags": [
+          "PUT"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PUT"
+    }
+  ]
+}
