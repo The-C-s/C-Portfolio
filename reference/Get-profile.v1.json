@@ -32,15 +32,18 @@
                     },
                     "experience": {
                       "type": "array",
-                      "description": "a list of strings"
+                      "description": "a list of strings",
+                      "items": {}
                     },
                     "education": {
                       "type": "array",
-                      "description": "a list of strings"
+                      "description": "a list of strings",
+                      "items": {}
                     },
                     "projects": {
                       "type": "array",
-                      "description": "a list of MongoDB ids"
+                      "description": "a list of MongoDB ids",
+                      "items": {}
                     },
                     "logo": {
                       "type": "string",
@@ -50,7 +53,10 @@
                       "type": "string",
                       "description": "URL to resume"
                     }
-                  }
+                  },
+                  "required": [
+                    "email"
+                  ]
                 }
               }
             }
