@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Update profile",
+    "version": "1.0",
+    "contact": {
+      "name": "Victoria"
+    },
+    "description": "Updates the text params of a profile "
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/profile/:id": {
+      "put": {
+        "summary": "Updates text params",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "education": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "experience": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "projects": {
+                      "type": "array",
+                      "description": "Array of MongoDB ids ",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "education": [
+                        "Maccas University, Maccas High, Maccas Kindergarden"
+                      ],
+                      "experience": [
+                        "Maccas Worker"
+                      ],
+                      "projects": [
+                        {}
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "put-profile-:id",
+        "tags": [
+          "PUT"
+        ],
+        "description": "Update profile endpoint"
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PUT"
+    }
+  ]
+}

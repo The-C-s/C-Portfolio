@@ -2,8 +2,10 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Create-content",
-    "version": "1.0", 
-    "contact": {"name": "Victoria"}, 
+    "version": "1.0",
+    "contact": {
+      "name": "Victoria"
+    },
     "description": "Creates a post and returns the created post, requires token"
   },
   "servers": [
@@ -14,13 +16,15 @@
   "paths": {
     "/content/create": {
       "post": {
-        "description": "Creates a post and returns it, requires token", 
+        "description": "Creates a post and returns it, requires token",
         "summary": "create",
         "tags": [
           "POST"
         ],
         "responses": {
-          "200": { "description": "OK", "content": {
+          "200": {
+            "description": "OK",
+            "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -36,6 +40,10 @@
                     "title": {
                       "type": "string"
                     },
+                    "file": {
+                      "type": "object",
+                      "description": "File is uploaded using 'file' params, converted to a URL (string) and stored in 'content' params on DB"
+                    },
                     "description": {
                       "type": "string"
                     },
@@ -45,13 +53,17 @@
                     "tags": {
                       "type": "array",
                       "description": "array of strings for tags",
-                      "items": { "type": "string"}
+                      "items": {
+                        "type": "string"
+                      }
                     },
-                    "viewPermissions": { "type": "string", "description": "ENUM of Public, Private or InviteOnly"}
+                    "viewPermissions": {
+                      "type": "string",
+                      "description": "ENUM of Public, Private or InviteOnly"
+                    }
                   },
                   "required": [
                     "title",
-                    "id",
                     "user"
                   ]
                 },
@@ -61,28 +73,33 @@
                       "displayDate": "2020-09-08T03:16:45.379+00:00",
                       "createdDate": "2020-09-08T03:16:45.379+00:00",
                       "title": "Hello",
-                      "description": "World", 
-                      "user": "uwu@gmail.com", 
-                      "tags": ["hi", "hello"], 
-                      "id": "1234567890", 
+                      "description": "World",
+                      "user": "uwu@gmail.com",
+                      "tags": [
+                        "hi",
+                        "hello"
+                      ],
+                      "id": "1234567890",
                       "viewPermissions": "Public"
                     }
                   }
                 }
               }
             }
-          }, 
-          "400": {"description": "Unauthorised"}, 
-          "500": {"description": "Internal Server Error"}
+          },
+          "400": {
+            "description": "Unauthorised"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         },
         "operationId": "post-content-create"
       }
     }
   },
   "components": {
-    "schemas": {
-
-    }
+    "schemas": {}
   },
   "tags": [
     {

@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Get-profile",
+    "version": "1.0",
+    "contact": {
+      "name": "Victoria"
+    },
+    "description": "Returns the user's profile information"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/profile/create": {
+      "get": {
+        "description": "Returns user profile details",
+        "summary": "Get Profile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "email that the profile belongs to"
+                    },
+                    "experience": {
+                      "type": "array",
+                      "description": "a list of strings",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "education": {
+                      "type": "array",
+                      "description": "a list of strings",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "projects": {
+                      "type": "array",
+                      "description": "a list of MongoDB ids",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "logo": {
+                      "type": "string",
+                      "description": "URL to logo image"
+                    },
+                    "resume": {
+                      "type": "string",
+                      "description": "URL to resume"
+                    }
+                  },
+                  "required": [
+                    "email"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unauthorised"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-profile-create",
+        "tags": [
+          "GET"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "tags": [
+    {
+      "name": "GET"
+    }
+  ]
+}
