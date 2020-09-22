@@ -20,6 +20,9 @@ const storage = new CloudinaryStorage({
 
 //Used to upload files
 //Max is currently 16MB (Mongo limit)
+//Currently has no specification on formats 
+//Can also add image restriction, so we have a special upload for image (jpeg, png etc)
+//And another upload function for resumes (any format)
 const upload = multer({storage: storage, 
     limits: {fileSize: 1024*1024*16}
 });
