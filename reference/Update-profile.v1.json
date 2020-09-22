@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Create-profile",
+    "title": "Update profile",
     "version": "1.0",
     "contact": {
       "name": "Victoria"
     },
-    "description": "Creates a profile (with only the text fields), files are uploaded through put methods"
+    "description": "Updates the text params of a profile "
   },
   "servers": [
     {
@@ -14,13 +14,9 @@
     }
   ],
   "paths": {
-    "/profile/create": {
-      "post": {
-        "description": "Creates a profile (Text only)",
-        "summary": "Post endpoint",
-        "tags": [
-          "POST"
-        ],
+    "/profile/:id": {
+      "put": {
+        "summary": "Updates text params",
         "responses": {
           "200": {
             "description": "OK",
@@ -29,56 +25,72 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "email": {
-                      "type": "string",
-                      "description": "automatically generated on creation of a profile"
-                    },
-                    "experience": {
+                    "education": {
                       "type": "array",
-                      "description": "array of strings",
                       "items": {
                         "type": "string"
                       }
                     },
-                    "education": {
+                    "experience": {
                       "type": "array",
-                      "description": "array of strings",
                       "items": {
                         "type": "string"
                       }
                     },
                     "projects": {
                       "type": "array",
-                      "description": "array of Content objects (MongoDB ids)",
+                      "description": "Array of MongoDB ids ",
                       "items": {
                         "type": "object"
                       }
                     }
-                  },
-                  "required": [
-                    "email"
-                  ]
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "education": [
+                        "Maccas University, Maccas High, Maccas Kindergarden"
+                      ],
+                      "experience": [
+                        "Maccas Worker"
+                      ],
+                      "projects": [
+                        {}
+                      ]
+                    }
+                  }
                 }
               }
             }
           },
-          "400": {
-            "description": "Unauthorised"
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
           }
         },
-        "operationId": "post-profile-create"
+        "operationId": "put-profile-:id",
+        "tags": [
+          "PUT"
+        ],
+        "description": "Update profile endpoint"
       }
     }
   },
   "components": {
-    "schemas": {}
+    "schemas": {},
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
   },
   "tags": [
     {
-      "name": "POST"
+      "name": "PUT"
     }
   ]
 }

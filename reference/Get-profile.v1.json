@@ -33,17 +33,23 @@
                     "experience": {
                       "type": "array",
                       "description": "a list of strings",
-                      "items": {}
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "education": {
                       "type": "array",
                       "description": "a list of strings",
-                      "items": {}
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "projects": {
                       "type": "array",
                       "description": "a list of MongoDB ids",
-                      "items": {}
+                      "items": {
+                        "type": "object"
+                      }
                     },
                     "logo": {
                       "type": "string",
