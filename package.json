@@ -6,10 +6,9 @@
   "main": "server/server.js",
   "scripts": {
     "client": "cd client && npm install && npm start",
-    "server": "node server/server.js",
+    "server": "cd server && npm install && npm start",
     "start": "concurrently \"npm run server\" \"npm run client\" "
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/The-C-s/C-Portfolio.git"

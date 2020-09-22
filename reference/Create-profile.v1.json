@@ -1,0 +1,49 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Create-profile",
+    "version": "1.0",
+    "contact": {"name":"Victoria"},
+    "description": "Creates a profile (with only the text fields), files are uploaded through put methods"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/profile/create": {
+      "post": {
+        "description": "Creates a profile (Text only)",
+        "summary": "Post endpoint",
+        "tags": [
+          "POST"
+        ],
+        "responses": {
+          "200": { "description": "OK", "content":{ 
+            "application/json":{
+              "schema": { 
+                "type": "object", 
+                "properties": { 
+                  "email": {"type": "string", "description": "automatically generated on creation of a profile"}, 
+                  "experience": { "type": "array", "description": "array of strings"}, 
+                  "education": {"type": "array", "description": "array of strings"}, 
+                  "projects": {"type": "array", "description": "array of Content objects (MongoDB ids)"}
+                }
+              }
+            }
+          }}
+        },
+        "operationId": "post-profile-create"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }, 
+  "tags": [
+    {
+      "name": "POST"
+    }
+  ]
+}
