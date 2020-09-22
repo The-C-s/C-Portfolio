@@ -1,5 +1,5 @@
 # Builds on pushes and pull requests to master
-name: Build client
+name: Build Client
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       
       # Push new build along with any pushes to master that affect client
       - name: Push build to master
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
