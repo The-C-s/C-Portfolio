@@ -1,5 +1,5 @@
 # Builds on pushes and pull requests to master
-name: build-client
+name: Build client
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - 'client/**'
+  workflow_dispatch:
 
 jobs:
   build:
