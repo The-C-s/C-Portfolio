@@ -1,5 +1,5 @@
 # Builds on pushes and pull requests to master
-name: Build Client
+name: build
 
 on:
   push:
@@ -20,18 +20,17 @@ jobs:
       # Checkout repo to the runner and install Node
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-
-      - name: Install server dependencies
+      
+      - name: Install dependencies
+        working-directory: client
         run: npm install
       
-      - name: Install and build client
+      - name: Build client
         working-directory: client
-        run: |
-          npm install
-          npm run build
+        run: npm run build
       
       # Push new build along with any pushes to master that affect client
-      - name: Push build to master
+      - name: Push build
         if: github.event_name != 'pull_request'
         run: |
           git config --global user.name "github-actions[bot]"
