@@ -32,7 +32,8 @@
                 }
               }
             }
-          }}
+          }}, "400": {"description": "Unauthorised"}, 
+          "500": {"description": "Internal Server Error"}
         },
         "operationId": "post-profile-create"
       }
