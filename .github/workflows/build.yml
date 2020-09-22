@@ -1,0 +1,40 @@
+# Builds on pushes and pull requests to master
+name: build-client
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'client/**'
+  pull_request:
+    paths:
+      - 'client/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo to the runner and install Node
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+
+      - name: Install server dependencies
+        run: npm install
+      
+      - name: Install and build client
+        working-directory: client
+        run: |
+          npm install
+          npm run build
+      
+      # Push new build along with any pushes to master that affect client
+      - name: Push build to master
+        if: github.event == 'push'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add build
+          git commit -m "Build client"
+          git push
