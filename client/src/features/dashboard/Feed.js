@@ -17,7 +17,7 @@ export default function Feed() {
   useEffect(() => {
     async function fetch() { dispatch(getContent()) }
     fetch();
-  }, []);
+  }, [dispatch]);
 
   return(
     <div className="flex-wrap pt-3 pb-2 mb-3">
