@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import TopNavbar from './TopNavbar';
 import SideNavBar from './SideNavbar';
 import Feed from './Feed';
+import Test from '../user/EditUser'
 import AddContent from '../content/AddContent';
 
 export default function Dashboard() {
@@ -36,6 +37,7 @@ export default function Dashboard() {
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
+            {(view === 'edit-user') && <Test setView={setViewHandler}/>}
           </main>
         </Row>
       </Container>
