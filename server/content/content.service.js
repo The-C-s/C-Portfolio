@@ -1,8 +1,4 @@
-const config = require('../config.json');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
-
 const Content = db.Content; 
 const User = db.User;
 
@@ -22,11 +18,9 @@ async function getAll(userid) {
     try{ 
         //Finds a user, then returns all content with their email  
         const user = await User.findById(userid); 
-        console.log(user.email); 
         return await Content.find({user: user.email});
     } catch(error) {
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "User does not exist";
     }
 }
 
@@ -37,71 +31,70 @@ async function getById(id) {
         return await Content.findById(id);
     } catch(error) {
         //error thrown if not in db
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "Post does not exist"; 
     }
 }
 
 //Creates a post
-async function create(userid, userParam) {
+async function create(userid, userParam, file) {
     try {
         //Create a new post 
         const post = new Content(userParam); 
         //Sets the user of the post to the person who created it 
         const user = await User.findById(userid); 
         post.user = user.email; 
+        //Saves url of image/file 
+        post.content = file.path; 
         //Saves post and returns a post 
         await post.save();
         return post;  
     } catch(error) {
         //Otherwise throws error if post not created 
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "Post not created"; 
     }
 }
 
 //Updates a post
-async function update(userid, postid, userParam) {
+async function update(userid, postid, userParam, file) {
     //attempt to get user, return null if error getting user
     let post;
-    let user;
     try {
         post = await Content.findById(postid);
-        user = await User.findById(userid);
         //Checks if the person editing is the the user of the post 
+        const user = await User.findById(userid);
         if(user.email == post.user){ 
             //Updates the specified post with the input 
             Object.assign(post, userParam);
+            if(file.path){ 
+                //Updates content's file path if file exists 
+                post.content = file.path; 
+            }
             await post.save();
-            return post;
+                return post;    
         }
-        //Otherwise return an error (should I be throwing this?)
+        //Otherwise return an error 
         else{ 
-            return (error)
+            throw "Invalid User Details";
         }
     } catch(error) {
-        //error thrown when not found in database
-        if (error.name == "CastError") { return null; }
-        throw error;
+        throw "Post not found"; 
     }
 }
 
 //Deletes a post
 async function _delete(userid, postid) {
-    let post;
-    let user;
     try {
-        post = await Content.findById(postid);
-        user = await User.findById(userid);
+        post = Content.findbyId(postid); 
+        const user = await User.findById(userid);
         //Checks that the user accessing is the same as the creator 
         if(user.email == post.user){
-            return await Content.findByIdAndRemove(postid);
+            return await Content.findByIdAndRemove(id);
         }
         else{ 
-            return error; 
+            throw "Invalid User Details"; 
         }
     } catch(error) {
-        if (error.name == "CastError") { return null; }
-        throw error;
+
+        throw "Post not found";
     }
 }

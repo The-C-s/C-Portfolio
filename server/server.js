@@ -8,7 +8,7 @@ const cors = require('cors');
 const jwt = require('./_helpers/jwt');
 const contentRoute = require('./content/content.controller'); 
 const userRoute = require('./users/users.controller'); 
-const errorHandler = require('./_helpers/error-handler');
+const profileRoute = require('./profile/profile.controller'); 
 
 //mongoDB access
 async function testMongoDB() {
@@ -66,10 +66,9 @@ app.use('/users', userRoute);
 
 //Redirects anything with /content into our post routes folder 
 app.use('/content', contentRoute);
-// user functions
-app.use('/users', require('./users/users.controller'));
 
-app.use(errorHandler);
+//Redirects anything with profile 
+app.use('/profile', profileRoute); 
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
