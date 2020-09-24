@@ -93,8 +93,9 @@ async function update(id, userParam) {
     await user.save();
 }
 async function _delete(id) {
+    //delete user's content
     await contentService.deleteByUser(id);
-    console.log("bruh moment");
+    //delete user
     await User.findByIdAndRemove(id);
 }
 //based on github.com/cornflourblue/node-mongo-registration-login-api/

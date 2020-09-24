@@ -67,7 +67,6 @@ async function create(userid, userParam, file) {
         return post;  
     } catch(error) {
         //Otherwise throws error if post not created 
-        console.log(error);
         throw "Post not created"; 
     }
 }
@@ -126,6 +125,7 @@ async function _deleteByUser(userid) {
     // validate
     if (!user) throw new Error('UserNotFoundError');
 
+    //for each post, delete it
     var postid;
     for(postid of user.content) {
         await _delete(userid, postid);
