@@ -6,6 +6,7 @@
 		" ",
 		"/test",
 		"/database",
-    "/users"
+    	"/users",
+    	"/dashboard"
 	]
 }
