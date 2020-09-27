@@ -2,6 +2,7 @@ const config = require('../config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
+const contentService = require('../content/content.service');
 const User = db.User;
 
 module.exports = {
@@ -92,6 +93,9 @@ async function update(id, userParam) {
     await user.save();
 }
 async function _delete(id) {
+    //delete user's content
+    await contentService.deleteByUser(id);
+    //delete user
     await User.findByIdAndRemove(id);
 }
 //based on github.com/cornflourblue/node-mongo-registration-login-api/
