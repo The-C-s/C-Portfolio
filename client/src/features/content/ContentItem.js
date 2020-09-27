@@ -4,6 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 
 import Tags from './Tags';
+import VisibilityDot from './VisibilityDot';
+
+const isUrl = require('is-valid-http-url');
+const isImage = require('is-image');
 
 /*
  * Having EditContent and DeleteContent created by ContentItem
@@ -22,14 +26,13 @@ export default function ContentItem({ content }) {
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
 
-  /*
-   * This component can be passed content as a prop so never has to be
-   * tied up with Redux but its kids have full Redux functionality. Also its simple
-   * enough in layout and only has Modal kids so it can be thrown anywhere.
-   */
-
-  const { title, description, tags, displayDate } = content;
+  const { id, title, description, tags, displayDate } = content;
   const showTags = tags.length > 0;
+
+  // Determine variant of ContentItem to use
+  if (isUrl(content.body) && isImage(content.body)) {
+    const image = true;
+  }
 
   const date = Intl.DateTimeFormat('en-AU', {
     day: '2-digit',
@@ -44,8 +47,10 @@ export default function ContentItem({ content }) {
       <Row>
         <Card>
           <Card.Header>
-            <span className="contentitem-visibility-dot"><span className="contentitem-visibility-dot-inner"></span></span>
-            <div className="contentitem-title">{title}</div>
+            <div className="contentitem-title-visibility">
+              <VisibilityDot id={id}/>
+              <div className="contentitem-title">{title}</div>
+            </div>
             <div className="contentitem-date">{date}</div>
           </Card.Header>
           <Card.Body>
