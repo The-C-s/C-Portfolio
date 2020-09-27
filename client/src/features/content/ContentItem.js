@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+
+import Tags from './Tags';
 
 /*
  * Having EditContent and DeleteContent created by ContentItem
@@ -26,9 +27,7 @@ export default function ContentItem({ content }) {
    * tied up with Redux but its kids have full Redux functionality. Also its simple
    * enough in layout and only has Modal kids so it can be thrown anywhere.
    */
-  // const { title, body } = content;
-  // const description = body;
-  // const tags = ['tag1', 'tag2', 'tag3'];
+
   const { title, description, tags, displayDate } = content;
   const showTags = tags.length > 0;
 
@@ -53,9 +52,7 @@ export default function ContentItem({ content }) {
             <div className="contentitem-container">
               <div>
                 <div className="contentitem-tags">
-                  {showTags && <>
-                  tags&nbsp;&nbsp;&nbsp;›{tags.map(tag => <>&nbsp;&nbsp;&nbsp;<a href="#" className="contentitem-tag">{tag}</a></>)}
-                  </>}
+                  {showTags && <Tags tags={tags}/>}
                 </div>
                 <h3>Description</h3>
               </div>
