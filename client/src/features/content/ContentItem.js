@@ -26,19 +26,43 @@ export default function ContentItem({ content }) {
    * tied up with Redux but its kids have full Redux functionality. Also its simple
    * enough in layout and only has Modal kids so it can be thrown anywhere.
    */
-  const { title, description } = content;
+  // const { title, body } = content;
+  // const description = body;
+  // const tags = ['tag1', 'tag2', 'tag3'];
+  const { title, description, tags, displayDate } = content;
+  const showTags = tags.length > 0;
+
+  const date = Intl.DateTimeFormat('en-AU', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  }).format(Date.parse(displayDate));
 
   return(
     <React.Fragment>
       <EditContent content={content} show={showEdit} closeHandler={handleEditClose}/>
       <DeleteContent content={content} show={showDelete} closeHandler={handleDeleteClose}/>
       <Row>
-        <Card className="flex-fill mt-5 ml-5 mr-5">
+        <Card>
+          <Card.Header>
+            <span className="contentitem-visibility-dot"><span className="contentitem-visibility-dot-inner"></span></span>
+            <div className="contentitem-title">{title}</div>
+            <div className="contentitem-date">{date}</div>
+          </Card.Header>
           <Card.Body>
-            <h4 className="card-title">{title}</h4>
+            <div className="contentitem-container">
+              <div>
+                <div className="contentitem-tags">
+                  {showTags && <>
+                  tags&nbsp;&nbsp;&nbsp;›{tags.map(tag => <>&nbsp;&nbsp;&nbsp;<a href="#" className="contentitem-tag">{tag}</a></>)}
+                  </>}
+                </div>
+                <h3>Description</h3>
+              </div>
+            </div>
             <p className="card-text">{description}</p>
-            <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
-            <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
+            {/*<Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
+            <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>*/}
           </Card.Body>
         </Card>
       </Row>
