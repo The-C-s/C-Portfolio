@@ -6,10 +6,10 @@ const uploadFile = require('../_helpers/file-upload');
 
 //FIX: Can only store one file per post, think upload.array?  
 // Routes
-router.post('/create',verify.auth, uploadFile.single('file'), create);
+router.post('/create',verify.auth, uploadFile.upload.single('file'), create);
 router.get('/', verify.auth, getAll);
 router.get('/:id', getById);
-router.put('/:id', verify.auth, uploadFile.single('file'), update);
+router.put('/:id', verify.auth, uploadFile.upload.single('file'), update);
 router.delete('/:id', verify.auth, _delete);
 
 

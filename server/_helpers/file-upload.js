@@ -13,10 +13,19 @@ cloudinary.config({
 
 
 // Storage for files 
+const imageStorage = new CloudinaryStorage({ 
+    cloudinary, 
+    folder: 'CPortfolio',  //Not working? 
+    allowedFormats: ['jpeg', 'jpg', 'png'] 
+    //Can also make picture circle or something 
+    //transformations: []
+}); 
+
 const storage = new CloudinaryStorage({ 
     cloudinary, 
     folder: 'CPortfolio'
 }); 
+
 
 //Used to upload files
 //Max is currently 16MB (Mongo limit)
@@ -24,10 +33,15 @@ const storage = new CloudinaryStorage({
 //Can also add image restriction, so we have a special upload for image (jpeg, png etc)
 //And another upload function for resumes (any format)
 const upload = multer({storage: storage, 
-    limits: {fileSize: 1024*1024*16}
+    limits: {fileSize: 1024*1024*16}, 
 });
 
-module.exports = upload; 
+const uploadImage = multer({
+    storage: imageStorage, 
+    limits: {fileSize: 1024*1024*16}
+}); 
+
+module.exports = {upload, uploadImage}; 
 
 //How to use middleware, add in between path "/create" and function create
 //Call by using upload.single('file') where file is the name of the field which gets the image/file
