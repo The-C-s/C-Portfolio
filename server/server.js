@@ -70,6 +70,11 @@ app.use('/content', contentRoute);
 //Redirects anything with profile 
 app.use('/profile', profileRoute); 
 
+//redirects any other url to default
+app.use(function(req, res){
+       res.redirect('/');
+   });
+
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
     if (error) return console.log(`Error: ${error}`);
