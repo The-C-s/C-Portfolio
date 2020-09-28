@@ -98,9 +98,24 @@ async function update(id, userParam) {
         throw 'Email "' + userParam.email + '" is already taken';
     }
 
-    //if hash was entered
+    //illegal fields
     if(userParam.hash) {
       throw 'Hash is an illegal field';
+    }
+    if(userParam.content) {
+      throw 'Content is an illegal field';
+    }
+    if(userParam.profile) {
+      throw 'Profile is an illegal field';
+    }
+    if(userParam.createdDate) {
+      throw 'createdDate is an illegal field';
+    }
+    if(userParam.avatar) {
+      throw 'Avatar is an illegal field';
+    }
+    if(userParam.background) {
+      throw 'Background is an illegal field';
     }
 
     // hash password if it was entered
