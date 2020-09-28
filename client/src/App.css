@@ -19,8 +19,18 @@
   align-items: center;
 }
 
+.contentitem-header {
+  cursor: pointer;
+  z-index: 2;
+}
+
+.contentitem-header:hover .contentitem-title {
+  text-decoration: underline;
+}
+
 .card-body {
   padding: 2% 5% 5% 5%;
+  z-index: 3;
 }
 
 .card-body h3 {
@@ -45,6 +55,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: capitalize;
+  color: #FFFFFE;
+  text-shadow: 0 0 5px black;
 }
 
 .contentitem-date {
@@ -54,6 +66,12 @@
   letter-spacing: -0.01em;
   white-space: nowrap;
   padding-left: 10px;
+  color: #FFFFFE;
+  text-shadow: 0 0 5px black;
+}
+
+.card-img {
+  border-radius: 30px 30px 0 0;
 }
 
 .contentitem-tags {
