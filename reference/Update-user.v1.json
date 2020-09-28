@@ -3,10 +3,7 @@
   "info": {
     "title": "Update-user",
     "version": "1.0",
-    "description": "updates a user in database",
-    "contact": {
-      "name": "Hugh"
-    }
+    "description": "updates a user in database"
   },
   "servers": [
     {
@@ -117,15 +114,24 @@
                   },
                   "password": {
                     "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               }
             }
           }
-        },
-        "tags": [
-          "PUT"
-        ]
+        }
       }
     }
   },
@@ -137,10 +143,5 @@
         "scheme": "bearer"
       }
     }
-  },
-  "tags": [
-    {
-      "name": "PUT"
-    }
-  ]
+  }
 }
