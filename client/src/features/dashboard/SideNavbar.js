@@ -27,7 +27,7 @@ export default function SideNavbar({ setView }) {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="edit-user">
-              Edit User
+              User Profile
             </Nav.Link>
           </Nav.Item>
         </Nav>

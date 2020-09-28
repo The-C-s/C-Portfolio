@@ -8,6 +8,7 @@ const AUTH_USER = '/users/authenticate';
 const CURRENT_USER = '/users/current';
 const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create';
+const UPDATE_USER = '/users/update';
 
 // Takes email and password as an object and returns the user's details and token
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
@@ -27,12 +28,21 @@ const editContent = async content => await axios.put(`${CONTENT}${content.id}`, 
 // Takes just the content id (as a string) and authorises with existing token
 const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 
+//Takes the user id and a JSON object representing the user parameters and updates the database with the new info
+const editUser = async (id, userParams) => {
+    console.log("Reached edit user");
+    await axios.put(UPDATE_USER, id, userParams);
+    console.log("Reached post update");
+};
+
 // Make functions available to other components
+
 export default {
   authenticateUser,
   getUser,
   getAllContent,
   createContent,
   editContent,
-  deleteContent
+  deleteContent,
+  editUser
 };
