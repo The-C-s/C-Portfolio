@@ -1,20 +1,23 @@
 import React from 'react';
 
+import Button from 'react-bootstrap/Button';
+
 export default function Tags({ tags }) {
 
-  const clickHandler = tag => console.log(`'${tag}' tag clicked`);
+  const clickHandler = tag => console.log(`'${tag}' tag clicked.`);
 
   return(
     <React.Fragment>
       tags&nbsp;&nbsp;&nbsp;›{tags.map(
-        tag => <>
+        tag => <React.Fragment>
           &nbsp;&nbsp;&nbsp;
-          <a
-            href="#"
+          <Button
+            variant="link"
             className="contentitem-tag"
             key={tag}
             onClick={() => clickHandler(tag)}
-          >{tag}</a></>
+          >{tag}</Button>
+        </React.Fragment>
       )}
     </React.Fragment>
   );

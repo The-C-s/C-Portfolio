@@ -82,6 +82,12 @@
 }
 
 .contentitem-tag, .contentitem-tag:hover {
+  padding: 0;
+  display: inline-block;
+  font-family: 'Archivo', sans-serif;
+  text-transform: none;
+  font-style: normal;
+  font-size: 14px;
   color: #E53170;
 }
 
