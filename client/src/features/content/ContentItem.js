@@ -20,6 +20,7 @@ export default function ContentItem({ content }) {
   // Modal components will tell ContentItem when they wanna leave
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
+  const handleTitleClick = () => console.log(`${content.id} clicked.`);
 
   const { id, title, description, tags, displayDate } = content;
   const showTags = tags.length > 0;
@@ -49,7 +50,7 @@ export default function ContentItem({ content }) {
         {image ?
           <React.Fragment>
             <Card.Img src={content.content} alt={title}/>
-            <Card.ImgOverlay className="contentitem-header">
+            <Card.ImgOverlay className="contentitem-header" onClick={handleTitleClick}>
               <div className="contentitem-title-visibility">
                 <VisibilityDot id={id}/>
                 <div className="contentitem-title">{title}</div>
@@ -58,7 +59,7 @@ export default function ContentItem({ content }) {
             </Card.ImgOverlay>
           </React.Fragment>
         :
-          <Card.Header className="contentitem-header">
+          <Card.Header className="contentitem-header" onClick={handleTitleClick}>
             <div className="contentitem-title-visibility">
               <VisibilityDot id={id}/>
               <div className="contentitem-title">{title}</div>
