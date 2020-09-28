@@ -39,7 +39,7 @@ export default function AddContent({ setView }) {
           <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
         </Form.Group>
         <Form.Group controlId="description">
-          <Form.Label>Dscription</Form.Label>
+          <Form.Label>Description</Form.Label>
           <Form.Control as="textarea" rows="5" value={content.description} onChange={onChangeHandler}/>
         </Form.Group>
         <Button type="submit" variant="info">Create</Button>

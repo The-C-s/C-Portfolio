@@ -9,6 +9,8 @@ import TopNavbar from './TopNavbar';
 import SideNavBar from './SideNavbar';
 import Feed from './Feed';
 import AddContent from '../content/AddContent';
+import Profile from './Profile'; 
+import AddProfile from '../profile/AddProfile'; 
 
 export default function Dashboard() {
 
@@ -36,6 +38,8 @@ export default function Dashboard() {
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
+            {(view === 'profile') && <Profile/>}
+            {(view === 'add-profile') && <AddProfile setView ={setViewHandler}/>}
           </main>
         </Row>
       </Container>

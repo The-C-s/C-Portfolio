@@ -10,6 +10,8 @@ const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create'; 
 const CREATE_PROFILE = '/profile/create'; 
 const PROFILE = '/profile/'; 
+const ADD_LOGO = '/profile/addLogo';
+const ADD_RESUME = '/profile/addResume'; 
 
 // Takes email and password as an object and returns the user's details and token
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
@@ -33,12 +35,17 @@ const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 const createProfile = async profile => await axios.post(CREATE_PROFILE, profile); 
 
 // Takes a profile object (text only) and id and authorises with existing token
-const editProfile = async profile => await axios.put(`${PROFILE}${id}`, profile); 
+const editProfile = async profile => await axios.put(`${PROFILE}${profile.id}`, profile); 
 
 // Takes a profile id and authorises with existing token 
-const deleteProfile = async profile => await axios.delete(`${PROFILE}${id}`); 
+const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`); 
 
-//ADD addLogo and addResume to content 
+// Takes a profile id and authorises with existing token, returns profile
+const getProfile = async id => await axios.get(`${PROFILE}${id}`); 
+
+//Takes a profile id and authorises with existing token 
+const addLogo = async () => await axios.get(ADD_LOGO);  
+const addResume = async () => await axios.get(ADD_RESUME);  
 
 // Make functions available to other components
 export default {
@@ -48,5 +55,10 @@ export default {
   createContent,
   editContent,
   deleteContent, 
-  createProfile
+  createProfile, 
+  editProfile, 
+  deleteProfile, 
+  getProfile, 
+  addLogo,
+  addResume 
 };
