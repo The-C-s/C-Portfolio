@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import Tags from './Tags';
 import VisibilityDot from './VisibilityDot';
@@ -69,13 +73,18 @@ export default function ContentItem({ content }) {
         }
           <Card.Body>
             <div className="contentitem-container">
-              <div>
-                <div className="contentitem-tags">
-                  {showTags && <Tags tags={tags}/>}
-                </div>
-                <h3>Description</h3>
+              <div className="contentitem-tags">
+                {showTags && <Tags tags={tags}/>}
               </div>
+              <Dropdown alignRight>
+                <Dropdown.Toggle as={FontAwesomeIcon} icon={faEllipsisV} size="lg"></Dropdown.Toggle>
+                <Dropdown.Menu alignRight>
+                  <Dropdown.Item onClick={() => setShowEdit(true)}>Edit</Dropdown.Item>
+                  <Dropdown.Item onClick={() => setShowDelete(true)}>Delete</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
+            <h3>Description</h3>
             <p className="card-text">{description}</p>
             <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
             <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
