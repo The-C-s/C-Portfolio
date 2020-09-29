@@ -7,6 +7,11 @@ export const login = createAsyncThunk(
   api.authenticateUser
 );
 
+export const register = createAsyncThunk(
+  'user/authenticate',
+  api.authenticateUser
+);
+
 const user = createSlice({
   name: 'user',
   initialState: {
@@ -31,6 +36,17 @@ const user = createSlice({
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
+
+      // Persist JWT to local storage
+      localStorage.setItem('token', action.payload.data.token);
+
+      return {
+        ...state,
+        ...action.payload.data,
+        isAuthenticated: true
+      }
+    },
+    [register.fulfilled]: (state, action) => {
 
       // Persist JWT to local storage
       localStorage.setItem('token', action.payload.data.token);

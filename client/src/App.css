@@ -13,8 +13,26 @@ body > #root > div {
   justify-content: center;
 }
 
+.form-box h2{
+  text-align: center;
+}
+
+.form-box .form-control{
+  border-radius: 12px;
+} 
+
+.form-box .text-center{
+  color:black;
+  font-weight: bold;
+}
+
 .form-box {
   width: 80%;
+  padding:40px;
+  box-sizing: border-box;
+  border: 2px ridge turquoise;
+  border-radius: 8px;
+  background-color: turquoise;
 }
 
 /* Dashboard CSS */
