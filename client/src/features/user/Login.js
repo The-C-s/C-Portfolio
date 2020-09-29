@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { BsFillPersonFill } from "react-icons/bs";
 
 import { login } from './userSlice';
 
@@ -29,7 +30,7 @@ export default function Login() {
   return(
     <div className="form-box">
       <Form className="login-form" onSubmit={onSubmitHandler}>
-        <h2>Login</h2>
+        <h2><BsFillPersonFill/> Login</h2>
         <hr/>
         <Form.Group>
           <Form.Control
@@ -51,7 +52,7 @@ export default function Login() {
             className="form-control"
           />
         </Form.Group>
-        <Button type="submit" block variant="primary" rounded>Login</Button>
+        <Button type="submit" block variant="primary">Login</Button>
         <div className="text-center"> Don't have an account? <Nav.Link href="/register">Register</Nav.Link></div>
       </Form>
     </div>
