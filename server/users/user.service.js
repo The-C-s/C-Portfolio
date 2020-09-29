@@ -11,11 +11,27 @@ module.exports = {
     getById,
     create,
     update,
+    addAvatar,
+    addBackground,
+    deleteAvatar,
+    deleteBackground,
     delete: _delete
 };
 
 async function authenticate({ email, password }) {
+    //check if required fields are present
+    if (!userParam.email) {
+        throw 'Email is a required field';
+    }
+    if (!userParam.password) {
+      throw 'Password is a required field';
+    }
+
     const user = await User.findOne({ email });
+
+    //check if user exists
+    if (!user) throw new Error('UserNotFoundError');
+
     if (user && bcrypt.compareSync(password, user.hash)) {
         const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
         return {
@@ -82,6 +98,26 @@ async function update(id, userParam) {
         throw 'Email "' + userParam.email + '" is already taken';
     }
 
+    //illegal fields
+    if(userParam.hash) {
+      throw 'Hash is an illegal field';
+    }
+    if(userParam.content) {
+      throw 'Content is an illegal field';
+    }
+    if(userParam.profile) {
+      throw 'Profile is an illegal field';
+    }
+    if(userParam.createdDate) {
+      throw 'createdDate is an illegal field';
+    }
+    if(userParam.avatar) {
+      throw 'Avatar is an illegal field';
+    }
+    if(userParam.background) {
+      throw 'Background is an illegal field';
+    }
+
     // hash password if it was entered
     if (userParam.password) {
         userParam.hash = bcrypt.hashSync(userParam.password, 10);
@@ -92,6 +128,45 @@ async function update(id, userParam) {
 
     await user.save();
 }
+
+async function addAvatar(id, file) {
+  const user = await User.findById(id);
+  //validate
+  if (!user) throw new Error('UserNotFoundError');
+  if(typeof file == 'undefined') throw 'No file uploaded';
+  //set new avatar and save
+  user.avatar = file.path;
+  await user.save();
+}
+
+async function addBackground(id, file) {
+  const user = await User.findById(id);
+  //validate
+  if (!user) throw new Error('UserNotFoundError');
+  if(typeof file == 'undefined') throw 'No file uploaded';
+  //set new background and save
+  user.background = file.path;
+  await user.save();
+}
+
+async function deleteAvatar(id, file) {
+  const user = await User.findById(id);
+  //validate
+  if (!user) throw new Error('UserNotFoundError');
+  //set new avatar and save
+  user.avatar = null;
+  await user.save();
+}
+
+async function deleteBackground(id, file) {
+  const user = await User.findById(id);
+  //validate
+  if (!user) throw new Error('UserNotFoundError');
+  //set new background and save
+  user.background = null;
+  await user.save();
+}
+
 async function _delete(id) {
     //delete user's content
     await contentService.deleteByUser(id);
