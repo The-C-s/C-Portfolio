@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import api from '../../common/api';
 
+//API calls 
 export const createProfile = createAsyncThunk(
     'profile/createProfile',
     api.createProfile
@@ -22,18 +23,17 @@ export const deleteProfile = createAsyncThunk(
     api.deleteProfile
 );
 
+//Stores profile in state.profile 
 const profile = createSlice({
     name: 'profile',
-    initialState: {},
+    //Added default arrays, as the state takes 2 seconds to actually get the data
+    initialState: {education:[], experience: [], projects: []},
     reducers: {},
     extraReducers: {
         //Resets state on logout (think its necessary)
         'user/logout': () => { return {}},
-        //Returns profile data? 
-        [getProfile.fulfilled]: (_, action) => {      
-            return {
-              ...action.payload.data
-            }
+        //Returns profile data 
+        [getProfile.fulfilled]: (_, action) => {  return {...action.payload.data}
         }
     }
   });

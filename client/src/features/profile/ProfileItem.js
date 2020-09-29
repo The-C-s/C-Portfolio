@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import EditProfile from './EditProfile';
 import DeleteProfile from './DeleteProfile';
 
-export default function ProfileItem( profile ) {
+export default function ProfileItem( {profile} ) {
 
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -19,10 +19,10 @@ export default function ProfileItem( profile ) {
 
   //Fields for profile 
   //ADD LOGO AND RESUME FIELDS
-  const {education, experience, projects } = profile;
-  //const showEducation = education.length > 0; 
-  //const showExperience = experience.length > 0; 
-  //const showProjects = projects.length > 0; 
+  const { education, experience, projects } = profile;
+  const showEducation = education.length > 0; 
+  const showExperience = experience.length > 0; 
+  const showProjects = projects.length > 0; 
 
   return(
     <React.Fragment>
@@ -33,7 +33,8 @@ export default function ProfileItem( profile ) {
           <Card.Body>
           <h4>Education</h4>
             <p className="card-education">{
-                education
+                showEducation && education.join("\n")
+                //education
             }</p>
           </Card.Body>
          </Card>
@@ -43,7 +44,8 @@ export default function ProfileItem( profile ) {
          <Card.Body>
           <h4>Experience</h4>
             <p className="card-experience">{
-                experience
+                //experience
+                showExperience && experience.join("\n")
             }</p>
             </Card.Body>
          </Card>
@@ -53,7 +55,8 @@ export default function ProfileItem( profile ) {
           <Card.Body>
             <h4>Projects</h4>
             <p className="card-projects">{
-                projects
+                //projects
+                showProjects && projects.join("\n")
             }</p>
             </Card.Body>
             </Card>

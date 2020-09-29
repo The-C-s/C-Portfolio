@@ -11,13 +11,11 @@ import ProfileItem from '../profile/ProfileItem';
 export default function Profile() {
 
   const dispatch = useDispatch();
+  //Getting the user and profile details 
   const user = useSelector(state => state.user);
-  const profile = dispatch(getProfile()); 
-  //const profile = useSelector(state => state.profile);
-  console.log("profile:" + user.profile);
-  console.log("profile:" + profile);
+  const profile = useSelector(state => state.profile);
 
-  // Reload content whenever something significant happens
+  // Reloading profile 
   useEffect(() => {
     async function fetch() { dispatch(getProfile(user.profile)) }
     fetch();
@@ -28,7 +26,7 @@ export default function Profile() {
       <Row>
         <h1 className="h2 ml-5 mt-5">Your Profile</h1>
       </Row>
-      {<ProfileItem profile ={profile} />}
+      {<ProfileItem profile = {profile} />}
     </div>
   );
 }
