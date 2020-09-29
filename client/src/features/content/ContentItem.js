@@ -86,8 +86,6 @@ export default function ContentItem({ content }) {
             </div>
             <h3>Description</h3>
             <p className="card-text">{description}</p>
-            <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
-            <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
           </Card.Body>
         </Card>
       </Row>
