@@ -27,8 +27,10 @@ const profile = createSlice({
     initialState: {},
     reducers: {},
     extraReducers: {
+        //Resets state on logout (think its necessary)
         'user/logout': () => { return {}},
-        [getProfile.fulfilled]: (state, action) => {      
+        //Returns profile data? 
+        [getProfile.fulfilled]: (_, action) => {      
             return {
               ...action.payload.data
             }

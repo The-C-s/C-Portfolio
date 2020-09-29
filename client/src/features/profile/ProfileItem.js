@@ -4,15 +4,11 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-/*
- * Having EditContent and DeleteContent created by ContentItem
- * helps keep Dashboard complexity as simple as possible and
- * can be called wherever in the app we decide to put a ContentItem.
- */
+
 import EditProfile from './EditProfile';
 import DeleteProfile from './DeleteProfile';
 
-export default function ProfileItem({ profile }) {
+export default function ProfileItem( profile ) {
 
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -21,9 +17,12 @@ export default function ProfileItem({ profile }) {
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
 
-  //Input fields for profile 
-  //ADD LOGO AND RESUME FIELDS 
-  const { education, experience, projects, logo, resume } = profile;
+  //Fields for profile 
+  //ADD LOGO AND RESUME FIELDS
+  const {education, experience, projects } = profile;
+  //const showEducation = education.length > 0; 
+  //const showExperience = experience.length > 0; 
+  //const showProjects = projects.length > 0; 
 
   return(
     <React.Fragment>
@@ -32,14 +31,36 @@ export default function ProfileItem({ profile }) {
       <Row>
         <Card className="flex-fill mt-5 ml-5 mr-5">
           <Card.Body>
-            <p className="card-education">{education}</p>
-            <p className="card-experience">{experience}</p>
-            <p className="card-projects">{projects}</p>
-            <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
-            <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
+          <h4>Education</h4>
+            <p className="card-education">{
+                education
+            }</p>
           </Card.Body>
-        </Card>
+         </Card>
       </Row>
+      <Row>
+      <Card className="flex-fill mt-5 ml-5 mr-5">
+         <Card.Body>
+          <h4>Experience</h4>
+            <p className="card-experience">{
+                experience
+            }</p>
+            </Card.Body>
+         </Card>
+        </Row>
+      <Row>
+          <Card className="flex-fill mt-5 ml-5 mr-5">
+          <Card.Body>
+            <h4>Projects</h4>
+            <p className="card-projects">{
+                projects
+            }</p>
+            </Card.Body>
+            </Card>
+        </Row>
+        <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
+        <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
+
     </React.Fragment>
   );
 }

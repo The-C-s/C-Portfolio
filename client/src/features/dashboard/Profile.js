@@ -11,21 +11,25 @@ import ProfileItem from '../profile/ProfileItem';
 export default function Profile() {
 
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile);
+  const user = useSelector(state => state.user);
+  const profile = dispatch(getProfile()); 
+  //const profile = useSelector(state => state.profile);
+  console.log("profile:" + user.profile);
+  console.log("profile:" + profile);
 
   // Reload content whenever something significant happens
   useEffect(() => {
-    async function fetch() { dispatch(getProfile()) }
+    async function fetch() { dispatch(getProfile(user.profile)) }
     fetch();
-  }, [dispatch]);
+  });
 
   return(
     <div className="flex-wrap pt-3 pb-2 mb-3">
       <Row>
-        {/* a h1 with a class of h2 👀 */}
         <h1 className="h2 ml-5 mt-5">Your Profile</h1>
       </Row>
-      { <ProfileItem profile/>}
+      {<ProfileItem profile ={profile} />}
     </div>
   );
 }
+ 

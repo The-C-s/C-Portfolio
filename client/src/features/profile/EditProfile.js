@@ -1,3 +1,4 @@
+//Can probably split this into different fields 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -35,7 +36,7 @@ export default function EditProfile({ profile, show, closeHandler }) {
             <Form.Control as="textarea" rows="5" value={_profile.experience} onChange={onChangeHandler}/>
           </Form.Group>
           <Form.Group controlId="projects">
-            <Form.Label>Experience</Form.Label>
+            <Form.Label>Projects</Form.Label>
             <Form.Control as="textarea" rows="5" value={_profile.projects} onChange={onChangeHandler}/>
           </Form.Group>
         </Form>

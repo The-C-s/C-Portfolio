@@ -12,7 +12,7 @@ export default function Feed() {
 
   const dispatch = useDispatch();
   const content = useSelector(state => state.content);
-
+  console.log("content:" + content); 
   // Reload content whenever something significant happens
   useEffect(() => {
     async function fetch() { dispatch(getContent()) }
