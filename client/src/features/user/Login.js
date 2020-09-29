@@ -6,6 +6,7 @@ import { login } from './userSlice';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav'
 
 export default function Login() {
 
@@ -50,7 +51,8 @@ export default function Login() {
             className="form-control"
           />
         </Form.Group>
-        <Button type="submit" variant="primary">Login</Button>
+        <Button type="submit" block variant="primary" rounded>Login</Button>
+        <div className="text-center"> Don't have an account? <Nav.Link href="/register">Register</Nav.Link></div>
       </Form>
     </div>
   );
