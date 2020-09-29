@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from '../user/Login';
+//import Image from 'react-bootstrap/Image'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,7 +12,7 @@ const Landing = () => {
       <Row className="no-gutter">
         <Col className="bg-info d-flex justify-content-center">
           <div className="splash-container">
-            <h1 className="display-3 text-white">cPortfolio</h1>
+            <h1 className="display-3 text-white"><img src="/images/image-2.png" alt=""/></h1>
           </div>
         </Col>
         <Col>
