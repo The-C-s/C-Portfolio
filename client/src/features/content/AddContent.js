@@ -33,8 +33,8 @@ export default function AddContent({ setView }) {
 
   // Input fields are based on state, so typing in them won't work unless we also change the state
   //since the quill element doesn't pass it's ID, have a seperate function for each element
-  const onTitleChangeHandler = e => updateContent({ ...content, ['title']: e });
-  const onDescriptionChangeHandler = e => updateContent({ ...content, ['description']: e });
+  const onTitleChangeHandler = e => updateContent({ ...content, 'title': e });
+  const onDescriptionChangeHandler = e => updateContent({ ...content, 'description': e });
 
   const enabledTools = [
       [{ 'header': [1, 2, false] }],
