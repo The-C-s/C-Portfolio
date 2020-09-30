@@ -10,7 +10,6 @@ export const login = createAsyncThunk(
 export const editUser = createAsyncThunk(
   'users/update',
   async (_details) => {
-    console.log("Reached userSlice");
     api.editUser(_details);
   }
 );

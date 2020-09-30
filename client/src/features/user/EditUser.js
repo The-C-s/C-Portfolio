@@ -8,10 +8,12 @@ import Modal from 'react-bootstrap/esm/Modal';
 export default function EditUser() {
     const user = useSelector(state => state.user);
 
-    //Initialised with the user fields. Cannot simply copy the whole object as the server rejects some fields
-    const [_details, updateDetails] = useState({"username" : user.username, "firstName" : user.firstName, "lastName" : user.lastName, "avatar" : user.avatar});
+    //Initialised with the user fields.
+    const [_details, updateDetails] = useState(user);
     const dispatch = useDispatch();
 
+
+    //submits the new user details to the server to update in the database
     const handleEditUser = () => {
         dispatch(editUser(_details))
         .then(closeEditHandler);
@@ -20,6 +22,8 @@ export default function EditUser() {
     const closeEditHandler = () => setShowUserEdit(false);
 
     const [showUserEdit, setShowUserEdit] = useState(false);
+
+    //source of truth for the user details, updated alongside the form when editing
     const onChangeHandler = e => updateDetails({ ..._details, [e.target.id]: e.target.value});
     
 
@@ -50,13 +54,10 @@ export default function EditUser() {
         <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
             Edit
         </Button>
+        <img src = "https://icon-library.com/images/default-user-icon/default-user-icon-6.jpg" alt = "profile image"></img>
         <h1 className="h2 ml-5 mt-5">Username: {user.username}</h1> 
         <h1 className="h2 ml-5 mt-5">First Name: {user.firstName}</h1>
         <h1 className="h2 ml-5 mt-5">Last Name: {user.lastName}</h1>
-        <img src = "https://icon-library.com/images/default-user-icon/default-user-icon-6.jpg" alt = "profile image"></img>
     </React.Fragment>
-    //return <h1>Hello, world!</h1>
-    //onClick = {() => editUser(user.id, {"username" : "changedUser"})
-    //
     );
 }
