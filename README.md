@@ -1,5 +1,7 @@
 # cPortfolio
 
+![Logo](/readme-images/Portfolio.png)
+
 ## Creators
 
 * [Brodie](https://github.com/bxvd) 
@@ -10,7 +12,7 @@
 
 ## About
 
-cPortfolio was developed by Brodie, Joshua, Newaz, Victoria and Hugh for the capstone subject [COMP30022](https://handbook.unimelb.edu.au/2020/subjects/comp30022) at the University of Melbourne. It was created using agile development methodologies and is primarily a React based web app.
+cPortfolio was developed by Brodie, Joshua, Newaz, Victoria and Hugh for the capstone subject [COMP30022](https://handbook.unimelb.edu.au/2020/subjects/comp30022) at the University of Melbourne. It was created using [agile development methodologies](https://drive.google.com/drive/folders/1mG3BdmEIAROik9fd3Uc7NkdbJ24uAVdT?fbclid=IwAR1vAZMsaJpmr-E09BJdYaW50tGc2w-sboJ6AbjLEk64D3H6GHmGWG-AC_M) and is primarily a React based web app.
 
 cPortfolio is a electronic Portfolio for users to catalogue and share pdfs, user profiles like LinkedIn, collectibles and other artefacts with other students, academics and scholars.
 
