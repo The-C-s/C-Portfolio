@@ -12,7 +12,7 @@ export default function DeleteProfile({ profile, show, closeHandler }) {
 
   const deleteClickHandler = () => {
 
-    // Wait until content is updated before dismissing the component
+    // Wait until profile is updated before dismissing the component
     dispatch(deleteProfile(profile.id))
       .then(() => dispatch(getProfile()))
       .then(() => closeHandler());

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
+import Image from 'react-bootstrap/Image'; 
+import Col from 'react-bootstrap/Col'; 
+import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import EditProfile from './EditProfile';
 import DeleteProfile from './DeleteProfile';
@@ -19,51 +21,51 @@ export default function ProfileItem( {profile} ) {
 
   //Fields for profile 
   //ADD LOGO AND RESUME FIELDS
-  const { education, experience, projects } = profile;
-  const showEducation = education.length > 0; 
-  const showExperience = experience.length > 0; 
-  const showProjects = projects.length > 0; 
+  const { logo, education, experience, projects } = profile;
 
   return(
     <React.Fragment>
       <EditProfile profile={profile} show={showEdit} closeHandler={handleEditClose}/>
       <DeleteProfile profile={profile} show={showDelete} closeHandler={handleDeleteClose}/>
+      <Container>
+        <Row>
+            <Col xs={3} md={3}>
+                <Image src={logo} roundedCircle fluid/>
+            </Col>
+        </Row>
+      </Container>
       <Row>
-        <Card className="flex-fill mt-5 ml-5 mr-5">
-          <Card.Body>
+      <ListGroup className="mt-5 ml-5 mr-5">
           <h4>Education</h4>
-            <p className="card-education">{
-                showEducation && education.join("\n")
-                //education
-            }</p>
-          </Card.Body>
-         </Card>
+            <div className="card-education">{
+                education.map( education => <ListGroup.Item key = {education}>
+                    {education}
+                </ListGroup.Item>)}
+            </div>
+        </ListGroup>
       </Row>
       <Row>
-      <Card className="flex-fill mt-5 ml-5 mr-5">
-         <Card.Body>
+      <ListGroup className="mt-5 ml-5 mr-5">
           <h4>Experience</h4>
-            <p className="card-experience">{
-                //experience
-                showExperience && experience.join("\n")
-            }</p>
-            </Card.Body>
-         </Card>
+            <div className="card-experience">{
+                experience.map( experience => <ListGroup.Item key = {experience}>
+                    {experience}
+                </ListGroup.Item>)}
+            </div>
+         </ListGroup>
         </Row>
       <Row>
-          <Card className="flex-fill mt-5 ml-5 mr-5">
-          <Card.Body>
+          <ListGroup className="mt-5 ml-5 mr-5">
             <h4>Projects</h4>
-            <p className="card-projects">{
-                //projects
-                showProjects && projects.join("\n")
-            }</p>
-            </Card.Body>
-            </Card>
+            <div className="card-projects">{
+                projects.map( projects => <ListGroup.Item key = {projects}>
+                    {projects}
+                </ListGroup.Item>)}            
+            </div>
+            </ListGroup>
         </Row>
         <Button variant="link" className="float-right" onClick={() => setShowEdit(true)}>Edit</Button>
         <Button variant="link" className="float-right text-danger" onClick={() => setShowDelete(true)}>Delete</Button>
-
     </React.Fragment>
   );
 }

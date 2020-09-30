@@ -33,8 +33,7 @@ const profile = createSlice({
         //Resets state on logout (think its necessary)
         'user/logout': () => { return {}},
         //Returns profile data 
-        [getProfile.fulfilled]: (_, action) => {  return {...action.payload.data}
-        }
+        [getProfile.fulfilled]: (_, action) => {  return {...action.payload.data}}
     }
   });
 

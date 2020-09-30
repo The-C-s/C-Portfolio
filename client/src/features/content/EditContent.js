@@ -11,7 +11,6 @@ export default function EditContent({ content, show, closeHandler }) {
 
   const [_content, updateContent] = useState(content);
   const dispatch = useDispatch();
-
   const editClickHandler = () => {
 
     dispatch(editContent(_content))

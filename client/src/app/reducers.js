@@ -9,7 +9,7 @@ import userReducer from '../features/user/userSlice';
 import profileReducer from '../features/profile/profileSlice';
  
 export default combineReducers({
+  profile: profileReducer,
   content: contentReducer,
-  user: userReducer, 
-  profile: profileReducer
+  user: userReducer
 });

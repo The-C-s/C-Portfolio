@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
@@ -11,16 +11,23 @@ import Feed from './Feed';
 import AddContent from '../content/AddContent';
 import Profile from './Profile'; 
 import AddProfile from '../profile/AddProfile'; 
+import {getProfile} from '../profile/profileSlice'; 
 
 export default function Dashboard() {
 
   // React hook for redirection
+  const dispatch = useDispatch();
   const history = useHistory();
   const [view, setView] = useState('dashboard');
+  const user = useSelector(state => state.user); 
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
   useEffect(() => { if (!isAuthenticated) history.push('/') });
 
+  useEffect(() => {
+    async function fetch() { dispatch(getProfile(user.profile)) }
+    fetch();
+  });
   /*
    * This is a bad way of doing a dashboard. Simply swaps out whatever component
    * is showing in <main> based on whatever string is set, and changing that
