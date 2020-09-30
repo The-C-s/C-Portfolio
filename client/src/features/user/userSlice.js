@@ -8,8 +8,8 @@ export const login = createAsyncThunk(
 );
 
 export const register = createAsyncThunk(
-  'user/authenticate',
-  api.authenticateUser
+  'user/register',
+  api.registerUser
 );
 
 const user = createSlice({
