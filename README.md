@@ -1,5 +1,3 @@
-# cPortfolio
-
 ![Logo](/readme-images/Portfolio.png)
 
 ## Creators
