@@ -1,7 +1,6 @@
 //Can probably split this into different fields 
 import React, { useState } from 'react';
 import { useDispatch} from 'react-redux';
-//import { produce } from 'immer'; 
 import { editProfile, getProfile } from './profileSlice';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -24,20 +23,20 @@ export default function EditProfile({ profile, show, closeHandler }) {
   const [_experience, updateExperience] = useState(profile.experience); 
   const [_projects, updateProjects] = useState(profile.projects); 
   const dispatch = useDispatch();
-
   const editClickHandler = () => {
     dispatch(editProfile(_profile))
       .then(() => dispatch(getProfile(_profile.id)))
       .then(() => closeHandler());
   }
 
+  
   const onChangeHandler = e => updateProfile({ ..._profile, [e.target.id]: e.target.value });
+  //Both of these functions work seperately, but updating any field after adding a new one always resets the array to empty 
+  //Assume its an issue with concurrent modification? 
   //Updates a single field 
   const onChangeEducationHandler = e => updateEducation([e.target.value]); 
-  //Adds and updates a field 
-  const onChangeAddEducationHandler = e => updateEducation([..._profile, e.target.value]); 
-  //const addEducationField = 
-  //const addNewField = e => produce(_profile => ()); 
+  //Adds an empty education field 
+  const addEducationField = e => updateEducation([..._education, '']); 
   
   return(
     <Modal size="lg" show={show} onHide={closeHandler}>
@@ -50,7 +49,7 @@ export default function EditProfile({ profile, show, closeHandler }) {
                     <Row>
                        <Form.Control as = "textarea" rows="1" value = {education} onChange={onChangeEducationHandler}/> 
                     </Row>)}
-            <Button onClick={onChangeHandler}>Add Education</Button>
+            <Button onClick={addEducationField}>Add Education</Button>
           </Form.Group>
           <Form.Group controlId="experience">
             <Form.Label>Experience</Form.Label>
