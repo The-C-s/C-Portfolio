@@ -17,7 +17,7 @@ export default function AddContent({ setView }) {
    * private state inside the component, in this case is used to just handle
    * what's in the input fields before we send it off to Redux.
    */
-  const [content, updateContent] = useState({'title':'','description':''});
+  const [content, updateContent] = useState({'title':'','description':'','content':''});
   const dispatch = useDispatch();
 
   const onSubmitHandler = e => {
@@ -33,8 +33,9 @@ export default function AddContent({ setView }) {
 
   // Input fields are based on state, so typing in them won't work unless we also change the state
   //since the quill element doesn't pass it's ID, have a seperate function for each element
-  const onTitleChangeHandler = e => updateContent({ ...content, 'title': e });
-  const onDescriptionChangeHandler = e => updateContent({ ...content, 'description': e });
+  const onTitleChangeHandler = e => updateContent({ ...content, 'title': e.target.value });
+  const onDescriptionChangeHandler = e => updateContent({ ...content, 'description': e.target.value });
+  const onContentChangeHandler = e => updateContent({ ...content, 'content': e });
 
   const enabledTools = [
       [{ 'header': [1, 2, false] }],
@@ -50,11 +51,15 @@ export default function AddContent({ setView }) {
       <Form className="mt-5" onSubmit={onSubmitHandler}>
         <Form.Group controlId="title">
           <Form.Label>Title</Form.Label>
-          <ReactQuill id="title" modules = {{toolbar: false}} theme='snow' value={content.title} onChange={onTitleChangeHandler}/>
+          <Form.Control type="text" value={content.title} onChange={onTitleChangeHandler}/>
         </Form.Group>
         <Form.Group controlId="description">
           <Form.Label>Description</Form.Label>
-          <ReactQuill id="description" modules = {{toolbar: enabledTools}} theme='snow' value={content.description} onChange={onDescriptionChangeHandler}/>
+          <Form.Control type="text" value={content.description} onChange={onDescriptionChangeHandler}/>
+        </Form.Group>
+        <Form.Group controlId="content">
+          <Form.Label>Content</Form.Label>
+          <ReactQuill modules = {{toolbar: enabledTools}} theme='snow' value={content.content} onChange={onContentChangeHandler}/>
         </Form.Group>
         <Button type="submit" variant="info">Create</Button>
       </Form>

@@ -25,8 +25,9 @@ export default function EditContent({ content, show, closeHandler }) {
 
   // Input fields are based on state, so typing in them won't work unless we also change the state
   //since the quill element doesn't pass it's ID, have a seperate function for each element
-  const onTitleChangeHandler = e => updateContent({ ...content, 'title': e });
-  const onDescriptionChangeHandler = e => updateContent({ ...content, 'description': e });
+  const onTitleChangeHandler = e => updateContent({ ..._content, 'title': e.target.value });
+  const onDescriptionChangeHandler = e => updateContent({ ..._content, 'description': e.target.value });
+  const onContentChangeHandler = e => updateContent({ ..._content, 'content': e });
 
   const enabledTools = [
       [{ 'header': [1, 2, false] }],
@@ -43,11 +44,15 @@ export default function EditContent({ content, show, closeHandler }) {
         <Form>
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
-            <ReactQuill modules = {{toolbar: false}} theme='snow' value={_content.title} onChange={onTitleChangeHandler}/>
+            <Form.Control type="text" value={_content.title} onChange={onTitleChangeHandler}/>
           </Form.Group>
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
-            <ReactQuill modules = {{toolbar: enabledTools}} theme='snow' value={_content.description} onChange={onDescriptionChangeHandler}/>
+            <Form.Control type="text" value={_content.description} onChange={onDescriptionChangeHandler}/>
+          </Form.Group>
+          <Form.Group controlId="content">
+            <Form.Label>Content</Form.Label>
+            <ReactQuill modules = {{toolbar: enabledTools}} theme='snow' value={_content.content} onChange={onContentChangeHandler}/>
           </Form.Group>
         </Form>
       </Modal.Body>
