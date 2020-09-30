@@ -1,4 +1,4 @@
-![Logo](/readme-images/Portfolio.png | width=150)
+![Logo](/readme-images/Portfolio.png)
 
 ## Creators
 
