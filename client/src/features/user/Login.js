@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { BsFillPersonFill } from "react-icons/bs";
+//import { BsFillPersonFill } from "react-icons/bs";
 
 import { login } from './userSlice';
 
@@ -30,7 +30,7 @@ export default function Login() {
   return(
     <div className="form-box">
       <Form className="login-form" onSubmit={onSubmitHandler}>
-        <h2><BsFillPersonFill/> Login</h2>
+        <h2> Login</h2>
         <hr/>
         <Form.Group>
           <Form.Control
