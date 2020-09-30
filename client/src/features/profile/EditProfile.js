@@ -18,7 +18,11 @@ import Row from 'react-bootstrap/Row';
 export default function EditProfile({ profile, show, closeHandler }) {
   //_profile is the state variable, updateProfile is a function that updates the state
   //Initial state of profile always takes some time to update
+
   const [_profile, updateProfile] = useState(profile);
+  const [_education, updateEducation] = useState(profile.education); 
+  const [_experience, updateExperience] = useState(profile.experience); 
+  const [_projects, updateProjects] = useState(profile.projects); 
   const dispatch = useDispatch();
 
   const editClickHandler = () => {
@@ -28,7 +32,11 @@ export default function EditProfile({ profile, show, closeHandler }) {
   }
 
   const onChangeHandler = e => updateProfile({ ..._profile, [e.target.id]: e.target.value });
-  const onChangeEducationHandler = e => updateProfile({..._profile, [e.target.id]: e.target.value}); 
+  //Updates a single field 
+  const onChangeEducationHandler = e => updateEducation([e.target.value]); 
+  //Adds and updates a field 
+  const onChangeAddEducationHandler = e => updateEducation([..._profile, e.target.value]); 
+  //const addEducationField = 
   //const addNewField = e => produce(_profile => ()); 
   
   return(
@@ -38,22 +46,22 @@ export default function EditProfile({ profile, show, closeHandler }) {
         <Form>
           <Form.Group controlId="education">
             <Form.Label>Education</Form.Label>
-            {_profile.education.map(education =>
+            {_education.map(education =>
                     <Row>
-                       <Form.Control as = "textarea" rows="1" value = {education}/> 
+                       <Form.Control as = "textarea" rows="1" value = {education} onChange={onChangeEducationHandler}/> 
                     </Row>)}
             <Button onClick={onChangeHandler}>Add Education</Button>
           </Form.Group>
           <Form.Group controlId="experience">
             <Form.Label>Experience</Form.Label>
-                {_profile.experience.map(experience =>
+                {_experience.map(experience =>
                     <Row>
                        <Form.Control as = "textarea" rows="1" value = {experience}/> 
                     </Row>)}
             </Form.Group>
           <Form.Group controlId="projects">
             <Form.Label>Projects</Form.Label>
-            {_profile.projects.map(projects =>
+            {_projects.map(projects =>
                     <Row>
                        <Form.Control as = "textarea" rows="1" value = {projects}/> 
                     </Row>)}
