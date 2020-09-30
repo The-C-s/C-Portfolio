@@ -13,7 +13,7 @@ const Landing = () => {
       <Row className="no-gutter">
         <Col className="bg-info d-flex justify-content-center">
           <div className="splash-container">
-            <h1 className="display-3 text-white"><img src="/images/image-2.png" alt=""/></h1>
+            <h1 className="display-3 text-white"><img src="/images/Portfolio.png" alt=""/></h1>
           </div>
         </Col>
         <Col>
