@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {editUser} from './userSlice';
 import Modal from 'react-bootstrap/esm/Modal';
+import Image from 'react-bootstrap/Image';
 
 export default function EditUser() {
     const user = useSelector(state => state.user);
@@ -54,7 +55,7 @@ export default function EditUser() {
         <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
             Edit
         </Button>
-        <img src = "https://icon-library.com/images/default-user-icon/default-user-icon-6.jpg" alt = "profile image"></img>
+        <Image src = {user.avatar} alt = "Hello Darkness"/>
         <h1 className="h2 ml-5 mt-5">Username: {user.username}</h1> 
         <h1 className="h2 ml-5 mt-5">First Name: {user.firstName}</h1>
         <h1 className="h2 ml-5 mt-5">Last Name: {user.lastName}</h1>
