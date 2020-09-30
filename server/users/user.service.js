@@ -20,10 +20,10 @@ module.exports = {
 
 async function authenticate({ email, password }) {
     //check if required fields are present
-    if (!userParam.email) {
+    if (!email) {
         throw 'Email is a required field';
     }
-    if (!userParam.password) {
+    if (!password) {
       throw 'Password is a required field';
     }
 
