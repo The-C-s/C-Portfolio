@@ -1,4 +1,4 @@
-![Logo](/readme-images/Portfolio.png){:height="36px" width="36px"}
+![Logo](/readme-images/Portfolio.png = 150x100)
 
 ## Creators
 
