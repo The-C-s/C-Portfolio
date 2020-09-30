@@ -29,9 +29,10 @@ const editContent = async content => await axios.put(`${CONTENT}${content.id}`, 
 const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 
 //Takes the user id and a JSON object representing the user parameters and updates the database with the new info
-const editUser = async (id, userParams) => {
+const editUser = async userParams => {
     console.log("Reached edit user");
-    await axios.put(UPDATE_USER, id, userParams);
+    console.log(userParams);
+    await axios.put(UPDATE_USER, userParams);
     console.log("Reached post update");
 };
 

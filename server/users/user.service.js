@@ -2,6 +2,7 @@ const config = require('../config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
+const contentModel = require('../content/content.model');
 const User = db.User;
 
 module.exports = {
@@ -70,6 +71,8 @@ async function create(userParam) {
 async function update(id, userParam) {
     const user = await User.findById(id);
 
+    console.log("Got here");
+
     // validate
     if (!user) throw new Error('UserNotFoundError');
     //if request gave username and username isn't the same as it was and the username is in the database
@@ -86,10 +89,23 @@ async function update(id, userParam) {
         userParam.hash = bcrypt.hashSync(userParam.password, 10);
     }
 
+    /*
+    if (!userParam.firstName) {
+        userParam.firstName = "Joshua";
+    }
+    else {
+        userParam.firstName = "Maccas";
+    }
+    */
+
+    //userParam = {"firstName" : "Direct Set"};
+
+    const firstNameUpdate = {"firstName" : "New Object"};
+
     // copy userParam properties to user
     Object.assign(user, userParam);
 
-    await user.save();
+    await user.save(); 
 }
 async function _delete(id) {
     await User.findByIdAndRemove(id);

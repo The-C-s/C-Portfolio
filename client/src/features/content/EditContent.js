@@ -30,7 +30,7 @@ export default function EditContent({ content, show, closeHandler }) {
             <Form.Label>Title</Form.Label>
             <Form.Control type="text" value={_content.title} onChange={onChangeHandler}/>
           </Form.Group>
-          <Form.Group controlId="description">
+          <Form.Group controlId="username">
             <Form.Label>Description</Form.Label>
             <Form.Control as="textarea" rows="5" value={_content.description} onChange={onChangeHandler}/>
           </Form.Group>
@@ -38,7 +38,6 @@ export default function EditContent({ content, show, closeHandler }) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={closeHandler}>Cancel</Button>
-        <Button variant="warning" onClick={editClickHandler}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   )

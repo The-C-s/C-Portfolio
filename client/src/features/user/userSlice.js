@@ -9,9 +9,9 @@ export const login = createAsyncThunk(
 
 export const editUser = createAsyncThunk(
   'users/update',
-  async () => {
+  async (_details) => {
     console.log("Reached userSlice");
-    api.editUser();
+    api.editUser(_details);
   }
 );
 
