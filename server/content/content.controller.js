@@ -2,17 +2,19 @@ const express = require('express');
 const router = express.Router();
 const contentService = require('./content.service');
 const verify = require('../_helpers/jwt'); 
+const uploadFile = require('../_helpers/file-upload'); 
 
-// routes
-router.post('/create', verify.auth, create);
-router.get('/', verify.auth, getAll);
+//FIX: Can only store one file per post, think upload.array?  
+// Routes
+router.post('/create',verify.auth, uploadFile.single('file'), create);
+router.get('/', getAll);
 router.get('/:id', getById);
-router.put('/:id', verify.auth, update);
+router.put('/:id', verify.auth, uploadFile.single('file'), update);
 router.delete('/:id', verify.auth, _delete);
 
 
-function create(req, res, next) { 
-    contentService.create(req.user.sub, req.body)
+function create(req, res, next) {
+    contentService.create(req.user.sub, req.body, req.file)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
@@ -30,7 +32,7 @@ function getById(req, res, next){
 }
 
 function update(req, res, next) {
-    contentService.update(req.user.sub, req.params.id, req.body)
+    contentService.update(req.user.sub, req.params.id, req.body, req.file)
         .then(content => content ? res.json({}) : res.status(404).json({message: "Post not found"}))
         .catch(err => next(err));
 }
@@ -42,3 +44,6 @@ function _delete(req, res, next) {
 }
 
 module.exports = router; 
+
+
+//Reference for file upload: https://www.youtube.com/watch?v=srPXMt1Q0nY&ab_channel=Academind 

@@ -43,6 +43,9 @@
                     "description": {
                       "type": "string"
                     },
+                    "content": { 
+                      "type": "string"
+                    },
                     "user": {
                       "type": "string"
                     },

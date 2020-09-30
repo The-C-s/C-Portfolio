@@ -6,9 +6,9 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const jwt = require('./_helpers/jwt');
-const contentRoute = require('./content/content.controller'); 
-const userRoute = require('./users/users.controller'); 
-const errorHandler = require('./_helpers/error-handler');
+const contentRoute = require('./content/content.controller');
+const userRoute = require('./users/users.controller');
+const profileRoute = require('./profile/profile.controller');
 
 //mongoDB access
 async function testMongoDB() {
@@ -52,28 +52,32 @@ app.use(cors());
 app.use(jwt.jwt());
 
 
-//Think i need something here to run the home page? 
+//Think i need something here to run the home page?
 app.get('/', (req, res) => {
     console.log(`URL: ${req.url}`);
 
     res.send({
-    	message: '👀'
+    	message: 'Invalid path, is METHOD correct?'
     });
 });
 
 // user functions
 app.use('/users', userRoute);
 
-//Redirects anything with /content into our post routes folder 
+//Redirects anything with /content into our post routes folder
 app.use('/content', contentRoute);
-// user functions
-app.use('/users', require('./users/users.controller'));
 
-app.use(errorHandler);
+//Redirects anything with profile
+app.use('/profile', profileRoute);
+
+//redirects any other url to default
+app.use(function(req, res){
+       res.redirect('/');
+   });
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
     if (error) return console.log(`Error: ${error}`);
- 
+
     console.log(`Server listening on port ${server.address().port}`);
 });

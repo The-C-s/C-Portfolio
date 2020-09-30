@@ -1,3 +1,136 @@
+/* ContentItem */
+.card {
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0px 14px 25px rgba(0, 0, 0, 0.1);
+  margin: 12% 5% 0 5%;
+  flex-grow: 1;
+  font-family: 'Archivo', sans-serif;
+}
+
+.card-header {
+  border: none;
+  border-radius: 30px 30px 0 0;
+  padding: 2% 4% 2% 2%;
+  color: #FFFFFE;
+  background: #0F0E17;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contentitem-header {
+  cursor: pointer;
+  z-index: 2;
+}
+
+.contentitem-header:hover .contentitem-title {
+  text-decoration: underline;
+}
+
+.card-body {
+  padding: 2% 5% 5% 5%;
+  z-index: 3;
+}
+
+.card-body h3 {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 18px;
+  margin: 15px 0 15px 0;
+  color: #0F0E17;
+}
+
+.card-body p {
+  font-size: 16px;
+  color: #62636C;
+}
+
+.contentitem-title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  color: #FFFFFE;
+  text-shadow: 0 0 5px black;
+}
+
+.contentitem-date {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  padding-left: 10px;
+  color: #FFFFFE;
+  text-shadow: 0 0 5px black;
+}
+
+.card-img {
+  border-radius: 30px 30px 0 0;
+}
+
+.contentitem-tags {
+  font-style: normal;
+  font-size: 14px;
+  color: #62636C;
+  margin-bottom: 2%;
+}
+
+.contentitem-tag, .contentitem-tag:hover {
+  padding: 0;
+  display: inline-block;
+  font-family: 'Archivo', sans-serif;
+  text-transform: none;
+  font-style: normal;
+  font-size: 14px;
+  color: #E53170;
+}
+
+.contentitem-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentitem-title-visibility {
+  display: flex;
+  align-items: center;
+}
+
+.contentitem-visibility-dot {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 7px solid rgba(255, 255, 255, 0.32);
+  background-color: #fff;
+  background-clip: padding-box;
+  cursor: pointer;
+  transition: border-width 0.2s;
+  transition-timing-function: ease-out;
+  margin-right: 10px;
+}
+
+.contentitem-visibility-dot:hover {
+  border-width: 3px;
+}
+
+.contentitem-button {
+  flex-basis: 0;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 18px;
+  font-weight: normal;
+  padding: 0 30px 0 30px;
+  max-height: 40px;
+  background: #FF8906;
+  box-shadow: 0px 7px 23px -6px #FF8906;
+  border-radius: 6px;
+}
+
 .modal {
   display: block;
 }

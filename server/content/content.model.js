@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const { Int32 } = require('mongodb');
 
 //Defining the content schema 
 const contentSchema = new Schema({

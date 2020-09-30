@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Add-logo",
+    "version": "1.0",
+    "contact": {
+      "name": "Victoria"
+    },
+    "description": "Uploads a logo to an already existing profile"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/profile/:id/addLogo": {
+      "put": {
+        "description": "Adds logo to a profile",
+        "summary": "Add Logo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "object",
+                      "description": "upload a logo through a file param, which will be converted into a url and stored in logo param as a string"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "put-profile-:id-addLogo",
+        "parameters": [],
+        "tags": [
+          "PUT"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PUT"
+    }
+  ]
+}
