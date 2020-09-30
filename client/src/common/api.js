@@ -5,12 +5,16 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
 
 const AUTH_USER = '/users/authenticate';
+const REGISTER_USER = '/users/authenticate';
 const CURRENT_USER = '/users/current';
 const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create';
 
 // Takes email and password as an object and returns the user's details and token
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
+
+// Takes email and password as an object and returns the user's details and token
+const registerUser = async user => await axios.post(REGISTER_USER, user);
 
 // Takes a token string and returns the user's details
 const getUser = async token => await axios.get(CURRENT_USER, token);
@@ -30,6 +34,7 @@ const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 // Make functions available to other components
 export default {
   authenticateUser,
+  registerUser,
   getUser,
   getAllContent,
   createContent,
