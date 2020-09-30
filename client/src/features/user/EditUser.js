@@ -3,23 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {editUser} from './userSlice';
-import apiFunctions from '../../common/api';
 import Modal from 'react-bootstrap/esm/Modal';
-
-//const dispatch = useDispatch();
-
 
 export default function EditUser() {
     const user = useSelector(state => state.user);
 
     //Initialised with the user fields. Cannot simply copy the whole object as the server rejects some fields
-    const [_details, updateDetails] = useState({"username" : user.username, "firstName" : user.firstName, "lastName" : user.lastName});
+    const [_details, updateDetails] = useState({"username" : user.username, "firstName" : user.firstName, "lastName" : user.lastName, "avatar" : user.avatar});
     const dispatch = useDispatch();
 
     const handleEditUser = () => {
-        console.log("Reached Handle User");
-        console.log(_details);
-        dispatch(editUser(_details));
+        dispatch(editUser(_details))
+        .then(closeEditHandler);
     };
 
     const closeEditHandler = () => setShowUserEdit(false);
@@ -58,7 +53,7 @@ export default function EditUser() {
         <h1 className="h2 ml-5 mt-5">Username: {user.username}</h1> 
         <h1 className="h2 ml-5 mt-5">First Name: {user.firstName}</h1>
         <h1 className="h2 ml-5 mt-5">Last Name: {user.lastName}</h1>
-        <img src = "https://icon-library.com/images/default-user-icon/default-user-icon-6.jpg"></img>
+        <img src = "https://icon-library.com/images/default-user-icon/default-user-icon-6.jpg" alt = "profile image"></img>
     </React.Fragment>
     //return <h1>Hello, world!</h1>
     //onClick = {() => editUser(user.id, {"username" : "changedUser"})

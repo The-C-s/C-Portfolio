@@ -38,6 +38,7 @@ export default function EditContent({ content, show, closeHandler }) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={closeHandler}>Cancel</Button>
+        <Button variant="warning" onClick={editClickHandler}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   )
