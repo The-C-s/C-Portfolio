@@ -15,6 +15,10 @@ function errorHandler(err, req, res, next) {
         return res.status(401).json({ message: 'Invalid Token' });
     }
 
+    if (err.name === 'UserPostMismatchError') {
+        return res.status(401).json({ message: 'Post does not belong to User' });
+    }
+
     if (err.name === 'UserNotFoundError') {
         return res.status(404).json({ message: 'User Not Found' });
     }
