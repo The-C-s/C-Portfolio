@@ -22,3 +22,6 @@ The is the repository for cPortfolio's frontend. You can find the repository for
 
 ## How to run
 
+npm install 
+
+npm run
