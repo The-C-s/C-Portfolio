@@ -62,9 +62,13 @@ async function create(userParam) {
       throw 'Password is a required field';
     }
 
-    if(userParam.hash) {
-      throw 'Hash is an illegal field';
-    }
+    //ignore illegal fields
+    delete userParam.hash;
+    delete userParam.content;
+    delete userParam.profile;
+    delete userParam.createdDate;
+    delete userParam.avatar;
+    delete userParam.background;
 
     if (await User.findOne({ email: userParam.email })) {
         throw 'Email "' + userParam.email + '" is already taken';
@@ -98,25 +102,13 @@ async function update(id, userParam) {
         throw 'Email "' + userParam.email + '" is already taken';
     }
 
-    //illegal fields
-    if(userParam.hash) {
-      throw 'Hash is an illegal field';
-    }
-    if(userParam.content) {
-      throw 'Content is an illegal field';
-    }
-    if(userParam.profile) {
-      throw 'Profile is an illegal field';
-    }
-    if(userParam.createdDate) {
-      throw 'createdDate is an illegal field';
-    }
-    if(userParam.avatar) {
-      throw 'Avatar is an illegal field';
-    }
-    if(userParam.background) {
-      throw 'Background is an illegal field';
-    }
+    //illegal fields, ignore them
+    delete userParam.hash;
+    delete userParam.content;
+    delete userParam.profile;
+    delete userParam.createdDate;
+    delete userParam.avatar;
+    delete userParam.background;
 
     // hash password if it was entered
     if (userParam.password) {
