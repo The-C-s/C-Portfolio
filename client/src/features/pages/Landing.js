@@ -1,10 +1,11 @@
 import React from 'react';
 import Login from '../user/Login';
-//import Image from 'react-bootstrap/Image'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+/* Added logo and removed the text display */
 
 const Landing = () => {
   return(
