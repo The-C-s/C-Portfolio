@@ -34,7 +34,11 @@ export default function EditProfile({ profile, show, closeHandler }) {
   //Both of these functions work seperately, but updating any field after adding a new one always resets the array to empty 
   //Assume its an issue with concurrent modification? 
   //Updates a single field 
-  const onChangeEducationHandler = e => updateEducation([e.target.value]); 
+  //VVV this function needs to update the specific field not replace it with the input, e.target.id is probably not correct here  
+  const onChangeEducationHandler = e => {
+      const tmp = [..._education]; 
+      tmp[e.target.id] = e.target.value; 
+      updateEducation(tmp)}; 
   //Adds an empty education field 
   const addEducationField = e => updateEducation([..._education, '']); 
   
