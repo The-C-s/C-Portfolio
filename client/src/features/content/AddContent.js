@@ -66,7 +66,7 @@ export default function AddContent({ setView }) {
       <Form className="mt-5" onSubmit={onSubmitHandler}>
         <Form.Group controlId="title">
           <Form.Label>Title</Form.Label>
-          <Form.Control type="text" value={content.title} onChange={onTitleChangeHandler}/>
+          <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
         </Form.Group>
         <Form.Group controlId="description">
           <Form.Label>Description</Form.Label>

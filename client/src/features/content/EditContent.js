@@ -67,15 +67,11 @@ export default function EditContent({ content, show, closeHandler }) {
         <Form>
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text" value={_content.title} onChange={onTitleChangeHandler}/>
+            <Form.Control type="text" value={_content.title} onChange={onChangeHandler}/>
           </Form.Group>
           <Form.Group controlId="username">
             <Form.Label>Description</Form.Label>
-            <Form.Control type="text" value={_content.description} onChange={onDescriptionChangeHandler}/>
-          </Form.Group>
-          <Form.Group controlId="content">
-            <Form.Label>Content</Form.Label>
-            <ReactQuill modules = {{toolbar: enabledTools}} theme='snow' value={_content.content} onChange={onContentChangeHandler}/>
+            <Form.Control type="text" value={_content.description} onChange={onChangeHandler}/>
           </Form.Group>
           <Button variant="primary" onClick={toggleShowFileOff} variant={!showFile ? "info" : "dark"}> Text </Button>
           <Button variant="primary" onClick={toggleShowFileOn} variant={!showFile ? "dark" : "info"}> File </Button>
