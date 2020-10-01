@@ -6,11 +6,11 @@ import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
-
+import ContentItem from "../content/ContentItem"; 
 import EditProfile from "./EditProfile";
 import DeleteProfile from "./DeleteProfile";
 
-export default function ProfileItem({ profile }) {
+export default function ProfileItem({ profile, projects }) {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
@@ -20,10 +20,24 @@ export default function ProfileItem({ profile }) {
 
   //Fields for profile
   //ADD LOGO AND RESUME FIELDS
-  const { logo, education, experience, projects } = profile;
+  const { logo, education, experience} = profile;
 
   return (
     <React.Fragment>
+        <Button
+        variant="link"
+        className="float-right"
+        onClick={() => setShowEdit(true)}
+      >
+        Edit
+      </Button>
+      <Button
+        variant="link"
+        className="float-right text-danger"
+        onClick={() => setShowDelete(true)}
+      >
+        Delete
+      </Button>
       <EditProfile
         profile={profile}
         show={showEdit}
@@ -42,21 +56,21 @@ export default function ProfileItem({ profile }) {
         </Row>
       </Container>
       <Row>
-        <ListGroup className="mt-5 ml-5 mr-5">
-          <h4>Education</h4>
+        <ListGroup className="mt-3 ml-5 mr-5">
+          <h4 className="mt-3 mb-5">Education</h4>
           <div className="card-education">
             {education.map((education) => (
-              <ListGroup.Item key={education}>{education}</ListGroup.Item>
+              <ListGroup.Item className="flex-fill ml-4 mr-5" key={education}>{education}</ListGroup.Item>
             ))}
           </div>
         </ListGroup>
       </Row>
       <Row>
-        <ListGroup className="mt-5 ml-5 mr-5">
-          <h4>Experience</h4>
+        <ListGroup className="mt-3 ml-5 mr-5">
+          <h4 className="mt-3 mb-5">Experience</h4>
           <div className="card-experience">
             {experience.map((experience) => (
-              <ListGroup.Item key={experience}>{experience}</ListGroup.Item>
+              <ListGroup.Item className="flex-fill ml-4 mr-5" key={experience}>{experience}</ListGroup.Item>
             ))}
           </div>
         </ListGroup>
@@ -65,26 +79,15 @@ export default function ProfileItem({ profile }) {
         <ListGroup className="mt-5 ml-5 mr-5">
           <h4>Projects</h4>
           <div className="card-projects">
+              {/*}
             {projects.map((projects) => (
               <ListGroup.Item key={projects}>{projects}</ListGroup.Item>
-            ))}
+            ))}*/}
+            {projects.map(projects => <ContentItem content = {projects}/>)}
           </div>
         </ListGroup>
       </Row>
-      <Button
-        variant="link"
-        className="float-right"
-        onClick={() => setShowEdit(true)}
-      >
-        Edit
-      </Button>
-      <Button
-        variant="link"
-        className="float-right text-danger"
-        onClick={() => setShowDelete(true)}
-      >
-        Delete
-      </Button>
+      
     </React.Fragment>
   );
 }

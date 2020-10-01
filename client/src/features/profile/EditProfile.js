@@ -158,7 +158,7 @@ export default function EditProfile({ profile, show, closeHandler }) {
                 <Form.Control
                   as="textarea"
                   rows="1"
-                  value={projects}
+                  value="McWorking on it"
                   onChange={onChangeProjectHandler}
                 />
                 <InputGroup.Append>
