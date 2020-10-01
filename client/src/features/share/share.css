@@ -1,0 +1,30 @@
+.share {
+  font-family: 'Open Sans', sans-serif;
+  color: #0F0E17;
+  padding-top: 10%;
+}
+
+.share .logo {
+  width: 200px;
+  height: 200px;
+}
+
+.share .name {
+  font-weight: 700;
+  font-size: 32pt;
+}
+
+.share .bio {
+  padding-top: 20px;
+}
+
+.share .name, .share .bio, .share .links {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.share .btn-link {
+  padding: 10px 0;
+  text-transform: none;
+  color: #747474;
+}
