@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -80,45 +81,48 @@ export default function Share() {
   }).format(Date.parse(date));
 
   return(
-    <Container className="share">
-      <Row>
-        <Col xs="auto">
-          <Image roundedCircle className="logo" src={profile.logo}/>
-        </Col>
-        <Col>
-          <Row className="name">{profile.firstName} {profile.lastName}</Row>
-          <Row className="bio">{profile.bio}</Row>
-          <Row className="links">
-            <Button as="a" href={profile.resume} variant="link"><FontAwesomeIcon icon={faFilePdf}/> Resume</Button>
-            <Button as="a" href={`mailto:${profile.email}`} variant="link"><FontAwesomeIcon icon={faEnvelope}/> {profile.email}</Button>
-          </Row>
-        </Col>
-      </Row>
-      <Row>
-        {_projects.map(project =>
-          <Row key={project.id} className="project">
-            <Row>
-              <Col xs="auto" className="date">{toLongDate(project.displayDate)}</Col>
-              <Col>
-                <Row className="title">{project.title}</Row>
-                <Row className="description">{project.description}</Row>
-                <Button variant="link" onClick={() => onExpandClick(project.id)}>
-                  {project.expand && <>Hide project <FontAwesomeIcon icon={faArrowCircleUp}/></>}
-                  {!project.expand && <>Show project <FontAwesomeIcon icon={faArrowCircleDown}/></>}
-                </Button>
-              </Col>
+    <>
+      <Button as={Link} to="/dashboard" variant="link">Back to dashboard</Button>
+      <Container className="share">
+        <Row>
+          <Col xs="auto">
+            <Image roundedCircle className="logo" src={profile.logo}/>
+          </Col>
+          <Col>
+            <Row className="name">{profile.firstName} {profile.lastName}</Row>
+            <Row className="bio">{profile.bio}</Row>
+            <Row className="links">
+              <Button as="a" href={profile.resume} variant="link"><FontAwesomeIcon icon={faFilePdf}/> Resume</Button>
+              <Button as="a" href={`mailto:${profile.email}`} variant="link"><FontAwesomeIcon icon={faEnvelope}/> {profile.email}</Button>
             </Row>
-            <Collapse in={project.expand}>
+          </Col>
+        </Row>
+        <Row>
+          {_projects.map(project =>
+            <Row key={project.id} className="project">
               <Row>
-                {(getContentType(project.content) == 'text') && <div dangerouslySetInnerHTML={{ __html: project.content }}/>}
-                {(getContentType(project.content) == 'image') && <a href={project.content} target="_blank"><Image src={project.content}/></a>}
-                {(getContentType(project.content) == 'url') && <a href={project.content} target="_blank">External link</a>}
+                <Col xs="auto" className="date">{toLongDate(project.displayDate)}</Col>
+                <Col>
+                  <Row className="title">{project.title}</Row>
+                  <Row className="description">{project.description}</Row>
+                  <Button variant="link" onClick={() => onExpandClick(project.id)}>
+                    {project.expand && <>Hide project <FontAwesomeIcon icon={faArrowCircleUp}/></>}
+                    {!project.expand && <>Show project <FontAwesomeIcon icon={faArrowCircleDown}/></>}
+                  </Button>
+                </Col>
               </Row>
-            </Collapse>
-            <hr/>
-          </Row>
-        )}
-      </Row>
-    </Container>
+              <Collapse in={project.expand}>
+                <Row>
+                  {(getContentType(project.content) === 'text') && <div dangerouslySetInnerHTML={{ __html: project.content }}/>}
+                  {(getContentType(project.content) === 'image') && <a href={project.content} target="_blank"><Image src={project.content}/></a>}
+                  {(getContentType(project.content) === 'url') && <a href={project.content} target="_blank">External link</a>}
+                </Row>
+              </Collapse>
+              <hr/>
+            </Row>
+          )}
+        </Row>
+      </Container>
+    </>
   );
 }
