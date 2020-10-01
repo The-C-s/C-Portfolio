@@ -5,7 +5,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
 
 const AUTH_USER = '/users/authenticate';
-const REGISTER_USER = '/users/authenticate';
+const REGISTER_USER = '/users/register';
 const CURRENT_USER = '/users/current';
 const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create';
