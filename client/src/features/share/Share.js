@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,9 +14,11 @@ import './share.css';
 
 export default function Share() {
 
-  let { username } = useParams();
-
-  console.log(`Share view for '${username}'`);
+  const date = Intl.DateTimeFormat('en-AU', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  }).format(Date.parse(displayDate));
 
   const profile = {
     id: "5f69f55dc9ba431048112e50",
@@ -63,6 +65,11 @@ export default function Share() {
             <Button as="a" href={profile.resume} variant="link"><FontAwesomeIcon icon={faFilePdf}/> Resume</Button>
             <Button as="a" href={`mailto:${profile.email}`} variant="link"><FontAwesomeIcon icon={faEnvelope}/> {profile.email}</Button>
           </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <hr/>
         </Col>
       </Row>
     </Container>

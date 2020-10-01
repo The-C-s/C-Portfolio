@@ -34,9 +34,6 @@ export default function App() {
         <Route path="/share">
           <Share/>
         </Route>
-        <Route path="/:username">
-          <Share/>
-        </Route>
       </Switch>
     </Router>
   );
