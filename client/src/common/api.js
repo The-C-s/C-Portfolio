@@ -12,6 +12,7 @@ const CREATE_PROFILE = '/profile/create';
 const PROFILE = '/profile/'; 
 const ADD_LOGO = '/profile/addLogo';
 const ADD_RESUME = '/profile/addResume'; 
+const UPDATE_USER = '/users/update';
 
 // Takes email and password as an object and returns the user's details and token
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
@@ -48,7 +49,13 @@ const getProfile = async id => await axios.get(`${PROFILE}${id}`);
 const addLogo = async () => await axios.get(ADD_LOGO);  
 const addResume = async () => await axios.get(ADD_RESUME);  
 
+const editUser = async userParams => {
+    console.log(userParams);
+    await axios.put(UPDATE_USER, userParams);
+};
+
 // Make functions available to other components
+
 export default {
   authenticateUser,
   getUser,
@@ -61,5 +68,6 @@ export default {
   deleteProfile, 
   getProfile, 
   addLogo,
-  addResume 
+  addResume, 
+  editUser
 };
