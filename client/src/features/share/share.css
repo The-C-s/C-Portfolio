@@ -18,10 +18,22 @@
   padding-top: 20px;
 }
 
+.share h6 {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.share .bio-item {
+  font-size: 9pt;
+  margin-bottom: 8px;
+  margin-left: 10px;
+}
+
 .share .row {
   margin-left: 0;
   margin-right: 0;
   max-width: 100%;
+  min-width: 100%;
 }
 
 .share .name, .share .bio, .share .links {
@@ -69,4 +81,8 @@
   width: 100%;
   border-top: 3px solid #e4e4e4;
   border-radius: 1%;
+}
+
+.btn-link.return {
+  position: fixed;
 }
