@@ -5,8 +5,8 @@ const verify = require('../_helpers/jwt');
 const uploadFile = require('../_helpers/file-upload'); 
 
 router.post('/create',verify.auth, create);
-router.put('/:id/addLogo',verify.auth, uploadFile.single('file'), addLogo);
-router.put('/:id/addResume', verify.auth, uploadFile.single('file'), addResume);  
+router.put('/addLogo',verify.auth, uploadFile.single('file'), addLogo);
+router.put('/addResume', verify.auth, uploadFile.single('file'), addResume);  
 router.get('/:id', getById);
 router.put('/:id', verify.auth, update);
 router.delete('/:id', verify.auth, _delete);
@@ -15,7 +15,7 @@ function create(req, res, next) {
     profileService.create(req.user.sub, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
-}
+}   
 
 function addLogo(req, res, next){ 
     profileService.addLogo(req.user.sub, req.params.id, req.file)

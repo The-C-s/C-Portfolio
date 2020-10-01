@@ -21,8 +21,18 @@ export default function SideNavbar({ setView }) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
+            <Nav.Link eventKey="profile">
+              Profile
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link eventKey="add-content">
               Add Content
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="add-profile">
+              Add Profile
             </Nav.Link>
           </Nav.Item>
         </Nav>

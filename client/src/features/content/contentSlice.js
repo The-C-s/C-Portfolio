@@ -12,6 +12,11 @@ export const getContent = createAsyncThunk(
   api.getAllContent
 );
 
+export const getSingleContent = createAsyncThunk( 
+  'content/getSingleContent', 
+   api.getSingleContent 
+); 
+
 export const createContent = createAsyncThunk(
   'content/createContent',
   api.createContent
