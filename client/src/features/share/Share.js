@@ -54,7 +54,7 @@ export default function Share() {
     resume: "https://res.cloudinary.com/dlh0pcycr/image/upload/v1600791776/vwrbvlhmjgroxzktbefu.pdf"
   }
 
-  const [_projects, setExpand] = useState(profile.projects.map(project => { ...project, expand: false }));
+  const [_projects, setExpand] = useState(profile.projects.map(project => {return {...project, expand: false }}));
   console.log(_projects);
 
   const date = Intl.DateTimeFormat('en-AU', {
