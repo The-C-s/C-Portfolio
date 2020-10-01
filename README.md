@@ -22,6 +22,10 @@ The is the repository for cPortfolio's frontend. You can find the repository for
 
 ## Background
 
+Most universities conduct semesters twice or thrice a year and want to have a platform that helps engage student, academics and peers for enhanced learning and also bridge the gap between each other. University of Melbourne has taken such an initiative to address and tackle the issues while conducting every subject. 
+
+This ePortfolio system will be able to allow students, lecturers and other cohorts to submit individual guest lecture reports and end-ofsubject individual reflections as well as a team reports. The ePortfolio website also helps keep a profile based network among students and academics with a dedicated portfolio for students and lecturers linking their other important portfolio based sites like LinkedIn, GitHub, Kaggle to name a few. Even researchers can be benefitted from this website by reaching out to their fit candidates for the intended project roles.
+
 ## Technologies Used
 ![Stack](/readme-images/stack.png)
 
