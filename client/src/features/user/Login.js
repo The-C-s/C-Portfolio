@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-//import { BsFillPersonFill } from "react-icons/bs";
 
-import { login } from './userSlice';
+import { login, register } from './userSlice';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav'
 
-export default function Login() {
+export default function Login({ onClickHandler }) {
 
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const [form, updateForm] = useState({ email: '', password: '' });
@@ -30,7 +28,7 @@ export default function Login() {
   return(
     <div className="form-box">
       <Form className="login-form" onSubmit={onSubmitHandler}>
-        <h2> Login</h2>
+        <h2>Login</h2>
         <hr/>
         <Form.Group>
           <Form.Control
@@ -53,7 +51,7 @@ export default function Login() {
           />
         </Form.Group>
         <Button type="submit" block variant="primary">Login</Button>
-        <div className="text-center"> Don't have an account? <Nav.Link href="/register">Register</Nav.Link></div>
+        <div className="text-center"> Don't have an account? <Button variant="link" onClick={onClickHandler}>Register</Button></div>
       </Form>
     </div>
   );
