@@ -73,8 +73,8 @@ export default function EditContent({ content, show, closeHandler }) {
             <Form.Label>Description</Form.Label>
             <Form.Control type="text" value={_content.description} onChange={onChangeHandler}/>
           </Form.Group>
-          <Button variant="primary" onClick={toggleShowFileOff} variant={!showFile ? "info" : "dark"}> Text </Button>
-          <Button variant="primary" onClick={toggleShowFileOn} variant={!showFile ? "dark" : "info"}> File </Button>
+          <Button variant="primary" onClick={toggleShowFileOff}> Text </Button>
+          <Button variant="primary" onClick={toggleShowFileOn}> File </Button>
           { !showFile ?
           <Form.Group controlId="content">
             <Form.Label>Content</Form.Label>
