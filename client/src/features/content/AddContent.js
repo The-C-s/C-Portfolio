@@ -17,25 +17,40 @@ export default function AddContent({ setView }) {
    * private state inside the component, in this case is used to just handle
    * what's in the input fields before we send it off to Redux.
    */
-  const [content, updateContent] = useState({'title':'','description':'','content':''});
+
+  const [content, updateContent] = useState({});
+  const [richText, updateRichText] = useState('');
+  const [file, updateFile] = useState();
+
+  const [showFile, setShowFile] = useState(false);
+  const toggleShowFileOff = () => setShowFile(false);
+  const toggleShowFileOn = () => setShowFile(true);
+
   const dispatch = useDispatch();
 
   const onSubmitHandler = e => {
-
     // Prevent 'Submit' from actually doing a traditional submit
     e.preventDefault();
 
+    //convert to FormData so we can send files
+    const data = new FormData();
+    for (let field in content) {
+      data.set(field, content[field]);
+    }
+    if(showFile && file) { data.set('file', file); }
+    else if (!showFile) { data.set('content', richText); }
+
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
-    dispatch(createContent(content))
+    dispatch(createContent(data))
       .then(() => dispatch(getContent()))
       .then(() => setView('dashboard'));
   }
 
   // Input fields are based on state, so typing in them won't work unless we also change the state
-  //since the quill element doesn't pass it's ID, have a seperate function for each element
-  const onTitleChangeHandler = e => updateContent({ ...content, 'title': e.target.value });
-  const onDescriptionChangeHandler = e => updateContent({ ...content, 'description': e.target.value });
-  const onContentChangeHandler = e => updateContent({ ...content, 'content': e });
+  const onChangeHandler = e => updateContent({ ...content, [e.target.id]: e.target.value });
+  const onContentChangeHandler = e => updateRichText(e);
+  const onFileChosenHandler = e => updateFile(e.target.files[0]);
+
 
   const enabledTools = [
       [{ 'header': [1, 2, false] }],
@@ -51,16 +66,26 @@ export default function AddContent({ setView }) {
       <Form className="mt-5" onSubmit={onSubmitHandler}>
         <Form.Group controlId="title">
           <Form.Label>Title</Form.Label>
-          <Form.Control type="text" value={content.title} onChange={onTitleChangeHandler}/>
+          <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
         </Form.Group>
         <Form.Group controlId="description">
           <Form.Label>Description</Form.Label>
-          <Form.Control type="text" value={content.description} onChange={onDescriptionChangeHandler}/>
+          <Form.Control as="textarea" rows="5" value={content.description} onChange={onChangeHandler}/>
         </Form.Group>
+        <Button variant="primary" onClick={toggleShowFileOff}> Text </Button>
+        <Button variant="primary" onClick={toggleShowFileOn}> File </Button>
+        { !showFile ?
         <Form.Group controlId="content">
           <Form.Label>Content</Form.Label>
-          <ReactQuill modules = {{toolbar: enabledTools}} theme='snow' value={content.content} onChange={onContentChangeHandler}/>
+          <ReactQuill modules = {{toolbar: enabledTools}} theme='snow' value={richText} onChange={onContentChangeHandler}/>
         </Form.Group>
+        :
+        <Form.Group controlId="file">
+          <Form.Label>File</Form.Label>
+          <br/>
+          <input type="file" name="file" onChange={onFileChosenHandler}/>
+        </Form.Group>
+        }
         <Button type="submit" variant="info">Create</Button>
       </Form>
     </React.Fragment>

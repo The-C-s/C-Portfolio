@@ -28,7 +28,7 @@ const getAllContent = async () => await axios.get(CONTENT);
 const createContent = async content => await axios.post(CREATE_CONTENT, content);
 
 // Takes a content object (that must include the id field) and authorises with existing token
-const editContent = async content => await axios.put(`${CONTENT}${content.id}`, content);
+const editContent = async content => await axios.put(`${CONTENT}${content.get('id')}`, content);
 
 // Takes just the content id (as a string) and authorises with existing token
 const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
