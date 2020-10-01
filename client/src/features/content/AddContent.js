@@ -6,7 +6,7 @@ import { createContent, getContent } from '../content/contentSlice';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function AddContent({ setView }) {  
+export default function AddContent({ setView }) {
 
   /*
    * useState is a React hook and unrelated to Redux. Creates a little
@@ -16,13 +16,22 @@ export default function AddContent({ setView }) {
   const [content, updateContent] = useState({});
   const dispatch = useDispatch();
 
-  const onSubmitHandler = e => {
+  const onFileChosen = e => {
+    updateContent({ ...content, 'file': e.target.files[0] });
+  }
 
+  const onSubmitHandler = e => {
     // Prevent 'Submit' from actually doing a traditional submit
     e.preventDefault();
 
+    //convert to FormData so we can send files
+    const data = new FormData();
+    for (let field in content) {
+      data.append(field, content[field]);
+    }
+
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
-    dispatch(createContent(content))
+    dispatch(createContent(data))
       .then(() => dispatch(getContent()))
       .then(() => setView('dashboard'));
   }
@@ -39,8 +48,12 @@ export default function AddContent({ setView }) {
           <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
         </Form.Group>
         <Form.Group controlId="description">
-          <Form.Label>Dscription</Form.Label>
+          <Form.Label>Description</Form.Label>
           <Form.Control as="textarea" rows="5" value={content.description} onChange={onChangeHandler}/>
+        </Form.Group>
+        <Form.Group controlId="file">
+          <Form.Label>File</Form.Label>
+          <input type="file" name="file" onChange={onFileChosen}/>
         </Form.Group>
         <Button type="submit" variant="info">Create</Button>
       </Form>
