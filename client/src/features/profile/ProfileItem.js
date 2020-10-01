@@ -50,7 +50,7 @@ export default function ProfileItem({ profile, projects }) {
       />
       <Container>
         <Row>
-          <Col xs={3} md={3}>
+          <Col className="mt-3 ml-5 mr-5">
             <Image src={logo} roundedCircle fluid />
           </Col>
         </Row>
