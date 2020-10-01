@@ -12,9 +12,19 @@ export default function EditContent({ content, show, closeHandler }) {
   const [_content, updateContent] = useState(content);
   const dispatch = useDispatch();
 
+  const onFileChosen = e => {
+    updateContent({ ..._content, 'file': e.target.files[0] });
+  }
+
   const editClickHandler = () => {
 
-    dispatch(editContent(_content))
+    //convert to FormData so we can send files
+    const _data = new FormData();
+    for (let field in _content) {
+      _data.append(field, _content[field]);
+    }
+
+    dispatch(editContent(_data))
       .then(() => dispatch(getContent()))
       .then(() => closeHandler());
   }
@@ -33,6 +43,11 @@ export default function EditContent({ content, show, closeHandler }) {
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control as="textarea" rows="5" value={_content.description} onChange={onChangeHandler}/>
+          </Form.Group>
+          <Form.Group controlId="file">
+            <Form.Label>File</Form.Label>
+            <br/>
+            <input type="file" name="file" onChange={onFileChosen}/>
           </Form.Group>
         </Form>
       </Modal.Body>
