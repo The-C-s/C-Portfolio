@@ -18,7 +18,7 @@ const UPDATE_USER = '/users/update';
 const authenticateUser = async user => await axios.post(AUTH_USER, user);
 
 // Takes a token string and returns the user's details
-const getUser = async token => await axios.get(CURRENT_USER, token);
+const getUser = async () => await axios.get(CURRENT_USER);
 
 // Uses an existing token if user is logged in and returns all their content (as a list, not an object)
 const getAllContent = async () => await axios.get(CONTENT);
