@@ -10,6 +10,7 @@ import { setUser } from '../features/user/userSlice';
 // Imports for React components
 import Landing from '../features/pages/Landing';
 import Dashboard from '../features/dashboard/Dashboard';
+import Share from '../features/share/Share';
 
 // For when css is being a b and you need to override some rules
 import '../App.css';
@@ -36,6 +37,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={Landing}/>
           <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path="/:username/share" component={Share}/>
         </Switch>
       </div>
     </Router>
