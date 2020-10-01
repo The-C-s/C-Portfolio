@@ -1,7 +1,7 @@
 .share {
   font-family: 'Open Sans', sans-serif;
   color: #0F0E17;
-  padding-top: 10%;
+  padding: 10%;
 }
 
 .share .logo {
@@ -27,4 +27,8 @@
   padding: 10px 0;
   text-transform: none;
   color: #747474;
+}
+
+.share .links>a {
+  margin-right: 20px;
 }
