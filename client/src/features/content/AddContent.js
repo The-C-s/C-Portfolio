@@ -17,6 +17,7 @@ export default function AddContent({ setView }) {
    * private state inside the component, in this case is used to just handle
    * what's in the input fields before we send it off to Redux.
    */
+
   const [content, updateContent] = useState({});
   const [richText, updateRichText] = useState('');
   const [file, updateFile] = useState();
@@ -50,6 +51,7 @@ export default function AddContent({ setView }) {
   const onContentChangeHandler = e => updateRichText(e);
   const onFileChosenHandler = e => updateFile(e.target.files[0]);
 
+
   const enabledTools = [
       [{ 'header': [1, 2, false] }],
       ['bold', 'italic', 'underline','strike', 'blockquote'],
@@ -64,7 +66,7 @@ export default function AddContent({ setView }) {
       <Form className="mt-5" onSubmit={onSubmitHandler}>
         <Form.Group controlId="title">
           <Form.Label>Title</Form.Label>
-          <Form.Control type="text" value={content.title} onChange={onChangeHandler}/>
+          <Form.Control type="text" value={content.title} onChange={onTitleChangeHandler}/>
         </Form.Group>
         <Form.Group controlId="description">
           <Form.Label>Description</Form.Label>
