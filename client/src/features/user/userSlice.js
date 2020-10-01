@@ -7,6 +7,13 @@ export const login = createAsyncThunk(
   api.authenticateUser
 );
 
+export const editUser = createAsyncThunk(
+  'users/update',
+  async (_details) => {
+    api.editUser(_details);
+  }
+);
+
 const user = createSlice({
   name: 'user',
   initialState: {
