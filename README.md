@@ -1,4 +1,4 @@
-![Logo](/readme-images/CroppedPortfolio-v2.png)
+![Logo](/readme-images/Portfolio.png)
 
 ## Creators
 
