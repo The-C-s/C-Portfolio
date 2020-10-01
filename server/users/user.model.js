@@ -7,9 +7,17 @@ const schema = new Schema({
     hash: { type: String, required: true },
     profile:{type: Schema.Types.ObjectId},
     username: { type: String, unique: true, required: true },
-    userInformation: { type: Schema.Types.ObjectId },
     content: { type: [Schema.Types.ObjectId] },
-    createdDate: { type: Date, default: Date.now }
+    profile: { type: Schema.Types.ObjectId},
+    createdDate: { type: Date, default: Date.now },
+    //name(s)
+    firstName: { type: String },
+    lastName: { type: String },
+    //additional emails for display on portfolio
+    emails : { type: [String] },
+    //customizable avatar and backgrounds (URLs)
+    avatar: { type: String, default: null },
+    background: { type: String, default: null }
 });
 
 schema.set('toJSON', {

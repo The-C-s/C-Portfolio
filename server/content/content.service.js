@@ -7,21 +7,29 @@ module.exports = {
     getById,
     create,
     update,
-    delete: _delete
+    delete: _delete,
+    deleteByUser: _deleteByUser
 };
 //FIX: Generic errors currently, might be helpful to have an error with a status code and a message? 
 
-//Returns all content
+//Returns all content by the given user
 //FIX: Add if statements to check if it should be viewable? eg. viewPerms or check that the user can actually 
 //call this function 
 async function getAll(userid) {
-    try{ 
-        //Finds a user, then returns all content with their email  
-        const user = await User.findById(userid); 
-        return await Content.find({user: user.email});
-    } catch(error) {
-        throw "User does not exist";
-    }
+    const user = await User.findById(userid);
+    // validate
+    if (!user) throw new Error('UserNotFoundError');
+
+    //get posts 
+    var post;
+    var posts = [];
+    var postid;
+    for(postid of user.content) {
+        post = await Content.findById(postid);
+        if (!post) throw new Error('PostNotFoundError');
+        posts.push(post);
+    } 
+    return posts;
 }
 
 //Given a postid, gets the post
@@ -43,10 +51,19 @@ async function create(userid, userParam, file) {
         //Sets the user of the post to the person who created it 
         const user = await User.findById(userid); 
         post.user = user.email; 
-        //Saves url of image/file 
-        post.content = file.path; 
+        //Saves url of image/file if there is one
+        if(typeof file !== 'undefined'){
+            post.content = file.path;
+        }
+        else{
+            post.content = userParam.content;
+        }
         //Saves post and returns a post 
         await post.save();
+        //add the post id to the user's content field
+        user.content.push(post.id);
+        await user.save();
+
         return post;  
     } catch(error) {
         //Otherwise throws error if post not created 
@@ -65,9 +82,9 @@ async function update(userid, postid, userParam, file) {
         if(user.email == post.user){ 
             //Updates the specified post with the input 
             Object.assign(post, userParam);
-            if(file.path){ 
-                //Updates content's file path if file exists 
-                post.content = file.path; 
+            if(typeof file !== 'undefined'){
+                //Updates content's file path if file exists
+                post.content = file.path;
             }
             await post.save();
                 return post;    
@@ -83,18 +100,34 @@ async function update(userid, postid, userParam, file) {
 
 //Deletes a post
 async function _delete(userid, postid) {
-    try {
-        post = Content.findbyId(postid); 
-        const user = await User.findById(userid);
-        //Checks that the user accessing is the same as the creator 
-        if(user.email == post.user){
-            return await Content.findByIdAndRemove(id);
-        }
-        else{ 
-            throw "Invalid User Details"; 
-        }
-    } catch(error) {
+    const post = await Content.findById(postid);
+    const user = await User.findById(userid);
 
-        throw "Post not found";
+    // validate
+    if (!user) throw new Error('UserNotFoundError');
+    if (!post) throw new Error('PostNotFoundError');
+    //Checks that the user accessing is the same as the creator 
+    if(user.email != post.user) throw new Error("UserPostMismatchError"); 
+
+    //remove from user's content field
+    const index = user.content.indexOf(postid);
+    if (index > -1) {
+        user.content.splice(index, 1);
+    }
+    await user.save();
+
+    //remove from database
+    return await Content.findByIdAndRemove(postid);
+}
+//deletes all content of a specific user
+async function _deleteByUser(userid) {
+    const user = await User.findById(userid);
+    // validate
+    if (!user) throw new Error('UserNotFoundError');
+
+    //for each post, delete it
+    var postid;
+    for(postid of user.content) {
+        await _delete(userid, postid);
     }
 }

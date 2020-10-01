@@ -21,6 +21,7 @@ const getUser = async token => await axios.get(CURRENT_USER, token);
 
 // Uses an existing token if user is logged in and returns all their content (as a list, not an object)
 const getAllContent = async () => await axios.get(CONTENT);
+// const getAllContent = async () => await axios.get('https://jsonplaceholder.typicode.com/posts');
 
 // Takes a content object and authorises with existing token
 const createContent = async content => await axios.post(CREATE_CONTENT, content);

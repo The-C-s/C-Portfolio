@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userService = require('./user.service');
+const uploadFile = require('../_helpers/file-upload');
 
 // routes
 router.post('/authenticate', authenticate);
@@ -8,6 +9,10 @@ router.post('/register', register);
 router.get('/', getAll);
 router.get('/current', getCurrent);
 router.put('/update', update);
+router.put('/avatar', uploadFile.single('file'), addAvatar);
+router.put('/background', uploadFile.single('file'), addBackground);
+router.delete('/avatar', _deleteAvatar);
+router.delete('/background', _deleteBackground);
 router.delete('/delete', _delete);
 
 module.exports = router;
@@ -90,6 +95,30 @@ function update(req, res, next) {
     userService.update(req.user.sub, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
+}
+
+function addAvatar(req, res, next) {
+    userService.addAvatar(req.user.sub, req.file)
+      .then(() => res.json({}))
+      .catch(err => next(err));
+}
+
+function addBackground(req, res, next) {
+    userService.addBackground(req.user.sub, req.file)
+      .then(() => res.json({}))
+      .catch(err => next(err));
+}
+
+function _deleteAvatar(req, res, next) {
+    userService.deleteAvatar(req.user.sub)
+      .then(() => res.json({}))
+      .catch(err => next(err));
+}
+
+function _deleteBackground(req, res, next) {
+    userService.deleteBackground(req.user.sub)
+      .then(() => res.json({}))
+      .catch(err => next(err));
 }
 
 /*
