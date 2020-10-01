@@ -4,19 +4,26 @@ import { useHistory } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 import TopNavbar from './TopNavbar';
 import SideNavBar from './SideNavbar';
 import Feed from './Feed';
 import Test from '../user/EditUser'
 import AddContent from '../content/AddContent';
+import EditUser from '../user/EditUser';
 
 export default function Dashboard() {
 
   // React hook for redirection
   const history = useHistory();
   const [view, setView] = useState('dashboard');
+  const _user = useSelector(state => state.user);
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const [showUserEdit, setShowUserEdit] = useState(false);
+  
+
+  const handleEditClose = () => setShowUserEdit(false);
 
   useEffect(() => { if (!isAuthenticated) history.push('/') });
 
@@ -35,11 +42,15 @@ export default function Dashboard() {
         <Row>
           <SideNavBar setView={setViewHandler}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
+            Edit
+        </Button>
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
             {(view === 'edit-user') && <Test setView={setViewHandler}/>}
           </main>
         </Row>
+        <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {_user} />
       </Container>
     </React.Fragment>
   );
