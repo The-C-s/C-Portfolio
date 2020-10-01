@@ -91,8 +91,8 @@ export default function Share() {
               <Collapse in={project.expand}>
                 <Row>
                   {(getContentType(project.content) === 'text') && <div dangerouslySetInnerHTML={{ __html: project.content }}/>}
-                  {(getContentType(project.content) === 'image') && <a href={project.content} target="_blank"><Image src={project.content}/></a>}
-                  {(getContentType(project.content) === 'url') && <a href={project.content} target="_blank">External link</a>}
+                  {(getContentType(project.content) === 'image') && <a href={project.content} target="_blank" rel="noopener noreferrer"><Image src={project.content}/></a>}
+                  {(getContentType(project.content) === 'url') && <a href={project.content} target="_blank" rel="noopener noreferrer">External link</a>}
                 </Row>
               </Collapse>
               <hr/>

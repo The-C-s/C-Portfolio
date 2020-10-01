@@ -14,7 +14,7 @@ import Profile from './Profile';
 import AddProfile from '../profile/AddProfile'; 
 import EditUser from '../user/EditUser';
 
-import { setUser, logout } from '../user/userSlice';
+import { setUser } from '../user/userSlice';
 import { getProfile } from '../profile/profileSlice';
 
 import api from '../../common/api';
@@ -43,7 +43,7 @@ export default function Dashboard() {
 
     if (!user.isAuthenticated) history.push('/')
     else if (!user.email) fetch();
-  },[dispatch]);
+  },[dispatch, history, user.email, user.isAuthenticated]);
 
   /*
    * This is a bad way of doing a dashboard. Simply swaps out whatever component
