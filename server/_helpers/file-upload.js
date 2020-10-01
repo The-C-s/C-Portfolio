@@ -41,7 +41,7 @@ const uploadImage = multer({
     limits: {fileSize: 1024*1024*16}
 }); 
 
-module.exports = {upload}; 
+module.exports = upload; 
 
 //How to use middleware, add in between path "/create" and function create
 //Call by using upload.single('file') where file is the name of the field which gets the image/file
