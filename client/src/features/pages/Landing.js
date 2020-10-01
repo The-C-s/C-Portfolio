@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Login from '../user/Login';
+import Register from '../user/Register'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,7 +8,12 @@ import Col from 'react-bootstrap/Col';
 
 /* Added logo and removed the text display */
 
-const Landing = () => {
+export default function Landing() {
+
+  const [register, setRegister] = useState(false);
+
+  const registerClickHandler = () => setRegister(true);
+
   return(
     <Container fluid>
       <Row className="no-gutter">
@@ -18,12 +24,10 @@ const Landing = () => {
         </Col>
         <Col>
           <div className="splash-container">
-            <Login/>
+            {() => register ? <Register/> : <Login onClickHandler={registerClickHandler}/>}
           </div>
         </Col>
       </Row>
     </Container>
   );
 }
-
-export default Landing;
