@@ -53,6 +53,7 @@ export default function AddContent({ setView }) {
         </Form.Group>
         <Form.Group controlId="file">
           <Form.Label>File</Form.Label>
+          <br/>
           <input type="file" name="file" onChange={onFileChosen}/>
         </Form.Group>
         <Button type="submit" variant="info">Create</Button>
