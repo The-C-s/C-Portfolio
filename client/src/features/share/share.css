@@ -18,8 +18,12 @@
   padding-top: 20px;
 }
 
+.share .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .share .name, .share .bio, .share .links {
-  margin: 0;
   padding-left: 20px;
 }
 
@@ -31,4 +35,33 @@
 
 .share .links>a {
   margin-right: 20px;
+}
+
+.share .project {
+  margin-top: 100px;
+}
+
+.share .project .date {
+  font-weight: 700;
+  color: #747474;
+  margin-top: 15px;
+}
+
+.share .project .title {
+  font-weight: 700;
+  font-size: 24pt;
+}
+
+.share .project .description {
+  margin-top: 20px;
+}
+
+.share .project .links {
+  padding: 0;
+}
+
+.share hr {
+  width: 100%;
+  border-top: 3px solid #e4e4e4;
+  border-radius: 1%;
 }

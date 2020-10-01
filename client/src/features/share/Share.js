@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faEnvelope, faArrowCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 
 import './share.css';
 
@@ -41,12 +41,6 @@ export default function Share() {
         displayDate: "2020-09-10T12:23:43.821+00:00",
         createdDate: "2020-09-10T12:23:43.821+00:00",
         user: "austen@maccas.edu.au"
-      },
-      {
-        id: "2"
-      },
-      {
-        id: "3"
       }
     ],
     email: "austen@maccas.edu.au",
@@ -54,14 +48,19 @@ export default function Share() {
     resume: "https://res.cloudinary.com/dlh0pcycr/image/upload/v1600791776/vwrbvlhmjgroxzktbefu.pdf"
   }
 
-  const [_projects, setExpand] = useState(profile.projects.map(project => {return {...project, expand: false }}));
-  console.log(_projects);
+  const [_projects, toggleExpand] = useState(profile.projects.map(project => { return { ...project, expand: false } }));
 
-  const date = Intl.DateTimeFormat('en-AU', {
+  const onExpandClick = id => toggleExpand(_projects.map(
+    project => project.id === id
+      ? { ...project, expand: !project.expand }
+      : project
+  ));
+
+  const toLongDate = date => Intl.DateTimeFormat('en-AU', {
     day: '2-digit',
     month: 'long',
     year: 'numeric'
-  }).format(Date.parse(profile.projects[0].displayDate));
+  }).format(Date.parse(date));
 
   return(
     <Container className="share">
@@ -79,9 +78,25 @@ export default function Share() {
         </Col>
       </Row>
       <Row>
-        {profile.projects.map(content =>
-          <Row>
-
+        {_projects.map(project =>
+          <Row key={project.id} className="project">
+            <Row>
+              <Col xs="auto" className="date">{toLongDate(project.displayDate)}</Col>
+              <Col>
+                <Row className="title">{project.title}</Row>
+                <Row className="description">{project.description}</Row>
+                <Button variant="link" onClick={() => onExpandClick(project.id)}>
+                  {project.expand && <>Hide project <FontAwesomeIcon icon={faArrowCircleUp}/></>}
+                  {!project.expand && <>Show project <FontAwesomeIcon icon={faArrowCircleDown}/></>}
+                </Button>
+              </Col>
+            </Row>
+            <Collapse in={project.expand}>
+              <Row>
+                {project.content}
+              </Row>
+            </Collapse>
+            <hr/>
           </Row>
         )}
       </Row>
