@@ -19,6 +19,7 @@ The is the repository for cPortfolio's frontend. You can find the repository for
 ## Features
 
 ## Technologies Used
+![Stack](/readme-images/stack.png)
 
 ## How to run
 
