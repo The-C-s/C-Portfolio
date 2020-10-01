@@ -15,12 +15,12 @@ export default function App() {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('token')) {
-  //     api.getUser()
-  //       .then(res => dispatch(setUser(res)));
-  //   }
-  // });
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      api.getUser()
+        .then(res => dispatch(setUser(res)));
+    }
+  });
 
   return(
     <Router>
