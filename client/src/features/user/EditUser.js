@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {editUser, setUser} from './userSlice';
+import {editUser} from './userSlice';
 import Modal from 'react-bootstrap/esm/Modal';
 import Image from 'react-bootstrap/Image';
 
@@ -17,18 +17,11 @@ export default function EditUser({show, closeHandler, user}) {
     const [_user, updateDetails] = useState(user);
     const dispatch = useDispatch();
 
-    //useSelector(state => state.user)
-    //console.log({user});
-
     //submits the new user details to the server to update in the database
     const handleEditUser = () => {
         dispatch(editUser(_user))
         .then(closeHandler);
     };
-
-    //const closeEditHandler = () => closeHandler;
-
-    const [showUserEdit, setShowUserEdit] = useState(false);
 
     //source of truth for the user details, updated alongside the form when editing
     const onChangeHandler = e => updateDetails({ ..._user, [e.target.id]: e.target.value});

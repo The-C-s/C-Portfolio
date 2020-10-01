@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 import TopNavbar from './TopNavbar';
 import SideNavBar from './SideNavbar';
 import Feed from './Feed';
-import Test from '../user/EditUser'
 import AddContent from '../content/AddContent';
 import EditUser from '../user/EditUser';
 

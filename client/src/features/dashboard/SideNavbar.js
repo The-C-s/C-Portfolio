@@ -25,11 +25,6 @@ export default function SideNavbar({ setView }) {
               Add Content
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="edit-user">
-              User Details
-            </Nav.Link>
-          </Nav.Item>
         </Nav>
       </div>
     </Nav>
