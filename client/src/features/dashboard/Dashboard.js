@@ -61,7 +61,7 @@ export default function Dashboard() {
             
           </main>
         </Row>
-        <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {_user} />
+        <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {user} />
       </Container>
     </React.Fragment>
   );
