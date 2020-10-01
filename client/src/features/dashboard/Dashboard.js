@@ -17,7 +17,7 @@ export default function Dashboard() {
   // React hook for redirection
   const history = useHistory();
   const [view, setView] = useState('dashboard');
-  const [_user, setUser] = useState(useSelector(state => state.user));
+  const _user = useSelector(state => state.user);
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const [showUserEdit, setShowUserEdit] = useState(false);
   
