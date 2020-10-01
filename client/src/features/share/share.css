@@ -21,6 +21,7 @@
 .share .row {
   margin-left: 0;
   margin-right: 0;
+  max-width: 100%;
 }
 
 .share .name, .share .bio, .share .links {
@@ -58,6 +59,10 @@
 
 .share .project .links {
   padding: 0;
+}
+
+.share .project img {
+  max-width: 100%;
 }
 
 .share hr {
