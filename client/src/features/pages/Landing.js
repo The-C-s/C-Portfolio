@@ -17,7 +17,7 @@ export default function Landing() {
 
   /* tried adding the validation that was meant to handle the password checks */
 
-  validate()
+  export default function validate()
   {
     let input = this.state.input;
     let errors = {};
@@ -49,7 +49,7 @@ export default function Landing() {
 
     if (!input["confirm_password"]) {
       isValid = false;
-      errors["confirm_password"] = "Please enter your confirm password.";
+      errors["confirm_password"] = "Please re enter to confirm password.";
     }
 
     if (typeof input["password"] !== "undefined" && typeof input["confirm_password"] !== "undefined") {
@@ -66,8 +66,6 @@ export default function Landing() {
 
     return isValid;
   }
-
-  //const renderThis = () => register ? <Register/> : <Login onClickHandler={registerClickHandler}/>
 
   return(
     <Container fluid>
