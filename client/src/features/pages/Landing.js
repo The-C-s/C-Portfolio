@@ -15,7 +15,7 @@ export default function Landing() {
   const loginClickHandler = () => setRegister(false);
   const registerClickHandler = () => setRegister(true);
 
-  const renderThis = () => register ? <Register/> : <Login onClickHandler={registerClickHandler}/>
+  //const renderThis = () => register ? <Register/> : <Login onClickHandler={registerClickHandler}/>
 
   return(
     <Container fluid>
