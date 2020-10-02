@@ -33,9 +33,9 @@ export default function Register({ onClickHandler }) {
           <Form.Group>
             <Form.Control
               type="text" 
-              id="name"
-              placeholder="Name" 
-              value={form.name}
+              id="username"
+              placeholder="username" 
+              value={form.username}
               onChange={onChangeHandler}
               className="form-control"
             />
@@ -70,7 +70,7 @@ export default function Register({ onClickHandler }) {
               className="form-control"
             />
           </Form.Group>
-          <Button type="submit" block variant="primary">Sign Up</Button>
+          <Button type="submit" onClickHandler = {onSubmitHandler} block variant="primary">Sign Up</Button>
           <div className="text-center"> Already have an account?<Button variant="link" onClick={onClickHandler}>Login here</Button></div>
         </Form>
       </div>

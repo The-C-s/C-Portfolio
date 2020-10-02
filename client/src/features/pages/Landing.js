@@ -12,7 +12,10 @@ export default function Landing() {
 
   const [register, setRegister] = useState(false);
 
+  const loginClickHandler = () => setRegister(false);
   const registerClickHandler = () => setRegister(true);
+
+  const renderThis = () => register ? <Register/> : <Login onClickHandler={registerClickHandler}/>
 
   return(
     <Container fluid>
@@ -24,7 +27,8 @@ export default function Landing() {
         </Col>
         <Col>
           <div className="splash-container">
-            {() => register ? <Register/> : <Login onClickHandler={registerClickHandler}/>}
+            {register && <Register onClickHandler = {loginClickHandler}/>}
+            {!register && <Login onClickHandler = {registerClickHandler}/>}
           </div>
         </Col>
       </Row>
