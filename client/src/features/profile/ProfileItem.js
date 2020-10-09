@@ -18,10 +18,11 @@ export default function ProfileItem({ profile, projects }) {
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
 
-  console.log("proj:" + projects); 
   //Fields for profile
-  //ADD LOGO AND RESUME FIELDS
-  const { logo, education, experience} = profile;
+  const { logo, education, experience, resume} = profile;
+
+  //Uses google's embedded file viewer
+  const resumeUrl = "//docs.google.com/gview?url=" + resume + "&embedded=true";
 
   return (
     <React.Fragment>
@@ -78,12 +79,14 @@ export default function ProfileItem({ profile, projects }) {
       </Row>
       <Row>
         <ListGroup className="mt-5 ml-5 mr-5">
+          <h4 className="mt-3 mb-5">Resume</h4>
+            <iframe title = "resume" src= {resumeUrl} style={{width:600, height:500}} frameBorder="0"></iframe>
+        </ListGroup>
+     </Row>
+      <Row>
+        <ListGroup className="mt-5 ml-5 mr-5">
           <h4>Projects</h4>
           <div className="card-projects">
-              {/*}
-            {projects.map((projects) => (
-              <ListGroup.Item key={projects}>{projects}</ListGroup.Item>
-            ))}*/}
             {projects.map(projects => <ContentItem content = {projects}/>)}
           </div>
         </ListGroup>
