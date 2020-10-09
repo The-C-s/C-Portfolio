@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -13,12 +13,24 @@ import Profile from './Profile';
 import AddProfile from '../profile/AddProfile'; 
 import EditUser from '../user/EditUser';
 
+import { getProfile } from '../profile/profileSlice';
+
 export default function Dashboard() {
+
+  const dispatch = useDispatch();
 
   const [view, setView] = useState('dashboard');
   const [showUserEdit, setShowUserEdit] = useState(false);
 
   const user = useSelector(state => state.user);
+
+  useEffect(() => {
+
+    async function fetch() {
+      dispatch(getProfile(user.profile));
+    }
+    fetch();
+  });
 
   const handleEditClose = () => setShowUserEdit(false);
 
