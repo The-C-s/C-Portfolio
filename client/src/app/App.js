@@ -19,6 +19,8 @@ export default function App() {
   useEffect(() => {
     
     async function fetch() {
+      console.log(authenticated);
+      console.log(token.get());
       if (token.get() !== null) dispatch(authenticate());
     }
     fetch();

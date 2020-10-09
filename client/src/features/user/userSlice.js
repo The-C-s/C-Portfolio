@@ -24,7 +24,7 @@ export const editUser = createAsyncThunk(
 
 const user = createSlice({
   name: 'user',
-  initialState: { isAuthenticated: false },
+  initialState: { isAuthenticated: token.get() !== null },
   reducers: {
     setUser: (state, action) => {
       return {
