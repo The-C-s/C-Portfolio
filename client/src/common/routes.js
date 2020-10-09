@@ -8,44 +8,42 @@ import AddContent from '../features/content/AddContent';
 import AddProfile from '../features/profile/AddProfile';
 import Share from '../features/share/Share';
 
-export const routes = [
+export const publicRoutes = [
   {
     path: "/",
     exact: true,
-    page: () => <Landing/>
-  },
+    page: <Landing/>
+  }
+];
+
+export const privateRoutes = [
   {
     path: "/dashboard",
     exact: true,
-    private: true,
-    page: () => <Dashboard/>,
-    dashboard: () => <Feed/>
+    page: <Dashboard/>,
+    dashboard: <Feed/>
   },
   {
     path: "/profile",
     exact: true,
-    private: true,
-    page: () => <Dashboard/>,
-    dashboard: () => <Profile/>
+    page: <Dashboard/>,
+    dashboard: <Profile/>
   },
   {
     path: "/add",
     exact: true,
-    private: true,
-    page: () => <Dashboard/>,
-    dashboard: () => <AddContent/>
+    page: <Dashboard/>,
+    dashboard: <AddContent/>
   },
   {
     path: "/new",
     exact: true,
-    private: true,
-    page: () => <Dashboard/>,
-    dashboard: () => <AddProfile/>
+    page: <Dashboard/>,
+    dashboard: <AddProfile/>
   },
   {
     path: "/share",
     exact: true,
-    private: true,
-    page: () => <Share/>
+    page: <Share/>
   }
-]
+];

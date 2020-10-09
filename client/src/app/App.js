@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 
 import { authenticate } from '../features/user/userSlice';
 import { token } from '../common/api';
-import { routes } from '../common/routes';
+import { publicRoutes, privateRoutes } from '../common/routes';
 
 import '../App.css';
 
@@ -12,11 +12,8 @@ export default function App() {
 
   const dispatch = useDispatch();
   const authenticated = useSelector(state => state.user.isAuthenticated);
-  const publicRoutes = routes.filter(route => route.private === null);
-  const privateRoutes = routes.filter(route => route.private !== null);
 
   useEffect(() => {
-    
     async function fetch() { if (token.get() !== null) dispatch(authenticate()) }
     fetch();
   });
@@ -29,7 +26,7 @@ export default function App() {
             key={index}
             exact={route.exact}
             path={route.path}
-            children={<route.page/>}
+            children={route.page}
           />
         )}
         {privateRoutes.map((route, index) =>
@@ -39,7 +36,7 @@ export default function App() {
             path={route.path}
             test={authenticated}
             fallback="/"
-            children={<route.page/>}
+            children={route.page}
           />
         )}
       </Switch>

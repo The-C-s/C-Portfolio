@@ -11,13 +11,13 @@ import SideNavBar from './SideNavbar';
 import EditUser from '../user/EditUser';
 
 import { getProfile } from '../profile/profileSlice';
-import { routes } from '../../common/routes';
+import { privateRoutes } from '../../common/routes';
 
 export default function Dashboard() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const dashboardRoutes = routes.filter(route => route.dashboard !== null);
+  const routes = privateRoutes.filter(route => route.dashboard !== null);
   const [showUserEdit, setShowUserEdit] = useState(false);
 
   useEffect(() => {
@@ -41,12 +41,12 @@ export default function Dashboard() {
               User Details
             </Button>
             <Switch>
-              {dashboardRoutes.map((route, index) =>
+              {routes.map((route, index) =>
                 <Route
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  children={<route.dashboard/>}
+                  children={route.dashboard}
                 />
               )}
             </Switch>
