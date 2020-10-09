@@ -24,6 +24,9 @@ const getUser = async () => await axios.get(CURRENT_USER);
 const getAllContent = async () => await axios.get(CONTENT);
 // const getAllContent = async () => await axios.get('https://jsonplaceholder.typicode.com/posts');
 
+//Gets one post from an id 
+const getSingleContent = async id => await axios.get(`${CONTENT}${id}`); 
+
 // Takes a content object and authorises with existing token
 const createContent = async content => await axios.post(CREATE_CONTENT, content);
 
@@ -60,6 +63,7 @@ export default {
   authenticateUser,
   getUser,
   getAllContent,
+  getSingleContent, 
   createContent,
   editContent,
   deleteContent, 

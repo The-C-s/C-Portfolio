@@ -27,13 +27,19 @@ export const deleteProfile = createAsyncThunk(
 const profile = createSlice({
     name: 'profile',
     //Added default arrays, as the state takes 2 seconds to actually get the data
-    initialState: {education:[], experience: [], projects: []},
+    initialState: {isLoaded: false, education:[], experience: [], projects: []},
     reducers: {},
     extraReducers: {
         //Resets state on logout (think its necessary)
         'user/logout': () => { return {}},
         //Returns profile data 
-        [getProfile.fulfilled]: (_, action) => {  return {...action.payload.data}}
+        [getProfile.fulfilled]: (state, action) => {  
+            return {
+                ...state,
+                ...action.payload.data, 
+                isLoaded: true 
+            }
+        }
     }
   });
 

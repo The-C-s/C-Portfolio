@@ -16,8 +16,6 @@ export default function EditProfile({ profile, show, closeHandler }) {
   const [_experience, updateExperience] = useState(profile.experience);
   const [_projects, updateProjects] = useState(profile.projects);
   const dispatch = useDispatch();
-  console.log(_projects);
-  console.log(profile);
 
   //Saves all changes
   const editClickHandler = () => {

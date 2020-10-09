@@ -18,6 +18,7 @@ export default function ProfileItem({ profile, projects }) {
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
 
+  console.log("proj:" + projects); 
   //Fields for profile
   //ADD LOGO AND RESUME FIELDS
   const { logo, education, experience} = profile;
