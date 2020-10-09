@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getProfile } from '../profile/profileSlice';
-import { getSingleContent } from '../content/contentSlice'; 
 import Row from 'react-bootstrap/Row';
 
 import ProfileItem from '../profile/ProfileItem';
@@ -16,7 +15,7 @@ export default function Profile() {
   const profile = useSelector(state => state.profile);
   const content = useSelector(state => state.content); 
   const isLoaded = useSelector(state => state.profile.isLoaded);
-  //const [loadProfile, setProfileStatus] = useState(false);
+
   // Reloading profile 
   useEffect(() => {
     async function fetch() { dispatch(getProfile(user.profile)) }; 
@@ -24,7 +23,8 @@ export default function Profile() {
   }, [dispatch, user.profile]);
 
   //Alternative solution from making a list of API calls 
-  //Kinda inefficient? 
+  //For each project in the profile, searchs through the content list for a matching id 
+  //Adds to array if project is found (otherwise currently does nothing)
   const getProjects = () => {  
     const projects = []; 
     if(isLoaded){
@@ -34,7 +34,6 @@ export default function Profile() {
         const id = profile.projects[i]
         for(let j = 0; j < contentLength; j++){ 
           if(id === content[j].id){ 
-            const post = content[j]; 
             projects.push(content[j]); 
             break; 
           }
@@ -43,25 +42,11 @@ export default function Profile() {
     }
     return projects; 
   }
+
+  //Calls the getProjects function to get a list of projects 
   const projectList = getProjects(); 
 
-  /*
-  //Given a single post id gets the post 
-  async function getPost(id){ 
-      const post = await getSingleContent(id); 
-      console.log(id); 
-      console.log("test");
-      console.log(post); 
-      return post; 
-  }
-
-  const getProjects = async(projects) => { 
-    const requests = projects.map((project)=> {getPost(project)})
-    console.log("test 2"); 
-    console.log(Promise.all(requests)); 
-    return Promise.all(requests).then(values => console.log(values)); 
-  }
-  */
+  //Will only load the profile if its completely loaded 
   return(
     <div className="flex-wrap pt-3 pb-2 mb-3">
       <Row>
