@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 
 import Nav from 'react-bootstrap/Nav';
 
-export default function SideNavbar({ setView }) {
+export default function SideNavbar() {
 
   const [active, setActive] = useState('dashboard');
 
   const onSelectHandler = eventKey => {
     setActive(eventKey);
-    setView(eventKey);
   }
 
   return(
@@ -17,22 +16,22 @@ export default function SideNavbar({ setView }) {
       <div className="sidebar-sticky">
         <Nav className="flex-column" activeKey={active} onSelect={onSelectHandler}>
           <Nav.Item>
-            <Nav.Link eventKey="dashboard">
+            <Nav.Link as={Link} to="/dashboard" eventKey="dashboard">
               Dashboard
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="profile">
+            <Nav.Link as={Link} to="/profile" eventKey="profile">
               Profile
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="add-content">
+            <Nav.Link as={Link} to="/add" eventKey="add-content">
               Add Content
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="add-profile">
+            <Nav.Link as={Link} to="/new" eventKey="add-profile">
               Add Profile
             </Nav.Link>
           </Nav.Item>
