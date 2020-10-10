@@ -31,7 +31,7 @@ export const authenticateToken = async () => await axios.get(CURRENT_USER);
 export const getAllContent = async () => await axios.get(CONTENT);
 
 //Gets one post from an id 
-const getSingleContent = async id => await axios.get(`${CONTENT}${id}`); 
+//const getSingleContent = async id => await axios.get(`${CONTENT}${id}`); 
 
 // Takes a content object and authorises with existing token
 export const createContent = async content => await axios.post(CREATE_CONTENT, content);

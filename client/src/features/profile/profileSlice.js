@@ -4,7 +4,9 @@ import {
     createProfile as apiCreateProfile,
     getProfile as apiGetProfile,
     editProfile as apiEditProfile,
-    deleteProfile as apiDeleteProfile
+    deleteProfile as apiDeleteProfile,
+    addLogo as apiAddLogo, 
+    addResume as apiAddResume
 } from '../../common/api';
 
 //API calls 
@@ -30,12 +32,12 @@ export const deleteProfile = createAsyncThunk(
 
 export const addLogo = createAsyncThunk(
     'profile/addLogo', 
-    api.addLogo
+    apiAddLogo
 );
 
 export const addResume = createAsyncThunk(
     'profile/addResume', 
-    api.addResume
+    apiAddResume
 );
 
 //Stores profile in state.profile 
