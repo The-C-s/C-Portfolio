@@ -13,15 +13,11 @@ import Profile from './Profile';
 import AddProfile from '../profile/AddProfile';
 import EditUser from '../user/EditUser';
 
-import { setUser } from '../user/userSlice';
 import { getProfile } from '../profile/profileSlice';
-
-import api from '../../common/api';
 
 export default function Dashboard() {
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [view, setView] = useState('dashboard');
   const [showUserEdit, setShowUserEdit] = useState(false);
@@ -31,12 +27,10 @@ export default function Dashboard() {
   useEffect(() => {
 
     async function fetch() {
-
-      const res = await api.getUser();
-
-      dispatch(setUser(res));
-      dispatch(getProfile(res.data.profile));
+      dispatch(getProfile(user.profile));
     }
+    fetch();
+  });
 
   const handleEditClose = () => setShowUserEdit(false);
 
