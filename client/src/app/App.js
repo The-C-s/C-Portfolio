@@ -2,12 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import Landing from '../features/pages/Landing';
-import Dashboard from '../features/dashboard/Dashboard';
-import Share from '../features/share/Share';
-
 import { authenticate } from '../features/user/userSlice';
 import { token } from '../common/api';
+import { publicRoutes, privateRoutes } from '../common/routes';
 
 import '../App.css';
 
@@ -17,27 +14,31 @@ export default function App() {
   const authenticated = useSelector(state => state.user.isAuthenticated);
 
   useEffect(() => {
-    
-    async function fetch() {
-      console.log(authenticated);
-      console.log(token.get());
-      if (token.get() !== null) dispatch(authenticate());
-    }
+    async function fetch() { if (token.get() !== null) dispatch(authenticate()) }
     fetch();
   });
 
   return(
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Landing/>
-        </Route>
-        <PrivateRoute exact path="/dashboard" test={authenticated} fallback="/">
-          <Dashboard/>
-        </PrivateRoute>
-        <Route path="/share">
-          <Share/>
-        </Route>
+        {publicRoutes.map((route, index) =>
+          <Route
+            key={index}
+            exact={route.exact}
+            path={route.path}
+            children={route.page}
+          />
+        )}
+        {privateRoutes.map((route, index) =>
+          <PrivateRoute
+            key={index}
+            exact={route.exact}
+            path={route.path}
+            test={authenticated}
+            fallback="/"
+            children={route.page}
+          />
+        )}
       </Switch>
     </Router>
   );
