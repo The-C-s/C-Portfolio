@@ -26,7 +26,7 @@ export default function ContentItem({ content }) {
   const handleTitleClick = () => console.log(`${content.id} clicked.`);
 
   const { id, title, description, tags, displayDate } = content;
-  const showTags = tags.length > 0;
+  const showTags = tags ? tags.length > 0 : false;
 
   // Determine variant of ContentItem to use
   let image = false;
@@ -38,11 +38,15 @@ export default function ContentItem({ content }) {
     }
   }
 
-  const date = Intl.DateTimeFormat('en-AU', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  }).format(Date.parse(displayDate));
+  const date = () => (
+    displayDate
+      ? Intl.DateTimeFormat('en-AU', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric'
+        }).format(Date.parse(displayDate))
+      : ""
+  );
 
   return(
     <React.Fragment>
