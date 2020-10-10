@@ -20,9 +20,16 @@ export default function ProfileItem({ profile, projects }) {
 
   //Fields for profile
   const { logo, education, experience, resume} = profile;
-
+  
   //Uses google's embedded file viewer
   const resumeUrl = "//docs.google.com/gview?url=" + resume + "&embedded=true";
+  //Checks which fields to render (not actually necessary)
+  const hasLogo = require('is-image'); 
+  const hasResume = require('is-valid-http-url'); 
+  console.log(projects); 
+  const hasEducation = education.length > 0; 
+  const hasExperience = experience.length > 0; 
+  const hasProjects = projects.length > 0;  
 
   return (
     <React.Fragment>
@@ -52,46 +59,49 @@ export default function ProfileItem({ profile, projects }) {
       />
       <Container>
         <Row>
+        <h4 className="mt-3 mb-5">Logo</h4>
           <Col className="mt-3 ml-5 mr-5">
-            <Image src={logo} roundedCircle fluid />
+            {hasLogo && <Image src={logo} roundedCircle fluid />} 
           </Col>
         </Row>
       </Container>
       <Row>
         <ListGroup className="mt-3 ml-5 mr-5">
           <h4 className="mt-3 mb-5">Education</h4>
+          {hasEducation && 
           <div className="card-education">
             {education.map((education) => (
               <ListGroup.Item className="flex-fill ml-4 mr-5" key={education}>{education}</ListGroup.Item>
             ))}
-          </div>
+          </div>}
         </ListGroup>
       </Row>
       <Row>
         <ListGroup className="mt-3 ml-5 mr-5">
           <h4 className="mt-3 mb-5">Experience</h4>
-          <div className="card-experience">
+          {hasExperience && 
+            <div className="card-experience">
             {experience.map((experience) => (
-              <ListGroup.Item className="flex-fill ml-4 mr-5" key={experience}>{experience}</ListGroup.Item>
-            ))}
-          </div>
+              <ListGroup.Item className="flex-fill ml-4 mr-5" key={experience}>{experience}</ListGroup.Item>))}
+          </div>}
         </ListGroup>
       </Row>
       <Row>
         <ListGroup className="mt-5 ml-5 mr-5">
           <h4 className="mt-3 mb-5">Resume</h4>
-            <iframe title = "resume" src= {resumeUrl} style={{width:600, height:500}} frameBorder="0"></iframe>
+            {hasResume && <iframe title = "resume" src= {resumeUrl} style={{width:600, height:500}} frameBorder="0"></iframe>}
         </ListGroup>
      </Row>
       <Row>
         <ListGroup className="mt-5 ml-5 mr-5">
           <h4>Projects</h4>
+          { hasProjects && 
           <div className="card-projects">
             {projects.map(projects => <ContentItem content = {projects}/>)}
           </div>
+          }
         </ListGroup>
       </Row>
-      
     </React.Fragment>
   );
 }
