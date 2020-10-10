@@ -47,6 +47,7 @@ export default function ProfileItem({ profile, projects }) {
       </Button>
       <EditProfile
         profile={profile}
+        projects = {projects}
         show={showEdit}
         closeHandler={handleEditClose}
       />

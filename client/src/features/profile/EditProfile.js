@@ -5,56 +5,57 @@ import { editProfile, getProfile, addLogo, addResume } from "./profileSlice";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Row from 'react-bootstrap/Row';
+import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
+import Projects from "./Projects";
 
-export default function EditProfile({ profile, show, closeHandler }) {
+export default function EditProfile({ profile, projects, show, closeHandler }) {
   //_profile is the state variable, updateProfile is a function that updates the state
   //Initial state of profile always takes some time to update
   const [_profile, updateProfile] = useState(profile);
+  const [_projects, updateProjects] = useState(projects);
+
   const [_education, updateEducation] = useState(profile.education);
   const [_experience, updateExperience] = useState(profile.experience);
-  const [_projects, updateProjects] = useState(profile.projects);
-  const [_logo, updateLogo] = useState(); 
-  const [_resume, updateResume] = useState(); 
+  const [_logo, updateLogo] = useState();
+  const [_resume, updateResume] = useState();
   const dispatch = useDispatch();
-
+  const [viewAddProject, setView] = useState(false);
   //Saves all changes
   const editClickHandler = () => {
     dispatch(editProfile(_profile))
-       .then(() => dispatch(getProfile(_profile.id)))
-       .then(() => closeHandler());
-    };
-
-  const saveLogoHandler = () => { 
-      const _data = new FormData();
-      _data.set('file', _logo);
-      dispatch(addLogo(_profile.id, _data))
-       .then(() => dispatch(getProfile(_profile.id)))
-       .then(() => closeHandler()); 
-  }
-
-  const saveResumeHandler = ()=> { 
-    const _data = new FormData();
-      _data.set('file', _resume); 
-      dispatch(addResume(_profile.id,_data))
       .then(() => dispatch(getProfile(_profile.id)))
-      .then(() => closeHandler()); 
-  }
-  //Updates logo field 
-  const onLogoUploadHandler = e => updateLogo(e.target.files[0]); 
-  const onResumeUploadHandler = e => updateResume(e.target.files[0]); 
-  const deleteLogo = () => updateLogo('undefined');
-  const deleteResume = () => updateResume('undefined'); 
-  //const resetLogoChanges = e => updateLogo(profile.logo); 
-  //const resetResumeChanges = e => updateResume(profile.resume); 
+      .then(() => closeHandler());
+  };
+
+  const saveLogoHandler = () => {
+    const _data = new FormData();
+    _data.set("file", _logo);
+    dispatch(addLogo(_profile.id, _data))
+      .then(() => dispatch(getProfile(_profile.id)))
+      .then(() => closeHandler());
+  };
+
+  const saveResumeHandler = () => {
+    const _data = new FormData();
+    _data.set("file", _resume);
+    dispatch(addResume(_profile.id, _data))
+      .then(() => dispatch(getProfile(_profile.id)))
+      .then(() => closeHandler());
+  };
+
+  //Updates logo field
+  const onLogoUploadHandler = (e) => updateLogo(e.target.files[0]);
+  const onResumeUploadHandler = (e) => updateResume(e.target.files[0]);
+  const deleteLogo = () => updateLogo("undefined");
+  const deleteResume = () => updateResume("undefined");
 
   //Updates and sets education field in profile
   const onChangeEducationHandler = (e) => {
     //Copy and updates tmp array
     const tmp = [..._education];
     tmp[e.target.id] = e.target.value;
-    //Updates education array and profile in react stae
+    //Updates education array and profile in react state
     updateEducation(tmp);
     updateProfile({ ..._profile, education: tmp });
   };
@@ -94,18 +95,19 @@ export default function EditProfile({ profile, show, closeHandler }) {
     updateProfile({ ..._profile, experience: tmp });
   };
 
+  /*
   const onChangeProjectHandler = (e) => {
     const tmp = [..._projects];
     tmp[e.target.id] = e.target.value;
     updateProjects(tmp);
     updateProfile({ ..._projects, projects: tmp });
   };
-
+  */
   const addProjectField = () => {
-    const tmp = [..._projects, ""];
-    console.log(tmp);
-    updateProjects(tmp);
-    updateProfile({ ..._profile, projects: tmp });
+    //const tmp = [..._projects, ""];
+    // updateProjects(tmp);
+    //updateProfile({ ..._profile, projects: tmp });
+    setView(true);
   };
 
   const deleteProjectField = (id) => {
@@ -121,24 +123,26 @@ export default function EditProfile({ profile, show, closeHandler }) {
         <Modal.Title>Edit Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <Form.Group controlId="logo">
-            <Form.Label>Logo</Form.Label>
-            <br/>
-            <input type="file" name="logo" onChange={onLogoUploadHandler}/>
-            <Row>
-            <Button onClick={deleteLogo}> Delete </Button>
-            <Button onClick={saveLogoHandler}> Save Logo </Button>
-            </Row>
-          </Form.Group>
-      <Form.Group controlId="resume">
-            <Form.Label>Resume</Form.Label>
-            <br/>
-            <input type="file" name="resume" onChange={onResumeUploadHandler}/>
-            <Row>
-            <Button onClick={deleteResume}> Delete </Button>
-            <Button onClick={saveResumeHandler}> Save Resume </Button>
-            </Row>
-      </Form.Group>
+        <Form.Group controlId="logo">
+          <Form.Label>Logo</Form.Label>
+          <br />
+          <input className="mb-3" type="file" name="logo" onChange={onLogoUploadHandler} />
+          <br/>
+          <Row>
+            <Button className="ml-3" onClick={deleteLogo}> Delete </Button>
+            <Button className="ml-3" onClick={saveLogoHandler}> Save Logo </Button>
+          </Row>
+        </Form.Group>
+        <Form.Group controlId="resume">
+          <Form.Label>Resume</Form.Label>
+          <br />
+          <input className="mb-3"  type="file" name="resume" onChange={onResumeUploadHandler} />
+          <br/>
+          <Row>
+            <Button className="ml-3" onClick={deleteResume}> Delete </Button>
+            <Button className="ml-3" onClick={saveResumeHandler}> Save Resume </Button>
+          </Row>
+        </Form.Group>
         <Form>
           <Form.Group controlId="education">
             <Form.Label>Education</Form.Label>
@@ -196,12 +200,7 @@ export default function EditProfile({ profile, show, closeHandler }) {
           {_projects.map((projects, i) => (
             <Form.Group controlId={i}>
               <InputGroup className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  rows="1"
-                  value="McWorking on it"
-                  onChange={onChangeProjectHandler}
-                />
+                <Form.Control typeof="text" value={projects.title} readOnly />
                 <InputGroup.Append>
                   <Button
                     variant="outline-secondary"
@@ -214,7 +213,17 @@ export default function EditProfile({ profile, show, closeHandler }) {
               </InputGroup>
             </Form.Group>
           ))}
-          <Button onClick={addProjectField}>Add Project</Button>
+          {"\n"}
+          {viewAddProject && (
+            <Projects
+              projects={projects}
+              profile={_profile}
+              updateProfile={updateProfile}
+              updateProjects={updateProjects}
+            />
+          )}
+          {"\n"}
+          <Button onClick={addProjectField}>New Project</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
