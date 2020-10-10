@@ -1,44 +1,28 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 import Nav from 'react-bootstrap/Nav';
 
+import NavLink from './NavLink';
+
 export default function SideNavbar() {
-
-  const [active, setActive] = useState('dashboard');
-
-  const onSelectHandler = eventKey => {
-    setActive(eventKey);
-  }
-
   return(
     <Nav className="col-md-2 d-none d-md-block bg-light sidebar">
       <div className="sidebar-sticky">
-        <Nav className="flex-column" activeKey={active} onSelect={onSelectHandler}>
+        <Nav className="flex-column">
           <Nav.Item>
-            <Nav.Link as={Link} to="/dashboard" eventKey="dashboard">
-              Dashboard
-            </Nav.Link>
+            <NavLink to="/dashboard" activeOnlyWhenExact={true} label="Dashboard"/>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} to="/profile" eventKey="profile">
-              Profile
-            </Nav.Link>
+            <NavLink to="/profile" label="Profile"/>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} to="/add" eventKey="add-content">
-              Add Content
-            </Nav.Link>
+            <NavLink to="/add" label="Add Content"/>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} to="/new" eventKey="add-profile">
-              Add Profile
-            </Nav.Link>
+            <NavLink to="/new" label="Add Profile"/>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link as={Link} to="/share" eventKey="share">
-              Share View
-            </Nav.Link>
+            <NavLink to="/share" label="Share View"/>
           </Nav.Item>
         </Nav>
       </div>
