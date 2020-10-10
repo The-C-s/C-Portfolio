@@ -13,7 +13,6 @@ import DeleteProfile from "./DeleteProfile";
 export default function ProfileItem({ profile, projects }) {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-
   // Modal components will tell ContentItem when they wanna leave
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
@@ -26,7 +25,6 @@ export default function ProfileItem({ profile, projects }) {
   //Checks which fields to render (not actually necessary)
   const hasLogo = require('is-image'); 
   const hasResume = require('is-valid-http-url'); 
-  console.log(projects); 
   const hasEducation = education.length > 0; 
   const hasExperience = experience.length > 0; 
   const hasProjects = projects.length > 0;  

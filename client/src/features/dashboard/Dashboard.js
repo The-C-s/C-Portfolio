@@ -11,7 +11,6 @@ import SideNavBar from './SideNavbar';
 import Feed from './Feed';
 import AddContent from '../content/AddContent';
 import Profile from './Profile'; 
-import AddProfile from '../profile/AddProfile'; 
 import EditUser from '../user/EditUser';
 
 import { setUser } from '../user/userSlice';
@@ -65,9 +64,7 @@ export default function Dashboard() {
         </Button>
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
-            {(view === 'profile') && <Profile/>}
-            {(view === 'add-profile') && <AddProfile setView ={setViewHandler}/>}
-            
+            {(view === 'profile') && <Profile/>}            
           </main>
         </Row>
         <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {user} />

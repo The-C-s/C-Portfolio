@@ -23,6 +23,16 @@ export const deleteProfile = createAsyncThunk(
     api.deleteProfile
 );
 
+export const addLogo = createAsyncThunk(
+    'profile/addLogo', 
+    api.addLogo
+);
+
+export const addResume = createAsyncThunk(
+    'profile/addResume', 
+    api.addResume
+);
+
 //Stores profile in state.profile 
 const profile = createSlice({
     name: 'profile',

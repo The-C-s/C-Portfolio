@@ -1,11 +1,11 @@
 //Can probably split this into different fields
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editProfile, getProfile } from "./profileSlice";
+import { editProfile, getProfile, addLogo, addResume } from "./profileSlice";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-//import Row from 'react-bootstrap/Row';
+import Row from 'react-bootstrap/Row';
 import InputGroup from "react-bootstrap/InputGroup";
 
 export default function EditProfile({ profile, show, closeHandler }) {
@@ -15,14 +15,39 @@ export default function EditProfile({ profile, show, closeHandler }) {
   const [_education, updateEducation] = useState(profile.education);
   const [_experience, updateExperience] = useState(profile.experience);
   const [_projects, updateProjects] = useState(profile.projects);
+  const [_logo, updateLogo] = useState(); 
+  const [_resume, updateResume] = useState(); 
   const dispatch = useDispatch();
 
   //Saves all changes
   const editClickHandler = () => {
     dispatch(editProfile(_profile))
+       .then(() => dispatch(getProfile(_profile.id)))
+       .then(() => closeHandler());
+    };
+
+  const saveLogoHandler = () => { 
+      const _data = new FormData();
+      _data.set('file', _logo);
+      dispatch(addLogo(_profile.id, _data))
+       .then(() => dispatch(getProfile(_profile.id)))
+       .then(() => closeHandler()); 
+  }
+
+  const saveResumeHandler = ()=> { 
+    const _data = new FormData();
+      _data.set('file', _resume); 
+      dispatch(addResume(_profile.id,_data))
       .then(() => dispatch(getProfile(_profile.id)))
-      .then(() => closeHandler());
-  };
+      .then(() => closeHandler()); 
+  }
+  //Updates logo field 
+  const onLogoUploadHandler = e => updateLogo(e.target.files[0]); 
+  const onResumeUploadHandler = e => updateResume(e.target.files[0]); 
+  const deleteLogo = () => updateLogo('undefined');
+  const deleteResume = () => updateResume('undefined'); 
+  //const resetLogoChanges = e => updateLogo(profile.logo); 
+  //const resetResumeChanges = e => updateResume(profile.resume); 
 
   //Updates and sets education field in profile
   const onChangeEducationHandler = (e) => {
@@ -96,6 +121,24 @@ export default function EditProfile({ profile, show, closeHandler }) {
         <Modal.Title>Edit Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+      <Form.Group controlId="logo">
+            <Form.Label>Logo</Form.Label>
+            <br/>
+            <input type="file" name="logo" onChange={onLogoUploadHandler}/>
+            <Row>
+            <Button onClick={deleteLogo}> Delete </Button>
+            <Button onClick={saveLogoHandler}> Save Logo </Button>
+            </Row>
+          </Form.Group>
+      <Form.Group controlId="resume">
+            <Form.Label>Resume</Form.Label>
+            <br/>
+            <input type="file" name="resume" onChange={onResumeUploadHandler}/>
+            <Row>
+            <Button onClick={deleteResume}> Delete </Button>
+            <Button onClick={saveResumeHandler}> Save Resume </Button>
+            </Row>
+      </Form.Group>
         <Form>
           <Form.Group controlId="education">
             <Form.Label>Education</Form.Label>

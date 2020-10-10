@@ -32,11 +32,6 @@ export default function SideNavbar({ setView }) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="add-profile">
-              Add Profile
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
             <Nav.Link as={Link} to="/share" eventKey="share">
               Share View
             </Nav.Link>

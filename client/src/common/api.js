@@ -10,8 +10,8 @@ const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create'; 
 const CREATE_PROFILE = '/profile/create'; 
 const PROFILE = '/profile/'; 
-const ADD_LOGO = '/profile/addLogo';
-const ADD_RESUME = '/profile/addResume'; 
+const ADD_LOGO = '/profile/addLogo/';
+const ADD_RESUME = '/profile/addResume/'; 
 const UPDATE_USER = '/users/update';
 
 // Takes email and password as an object and returns the user's details and token
@@ -49,8 +49,8 @@ const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`);
 const getProfile = async id => await axios.get(`${PROFILE}${id}`); 
 
 //Takes a profile id and authorises with existing token 
-const addLogo = async () => await axios.get(ADD_LOGO);  
-const addResume = async () => await axios.get(ADD_RESUME);  
+const addLogo = async (id, logo) => await axios.post(`${ADD_LOGO}${id}`, logo);  
+const addResume = async (id, resume) => await axios.post(`${ADD_RESUME}${id}`, resume);  
 
 const editUser = async userParams => {
     console.log(userParams);
