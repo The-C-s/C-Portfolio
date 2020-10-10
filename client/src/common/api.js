@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // API not working locally? This will be why
 // TODO: set using env vars instead (will still need to set localhost port)
-axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-
+//axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:59075';
 const AUTH_USER = '/users/authenticate';
 const REGISTER_USER = '/users/register';
 const CURRENT_USER = '/users/current';

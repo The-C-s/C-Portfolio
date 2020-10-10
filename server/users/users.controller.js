@@ -40,8 +40,10 @@ no authentication token required
 */
 function register(req, res, next) {
     userService.create(req.body)
-        .then(existingUser => !existingUser ? res.json({}) : res.status(400).json({message : "Email already taken"}))
         .catch(err => next(err));
+        
+        /*.then(user => !user ? res.json({message : "register successful"}) : res.status(400).json({message : "Email already taken"}))
+        .catch(err => next(err));*/
 }
 
 /*

@@ -64,8 +64,15 @@ async function create(userParam) {
         user.hash = bcrypt.hashSync(userParam.password, 10);
     }
 
-    // save user
     await user.save();
+
+    //const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
+
+    //user.token = token;
+    // save user
+
+    //await user.save();
+    
 }
 
 async function update(id, userParam) {
