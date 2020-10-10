@@ -1,26 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import api from '../../common/api';
+import {
+    createProfile as apiCreateProfile,
+    getProfile as apiGetProfile,
+    editProfile as apiEditProfile,
+    deleteProfile as apiDeleteProfile
+} from '../../common/api';
 
 //API calls 
 export const createProfile = createAsyncThunk(
     'profile/createProfile',
-    api.createProfile
+    apiCreateProfile
 );
 
 export const getProfile = createAsyncThunk(
     'profile/getProfile',
-    api.getProfile
+    apiGetProfile
 );
 
 export const editProfile = createAsyncThunk(
     'profile/updateProfile', 
-    api.editProfile
+    apiEditProfile
 ); 
 
 export const deleteProfile = createAsyncThunk(
     'profile/deleteProfile', 
-    api.deleteProfile
+    apiDeleteProfile
 );
 
 export const addLogo = createAsyncThunk(

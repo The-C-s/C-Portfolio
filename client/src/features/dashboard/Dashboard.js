@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,38 +10,29 @@ import SideNavBar from './SideNavbar';
 import Feed from './Feed';
 import AddContent from '../content/AddContent';
 import Profile from './Profile'; 
+import AddProfile from '../profile/AddProfile';
 import EditUser from '../user/EditUser';
 
-import { setUser } from '../user/userSlice';
 import { getProfile } from '../profile/profileSlice';
-
-import api from '../../common/api';
 
 export default function Dashboard() {
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [view, setView] = useState('dashboard');
   const [showUserEdit, setShowUserEdit] = useState(false);
 
   const user = useSelector(state => state.user);
 
-  const handleEditClose = () => setShowUserEdit(false);
-
   useEffect(() => {
 
     async function fetch() {
-
-      const res = await api.getUser();
-      
-      dispatch(setUser(res));
-      dispatch(getProfile(res.data.profile));
+      dispatch(getProfile(user.profile));
     }
+    fetch();
+  });
 
-    if (!user.isAuthenticated) history.push('/')
-    else if (!user.email) fetch();
-  },[dispatch, history, user.email, user.isAuthenticated]);
+  const handleEditClose = () => setShowUserEdit(false);
 
   /*
    * This is a bad way of doing a dashboard. Simply swaps out whatever component

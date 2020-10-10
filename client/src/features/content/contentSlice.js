@@ -4,32 +4,33 @@
  */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import api from '../../common/api';
+import {
+  getAllContent,
+  createContent as apiCreateContent,
+  editContent as apiEditContent,
+  deleteContent as apiDeleteContent
+} from '../../common/api';
 
 // Async Thunks required whenever there's an API call
 export const getContent = createAsyncThunk(
   'content/getContent',
-  api.getAllContent
+  getAllContent
 );
-
-export const getSingleContent = createAsyncThunk( 
-  'content/getSingleContent', 
-   api.getSingleContent 
-); 
 
 export const createContent = createAsyncThunk(
   'content/createContent',
-  api.createContent
+  apiCreateContent,
+
 );
 
 export const editContent = createAsyncThunk(
   'content/editContent',
-  api.editContent
+  apiEditContent
 );
 
 export const deleteContent = createAsyncThunk(
   'content/deleteContent',
-  api.deleteContent
+  apiDeleteContent
 );
 
 const content = createSlice({
