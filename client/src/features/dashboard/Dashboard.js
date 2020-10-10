@@ -10,7 +10,6 @@ import SideNavBar from './SideNavbar';
 import Feed from './Feed';
 import AddContent from '../content/AddContent';
 import Profile from './Profile'; 
-import AddProfile from '../profile/AddProfile';
 import EditUser from '../user/EditUser';
 
 import { getProfile } from '../profile/profileSlice';
