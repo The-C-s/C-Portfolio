@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -13,18 +12,15 @@ import AddContent from '../content/AddContent';
 import Profile from './Profile'; 
 import AddProfile from '../profile/AddProfile'; 
 import EditUser from '../user/EditUser';
+import Homepage from '../pages/Homepage';
 
-import { setUser } from '../user/userSlice';
 import { getProfile } from '../profile/profileSlice';
-
-import api from '../../common/api';
 
 export default function Dashboard() {
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const [view, setView] = useState('dashboard');
+  const [view, setView] = useState('homepage');
   const [showUserEdit, setShowUserEdit] = useState(false);
 
   const user = useSelector(state => state.user);
@@ -34,16 +30,11 @@ export default function Dashboard() {
   useEffect(() => {
 
     async function fetch() {
-
-      const res = await api.getUser();
-      
-      dispatch(setUser(res));
-      dispatch(getProfile(res.data.profile));
+      dispatch(getProfile(user.profile));
     }
+    fetch();
+  });
 
-    if (!user.isAuthenticated) history.push('/')
-    else if (!user.email) fetch();
-  },[dispatch, history, user.email, user.isAuthenticated]);
 
   /*
    * This is a bad way of doing a dashboard. Simply swaps out whatever component
@@ -58,11 +49,12 @@ export default function Dashboard() {
       <TopNavbar/>
       <Container fluid>
         <Row>
-          <SideNavBar setView={setViewHandler}/>
+          <SideNavBar view={view} setView={setViewHandler}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
           <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
             User Details
         </Button>
+            {(view === 'homepage') && <Homepage view={view} setView={setViewHandler}/>}
             {(view === 'dashboard') && <Feed/>}
             {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
             {(view === 'profile') && <Profile/>}
