@@ -1,11 +1,18 @@
 import React from 'react';
-import Login from '../user/Login';
+import { useHistory } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const Landing = () => {
+import Login from '../user/Login';
+
+export default function Landing() {
+
+  const history = useHistory();
+
+  const loginHandler = () => history.push('/dashboard');
+
   return(
     <Container fluid>
       <Row className="no-gutter">
@@ -16,12 +23,10 @@ const Landing = () => {
         </Col>
         <Col>
           <div className="splash-container">
-            <Login/>
+            <Login onLogin={loginHandler}/>
           </div>
         </Col>
       </Row>
     </Container>
   );
 }
-
-export default Landing;
