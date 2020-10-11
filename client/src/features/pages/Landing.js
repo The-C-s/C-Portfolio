@@ -5,8 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Login from '../user/Login';
-import Register from '../user/Register'
+import { publicRoutes } from '../../common/routes';
 
 /* Added logo and removed the text display */
 
@@ -60,6 +59,9 @@ export function validate() {
 }
 
 export default function Landing() {
+
+  // Get routes that Landing can handle
+  const routes = publicRoutes.filter(route => route.landing !== null);
  
   return(
     <Container fluid>
@@ -72,12 +74,14 @@ export default function Landing() {
         <Col>
           <div className="splash-container">
             <Switch>
-              <Route exact path="/">
-                <Login/>
-              </Route>
-              <Route exact path="/register">
-                <Register/>
-              </Route>
+              {routes.map((route, index) =>
+                  <Route
+                    key={index}
+                    path={route.path}
+                    exact={route.exact}
+                    children={route.landing}
+                  />
+                )}
             </Switch>
           </div>
         </Col>
