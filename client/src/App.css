@@ -274,6 +274,7 @@ body {
 a {
   color: #0000EE;
 }
+/* when hovered over */
 a:hover {
   color: #0000EE;
   text-decoration: underline;
