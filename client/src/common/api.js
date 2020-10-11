@@ -11,8 +11,8 @@ const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create'; 
 const CREATE_PROFILE = '/profile/create'; 
 const PROFILE = '/profile/'; 
-const ADD_LOGO = '/profile/addLogo';
-const ADD_RESUME = '/profile/addResume'; 
+const ADD_LOGO = '/profile/addLogo/';
+const ADD_RESUME = '/profile/addResume/'; 
 const UPDATE_USER = '/users/update';
 
 export const token = {
@@ -29,6 +29,9 @@ export const authenticateToken = async () => await axios.get(CURRENT_USER);
 
 // Uses an existing token if user is logged in and returns all their content (as a list, not an object)
 export const getAllContent = async () => await axios.get(CONTENT);
+
+//Gets one post from an id 
+//const getSingleContent = async id => await axios.get(`${CONTENT}${id}`); 
 
 // Takes a content object and authorises with existing token
 export const createContent = async content => await axios.post(CREATE_CONTENT, content);
@@ -51,8 +54,11 @@ export const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`);
 // Takes a profile id and authorises with existing token, returns profile
 export const getProfile = async id => await axios.get(`${PROFILE}${id}`); 
 
-export const addLogo = async () => await axios.get(ADD_LOGO);
+//Takes a profile id and authorises with existing token 
+export const addLogo = async (id, logo) => await axios.post(`${ADD_LOGO}${id}`, logo);  
 
-export const addResume = async () => await axios.get(ADD_RESUME);
+export const addResume = async (id, resume) => await axios.post(`${ADD_RESUME}${id}`, resume);  
 
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
+
+

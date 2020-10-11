@@ -19,9 +19,6 @@ export default function SideNavbar() {
             <NavLink to="/add" label="Add Content"/>
           </Nav.Item>
           <Nav.Item>
-            <NavLink to="/new" label="Add Profile"/>
-          </Nav.Item>
-          <Nav.Item>
             <NavLink to="/share" label="Share View"/>
           </Nav.Item>
         </Nav>
