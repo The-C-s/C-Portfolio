@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { login } from './userSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import HashLoader from 'react-spinners/HashLoader';
+
+import { login } from './userSlice';
 
 export default function Login({ onLogin }) {
 
-  const [form, updateForm] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
+  const loggingIn = useSelector(state => state.app.loading.login);
+  const [form, updateForm] = useState({ email: '', password: '' });
 
   const onSubmitHandler = e => {
 
@@ -46,7 +48,11 @@ export default function Login({ onLogin }) {
             className="form-control"
           />
         </Form.Group>
-        <Button type="submit" block variant="primary">Login</Button>
+        <Button className="btn-login" type="submit" variant="primary">
+          {loggingIn
+            ? <>Logging in <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={loggingIn}/></span></>
+            : "Log in"}
+        </Button>
         <div className="text-center"> Don't have an account? <Button variant="link" onClick={onClickHandler}>Register</Button></div>
       </Form>
     </div>
