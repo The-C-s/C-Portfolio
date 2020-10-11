@@ -72,8 +72,8 @@ app.use('/profile', profileRoute);
 
 //redirects any other url to default
 app.use(function(req, res){
-       res.redirect(req);
-   });
+    res.redirect(req.url);
+});
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
