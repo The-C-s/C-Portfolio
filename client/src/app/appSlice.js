@@ -23,6 +23,10 @@ const app = createSlice({
     'user/update/fulfilled': state => { stopLoading(state, 'update') },
     'user/update/rejected': (state, action) => { setError(state, 'update', action.payload) },
 
+    'user/register/pending': state => { return startLoading(state, 'register') },
+    'user/register/fulfilled': state => { stopLoading(state, 'register') },
+    'user/register/rejected': (state, action) => { setError(state, 'register', action.payload) },
+
     'content/getContent/pending': state => { return startLoading(state, 'getContent') },
     'content/getContent/fulfilled': state => { stopLoading(state, 'getContent') },
     'content/getContent/rejected': (state, action) => { setError(state, 'getContent', action.payload) },

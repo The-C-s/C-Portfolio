@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -60,12 +60,6 @@ export function validate() {
 }
 
 export default function Landing() {
-
-  const history = useHistory();
-
-  const loginHandler = () => history.push('/dashboard');
-
-  const loginClickHandler = () => console.log("Login click");
  
   return(
     <Container fluid>
@@ -79,10 +73,10 @@ export default function Landing() {
           <div className="splash-container">
             <Switch>
               <Route exact path="/">
-                <Login onLogin={loginHandler}/>
+                <Login/>
               </Route>
               <Route exact path="/register">
-                <Register onClickHandler={loginClickHandler}/>
+                <Register/>
               </Route>
             </Switch>
           </div>

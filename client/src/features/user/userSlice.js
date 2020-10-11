@@ -57,17 +57,17 @@ const user = createSlice({
         isAuthenticated: true
       }
     },
-    [register.fulfilled]: (state, action) => {
+    // [register.fulfilled]: (state, action) => {
 
-      // Persist JWT to local storage
-      localStorage.setItem('token', action.payload.data.token);
+    //   // Persist JWT to local storage
+    //   localStorage.setItem('token', action.payload.data.token);
 
-      return {
-        ...state,
-        ...action.payload.data,
-        isAuthenticated: true
-      }
-    },
+    //   return {
+    //     ...state,
+    //     ...action.payload.data,
+    //     isAuthenticated: true
+    //   }
+    // },
     [authenticate.fulfilled]: (state, action) => {
       return {
         ...state,
