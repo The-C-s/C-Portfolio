@@ -42,11 +42,15 @@ export default function ContentItem({ content }) {
     }
   }
 
-  const date = Intl.DateTimeFormat('en-AU', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  }).format(Date.parse(displayDate));
+  const date = () => (
+    displayDate
+      ? Intl.DateTimeFormat('en-AU', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric'
+        }).format(Date.parse(displayDate))
+      : ""
+  );
 
   return(
     <React.Fragment>
