@@ -25,7 +25,12 @@ export default function ContentItem({ content }) {
   const handleDeleteClose = () => setShowDelete(false);
   const handleTitleClick = () => console.log(`${content.id} clicked.`);
 
-  const { id, title, description, tags, displayDate } = content;
+  const { id, title, description, displayDate } = content;  
+
+  // Bandaid
+  let { tags } = content;
+  if (tags.length === 1) tags = tags[0].split(',');
+
   const showTags = tags.length > 0;
 
   // Determine variant of ContentItem to use
