@@ -10,6 +10,9 @@ export default function SideNavbar() {
       <div className="sidebar-sticky">
         <Nav className="flex-column">
           <Nav.Item>
+            <NavLink to="/homepage" label="Homepage"/>
+          </Nav.Item>
+          <Nav.Item>
             <NavLink to="/dashboard" activeOnlyWhenExact={true} label="Dashboard"/>
           </Nav.Item>
           <Nav.Item>
