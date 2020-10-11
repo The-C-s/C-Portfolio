@@ -11,7 +11,7 @@ export default function Landing() {
 
   const history = useHistory();
 
-  const loginHandler = () => history.push('/dashboard');
+  const loginHandler = () => history.push('/homepage');
 
   return(
     <Container fluid>

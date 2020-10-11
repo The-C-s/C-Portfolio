@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Landing from '../features/pages/Landing';
+import Homepage from '../features/pages/Homepage';
 import Dashboard from '../features/dashboard/Dashboard';
 import Feed from '../features/dashboard/Feed';
 import Profile from '../features/profile/Profile';
@@ -16,6 +17,11 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
+  {
+    path: "/homepage",
+    exact: true,
+    page: <Homepage/>
+  },
   {
     path: "/dashboard",
     exact: true,
