@@ -1,10 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import api from '../../common/api';
+import {
+  authenticateCredentials,
+  authenticateToken,
+  updateUser,
+  token
+} from '../../common/api';
 
 export const login = createAsyncThunk(
+  'user/login',
+  authenticateCredentials
+);
+
+export const authenticate = createAsyncThunk(
   'user/authenticate',
-  api.authenticateUser
+  authenticateToken
+);
+
+export const editUser = createAsyncThunk(
+  'user/update',
+  updateUser
 );
 
 export const register = createAsyncThunk(
@@ -14,23 +29,18 @@ export const register = createAsyncThunk(
 
 const user = createSlice({
   name: 'user',
-  initialState: {
-    isAuthenticated: (localStorage.getItem('token') !== null),
-    authType: 'Bearer'
-  },
+  initialState: { isAuthenticated: token.get() !== null },
   reducers: {
     setUser: (state, action) => {
       return {
         ...state,
         ...action.payload.data,
-        token: localStorage.getItem('token'),
+        token: token.get(),
         isAuthenticated: true
       }
     },
     logout: () => {
-
-      localStorage.removeItem('token');
-
+      token.delete();
       return { isAuthenticated: false }
     }
   },
@@ -38,7 +48,7 @@ const user = createSlice({
     [login.fulfilled]: (state, action) => {
 
       // Persist JWT to local storage
-      localStorage.setItem('token', action.payload.data.token);
+      token.set(action.payload.data.token);
 
       return {
         ...state,
@@ -56,6 +66,17 @@ const user = createSlice({
         ...action.payload.data,
         isAuthenticated: true
       }
+    },
+    [authenticate.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.data,
+        isAuthenticated: true
+      }
+    },
+    [authenticate.rejected]: () => {
+      token.delete();
+      return { isAuthenticated: false } 
     }
   }
 });

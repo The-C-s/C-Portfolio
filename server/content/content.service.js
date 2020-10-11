@@ -56,7 +56,7 @@ async function create(userid, userParam, file) {
             post.content = file.path;
         }
         else{
-            post.content = null;
+            post.content = userParam.content;
         }
         //Saves post and returns a post 
         await post.save();
@@ -82,9 +82,9 @@ async function update(userid, postid, userParam, file) {
         if(user.email == post.user){ 
             //Updates the specified post with the input 
             Object.assign(post, userParam);
-            if(file.path){ 
-                //Updates content's file path if file exists 
-                post.content = file.path; 
+            if(typeof file !== 'undefined'){
+                //Updates content's file path if file exists
+                post.content = file.path;
             }
             await post.save();
                 return post;    

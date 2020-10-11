@@ -30,6 +30,7 @@ async function create(userid, userParam) {
         const profile = new Profile(userParam); 
         //Gets user email and saves it 
         profile.email = user.email; 
+        user.profile = profile.id; 
         await profile.save();
         return profile;  
     } catch(error) {

@@ -1,0 +1,124 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "add-avatar",
+    "version": "1.0",
+    "description": "sets or delete's the user's avatar",
+    "contact": {
+      "name": "Hugh"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users/avatar": {
+      "put": {
+        "summary": "",
+        "operationId": "put-users-avatar",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request\nNo file was uploaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "message": "No File Uploaded"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized\nToken is invalid"
+          },
+          "404": {
+            "description": "UserNotFoundError\nUser could not be found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "sets the user's avatar to the attached image",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/image": {
+              "schema": {
+                "type": "null"
+              },
+              "examples": {
+                "example-1": {
+                  "value": ""
+                }
+              }
+            }
+          },
+          "description": "an image to be set as the avatar"
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-users-avatar",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized\nToken is invalid"
+          },
+          "404": {
+            "description": "UserNotFoundError\nUser could not be found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "deletes the user's avatar to the attached image",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "null"
+              }
+            }
+          },
+          "description": "no body"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

@@ -1,44 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 import TopNavbar from './TopNavbar';
 import SideNavBar from './SideNavbar';
-import Feed from './Feed';
-import AddContent from '../content/AddContent';
+import EditUser from '../user/EditUser';
+
+import { getProfile } from '../profile/profileSlice';
+import { privateRoutes } from '../../common/routes';
 
 export default function Dashboard() {
 
-  // React hook for redirection
-  const history = useHistory();
-  const [view, setView] = useState('dashboard');
-  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const routes = privateRoutes.filter(route => route.dashboard !== null);
+  const [showUserEdit, setShowUserEdit] = useState(false);
 
-  useEffect(() => { if (!isAuthenticated) history.push('/') });
+  useEffect(() => {
 
-  /*
-   * This is a bad way of doing a dashboard. Simply swaps out whatever component
-   * is showing in <main> based on whatever string is set, and changing that
-   * string by clicking the links in the navbar. Quick and easy but not nice to
-   * maintain.
-   */
-  const setViewHandler = eventKey => setView(eventKey);
+    async function fetch() {
+      dispatch(getProfile(user.profile));
+    }
+    fetch();
+  });
+
+  const handleEditClose = () => setShowUserEdit(false);
 
   return(
-    <React.Fragment>
+    <>
       <TopNavbar/>
       <Container fluid>
         <Row>
-          <SideNavBar setView={setViewHandler}/>
+          <SideNavBar/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            {(view === 'dashboard') && <Feed/>}
-            {(view === 'add-content') && <AddContent setView={setViewHandler}/>}
+            <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
+              User Details
+            </Button>
+            <Switch>
+              {routes.map((route, index) =>
+                <Route
+                  key={index}
+                  path={route.path}
+                  exact={route.exact}
+                  children={route.dashboard}
+                />
+              )}
+            </Switch>
           </main>
         </Row>
+        <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {user} />
       </Container>
-    </React.Fragment>
+    </>
   );
 }

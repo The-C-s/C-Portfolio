@@ -1,43 +1,53 @@
-// Imports for framework and functionality
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-// Imports for custom app functionality
-import api from '../common/api';
-import { setUser } from '../features/user/userSlice';
+import { authenticate } from '../features/user/userSlice';
+import { token } from '../common/api';
+import { publicRoutes, privateRoutes } from '../common/routes';
 
-// Imports for React components
-import Landing from '../features/pages/Landing';
-import Dashboard from '../features/dashboard/Dashboard';
-
-// For when css is being a b and you need to override some rules
 import '../App.css';
 
-// React component is its main function
-// Pls don't use classes! Unless there is a *really* good reason
 export default function App() {
 
-  // Allow us to dispatch actions to Redux
   const dispatch = useDispatch();
+  const authenticated = useSelector(state => state.user.isAuthenticated);
 
-  // React hook, nothing to do with Redux.
-  // Gets called whenever there is a change related to the component that it's inside of
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      api.getUser()
-        .then(res => dispatch(setUser(res)));
-    }
+    async function fetch() { if (token.get() !== null) dispatch(authenticate()) }
+    fetch();
   });
 
   return(
     <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Landing}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
-        </Switch>
-      </div>
+      <Switch>
+        {publicRoutes.map((route, index) =>
+          <Route
+            key={index}
+            exact={route.exact}
+            path={route.path}
+            children={route.page}
+          />
+        )}
+        {privateRoutes.map((route, index) =>
+          <PrivateRoute
+            key={index}
+            exact={route.exact}
+            path={route.path}
+            test={authenticated}
+            fallback="/"
+            children={route.page}
+          />
+        )}
+      </Switch>
     </Router>
+  );
+}
+
+const PrivateRoute = ({ _props, children, test, fallback }) => {
+  return(
+    <Route {..._props} render={() =>
+      test ? children : <Redirect to={{ pathname: fallback }}/>
+    }/>
   );
 }

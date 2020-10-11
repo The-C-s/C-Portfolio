@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { login } from './userSlice';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function Login({ onClickHandler }) {
+export default function Login({ onLogin }) {
 
-  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const [form, updateForm] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const onSubmitHandler = e => {
 
     e.preventDefault();
 
-    dispatch(login(form));
+    dispatch(login(form))
+      .then(() => onLogin());
   }
-
-  useEffect(() => { if (isAuthenticated) history.push('/dashboard') });
 
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
 
