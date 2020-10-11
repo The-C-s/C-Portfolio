@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Landing from '../features/pages/Landing';
+import Login from '../features/user/Login';
+import Register from '../features/user/Register';
 import Dashboard from '../features/dashboard/Dashboard';
 import Feed from '../features/dashboard/Feed';
 import Profile from '../features/profile/Profile';
@@ -11,7 +13,14 @@ export const publicRoutes = [
   {
     path: "/",
     exact: true,
-    page: <Landing/>
+    page: <Landing/>,
+    landing: <Login/>
+  },
+  {
+    path: "/register",
+    exact: true,
+    page: <Landing/>,
+    landing: <Register/>
   }
 ];
 

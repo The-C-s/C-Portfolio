@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +8,7 @@ import HashLoader from 'react-spinners/HashLoader';
 
 import { login } from './userSlice';
 
-export default function Login({ onLogin, registerClickHandler }) {
+export default function Login({ onLogin }) {
 
   const dispatch = useDispatch();
   const loggingIn = useSelector(state => state.app.loading.login);
@@ -53,7 +54,7 @@ export default function Login({ onLogin, registerClickHandler }) {
             ? <>Logging in <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={loggingIn}/></span></>
             : "Log in"}
         </Button>
-        <div className="text-center"> Don't have an account? <Button variant="link" onClick={registerClickHandler}>Register</Button></div>
+        <div className="text-center"> Don't have an account? <Button as={Link} to="/register" variant="link">Register</Button></div>
       </Form>
     </div>
   );

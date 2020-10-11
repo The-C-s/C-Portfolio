@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,8 +10,7 @@ import Register from '../user/Register'
 
 /* Added logo and removed the text display */
 
-export function validate()
-{
+export function validate() {
   let input = this.state.input;
   let errors = {};
   let isValid = true;
@@ -60,19 +59,13 @@ export function validate()
   return isValid;
 }
 
-
 export default function Landing() {
 
   const history = useHistory();
-  const [register, setRegister] = useState(false);
-
-  const loginClickHandler = () => setRegister(false);
-  const registerClickHandler = () => setRegister(true);
 
   const loginHandler = () => history.push('/dashboard');
 
-  /* tried adding the validation that was meant to handle the password checks */
-
+  const loginClickHandler = () => console.log("Login click");
  
   return(
     <Container fluid>
@@ -84,8 +77,14 @@ export default function Landing() {
         </Col>
         <Col>
           <div className="splash-container">
-            {register && <Register onClickHandler={loginClickHandler}/>}
-            {!register && <Login onLogin={loginHandler} registerClickHandler={registerClickHandler}/>}
+            <Switch>
+              <Route exact path="/">
+                <Login onLogin={loginHandler}/>
+              </Route>
+              <Route exact path="/register">
+                <Register onClickHandler={loginClickHandler}/>
+              </Route>
+            </Switch>
           </div>
         </Col>
       </Row>

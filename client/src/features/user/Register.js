@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
 import { register } from './userSlice';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function Register({ onClickHandler }) {
+export default function Register({ registerHandler }) {
 
-    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     const [form, updateForm] = useState({ name: '', email: '', password: '', password2: ''});
     const dispatch = useDispatch();
     const history = useHistory();
@@ -20,8 +19,6 @@ export default function Register({ onClickHandler }) {
   
       dispatch(register(form, history));
     }
-  
-    useEffect(() => { if (isAuthenticated) history.push('/dashboard') });
   
     const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
   
@@ -34,7 +31,7 @@ export default function Register({ onClickHandler }) {
             <Form.Control
               type="text" 
               id="username"
-              placeholder="username" 
+              placeholder="Username" 
               value={form.username}
               onChange={onChangeHandler}
               className="form-control"
@@ -70,8 +67,8 @@ export default function Register({ onClickHandler }) {
               className="form-control"
             />
           </Form.Group>
-          <Button type="submit" onClickHandler = {onSubmitHandler} block variant="primary">Sign Up</Button>
-          <div className="text-center"> Already have an account?<Button variant="link" onClick={onClickHandler}>Login here</Button></div>
+          <Button type="submit" onClickHandler={onSubmitHandler} variant="primary">Sign Up</Button>
+          <div className="text-center"> Already have an account?<Button as={Link} to="/" variant="link">Login here</Button></div>
         </Form>
       </div>
     );
