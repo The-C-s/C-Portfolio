@@ -6,10 +6,7 @@
 		" ",
 		"/test",
 		"/database",
-    "/users",
-    "/dashboard",
-		"/profile",
-		"/add",
-		"/share"
+    	"/users",
+    	"/dashboard"
 	]
 }
