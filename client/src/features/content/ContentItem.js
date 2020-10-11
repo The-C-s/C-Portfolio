@@ -25,8 +25,12 @@ export default function ContentItem({ content }) {
   const handleDeleteClose = () => setShowDelete(false);
   const handleTitleClick = () => console.log(`${content.id} clicked.`);
 
-  const { id, title, description, tags, displayDate } = content;
-  const showTags = tags ? tags.length > 0 : false;
+  const { id, title, description, displayDate } = content;  
+  let { tags } = content;
+  const showTags = tags.length > 1 || (tags.length === 1 && tags[0] !== "");
+
+  // Bandaid
+  if (tags.length === 1) tags = tags[0].split(',');
 
   // Determine variant of ContentItem to use
   let image = false;
