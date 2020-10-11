@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,6 +11,7 @@ import { login } from './userSlice';
 export default function Login({ onLogin }) {
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const loggingIn = useSelector(state => state.app.loading.login);
   const [form, updateForm] = useState({ email: '', password: '' });
 
@@ -18,7 +20,7 @@ export default function Login({ onLogin }) {
     e.preventDefault();
 
     dispatch(login(form))
-      .then(() => onLogin());
+      .then(() => history.push('/homepage'));
   }
 
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
@@ -53,6 +55,7 @@ export default function Login({ onLogin }) {
             ? <>Logging in <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={loggingIn}/></span></>
             : "Log in"}
         </Button>
+        <div className="text-center"> Don't have an account? <Button as={Link} to="/register" variant="link">Register</Button></div>
       </Form>
     </div>
   );

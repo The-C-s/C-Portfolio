@@ -6,6 +6,7 @@ axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
 // axios.defaults.baseURL = 'http://localhost:50000';
 
 const AUTH_USER = '/users/authenticate';
+const REGISTER_USER = '/users/register';
 const CURRENT_USER = '/users/current';
 const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create'; 
@@ -23,6 +24,9 @@ export const token = {
 
 // Takes email and password as an object and returns the user's details and token
 export const authenticateCredentials = async user => await axios.post(AUTH_USER, user);
+
+// Takes email and password as an object and returns the user's details and token
+export const registerUser = async user => await axios.post(REGISTER_USER, user);
 
 // Uses locally-stored token and returns the user's details
 export const authenticateToken = async () => await axios.get(CURRENT_USER);
