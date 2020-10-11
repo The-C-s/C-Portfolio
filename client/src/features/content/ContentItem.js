@@ -26,12 +26,11 @@ export default function ContentItem({ content }) {
   const handleTitleClick = () => console.log(`${content.id} clicked.`);
 
   const { id, title, description, displayDate } = content;  
+  let { tags } = content;
+  const showTags = tags.length > 1 || tags.length === 1 && tags[0] !== "";
 
   // Bandaid
-  let { tags } = content;
   if (tags.length === 1) tags = tags[0].split(',');
-
-  const showTags = tags.length > 0;
 
   // Determine variant of ContentItem to use
   let image = false;
