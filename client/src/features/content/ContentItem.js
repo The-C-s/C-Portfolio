@@ -27,7 +27,7 @@ export default function ContentItem({ content }) {
 
   const { id, title, description, displayDate } = content;  
   let { tags } = content;
-  const showTags = tags.length > 1 || tags.length === 1 && tags[0] !== "";
+  const showTags = tags.length > 1 || (tags.length === 1 && tags[0] !== "");
 
   // Bandaid
   if (tags.length === 1) tags = tags[0].split(',');
