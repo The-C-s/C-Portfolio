@@ -72,7 +72,7 @@ app.use('/profile', profileRoute);
 
 //redirects any other url to default
 app.use(function(req, res){
-       res.redirect(req);
+       res.redirect('/');
    });
 
 // Start the server
