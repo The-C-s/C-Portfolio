@@ -12,8 +12,6 @@ import Collapse from 'react-bootstrap/Collapse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf, faEnvelope, faArrowCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 
-import './share.css';
-
 const isUrl = require('is-valid-http-url');
 const isImage = require('is-image');
 
