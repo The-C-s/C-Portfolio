@@ -20,7 +20,7 @@ export default function Login({ onLogin }) {
     e.preventDefault();
 
     dispatch(login(form))
-      .then(() => history.push('/dashboard'));
+      .then(() => history.push('/homepage'));
   }
 
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
