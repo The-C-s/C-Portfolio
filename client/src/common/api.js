@@ -26,7 +26,7 @@ export const token = {
 export const authenticateCredentials = async user => await axios.post(AUTH_USER, user);
 
 // Takes email and password as an object and returns the user's details and token
-const registerUser = async user => await axios.post(REGISTER_USER, user);
+export const registerUser = async user => await axios.post(REGISTER_USER, user);
 
 // Uses locally-stored token and returns the user's details
 export const authenticateToken = async () => await axios.get(CURRENT_USER);

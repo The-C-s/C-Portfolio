@@ -7,7 +7,7 @@ import HashLoader from 'react-spinners/HashLoader';
 
 import { login } from './userSlice';
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, registerClickHandler }) {
 
   const dispatch = useDispatch();
   const loggingIn = useSelector(state => state.app.loading.login);
@@ -53,7 +53,7 @@ export default function Login({ onLogin }) {
             ? <>Logging in <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={loggingIn}/></span></>
             : "Log in"}
         </Button>
-        <div className="text-center"> Don't have an account? <Button variant="link" onClick={onClickHandler}>Register</Button></div>
+        <div className="text-center"> Don't have an account? <Button variant="link" onClick={registerClickHandler}>Register</Button></div>
       </Form>
     </div>
   );

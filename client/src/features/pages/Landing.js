@@ -47,7 +47,7 @@ export function validate()
 
   if (typeof input["password"] !== "undefined" && typeof input["confirm_password"] !== "undefined") {
       
-    if (input["password"] != input["confirm_password"]) {
+    if (input["password"] !== input["confirm_password"]) {
       isValid = false;
       errors["password"] = "Passwords don't match.";
     }
@@ -69,8 +69,6 @@ export default function Landing() {
   const loginClickHandler = () => setRegister(false);
   const registerClickHandler = () => setRegister(true);
 
-  
-
   const loginHandler = () => history.push('/dashboard');
 
   /* tried adding the validation that was meant to handle the password checks */
@@ -87,7 +85,7 @@ export default function Landing() {
         <Col>
           <div className="splash-container">
             {register && <Register onClickHandler={loginClickHandler}/>}
-            {!register && <Login onClickHandler={registerClickHandler}/>}
+            {!register && <Login onLogin={loginHandler} registerClickHandler={registerClickHandler}/>}
           </div>
         </Col>
       </Row>
