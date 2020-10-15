@@ -5,8 +5,8 @@ const verify = require('../_helpers/jwt');
 const uploadFile = require('../_helpers/file-upload'); 
 
 router.post('/create',verify.auth, create);
-router.put('/addLogo/:id',verify.auth, uploadFile.single('file'), addLogo);
-router.put('/addResume/:id', verify.auth, uploadFile.single('file'), addResume);  
+router.put('/addLogo/:id',verify.auth, uploadFile.uploadImage.single('file'), addLogo);
+router.put('/addResume/:id', verify.auth, uploadFile.uploadPdf.single('file'), addResume);  
 router.get('/:id', getById);
 router.put('/:id', verify.auth, update);
 router.delete('/:id', verify.auth, _delete);
