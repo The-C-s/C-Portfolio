@@ -1,4 +1,4 @@
-const mockAPI = {
+export const mockAPI = {
   baseURL: 'https://cportfolio.herokuapp.com',
   user: {
     'id': '5f5a1512b6ba881a7cd300ae',
