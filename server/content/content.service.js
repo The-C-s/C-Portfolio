@@ -1,7 +1,6 @@
 const db = require('../_helpers/db');
 const Content = db.Content; 
 const User = db.User;
-
 module.exports = {
     getAll,
     getById,

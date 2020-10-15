@@ -9,31 +9,40 @@ cloudinary.config({
     cloud_name: config.cloudName, 
     api_key: config.apiName, 
     api_secret: config.apiSecret 
-  });
+});
 
 
 // Storage for files 
 const imageStorage = new CloudinaryStorage({ 
-    cloudinary, 
-    folder: 'CPortfolio',  //Not working? 
-    allowedFormats: ['jpeg', 'jpg', 'png'] 
+    cloudinary: cloudinary, 
+    params: {
+        folder: "CPortfolio",  //Not working? 
+        allowed_formats: ["jpeg", "jpg", "png"] 
+    } 
     //Can also make picture circle or something 
     //transformations: []
 }); 
 
+const pdfStorage = new CloudinaryStorage({ 
+    cloudinary: cloudinary, 
+    params:{
+        folder: "CPortfolio",  //Not working? 
+        allowed_formats: "pdf"
+    }
+}); 
+
 const storage = new CloudinaryStorage({ 
-    cloudinary, 
-    folder: 'CPortfolio'
+    cloudinary: cloudinary, 
+    params: {
+        folder: 'CPortfolio'
+    }
 }); 
 
 
 //Used to upload files
 //Max is currently 16MB (Mongo limit)
-//Currently has no specification on formats 
-//Can also add image restriction, so we have a special upload for image (jpeg, png etc)
-//And another upload function for resumes (any format)
 const upload = multer({storage: storage, 
-    limits: {fileSize: 1024*1024*16}, 
+    limits: {fileSize: 1024*1024*16} 
 });
 
 const uploadImage = multer({
@@ -41,7 +50,12 @@ const uploadImage = multer({
     limits: {fileSize: 1024*1024*16}
 }); 
 
-module.exports = upload; 
+const uploadPdf = multer({ 
+    storage: pdfStorage, 
+    limits:{fileSize: 1024*1024*16}
+}); 
+
+module.exports = {upload, uploadImage, uploadPdf}; 
 
 //How to use middleware, add in between path "/create" and function create
 //Call by using upload.single('file') where file is the name of the field which gets the image/file
