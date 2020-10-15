@@ -5,16 +5,16 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
 // axios.defaults.baseURL = 'http://localhost:50000';
 
-const AUTH_USER = '/users/authenticate';
-const REGISTER_USER = '/users/register';
-const CURRENT_USER = '/users/current';
-const CONTENT = '/content/';
-const CREATE_CONTENT = '/content/create'; 
-const CREATE_PROFILE = '/profile/create'; 
-const PROFILE = '/profile/'; 
-const ADD_LOGO = '/profile/addLogo/';
-const ADD_RESUME = '/profile/addResume/'; 
-const UPDATE_USER = '/users/update';
+export const AUTH_USER = '/users/authenticate';
+export const REGISTER_USER = '/users/register';
+export const CURRENT_USER = '/users/current';
+export const CONTENT = '/content/';
+export const CREATE_CONTENT = '/content/create'; 
+export const CREATE_PROFILE = '/profile/create'; 
+export const PROFILE = '/profile/'; 
+export const ADD_LOGO = '/profile/addLogo/';
+export const ADD_RESUME = '/profile/addResume/'; 
+export const UPDATE_USER = '/users/update';
 
 export const token = {
   get: () => localStorage.getItem('token'),
@@ -41,7 +41,18 @@ export const getAllContent = async () => await axios.get(CONTENT);
 export const createContent = async content => await axios.post(CREATE_CONTENT, content);
 
 // Takes a content object (that must include the id field) and authorises with existing token
-export const editContent = async content => await axios.put(`${CONTENT}${content.get('id')}`, content);
+export const editContent = async content => {
+
+  // Handle special case of FormData object being passed
+  let id;
+  try {
+    id = content.get('id');
+  } catch {
+    id = content.id;
+  }
+
+  await axios.put(`${CONTENT}${id}`, content);
+}
 
 // Takes just the content id (as a string) and authorises with existing token
 export const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
