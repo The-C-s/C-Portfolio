@@ -31,7 +31,7 @@ export default function EditProfile({ profile, projects, show, closeHandler }) {
   const saveLogoHandler = () => {
     const _data = new FormData();
     _data.set("file", _logo);
-    dispatch(addLogo(_profile.id, _data))
+    dispatch(addLogo(_data))
       .then(() => dispatch(getProfile(_profile.id)))
       .then(() => closeHandler());
   };
@@ -39,7 +39,7 @@ export default function EditProfile({ profile, projects, show, closeHandler }) {
   const saveResumeHandler = () => {
     const _data = new FormData();
     _data.set("file", _resume);
-    dispatch(addResume(_profile.id, _data))
+    dispatch(addResume(_data))
       .then(() => dispatch(getProfile(_profile.id)))
       .then(() => closeHandler());
   };

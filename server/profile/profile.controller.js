@@ -5,8 +5,8 @@ const verify = require('../_helpers/jwt');
 const uploadFile = require('../_helpers/file-upload'); 
 
 router.post('/create',verify.auth, create);
-router.put('/addLogo/:id',verify.auth, uploadFile.uploadImage.single('file'), addLogo);
-router.put('/addResume/:id', verify.auth, uploadFile.uploadPdf.single('file'), addResume);  
+router.put('/addLogo',verify.auth, uploadFile.uploadImage.single('file'), addLogo);
+router.put('/addResume', verify.auth, uploadFile.uploadPdf.single('file'), addResume);  
 router.get('/:id', getById);
 router.put('/:id', verify.auth, update);
 router.delete('/:id', verify.auth, _delete);
@@ -18,13 +18,13 @@ function create(req, res, next) {
 }   
 
 function addLogo(req, res, next){ 
-    profileService.addLogo(req.user.sub, req.params.id, req.file)
+    profileService.addLogo(req.user.sub, req.file)
     .then(profile => profile ? res.json({}) : res.status(404).json({message: "Profile not found"}))
     .catch(err => next(err));  
 }
 
 function addResume(req, res, next){ 
-    profileService.addResume(req.user.sub, req.params.id, req.file)
+    profileService.addResume(req.user.sub, req.file)
     .then(profile => profile ? res.json({}) : res.status(404).json({message: "Profile not found"}))
     .catch(err => next(err));  
 }

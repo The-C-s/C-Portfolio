@@ -3,7 +3,7 @@ import axios from 'axios';
 // API not working locally? This will be why
 // TODO: set using env vars instead (will still need to set localhost port)
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-// axios.defaults.baseURL = 'http://localhost:50000';
+//axios.defaults.baseURL = 'http://localhost:63579';
 
 const AUTH_USER = '/users/authenticate';
 const REGISTER_USER = '/users/register';
@@ -12,8 +12,8 @@ const CONTENT = '/content/';
 const CREATE_CONTENT = '/content/create'; 
 const CREATE_PROFILE = '/profile/create'; 
 const PROFILE = '/profile/'; 
-const ADD_LOGO = '/profile/addLogo/';
-const ADD_RESUME = '/profile/addResume/'; 
+const ADD_LOGO = '/profile/addLogo';
+const ADD_RESUME = '/profile/addResume'; 
 const UPDATE_USER = '/users/update';
 
 export const token = {
@@ -59,9 +59,9 @@ export const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`);
 export const getProfile = async id => await axios.get(`${PROFILE}${id}`); 
 
 //Takes a profile id and authorises with existing token 
-export const addLogo = async (id, logo) => await axios.post(`${ADD_LOGO}${id}`, logo);  
+export const addLogo = async logo => await axios.put(ADD_LOGO, logo);  
 
-export const addResume = async (id, resume) => await axios.post(`${ADD_RESUME}${id}`, resume);  
+export const addResume = async resume => await axios.put(ADD_RESUME, resume);  
 
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
 
