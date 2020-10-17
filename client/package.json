@@ -1,6 +1,6 @@
 {
   "name": "c-portfolio-client",
-  "version": "0.0.1",
+  "version": "0.2.2",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -37,6 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:mockapi": "REACT_APP_API=mock npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -57,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.18.2",
     "redux-mock-store": "^1.5.4"
   }
 }
