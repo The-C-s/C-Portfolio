@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Intercept and mock all requests if run with with start:mockapi
 if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
-  require('../mockapi/api');
+  require('../_mockapi/api');
 }
 
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';

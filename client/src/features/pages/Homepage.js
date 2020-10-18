@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
-import TopNavbar from '../dashboard/TopNavbar';
+import TopNavbar from '../layout/TopNavbar';
 
 import Nav from 'react-bootstrap/Nav';
-import NavLink from '../dashboard/NavLink';
+import NavLink from '../layout/NavLink';
 
 import { getProfile } from '../profile/profileSlice';
 

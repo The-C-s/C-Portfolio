@@ -6,8 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-import TopNavbar from './TopNavbar';
-import SideNavBar from './SideNavbar';
+import TopNavbar from '../layout/TopNavbar';
+import SideNavBar from '../layout/SideNavbar';
 import EditUser from '../user/EditUser';
 
 import { getProfile } from '../profile/profileSlice';
