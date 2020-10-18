@@ -8,6 +8,7 @@ module.exports = {
     User: require('../users/user.model'), 
     Content: require('../content/content.model'), 
     Profile: require('../profile/profile.model')
+    Share: require('../share/share.model')
 };
 
 //based on https://github.com/cornflourblue/node-mongo-registration-login-api/
