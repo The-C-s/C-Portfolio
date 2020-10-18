@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-// API not working locally? This will be why
-// TODO: set using env vars instead (will still need to set localhost port)
+// Intercept and mock all requests if run with with start:mockapi
+if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
+  require('../mockapi/api');
+}
+
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-// axios.defaults.baseURL = 'http://localhost:50000';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
