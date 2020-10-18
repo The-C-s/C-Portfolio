@@ -17,7 +17,9 @@ const schema = new Schema({
     emails : { type: [String] },
     //customizable avatar and backgrounds (URLs)
     avatar: { type: String, default: null },
-    background: { type: String, default: null }
+    background: { type: String, default: null },
+    //public share view IDs
+    sharePages: { type: [String] }
 });
 
 schema.set('toJSON', {
