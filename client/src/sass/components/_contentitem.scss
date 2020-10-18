@@ -11,8 +11,6 @@
   border: none;
   border-radius: 30px 30px 0 0;
   padding: 2% 4% 2% 2%;
-  color: #FFFFFE;
-  background: #0F0E17;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,12 +35,10 @@
   letter-spacing: 0;
   font-size: 18px;
   margin: 15px 0 15px 0;
-  color: #0F0E17;
 }
 
 .card-body p {
   font-size: 16px;
-  color: #62636C;
 }
 
 .contentitem-title {
@@ -54,7 +50,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: capitalize;
-  color: #FFFFFE;
   text-shadow: 0 0 5px black;
 }
 
@@ -65,7 +60,6 @@
   letter-spacing: -0.01em;
   white-space: nowrap;
   padding-left: 10px;
-  color: #FFFFFE;
   text-shadow: 0 0 5px black;
 }
 
@@ -76,7 +70,6 @@
 .contentitem-tags {
   font-style: normal;
   font-size: 14px;
-  color: #62636C;
 }
 
 .contentitem-tag, .contentitem-tag:hover {
@@ -86,7 +79,6 @@
   text-transform: none;
   font-style: normal;
   font-size: 14px;
-  color: #E53170;
 }
 
 .contentitem-container {
@@ -140,4 +132,36 @@
   border-radius: 10%;
   box-shadow: 0px 14px 25px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+}
+
+@include sass-themify() {
+
+  .card-header {
+    color: sass-themify-get-color('contentitem-title');
+    background: sass-themify-get-color('contentitem-bg');
+  }
+
+  .card-body h3 {
+    color: sass-themify-get-color('contentitem-heading');
+  }
+
+  .card-body p {
+    color: sass-themify-get-color('contentitem-text');
+  }
+
+  .contentitem-title {
+    color: sass-themify-get-color('contentitem-title');
+  }
+
+  .contentitem-date {
+    color: sass-themify-get-color('contentitem-date');
+  }
+
+  .contentitem-tags {
+    color: sass-themify-get-color('contentitem-text');
+  }
+  
+  .contentitem-tag, .contentitem-tag:hover {
+    color: sass-themify-get-color('contentitem-tag');
+  }
 }
