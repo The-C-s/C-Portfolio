@@ -16,11 +16,8 @@ const isImage = require('is-image');
 export default function ContentItem({ content }) {
 
   const { id, title, description, displayDate } = content;
-  const date = parseDate(displayDate);
-
   let { tags } = content;
-
-  const showTags = tags.length > 1 || (tags.length === 1 && tags[0].tag !== "");
+  const date = parseDate(displayDate);
 
   // Bandaid
   if (tags.length === 1) tags = tags[0].split(',');
@@ -57,9 +54,9 @@ export default function ContentItem({ content }) {
           </Row>
           <Row className="contentitem contentitem-body">
             {image &&
-              <Col md={3} className="contentitem contentitem-image-container">
+              <Col className="contentitem contentitem-image-container" md={3}>
                 <Row className="contentitem contentitem-image-container">
-                  <img className="contentitem contentitem-image" src={content.content}></img>
+                  <img className="contentitem contentitem-image" src={content.content} alt={title}></img>
                 </Row>
               </Col>}
             <Col>
