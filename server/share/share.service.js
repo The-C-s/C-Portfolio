@@ -6,7 +6,7 @@ module.exports = {
     create,
     update
 };
-//Creates a post
+//Creates a share page
 async function create(userid) {
     const user = await User.findById(userid);
 
@@ -21,6 +21,7 @@ async function create(userid) {
     return share;
 }
 
+//Updates the content of a share page
 async function update(userid, shareid, userParam) {
     const user = await User.findById(userid);
     const sharePage = await Share.findById(shareid);
