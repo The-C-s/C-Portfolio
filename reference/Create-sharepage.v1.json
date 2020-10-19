@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Create-sharepage",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/share/create": {
+      "post": {
+        "summary": "",
+        "operationId": "post-share-create",
+        "responses": {
+          "200": {
+            "description": "OK\nReturns the created share page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "createdDate": {
+                      "type": "string"
+                    },
+                    "editedDate": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "a short ID that can be used in the URL"
+                    },
+                    "content": {
+                      "type": "array",
+                      "description": "IDs for content being shared",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "user": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "createdDate",
+                    "editedDate",
+                    "id",
+                    "content",
+                    "user"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500 Internal Server Error"
+          }
+        },
+        "description": "Creates a new share page for the current user and returns it",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "null"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
