@@ -1,5 +1,9 @@
 .topnav {
   min-height: 0 !important;
   height: 60px;
-  align-items: center;
+
+  .topnav-navitem {
+    display: flex;
+    align-items: center;
+  }
 }

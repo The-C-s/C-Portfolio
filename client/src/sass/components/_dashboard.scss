@@ -1,13 +1,5 @@
-body {
-  font-size: .875rem;
-}
-
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
-}
-
-[role="main"] {
-  padding-top: 48px;
+@include sass-themify() {
+  .dashboard-main {
+    background-color: sass-themify-get-color('dashboard-bg');
+  }
 }
