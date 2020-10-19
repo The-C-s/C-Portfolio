@@ -13,6 +13,8 @@ $theme-map: (
 
 @import './components/login';
 @import './components/contentitem';
+@import './components/contentitemmenu';
+@import './components/tag';
 @import './components/modal';
 @import './components/dashboard';
 @import './components/quill';

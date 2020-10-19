@@ -1,8 +1,19 @@
 $theme-default: (
-  'contentitem-bg': rgb(14, 23, 14),
-  'contentitem-title': rgb(255, 255, 254),
-  'contentitem-date': rgb(255, 255, 254),
+  'contentitem-bg': rgb(255, 255, 255),
+  'contentitem-title': rgb(0, 0, 0),
+  'contentitem-date': rgb(125, 125, 125),
   'contentitem-heading': rgb(15, 14, 23),
   'contentitem-text': rgb(98, 99, 108),
-  'contentitem-tag': rgb(229, 49, 112)
+  'tag-default-bg': rgb(243, 243, 243),
+  'tag-default-fg': rgb(100, 100, 100),
+  'tag-1-bg': rgb(243, 243, 243),
+  'tag-1-fg': rgb(100, 100, 100),
+  'tag-2-bg': rgb(243, 243, 243),
+  'tag-2-fg': rgb(100, 100, 100),
+  'tag-3-bg': rgb(243, 243, 243),
+  'tag-3-fg': rgb(100, 100, 100),
+  'tag-4-bg': rgb(243, 243, 243),
+  'tag-4-fg': rgb(100, 100, 100),
+  'tag-5-bg': rgb(243, 243, 243),
+  'tag-5-fg': rgb(100, 100, 100),
 );
