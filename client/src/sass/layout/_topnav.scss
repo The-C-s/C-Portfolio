@@ -7,3 +7,9 @@
     align-items: center;
   }
 }
+
+@include sass-themify() {
+  .topnav {
+    background-color: sass-themify-get-color('topnav-bg');
+  }
+}
