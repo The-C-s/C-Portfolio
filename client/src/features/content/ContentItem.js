@@ -1,31 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import Dropdown from 'react-bootstrap/Dropdown';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import Tags from './Tags';
-import VisibilityDot from './VisibilityDot';
-import EditContent from './EditContent';
-import DeleteContent from './DeleteContent';
+import ContentItemMenu from './ContentItemMenu';
+
+import { parseDate } from '../../common/helpers';
 
 const isUrl = require('is-valid-http-url');
 const isImage = require('is-image');
 
 export default function ContentItem({ content }) {
 
-  const [showEdit, setShowEdit] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
-
-  // Modal components will tell ContentItem when they wanna leave
-  const handleEditClose = () => setShowEdit(false);
-  const handleDeleteClose = () => setShowDelete(false);
-  const handleTitleClick = () => console.log(`${content.id} clicked.`);
-
-  const { id, title, description, displayDate } = content;  
+  const { id, title, description, displayDate } = content;
+  const date = parseDate(displayDate);
   let { tags } = content;
   const showTags = tags.length > 1 || (tags.length === 1 && tags[0] !== "");
 
@@ -42,60 +33,41 @@ export default function ContentItem({ content }) {
     }
   }
 
-  const date = () => (
-    displayDate
-      ? Intl.DateTimeFormat('en-AU', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric'
-        }).format(Date.parse(displayDate))
-      : ""
-  );
-
   return(
-    <React.Fragment>
-      <EditContent content={content} show={showEdit} closeHandler={handleEditClose}/>
-      <DeleteContent content={content} show={showDelete} closeHandler={handleDeleteClose}/>
-      <Row>
-        <Card>
-        {image ?
-          <React.Fragment>
-            <Card.Img src={content.content} alt={title}/>
-            <Card.ImgOverlay className="contentitem-header" onClick={handleTitleClick}>
-              <div className="contentitem-title-visibility">
-                <VisibilityDot id={id}/>
-                <div className="contentitem-title">{title}</div>
-              </div>
-              <div className="contentitem-date">{date}</div>
-            </Card.ImgOverlay>
-          </React.Fragment>
-        :
-          <Card.Header className="contentitem-header" onClick={handleTitleClick}>
-            <div className="contentitem-title-visibility">
-              <VisibilityDot id={id}/>
-              <div className="contentitem-title">{title}</div>
-            </div>
-            <div className="contentitem-date">{date}</div>
-          </Card.Header>
-        }
-          <Card.Body>
-            <div className="contentitem-container">
-              <div className="contentitem-tags">
-                {showTags && <Tags tags={tags}/>}
-              </div>
-              <Dropdown alignRight>
-                <Dropdown.Toggle as={FontAwesomeIcon} icon={faEllipsisV} size="lg"></Dropdown.Toggle>
-                <Dropdown.Menu alignRight>
-                  <Dropdown.Item onClick={() => setShowEdit(true)}>Edit</Dropdown.Item>
-                  <Dropdown.Item onClick={() => setShowDelete(true)}>Delete</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-            <h3>Description</h3>
-            <p className="card-text">{description}</p>
-          </Card.Body>
+    <>
+      <Container className="contentitem contentitem-container" key={id}>
+        <Card className="contentitem contentitem-card">
+          <Row className="contentitem contentitem-head">
+            <Col xs={11}>
+              <Row className="contentitem contentitem-title">{title}</Row>
+              <Row className="contentitem contentitem-date">{date}</Row>
+            </Col>
+            <Col>
+              <Row className="contentitem contentitem-menu">
+                <ContentItemMenu content={content}/>
+              </Row>
+            </Col>
+          </Row>
+          <Row className="contentitem contentitem-body">
+            {image &&
+              <Col md={3} className="contentitem contentitem-image-container">
+                <Row className="contentitem contentitem-image-container">
+                  <img className="contentitem contentitem-image" src={content.content}></img>
+                </Row>
+              </Col>}
+            <Col>
+              <Row>
+                <p className="contentitem contentitem-description">{description}</p>
+              </Row>
+            </Col>
+          </Row>
+          <Row className="contentitem contentitem-footer">
+            <Container className="contentitem contentitem-container contentitem-tags">
+              {showTags && <Tags tags={tags}/>}
+            </Container>
+          </Row>
         </Card>
-      </Row>
-    </React.Fragment>
+      </Container>
+    </>
   );
 }
