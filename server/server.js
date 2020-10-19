@@ -6,6 +6,7 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const jwt = require('./_helpers/jwt');
+const errorHandler = require('./_helpers/error-handler');
 const contentRoute = require('./content/content.controller');
 const userRoute = require('./users/users.controller');
 const profileRoute = require('./profile/profile.controller');
@@ -78,6 +79,9 @@ app.use('/share', shareRoute);
 app.use(function(req, res){
        res.redirect('/');
    });
+
+// global error handler
+app.use(errorHandler);
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
