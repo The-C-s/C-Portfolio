@@ -17,10 +17,12 @@ $theme-map: (
 @import './components/tag';
 @import './components/modal';
 @import './components/dashboard';
+@import './components/navbutton';
+@import './components/avatarbutton';
 @import './components/quill';
 
+@import './layout/topnav';
 @import './layout/sidebar';
-@import './layout/navbar';
 
 @import './pages/landing';
 @import './pages/share';

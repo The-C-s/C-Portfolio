@@ -1,0 +1,10 @@
+.navbutton {
+  cursor: pointer;
+  width: 24px !important;
+}
+
+@include sass-themify() {
+  .navbutton {
+    color: sass-themify-get-color('navbutton');
+  }
+}

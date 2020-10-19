@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
-import TopNavbar from '../layout/TopNavbar';
+import TopNav from '../layout/TopNav';
 
 import Nav from 'react-bootstrap/Nav';
 import NavLink from '../layout/NavLink';
@@ -24,7 +24,7 @@ export default function Homepage() {
 
   return(
     <>
-      <TopNavbar/>
+      <TopNav/>
       <br/>
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
       <Nav className="flex-column">

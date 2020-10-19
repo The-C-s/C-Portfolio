@@ -38,47 +38,45 @@ export default function ContentItem({ content }) {
   }
 
   return(
-    <>
-      <Container className="contentitem contentitem-container" key={id}>
-        <Card className="contentitem contentitem-card">
-          <Row className="contentitem contentitem-head">
-            <Col xs={11}>
-              <Row className="contentitem contentitem-title">{title}</Row>
-              <Row className="contentitem contentitem-date">{date}</Row>
-            </Col>
-            <Col>
-              <Row className="contentitem contentitem-menu">
-                <ContentItemMenu content={content}/>
+    <Container className="contentitem contentitem-container" key={id}>
+      <Card className="contentitem contentitem-card">
+        <Row className="contentitem contentitem-head">
+          <Col xs={11}>
+            <Row className="contentitem contentitem-title">{title}</Row>
+            <Row className="contentitem contentitem-date">{date}</Row>
+          </Col>
+          <Col>
+            <Row className="contentitem contentitem-menu">
+              <ContentItemMenu content={content}/>
+            </Row>
+          </Col>
+        </Row>
+        <Row className="contentitem contentitem-body">
+          {image &&
+            <Col className="contentitem contentitem-image-container" md={3}>
+              <Row className="contentitem contentitem-image-container">
+                <img className="contentitem contentitem-image" src={content.content} alt={title}></img>
               </Row>
-            </Col>
-          </Row>
-          <Row className="contentitem contentitem-body">
-            {image &&
-              <Col className="contentitem contentitem-image-container" md={3}>
-                <Row className="contentitem contentitem-image-container">
-                  <img className="contentitem contentitem-image" src={content.content} alt={title}></img>
-                </Row>
-              </Col>}
-            <Col>
-              <Row>
-                <p className="contentitem contentitem-description">{description}</p>
-              </Row>
-            </Col>
-          </Row>
-          <Row className="contentitem contentitem-footer">
-            <div className="contentitem contentitem-container contentitem-tags">
-              {tags.map((tag, index) => 
-                <Tag
-                  key={index}
-                  colour={tag.variant}
-                  shape={index === 0 ? 'first' : index === (tags.length - 1) ? 'last' : 'mid'}
-                  tag={tag.tag}
-                />
-              )}
-            </div>
-          </Row>
-        </Card>
-      </Container>
-    </>
+            </Col>}
+          <Col>
+            <Row>
+              <p className="contentitem contentitem-description">{description}</p>
+            </Row>
+          </Col>
+        </Row>
+        <Row className="contentitem contentitem-footer">
+          <div className="contentitem contentitem-container contentitem-tags">
+            {tags.map((tag, index) => 
+              <Tag
+                key={index}
+                colour={tag.variant}
+                shape={index === 0 ? 'first' : index === (tags.length - 1) ? 'last' : 'mid'}
+                tag={tag.tag}
+              />
+            )}
+          </div>
+        </Row>
+      </Card>
+    </Container>
   );
 }

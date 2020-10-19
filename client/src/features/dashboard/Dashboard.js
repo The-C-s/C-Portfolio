@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-import TopNavbar from '../layout/TopNavbar';
+import TopNav from '../layout/TopNav';
 import SideNavBar from '../layout/SideNavbar';
 import EditUser from '../user/EditUser';
 
@@ -32,12 +32,12 @@ export default function Dashboard() {
 
   return(
     <>
-      <TopNavbar/>
+      <TopNav/>
       <Container fluid>
         <Row>
           <SideNavBar/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
+            <Button variant="link" className="float-right" onClick={() => setShowUserEdit(true)}>
               User Details
             </Button>
             <Switch>
@@ -52,7 +52,7 @@ export default function Dashboard() {
             </Switch>
           </main>
         </Row>
-        <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {user} />
+        <EditUser show={showUserEdit} closeHandler={handleEditClose} user={user}/>
       </Container>
     </>
   );
