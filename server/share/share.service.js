@@ -4,6 +4,7 @@ const User = db.User;
 const Share = db.Share;
 module.exports = {
     create,
+    update
 };
 //Creates a post
 async function create(userid) {
@@ -18,4 +19,26 @@ async function create(userid) {
     await user.save();
 
     return share;
+}
+
+async function update(userid, shareid, userParam) {
+    const user = await User.findById(userid);
+    const sharePage = await Share.findById(shareid);
+
+    //check if the user and share page exist
+    if (!user) throw new Error('UserNotFoundError');
+    if (!sharePage) throw new Error('SharePageNotFoundError');
+
+    //verify that all new content belongs to the user
+    console.log(user.content);
+    if (userParam.content) {
+        for (post of userParam.content) {
+            //if post is not in user.content, throw error
+            if (user.content.indexOf(post) < 0) throw new Error('UserPostMismatchError');
+        }
+    }
+
+    //update the content
+    sharePage.content = userParam.content;
+    await sharePage.save();
 }
