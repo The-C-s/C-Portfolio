@@ -17,7 +17,7 @@ export default function NavLink({ label, to, activeOnlyWhenExact, icon }) {
       as={Link}
       to={to}
       className={`navlink${match ? ' navlink-active active' : ''}`}>
-        {icon && <FontAwesomeIcon className={`navlink-icon${match ? ' navlink-active' : ''}`} icon={icon} size="lg"/>}
+        {icon && <FontAwesomeIcon className={`navlink-icon${match ? ' navlink-icon-active' : ''}`} icon={icon} size="lg"/>}
         {label}
     </Nav.Link>
   );
