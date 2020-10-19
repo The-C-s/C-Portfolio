@@ -13,6 +13,7 @@
 
 .tag-shape-first {
   border-radius: 38px 0 0 38px;
+  padding-left: 7px;
 }
 
 .tag-shape-mid {
@@ -22,6 +23,7 @@
 .tag-shape-last {
   border-radius: 0 38px 38px 0;
   margin-left: 2px;
+  padding-right: 7px;
 }
 
 @include sass-themify() {
