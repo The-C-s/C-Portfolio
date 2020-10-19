@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-import Tags from './Tags';
+import Tag from './Tag';
 import ContentItemMenu from './ContentItemMenu';
 
 import { parseDate } from '../../common/helpers';
@@ -17,11 +17,18 @@ export default function ContentItem({ content }) {
 
   const { id, title, description, displayDate } = content;
   const date = parseDate(displayDate);
+
   let { tags } = content;
-  const showTags = tags.length > 1 || (tags.length === 1 && tags[0] !== "");
+
+  const showTags = tags.length > 1 || (tags.length === 1 && tags[0].tag !== "");
 
   // Bandaid
   if (tags.length === 1) tags = tags[0].split(',');
+
+  tags = content.tags.map(tag => {
+    if (typeof tag === 'string') return { tag: tag, variant: 'default' }
+    else return tag;
+  });
 
   // Determine variant of ContentItem to use
   let image = false;
@@ -62,9 +69,16 @@ export default function ContentItem({ content }) {
             </Col>
           </Row>
           <Row className="contentitem contentitem-footer">
-            <Container className="contentitem contentitem-container contentitem-tags">
-              {showTags && <Tags tags={tags}/>}
-            </Container>
+            <div className="contentitem contentitem-container contentitem-tags">
+              {tags.map((tag, index) => 
+                <Tag
+                  key={index}
+                  colour={tag.variant}
+                  shape={index === 0 ? 'first' : index === (tags.length - 1) ? 'last' : 'mid'}
+                  tag={tag.tag}
+                />
+              )}
+            </div>
           </Row>
         </Card>
       </Container>

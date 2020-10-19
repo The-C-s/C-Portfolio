@@ -1,0 +1,81 @@
+.tag {
+  height: 20px;
+  padding: 0 5px;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline;
+}
+
+.tag-shape-first {
+  border-radius: 38px 0 0 38px;
+}
+
+.tag-shape-mid {
+  margin-left: 2px;
+}
+
+.tag-shape-last {
+  border-radius: 0 38px 38px 0;
+  margin-left: 2px;
+}
+
+@include sass-themify() {
+  .tag-colour-default {
+    color: sass-themify-get-color('tag-default-fg');
+    background-color: sass-themify-get-color('tag-default-bg');
+  }
+
+  .tag-colour-default:hover {
+    background-color: darken(sass-themify-get-color('tag-default-bg'), 10%);
+  }
+
+  .tag-colour-1 {
+    color: sass-themify-get-color('tag-1-fg');
+    background-color: sass-themify-get-color('tag-1-bg');
+  }
+
+  .tag-colour-1:hover {
+    background-color: darken(sass-themify-get-color('tag-1-bg'), 10%);
+  }
+
+  .tag-colour-2 {
+    color: sass-themify-get-color('tag-2-fg');
+    background-color: sass-themify-get-color('tag-2-bg');
+  }
+
+  .tag-colour-2:hover {
+    background-color: darken(sass-themify-get-color('tag-2-bg'), 10%);
+  }
+
+  .tag-colour-3 {
+    color: sass-themify-get-color('tag-3-fg');
+    background-color: sass-themify-get-color('tag-3-bg');
+  }
+
+  .tag-colour-3:hover {
+    background-color: darken(sass-themify-get-color('tag-3-bg'), 10%);
+  }
+
+  .tag-colour-4 {
+    color: sass-themify-get-color('tag-4-fg');
+    background-color: sass-themify-get-color('tag-4-bg');
+  }
+
+  .tag-colour-4:hover {
+    background-color: darken(sass-themify-get-color('tag-4-bg'), 10%);
+  }
+
+  .tag-colour-5 {
+    color: sass-themify-get-color('tag-5-fg');
+    background-color: sass-themify-get-color('tag-5-bg');
+  }
+
+  .tag-colour-5:hover {
+    background-color: darken(sass-themify-get-color('tag-5-bg'), 10%);
+  }
+}

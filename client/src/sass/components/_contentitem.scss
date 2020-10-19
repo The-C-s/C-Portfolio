@@ -14,7 +14,7 @@
   .contentitem-card {
     border-radius: 7px;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    margin: 5px;
+    margin-bottom: 10px;
     padding: 20px;
   }
 
@@ -48,13 +48,14 @@
   .contentitem-image {
     border-radius: 7px;
     max-width: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .contentitem-description {
     margin: 0;
   }
 
-  .contentitem-body {
+  .contentitem-body, .contentitem-footer {
     margin-top: 10px;
     align-items: center;
   }
@@ -63,45 +64,12 @@
     margin-left: 8px;
     margin-right: 8px;
   }
+
+  .contentitem-tags {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
-
-.contentitem-tags {
-  font-style: normal;
-  font-size: 14px;
-}
-
-.contentitem-tag, .contentitem-tag:hover {
-  padding: 0;
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
-  text-transform: none;
-  font-style: normal;
-  font-size: 14px;
-}
-
-.contentitem-title-visibility {
-  display: flex;
-  align-items: center;
-}
-
-.contentitem-visibility-dot {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: 7px solid rgba(255, 255, 255, 0.32);
-  background-color: #fff;
-  background-clip: padding-box;
-  cursor: pointer;
-  transition: border-width 0.2s;
-  transition-timing-function: ease-out;
-  margin-right: 10px;
-}
-
-.contentitem-visibility-dot:hover {
-  border-width: 3px;
-}
-
-
 
 @include sass-themify() {
 
@@ -117,32 +85,7 @@
     color: sass-themify-get-color('contentitem-date');
   }
 
-  .card-header {
-    color: sass-themify-get-color('contentitem-title');
-    background: sass-themify-get-color('contentitem-bg');
-  }
-
-  .card-body h3 {
-    color: sass-themify-get-color('contentitem-heading');
-  }
-
-  .card-body p {
+  .contentitem-body {
     color: sass-themify-get-color('contentitem-text');
-  }
-
-  .contentitem-title {
-    color: sass-themify-get-color('contentitem-title');
-  }
-
-  .contentitem-date {
-    color: sass-themify-get-color('contentitem-date');
-  }
-
-  .contentitem-tags {
-    color: sass-themify-get-color('contentitem-text');
-  }
-  
-  .contentitem-tag, .contentitem-tag:hover {
-    color: sass-themify-get-color('contentitem-tag');
   }
 }
