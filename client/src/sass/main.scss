@@ -19,11 +19,12 @@ $theme-map: (
 @import './components/dashboard';
 @import './components/feed';
 @import './components/navbutton';
+@import './components/navlink';
 @import './components/avatarbutton';
 @import './components/quill';
 
 @import './layout/topnav';
-@import './layout/sidebar';
+@import './layout/sidenav';
 
 @import './pages/landing';
 @import './pages/share';

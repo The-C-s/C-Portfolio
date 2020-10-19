@@ -3,7 +3,9 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 import Nav from 'react-bootstrap/Nav';
 
-export default function NavLink({ label, to, activeOnlyWhenExact }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+export default function NavLink({ label, to, activeOnlyWhenExact, icon }) {
 
   let match = useRouteMatch({
     path: to,
@@ -14,7 +16,8 @@ export default function NavLink({ label, to, activeOnlyWhenExact }) {
     <Nav.Link
       as={Link}
       to={to}
-      className={match ? "active" : ""}>
+      className={`navlink${match ? ' navlink-active active' : ''}`}>
+        {icon && <FontAwesomeIcon className={`navlink-icon${match ? ' navlink-active' : ''}`} icon={icon} size="lg"/>}
         {label}
     </Nav.Link>
   );

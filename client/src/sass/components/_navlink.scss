@@ -1,0 +1,23 @@
+.navlink {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+@include sass-themify() {
+
+  .navlink {
+    color: sass-themify-get-color('sidenav-fg');
+  }
+
+  .navlink-active {
+    color: sass-themify-get-color('sidenav-active');
+  }
+
+  .navlink-icon {
+    color: sass-themify-get-color('sidenav-icon');
+  }
+
+  .navlink-icon-active {
+    color: sass-themify-get-color('sidenav-icon-active');
+  }
+}

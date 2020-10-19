@@ -31,7 +31,7 @@ export default function Dashboard() {
       <Container fluid>
         <Row>
           <SideNavBar/>
-          <main role="main" className="dashboard-main col-md-9 ml-sm-auto col-lg-10 px-4">
+          <main role="main" className="dashboard-main col-sm-9 col-lg-10 ml-sm-auto px-4">
             <Switch>
               {routes.map((route, index) =>
                 <Route
