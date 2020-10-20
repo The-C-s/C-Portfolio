@@ -19,6 +19,10 @@ function errorHandler(err, req, res, next) {
         return res.status(401).json({ error: 'Post does not belong to User' });
     }
 
+    if (err.message === 'UserShareMismatchError') {
+        return res.status(401).json({ error: 'Share page does not belong to User'});
+    }
+
     if (err.message === 'UserNotFoundError') {
         return res.status(404).json({ error: 'User Not Found' });
     }
