@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
 
-import TopNavbar from '../layout/TopNavbar';
+import TopNav from '../layout/TopNav';
 import SideNavBar from '../layout/SideNavbar';
-import EditUser from '../user/EditUser';
 
 import { getProfile } from '../profile/profileSlice';
 import { privateRoutes } from '../../common/routes';
 
 export default function Dashboard() {
-
+  
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const routes = privateRoutes.filter(route => route.dashboard !== null);
-  const [showUserEdit, setShowUserEdit] = useState(false);
 
   useEffect(() => {
 
@@ -28,18 +25,13 @@ export default function Dashboard() {
     fetch();
   });
 
-  const handleEditClose = () => setShowUserEdit(false);
-
   return(
     <>
-      <TopNavbar/>
+      <TopNav/>
       <Container fluid>
         <Row>
           <SideNavBar/>
-          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <Button variant = "link" className = "float-right" onClick = {() => setShowUserEdit(true)}>
-              User Details
-            </Button>
+          <main role="main" className="dashboard-main col-md-9 ml-sm-auto col-lg-10 px-4">
             <Switch>
               {routes.map((route, index) =>
                 <Route
@@ -52,7 +44,6 @@ export default function Dashboard() {
             </Switch>
           </main>
         </Row>
-        <EditUser show = {showUserEdit} closeHandler = {handleEditClose} user = {user} />
       </Container>
     </>
   );
