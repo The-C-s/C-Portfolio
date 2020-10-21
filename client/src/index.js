@@ -6,8 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import store from './app/store';
 import App from './app/App';
 
-import './index.css';
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -22,7 +22,7 @@ export default function Register() {
     
     dispatch(register(form))
       .then(() => dispatch(login(form)))
-      .then(() => history.push('/dashboard'));
+      .then(() => history.push('/homepage'));
   }
   
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });

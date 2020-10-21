@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// API not working locally? This will be why
-// TODO: set using env vars instead (will still need to set localhost port)
+// Intercept and mock all requests if run with with start:mockapi
+if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
+  require('../_mockapi/api');
+}
+
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
 //axios.defaults.baseURL = 'http://localhost:63579';
 
@@ -41,7 +44,18 @@ export const getAllContent = async () => await axios.get(CONTENT);
 export const createContent = async content => await axios.post(CREATE_CONTENT, content);
 
 // Takes a content object (that must include the id field) and authorises with existing token
-export const editContent = async content => await axios.put(`${CONTENT}${content.get('id')}`, content);
+export const editContent = async content => {
+
+  // Handle special case of FormData object being passed
+  let id;
+  try {
+    id = content.get('id');
+  } catch {
+    id = content.id;
+  }
+
+  await axios.put(`${CONTENT}${id}`, content);
+}
 
 // Takes just the content id (as a string) and authorises with existing token
 export const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);

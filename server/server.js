@@ -9,7 +9,8 @@ const jwt = require('./_helpers/jwt');
 const contentRoute = require('./content/content.controller');
 const userRoute = require('./users/users.controller');
 const profileRoute = require('./profile/profile.controller');
-
+const shareRoute = require('./share/share.controller');
+    
 //mongoDB access
 async function testMongoDB() {
   const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
@@ -69,6 +70,9 @@ app.use('/content', contentRoute);
 
 //Redirects anything with profile
 app.use('/profile', profileRoute);
+
+//Redirects requests to /share to the share controller
+app.use('/share', shareRoute);
 
 //redirects any other url to default
 app.use(function(req, res){

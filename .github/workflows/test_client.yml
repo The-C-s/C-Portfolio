@@ -1,0 +1,30 @@
+# Runs client tests on pushes and pull requests to master
+name: test client
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'client/**'
+  pull_request:
+    paths:
+      - 'client/**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo to the runner and install Node
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      
+      - name: Install dependencies
+        working-directory: client
+        run: npm install
+      
+      - name: Test client
+        working-directory: client
+        run: npm test

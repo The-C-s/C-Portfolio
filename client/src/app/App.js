@@ -6,7 +6,7 @@ import { authenticate } from '../features/user/userSlice';
 import { token } from '../common/api';
 import { publicRoutes, privateRoutes } from '../common/routes';
 
-import '../App.css';
+import '../sass/main.scss';
 
 export default function App() {
 
