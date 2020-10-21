@@ -15,7 +15,7 @@ export default function Dashboard() {
   
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const routes = privateRoutes.filter(route => route.dashboard !== null);
+  const routes = privateRoutes.filter(route => 'dashboard' in route);
 
   useEffect(() => {
 

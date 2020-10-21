@@ -1,10 +1,27 @@
 .navlink {
   font-weight: 400;
   font-size: 16px;
+  letter-spacing: -0.01em;
 
   .navlink-icon {
     margin-right: 10px;
     width: 18px;
+    transition: 0.2s;
+  }
+
+  .navlink-chevron {
+    width: 10px;
+    float: right;
+    margin-right: 20px;
+    transition: 0.5s;
+  }
+}
+
+.navlink-sub {
+  font-size: 14px;
+
+  .navlink-icon {
+    width: 14px;
   }
 }
 
@@ -28,5 +45,9 @@
 
   .navlink:hover .navlink-icon {
     color: sass-themify-get-color('sidenav-icon-active');
+  }
+
+  .navlink-chevron {
+    color: sass-themify-get-color('sidenav-active');
   }
 }
