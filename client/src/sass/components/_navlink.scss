@@ -1,0 +1,53 @@
+.navlink {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+
+  .navlink-icon {
+    margin-right: 10px;
+    width: 18px;
+    transition: 0.2s;
+  }
+
+  .navlink-chevron {
+    width: 10px;
+    float: right;
+    transition: 0.5s;
+  }
+}
+
+.navlink-sub {
+  font-size: 14px;
+  margin-left: 15px;
+
+  .navlink-icon {
+    width: 14px;
+  }
+}
+
+@include sass-themify() {
+
+  .navlink {
+    color: sass-themify-get-color('sidenav-fg');
+  }
+
+  .navlink-active {
+    color: sass-themify-get-color('sidenav-active');
+  }
+
+  .navlink-icon {
+    color: sass-themify-get-color('sidenav-icon');
+  }
+
+  .navlink-icon-active {
+    color: sass-themify-get-color('sidenav-icon-active');
+  }
+
+  .navlink:hover .navlink-icon {
+    color: sass-themify-get-color('sidenav-icon-active');
+  }
+
+  .navlink-chevron {
+    color: sass-themify-get-color('sidenav-active');
+  }
+}

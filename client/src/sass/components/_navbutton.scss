@@ -5,6 +5,6 @@
 
 @include sass-themify() {
   .navbutton {
-    color: sass-themify-get-color('navbutton');
+    color: sass-themify-get-color('topnav-fg');
   }
 }

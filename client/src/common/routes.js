@@ -33,21 +33,24 @@ export const privateRoutes = [
   },
   {
     path: "/dashboard",
+    exact: false,
+    page: <Dashboard/>
+  },
+  {
+    path: "/dashboard/content",
     exact: true,
-    page: <Dashboard/>,
     dashboard: <Feed/>
   },
   {
-    path: "/profile",
+    path: "/dashboard/content/add",
+    exact: true,
+    dashboard: <AddContent/>
+  },
+  {
+    path: "/dashboard/profile",
     exact: true,
     page: <Dashboard/>,
     dashboard: <Profile/>
-  },
-  {
-    path: "/add",
-    exact: true,
-    page: <Dashboard/>,
-    dashboard: <AddContent/>
   },
   {
     path: "/share",

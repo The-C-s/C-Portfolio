@@ -31,21 +31,21 @@ export default function Homepage() {
         <h1> Homepage </h1>
         <hr/>
         <Nav.Item>
-          <NavLink to="/dashboard" activeOnlyWhenExact={true} label={<>
+          <NavLink to="/dashboard/content" activeOnlyWhenExact={true} label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Dashboard </h4> </Row>
             <Row> <h6> View and edit the content in your portfolio </h6> </Row>
           </>}/>
         </Nav.Item>
         <hr/>
         <Nav.Item>
-          <NavLink to="/profile" label={<>
+          <NavLink to="/dashboard/profile" label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Profile </h4> </Row>
             <Row> <h6> View and edit your profile </h6> </Row>
           </>}/>
         </Nav.Item>
         <hr/>
         <Nav.Item>
-          <NavLink to="/add" label={<>
+          <NavLink to="/dashboard/content/add" label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Add Content </h4> </Row>
             <Row> <h6> Create a new post for your portfolio </h6> </Row>
           </>}/>

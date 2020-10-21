@@ -16,7 +16,16 @@ $theme-default: (
   'tag-4-fg': rgb(100, 100, 100),
   'tag-5-bg': rgb(243, 243, 243),
   'tag-5-fg': rgb(100, 100, 100),
-  'navbutton': rgb(200, 200, 200),
   'dashboard-bg': rgb(255, 255, 255),
-  'topnav-bg': rgb(255, 255, 255)
+  'topnav-fg': rgb(200, 200, 200),
+  'topnav-bg': rgb(255, 255, 255),
+  'sidenav-fg': rgb(63, 69, 85),
+  'sidenav-bg': rgb(21, 25, 36),
+  'sidenav-active': rgb(255, 255, 255),
+  'sidenav-icon': rgb(63, 69, 85),
+  'sidenav-icon-active': rgb(118, 76, 242),
+  'sidenav-group-bg': rgb(21, 25, 36),
+  'sidenav-group-border': rgb(21, 25, 36),
+  'sidenav-group-expanded-bg': rgb(21, 25, 36),
+  'sidenav-group-expanded-border': rgb(21, 25, 36)
 );
