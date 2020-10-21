@@ -19,7 +19,7 @@ export default function NavLink({
   let match = useRouteMatch({
     path: to,
     exact: activeOnlyWhenExact
-  });
+  }) || expanded;
 
   return(
     <Nav.Link

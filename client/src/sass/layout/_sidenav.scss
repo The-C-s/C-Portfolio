@@ -9,15 +9,42 @@
   transition: 0.5s;
   display: flex !important;
   align-items: left;
-  padding: 0 0 0 2%;
+  padding: 0 2%;
 
   .sidenav-item {
     margin: 0;
   }
+
+  .sidenav-logo {
+    width: 60px;
+    height: 60px;
+    margin: 20px 0;
+    align-self: center;
+  }
+
+  .sidenav-group {
+    border-radius: 7px;
+  }
 }
 
 @include sass-themify() {
+
   .sidenav {
     background-color: sass-themify-get-color('sidenav-bg');
+  }
+
+  .sidenav-group {
+    background-color: sass-themify-get-color('sidenav-group-bg');
+    border: 1px solid sass-themify-get-color('sidenav-group-border');
+  }
+
+  .sidenav-group {
+    background-color: sass-themify-get-color('sidenav-group-bg');
+    border: 1px solid sass-themify-get-color('sidenav-group-border');
+  }
+
+  .sidenav-group-expanded {
+    background-color: sass-themify-get-color('sidenav-group-expanded-bg');
+    border: 1px solid sass-themify-get-color('sidenav-group-expanded-border');
   }
 }

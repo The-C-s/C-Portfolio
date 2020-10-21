@@ -19,6 +19,7 @@ export default function SideNavbar() {
 
   return(
     <Nav className="sidenav flex-column col-sm-3 col-lg-2 d-none d-sm-block">
+      <img className="sidenav-logo" src="/images/logo_white_transparent.png" alt="cPortfolio logo"/>
       <Nav.Item className="sidenav-item">
         <NavLink
           to="/homepage"
@@ -26,7 +27,7 @@ export default function SideNavbar() {
           icon={faHotTub}
         />
       </Nav.Item>
-      <div className="sidenav-group">
+      <div className={`sidenav-group${expandContent ? ' sidenav-group-expanded' : ''}`}>
         <Nav.Item className="sidenav-item" onClick={onContentClick}>
           <NavLink
             dropdown
