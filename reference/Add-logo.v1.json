@@ -14,7 +14,7 @@
     }
   ],
   "paths": {
-    "/profile/:id/addLogo": {
+    "/profile/addLogo": {
       "put": {
         "description": "Adds logo to a profile",
         "summary": "Add Logo",

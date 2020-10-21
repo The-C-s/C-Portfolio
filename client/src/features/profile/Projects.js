@@ -26,7 +26,7 @@ export default function Project({
       <Row>
         <Form.Label className="ml-3">Select Project</Form.Label>
       </Row>
-      <select name="cars" id="cars">
+      <select name="projects" id="projects">
         {content.map((content, i) => (
           <option value={i}>{content.title}</option>
         ))}
