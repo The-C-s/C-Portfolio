@@ -33,7 +33,6 @@ async function getById(shareid) {
     var post;
     var posts = [];
     var postid;
-    console.log(sharePage.content);
     for(postid of sharePage.content) {
         post = await Content.findById(postid);
         if (!post) throw new Error('PostNotFoundError');
