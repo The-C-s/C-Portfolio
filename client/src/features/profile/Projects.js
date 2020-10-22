@@ -1,46 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-//import Dropdown from "react-bootstrap/Dropdown";
-//import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from "react-bootstrap/Button"; 
 import { useSelector } from "react-redux";
 export default function Project({
   projects,
   profile,
   updateProfile,
   updateProjects,
+  closeProjectField
 }) {
+
   const content = useSelector((state) => state.content);
-  /*
-  const addProjectHandler = (e) => {
-    const tmp = [...projects, e.target.id];
-    console.log(tmp);
+  const [_newProject, updateNewProject] = useState(); 
+
+  const addProjectHandler = () => {
+    //Selects content object
+    const proj = selectProject(_newProject); 
+    //Saves and updates the state of projects (for display)
+    const tmp = [...projects, proj];
     updateProjects(tmp);
-    updateProfile({ ...profile, projects: tmp });
+
+    //Saves and updates the project ids (for profile storage)
+    const tmpIds = [];
+    for(let i = 0; i < tmp.length; i++){ 
+      tmpIds.push(tmp[i].id); 
+    } 
+    updateProfile({ ...profile, projects: tmpIds });
+    closeProjectField(); 
   };
-*/
+
+  //Searches content for new project id and returns the content object 
+  //Cant save objects in value so this is an alternative 
+  const selectProject = (id) => {
+    for(let i = 0; i < content.length; i++){ 
+      if(content[i].id === id){ 
+        return content[i]; 
+      }
+    }
+  }
 
   return (
     <React.Fragment>
-      <Row>
-        <Form.Label className="ml-3">Select Project</Form.Label>
-      </Row>
-      <select name="projects" id="projects">
-        {content.map((content, i) => (
-          <option value={i}>{content.title}</option>
-        ))}
-      </select>
-      <div>
-        <br></br>
-      </div>
-      {/* doing this the long way bc brodie destroyed the dropdown button default :))) 
-      <DropdownButton id="dropdown-basic-button" title="Select Project">
-        {content.map((content, i) => (
-          <Dropdown.Item >{content.title}</Dropdown.Item>
-        ))}
-      </DropdownButton>
-      */}
+      <Form>
+        <Form.Group controlId="exampleForm.SelectCustom">
+          <Form.Label>Select Project</Form.Label>
+          <Form.Control value = {_newProject} onChange = {(e)=>{updateNewProject(e.target.value);}} as="select" custom>
+            {content.map((content) => (
+              <option id={content.id} key={content.id} value = {content.id}>{content.title}</option>
+            ))}
+          </Form.Control>
+          {"\n"}
+          <Button onClick={addProjectHandler}> Add </Button>
+        </Form.Group>
+      </Form>
     </React.Fragment>
   );
 }

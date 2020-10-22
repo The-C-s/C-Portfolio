@@ -84,8 +84,8 @@ export default function ContentItem({ content }) {
                 {showTags && <Tags tags={tags}/>}
               </div>
               <Dropdown alignRight>
-                <Dropdown.Toggle as={FontAwesomeIcon} icon={faEllipsisV} size="lg"></Dropdown.Toggle>
-                <Dropdown.Menu alignRight>
+                <Dropdown.Toggle className = "contentitem-dropdown-toggle" as={FontAwesomeIcon} icon={faEllipsisV} size="lg"></Dropdown.Toggle>
+                <Dropdown.Menu className = "contentitem-dropdown-menu" alignRight>
                   <Dropdown.Item onClick={() => setShowEdit(true)}>Edit</Dropdown.Item>
                   <Dropdown.Item onClick={() => setShowDelete(true)}>Delete</Dropdown.Item>
                 </Dropdown.Menu>

@@ -109,21 +109,21 @@
   border-width: 3px;
 }
 
-.dropdown-toggle {
+.contentitem-dropdown-toggle {
   cursor: pointer;
   transition: transform 0.5s;
   width: 20px !important;
 }
 
-.dropdown-toggle:hover {
+.contentitem-dropdown-toggle:hover {
   transform: rotate(45deg);
 }
 
-.dropdown.show .dropdown-toggle {
+.contentitem-dropdown.show .contentitem-dropdown-toggle {
   transform: rotate(90deg);
 }
 
-.dropdown-menu {
+.contentitem-dropdown-menu {
   opacity: 100 !important;
   top: 20px !important;
   left: -80px !important;
