@@ -12,7 +12,8 @@ module.exports = {
 function jwt() {
     const secret = config.secret;
     return expressJwt({ secret, algorithms: ['HS256'], isRevoked }).unless({
-        path: publicRoutes.routes
+        //a public route or a GET requst to a URL starting with '/share/'
+        path: [publicRoutes.routes, { url: /^\/share\/.+/, methods: [ 'GET' ] } ]
     });
 }
 
