@@ -13,12 +13,18 @@ $theme-map: (
 
 @import './components/login';
 @import './components/contentitem';
+@import './components/contentitemmenu';
+@import './components/tag';
 @import './components/modal';
 @import './components/dashboard';
+@import './components/feed';
+@import './components/navbutton';
+@import './components/navlink';
+@import './components/avatarbutton';
 @import './components/quill';
 
-@import './layout/sidebar';
-@import './layout/navbar';
+@import './layout/topnav';
+@import './layout/sidenav';
 
 @import './pages/landing';
 @import './pages/share';
