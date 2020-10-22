@@ -8,9 +8,9 @@ export default function Tag({ tag, colour, shape }) {
 
   return(
     <>
-      <Button className={`tag tag-colour-${colour} tag-shape-${shape}`} onClick={clickHandler}>
+      <div className={`tag tag-colour-${colour} tag-shape-${shape}`} onClick={clickHandler}>
         {tag}
-      </Button>
+      </div>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { FormInput } from 'shards-react';
 export default function Search({ show }) {
   return(
     <div>
-      <FormInput type="search" placeholder="Search"/>
+      <FormInput className="search-input" type="search" placeholder="Search"/>
     </div>
   );
 }

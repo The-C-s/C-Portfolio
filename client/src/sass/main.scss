@@ -1,7 +1,9 @@
-@import './base/typography';
-
+@import './vendors/shards';
 @import './vendors/bootstrap';
 @import './vendors/themify';
+
+@import './base/reset';
+@import './base/typography';
 
 @import './themes/default';
 
@@ -21,10 +23,25 @@ $theme-map: (
 @import './components/navbutton';
 @import './components/navlink';
 @import './components/avatarbutton';
+@import './components/search';
 @import './components/quill';
 
 @import './layout/topnav';
 @import './layout/sidenav';
+@import './layout/form';
 
 @import './pages/landing';
 @import './pages/share';
+
+// @include sass-themify() {
+
+//   .btn-primary {
+//     background-color: sass-themify-get-color('input-field-border');
+//     border-color: sass-themify-get-color('input-field-border');
+//   }
+
+//   .btn-primary:hover {
+//     border-color: sass-themify-get-color('input-field-border');
+//     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 4px 10px rgba(sass-themify-get-color('input-field-border'), 0.25);
+//   }
+// }

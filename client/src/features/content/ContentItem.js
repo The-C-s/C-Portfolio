@@ -39,7 +39,7 @@ export default function ContentItem({ content }) {
 
   return(
     <Container className="contentitem contentitem-container" key={id}>
-      <Card className="contentitem contentitem-card">
+      <div className="contentitem contentitem-card">
         <Row className="contentitem contentitem-head">
           <Col xs={11}>
             <Row className="contentitem contentitem-title">{title}</Row>
@@ -76,7 +76,7 @@ export default function ContentItem({ content }) {
             )}
           </div>
         </Row>
-      </Card>
+      </div>
     </Container>
   );
 }

@@ -1,0 +1,6 @@
+@include sass-themify() {
+  .form-control:focus {
+    border-color: sass-themify-get-color('input-field-border');
+    box-shadow: 0 .313rem .719rem rgba(sass-themify-get-color('input-field-border'),.1), 0 .156rem .125rem rgba(0, 0, 0, .06);
+  }
+}
