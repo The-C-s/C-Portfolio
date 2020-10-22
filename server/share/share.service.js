@@ -4,6 +4,7 @@ const User = db.User;
 const Share = db.Share;
 module.exports = {
     create,
+    getById,
     update,
     delete: _delete
 };
@@ -20,6 +21,25 @@ async function create(userid) {
     await user.save();
 
     return share;
+}
+
+async function getById(shareid) {
+    const sharePage = await Share.findById(shareid);
+
+    //check if the share page exists
+    if (!sharePage) throw new Error('SharePageNotFoundError');
+
+    //get all the posts in this sharepage
+    var post;
+    var posts = [];
+    var postid;
+    for(postid of sharePage.content) {
+        post = await Content.findById(postid);
+        if (!post) throw new Error('PostNotFoundError');
+        posts.push(post);
+    }
+
+    return posts;
 }
 
 //Updates the content of a share page
