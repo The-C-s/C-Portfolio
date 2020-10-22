@@ -1,0 +1,15 @@
+.topnav {
+  min-height: 0 !important;
+  height: 60px;
+
+  .topnav-navitem {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@include sass-themify() {
+  .topnav {
+    background-color: sass-themify-get-color('topnav-bg');
+  }
+}

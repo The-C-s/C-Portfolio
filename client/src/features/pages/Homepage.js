@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
-import TopNavbar from '../layout/TopNavbar';
+import TopNav from '../layout/TopNav';
 
 import Nav from 'react-bootstrap/Nav';
 import NavLink from '../layout/NavLink';
@@ -24,28 +24,28 @@ export default function Homepage() {
 
   return(
     <>
-      <TopNavbar/>
+      <TopNav/>
       <br/>
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
       <Nav className="flex-column">
         <h1> Homepage </h1>
         <hr/>
         <Nav.Item>
-          <NavLink to="/dashboard" activeOnlyWhenExact={true} label={<>
+          <NavLink to="/dashboard/content" activeOnlyWhenExact={true} label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Dashboard </h4> </Row>
             <Row> <h6> View and edit the content in your portfolio </h6> </Row>
           </>}/>
         </Nav.Item>
         <hr/>
         <Nav.Item>
-          <NavLink to="/profile" label={<>
+          <NavLink to="/dashboard/profile" label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Profile </h4> </Row>
             <Row> <h6> View and edit your profile </h6> </Row>
           </>}/>
         </Nav.Item>
         <hr/>
         <Nav.Item>
-          <NavLink to="/add" label={<>
+          <NavLink to="/dashboard/content/add" label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Add Content </h4> </Row>
             <Row> <h6> Create a new post for your portfolio </h6> </Row>
           </>}/>

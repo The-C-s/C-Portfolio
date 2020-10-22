@@ -1,152 +1,79 @@
-.card {
-  border-radius: 30px;
-  border: none;
-  box-shadow: 0px 14px 25px rgba(0, 0, 0, 0.1);
-  margin: 12% 5% 0 5%;
-  flex-grow: 1;
+.contentitem {
   font-family: 'Open Sans', sans-serif;
-}
 
-.card-header {
-  border: none;
-  border-radius: 30px 30px 0 0;
-  padding: 2% 4% 2% 2%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .row, [class^='col'] {
+    margin: 0;
+    padding: 0;
+  }
 
-.contentitem-header {
-  cursor: pointer;
-  z-index: 2;
-}
+  .contentitem-container {
+    width: 90%;
+  }
+  
+  .contentitem-card {
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 10px;
+    padding: 20px;
+  }
 
-.contentitem-header:hover .contentitem-title {
-  text-decoration: underline;
-}
+  .contentitem-menu {
+    justify-content: right;
+  }
 
-.card-body {
-  padding: 2% 5% 5% 5%;
-  z-index: 3;
-}
+  .contentitem-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -0.025em;
+  }
 
-.card-body h3 {
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 18px;
-  margin: 15px 0 15px 0;
-}
+  .contentitem-date {
+    font-size: 14px;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+    margin-top: 5px;
+  }
 
-.card-body p {
-  font-size: 16px;
-}
+  .contentitem-image-container {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
 
-.contentitem-title {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-transform: capitalize;
-  text-shadow: 0 0 5px black;
-}
+  .contentitem-image {
+    border-radius: 7px;
+    max-width: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
 
-.contentitem-date {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  padding-left: 10px;
-  text-shadow: 0 0 5px black;
-}
+  .contentitem-description {
+    margin: 0;
+  }
 
-.card-img {
-  border-radius: 30px 30px 0 0;
-}
+  .contentitem-body, .contentitem-footer {
+    margin-top: 10px;
+    align-items: center;
+  }
 
-.contentitem-tags {
-  font-style: normal;
-  font-size: 14px;
-}
+  .contentitem-description {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 
-.contentitem-tag, .contentitem-tag:hover {
-  padding: 0;
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
-  text-transform: none;
-  font-style: normal;
-  font-size: 14px;
-}
-
-.contentitem-container {
-  display: flex;
-  justify-content: space-between;
-  z-index: 4;
-}
-
-.contentitem-title-visibility {
-  display: flex;
-  align-items: center;
-}
-
-.contentitem-visibility-dot {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: 7px solid rgba(255, 255, 255, 0.32);
-  background-color: #fff;
-  background-clip: padding-box;
-  cursor: pointer;
-  transition: border-width 0.2s;
-  transition-timing-function: ease-out;
-  margin-right: 10px;
-}
-
-.contentitem-visibility-dot:hover {
-  border-width: 3px;
-}
-
-.contentitem-dropdown-toggle {
-  cursor: pointer;
-  transition: transform 0.5s;
-  width: 20px !important;
-}
-
-.contentitem-dropdown-toggle:hover {
-  transform: rotate(45deg);
-}
-
-.contentitem-dropdown.show .contentitem-dropdown-toggle {
-  transform: rotate(90deg);
-}
-
-.contentitem-dropdown-menu {
-  opacity: 100 !important;
-  top: 20px !important;
-  left: -80px !important;
-  pointer-events: auto !important;
-  min-width: 0;
-  border-radius: 10%;
-  box-shadow: 0px 14px 25px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  .contentitem-tags {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
 
 @include sass-themify() {
 
-  .card-header {
-    color: sass-themify-get-color('contentitem-title');
-    background: sass-themify-get-color('contentitem-bg');
-  }
-
-  .card-body h3 {
-    color: sass-themify-get-color('contentitem-heading');
-  }
-
-  .card-body p {
-    color: sass-themify-get-color('contentitem-text');
+  .contentitem-card {
+    background-color: sass-themify-get-color('contentitem-bg');
   }
 
   .contentitem-title {
@@ -157,11 +84,7 @@
     color: sass-themify-get-color('contentitem-date');
   }
 
-  .contentitem-tags {
+  .contentitem-body {
     color: sass-themify-get-color('contentitem-text');
-  }
-  
-  .contentitem-tag, .contentitem-tag:hover {
-    color: sass-themify-get-color('contentitem-tag');
   }
 }
