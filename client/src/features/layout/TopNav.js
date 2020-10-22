@@ -8,7 +8,7 @@ import { faSearch, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
 import NavButton from './NavButton';
 import AvatarButton from './AvatarButton';
 import EditUser from '../user/EditUser';
-import Search from '../dashboard/Search';
+import Search from '../search/Search';
 
 export default function TopNav() {
   
