@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
 }
 
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
+//axios.defaults.baseURL = 'http://localhost:62541';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
@@ -14,8 +15,8 @@ export const CONTENT = '/content/';
 export const CREATE_CONTENT = '/content/create'; 
 export const CREATE_PROFILE = '/profile/create'; 
 export const PROFILE = '/profile/'; 
-export const ADD_LOGO = '/profile/addLogo/';
-export const ADD_RESUME = '/profile/addResume/'; 
+export const ADD_LOGO = '/profile/addLogo';
+export const ADD_RESUME = '/profile/addResume'; 
 export const UPDATE_USER = '/users/update';
 
 export const token = {
@@ -72,9 +73,9 @@ export const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`);
 export const getProfile = async id => await axios.get(`${PROFILE}${id}`); 
 
 //Takes a profile id and authorises with existing token 
-export const addLogo = async (id, logo) => await axios.post(`${ADD_LOGO}${id}`, logo);  
+export const addLogo = async logo => await axios.put(ADD_LOGO, logo);  
 
-export const addResume = async (id, resume) => await axios.post(`${ADD_RESUME}${id}`, resume);  
+export const addResume = async resume => await axios.put(ADD_RESUME, resume);  
 
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
 

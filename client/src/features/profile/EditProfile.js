@@ -10,17 +10,17 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Projects from "./Projects";
 
 export default function EditProfile({ profile, projects, show, closeHandler }) {
+  const dispatch = useDispatch();
   //_profile is the state variable, updateProfile is a function that updates the state
   //Initial state of profile always takes some time to update
   const [_profile, updateProfile] = useState(profile);
   const [_projects, updateProjects] = useState(projects);
-
   const [_education, updateEducation] = useState(profile.education);
   const [_experience, updateExperience] = useState(profile.experience);
   const [_logo, updateLogo] = useState();
   const [_resume, updateResume] = useState();
-  const dispatch = useDispatch();
   const [viewAddProject, setView] = useState(false);
+
   //Saves all changes
   const editClickHandler = () => {
     dispatch(editProfile(_profile))
@@ -31,7 +31,7 @@ export default function EditProfile({ profile, projects, show, closeHandler }) {
   const saveLogoHandler = () => {
     const _data = new FormData();
     _data.set("file", _logo);
-    dispatch(addLogo(_profile.id, _data))
+    dispatch(addLogo(_data))
       .then(() => dispatch(getProfile(_profile.id)))
       .then(() => closeHandler());
   };
@@ -39,7 +39,7 @@ export default function EditProfile({ profile, projects, show, closeHandler }) {
   const saveResumeHandler = () => {
     const _data = new FormData();
     _data.set("file", _resume);
-    dispatch(addResume(_profile.id, _data))
+    dispatch(addResume(_data))
       .then(() => dispatch(getProfile(_profile.id)))
       .then(() => closeHandler());
   };
@@ -95,26 +95,25 @@ export default function EditProfile({ profile, projects, show, closeHandler }) {
     updateProfile({ ..._profile, experience: tmp });
   };
 
-  /*
-  const onChangeProjectHandler = (e) => {
-    const tmp = [..._projects];
-    tmp[e.target.id] = e.target.value;
-    updateProjects(tmp);
-    updateProfile({ ..._projects, projects: tmp });
-  };
-  */
   const addProjectField = () => {
-    //const tmp = [..._projects, ""];
-    // updateProjects(tmp);
-    //updateProfile({ ..._profile, projects: tmp });
     setView(true);
   };
 
+  const closeProjectField = () => {
+    setView(false);
+  };
+
   const deleteProjectField = (id) => {
+    //Removes project from state 
     const tmp = [..._projects];
     tmp.splice(id, 1);
     updateProjects(tmp);
-    updateProfile({ ..._profile, projects: tmp });
+    //Convert to ids and update profile
+    const tmpIds = [];
+    for(let i = 0; i < _projects.length; i++){ 
+      tmpIds.push(_projects[i].id); 
+    } 
+    updateProfile({ ..._profile, projects: tmpIds });
   };
 
   return (
@@ -216,14 +215,15 @@ export default function EditProfile({ profile, projects, show, closeHandler }) {
           {"\n"}
           {viewAddProject && (
             <Projects
-              projects={projects}
+              projects={_projects}
               profile={_profile}
               updateProfile={updateProfile}
               updateProjects={updateProjects}
+              closeProjectField = {closeProjectField}
             />
           )}
           {"\n"}
-          <Button onClick={addProjectField}>New Project</Button>
+          {!viewAddProject && <Button onClick={addProjectField}>New Project</Button>}
         </Form>
       </Modal.Body>
       <Modal.Footer>

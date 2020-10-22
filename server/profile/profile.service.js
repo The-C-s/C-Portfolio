@@ -40,20 +40,18 @@ async function create(userid, userParam) {
 }
 
 //Adds or updates a logo 
-async function addLogo(userid, profileid, file){ 
+async function addLogo(userid, file){ 
     //Checks if user and profile exist 
     try{ 
-        const profile = await Profile.findById(profileid); 
+        //Finds user 
         const user = await User.findById(userid); 
-        //Updates the logo params of profile if valid user and profile 
-        if(user.email == profile.email){ 
-            profile.logo = file.path; 
-            await profile.save(); 
-            return profile; 
-        }
-        else{ 
-            throw "Invalid User Details";
-        }
+        //Finds profile 
+        const profileid = user.profile; 
+        const profile = await Profile.findById(profileid); 
+        //Updates logo and saves  
+        profile.logo = file.path; 
+        await profile.save(); 
+        return profile; 
     }
     catch{ 
         throw "Profile does not exist"; 
@@ -61,20 +59,18 @@ async function addLogo(userid, profileid, file){
 }
 
 //Adds or updates a resume 
-async function addResume(userid, profileid, file){ 
+async function addResume(userid, file){ 
     //Checks if user and profile exist 
     try{ 
-        const profile = await Profile.findById(profileid); 
+        //Finds user 
         const user = await User.findById(userid); 
-        //Updates the logo params of profile if valid user and profile 
-        if(user.email == profile.email){ 
-            profile.resume = file.path; 
-            await profile.save(); 
-            return profile; 
-        }
-        else{ 
-            throw "Invalid User Details";
-        }
+        //Finds profile 
+        const profileid = user.profile; 
+        const profile = await Profile.findById(profileid); 
+        //Updates resume and saves  
+        profile.resume = file.path; 
+        await profile.save(); 
+        return profile; 
     }
     catch{ 
         throw "Profile does not exist"; 
@@ -88,7 +84,7 @@ async function update(userid, profileid, userParam) {
         const profile = await Profile.findById(profileid);
         //Checks if the person editing is the the person who owns profile 
         const user = await User.findById(userid);
-        if(user.email == profile.email){ 
+        if(user.profile == profile.id){ 
             //Updates input if yes
             Object.assign(profile, userParam);
             await profile.save();
@@ -109,7 +105,7 @@ async function _delete(userid, profileid) {
         const profile = Profile.findbyId(profileid); 
         const user = await User.findById(userid);
         //Checks that the user accessing is the same as the creator 
-        if(user.email == profile.email){
+        if(user.profile == profile.id){
             return await Content.findByIdAndRemove(id);
         }
         else{ 
