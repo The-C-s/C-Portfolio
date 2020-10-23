@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { FormInput } from 'shards-react';
+import {
+  InputGroup,
+  InputGroupText,
+  InputGroupAddon,
+  FormInput
+} from 'shards-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { activeSearch, stopSearch } from './searchSlice';
 
@@ -15,6 +22,7 @@ import { activeSearch, stopSearch } from './searchSlice';
 export default function Search({ show }) {
 
   const content = useSelector(state => state.content);
+  const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
 
@@ -49,6 +57,16 @@ export default function Search({ show }) {
   //   });
   // }
 
+  const searchClickHandler = () => {
+    document.getElementsByClassName('search-input')[0].focus();
+    setShowSearch(true);
+  }
+
+  const onFocusOutHandler = () => {
+    console.log('focus out');
+    if (query === '') setShowSearch(false);
+  }
+
   const onChangeHandler = e => {
 
     const _query = e.target.value;
@@ -65,7 +83,24 @@ export default function Search({ show }) {
 
   return(
     <div className="search">
-      <FormInput className="search-input" type="search" placeholder="Search" value={query} onChange={onChangeHandler}/>
+      <InputGroup seamless>
+        <InputGroupAddon type="prepend">
+          <InputGroupText>
+            <FontAwesomeIcon
+              className={`search-icon search-icon${showSearch ? '-active' : '-inactive'}`}
+              icon={faSearch}
+              onClick={searchClickHandler}
+            />
+          </InputGroupText>
+        </InputGroupAddon>
+        <FormInput
+          className={`search-input search-input${showSearch ? '-active' : '-inactive'}`}
+          type="search"
+          value={query}
+          onChange={onChangeHandler}
+          onBlur={onFocusOutHandler}
+        />
+      </InputGroup>
     </div>
   );
 }
