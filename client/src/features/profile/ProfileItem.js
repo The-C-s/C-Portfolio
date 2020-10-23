@@ -56,11 +56,11 @@ export default function ProfileItem({ profile, projects }) {
         show={showDelete}
         closeHandler={handleDeleteClose}
       />
-      <Container>
+      <Container className = "profile">
         <Row>
         <h4 className="mt-3 mb-5">Logo</h4>
           <Col className="mt-3 ml-5 mr-5">
-            {hasLogo && <Image src={logo} roundedCircle fluid />} 
+            {hasLogo && <Image className= "profile profile-logo" src={logo} roundedCircle/>} 
           </Col>
         </Row>
       </Container>
@@ -92,7 +92,7 @@ export default function ProfileItem({ profile, projects }) {
         </ListGroup>
      </Row>
       <Row>
-        <ListGroup className="mt-5 ml-5 mr-5">
+        <ListGroup className="profile-projects">
           <h4>Projects</h4>
           { hasProjects && 
           <div className="card-projects">
