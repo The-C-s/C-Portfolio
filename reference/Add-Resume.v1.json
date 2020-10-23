@@ -14,7 +14,7 @@
     }
   ],
   "paths": {
-    "/:id/addResume": {
+    "/profile/addResume": {
       "put": {
         "description": "uploads a file and saves link to resume",
         "summary": "addResume",

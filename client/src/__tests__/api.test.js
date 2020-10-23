@@ -14,8 +14,8 @@ const apiPaths = {
   CREATE_CONTENT: '/content/create',
   CREATE_PROFILE: '/profile/create',
   PROFILE: '/profile/',
-  ADD_LOGO: '/profile/addLogo/',
-  ADD_RESUME: '/profile/addResume/',
+  ADD_LOGO: '/profile/addLogo',
+  ADD_RESUME: '/profile/addResume',
   UPDATE_USER: '/users/update'
 }
 
@@ -149,11 +149,11 @@ test('Get Profile API call is correct', async () => {
 });
 
 test('Upload Logo API call is correct', async () => {
-  await api.addLogo(profile.id, profile.logo);
-  return expect(axios.post).toHaveBeenLastCalledWith(`${apiPaths.ADD_LOGO}${profile.id}`, profile.logo);
+  await api.addLogo(profile.logo);
+  return expect(axios.put).toHaveBeenLastCalledWith(apiPaths.ADD_LOGO, profile.logo);
 });
 
 test('Upload Resume API call is correct', async () => {
-  await api.addResume(profile.id, profile.resume);
-  return expect(axios.post).toHaveBeenLastCalledWith(`${apiPaths.ADD_RESUME}${profile.id}`, profile.resume);
+  await api.addResume(profile.resume);
+  return expect(axios.put).toHaveBeenLastCalledWith(apiPaths.ADD_RESUME, profile.resume);
 });
