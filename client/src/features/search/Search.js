@@ -35,32 +35,19 @@ export default function Search({ show }) {
     });
   });
 
-  const search = _query => {
+  // const autoComplete = () => {
 
-    _query = _query.toLowerCase();
-    let _results = new Set();
-    let matchedTitles = new Set();
-    let matchedTags = new Set();
-
-    options.titles.forEach(title => {
-      if (title.includes(_query)) matchedTitles.add(title);
-    });
-
-    options.tags.forEach(tag => {
-      if (tag.includes(_query)) matchedTags.add(tag);
-    });
-
-    content.forEach(_content => {
-
-      if (matchedTitles.has(_content.title.toLowerCase())) _results.add(_content);
-
-      _content.tags.forEach(tag => {
-        if (matchedTags.has(tag.toLowerCase())) _results.add(_content);
-      });
-    });
-
-    return [..._results];
-  }
+  //   let matchedTitles = new Set();
+  //   let matchedTags = new Set();
+    
+  //   options.titles.forEach(title => {
+  //     if (title.includes(query)) matchedTitles.add(title);
+  //   });
+    
+  //   options.tags.forEach(tag => {
+  //     if (tag.includes(query)) matchedTags.add(tag);
+  //   });
+  // }
 
   const onChangeHandler = e => {
 
@@ -73,8 +60,7 @@ export default function Search({ show }) {
       return;
     }
 
-    const _results = search(_query);
-    dispatch(activeSearch({ query: _query, content: _results }));
+    dispatch(activeSearch({ query: _query, content: content }));
   }
 
   return(

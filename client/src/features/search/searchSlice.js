@@ -10,7 +10,7 @@ const search = createSlice({
       return {
         active: true,
         query: action.payload.query,
-        content: action.payload.content
+        content: searchContent(action.payload.query, action.payload.content)
       }
     },
     stopSearch: () => { return { active: false } }
@@ -19,6 +19,23 @@ const search = createSlice({
     'user/logout': () => { return { active: false } }
   }
 });
+
+const searchContent = (query, content) => {
+  
+  query = query.toLowerCase();
+  let results = new Set();
+  
+  content.forEach(_content => {
+    
+    if (_content.title.toLowerCase().includes(query)) results.add(_content);
+    
+    _content.tags.forEach(tag => {
+      if (tag.toLowerCase().includes(query)) results.add(_content);
+    });
+  });
+  
+  return [...results];
+}
 
 export const { activeSearch, stopSearch } = search.actions;
 
