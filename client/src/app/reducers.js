@@ -8,10 +8,12 @@ import appReducer from './appSlice';
 import contentReducer from '../features/content/contentSlice';
 import userReducer from '../features/user/userSlice';
 import profileReducer from '../features/profile/profileSlice';
+import searchReducer from '../features/search/searchSlice';
  
 export default combineReducers({
   app: appReducer,
   profile: profileReducer,
   content: contentReducer,
-  user: userReducer
+  user: userReducer,
+  search: searchReducer
 });

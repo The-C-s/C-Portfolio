@@ -1,6 +1,7 @@
 .navbutton {
   cursor: pointer;
   width: 24px !important;
+  margin: 0 15px;
 }
 
 @include sass-themify() {

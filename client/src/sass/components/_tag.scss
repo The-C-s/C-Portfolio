@@ -1,7 +1,6 @@
 .tag {
   height: 20px;
   padding: 0 5px;
-  text-transform: none;
   display: flex;
   align-items: center;
   font-weight: normal;
@@ -9,6 +8,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-flex;
+  font-size: 12px;
 }
 
 .tag-shape-first {

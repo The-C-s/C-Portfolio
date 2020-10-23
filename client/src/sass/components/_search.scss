@@ -1,0 +1,29 @@
+.search {
+
+  .search-input {
+    border-radius: 0.375rem !important;
+    transition: 0.5s;
+    width: 200px;
+  }
+
+  .search-icon {
+    cursor: pointer;
+  }
+
+  .search-icon-inactive {
+    height: 18px;
+    width: 24px;
+  }
+
+  .search-input-inactive {
+    width: 0;
+    border: none;
+    height: 24px;
+  }
+}
+
+@include sass-themify() {
+  .search-icon {
+    color: sass-themify-get-color('topnav-fg');
+  }
+}
