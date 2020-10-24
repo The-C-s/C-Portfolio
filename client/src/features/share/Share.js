@@ -9,6 +9,8 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
+import ProfileLeft from './ProfileLeft';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf, faEnvelope, faArrowCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 
@@ -50,53 +52,58 @@ export default function Share() {
     <>
       <Button as={Link} to="/dashboard" variant="link" className="return">Back to dashboard</Button>
       <Container className="share">
-        <Row>
-          <Col xs="auto">
-            <Image roundedCircle className="logo" src={profile.logo}/>
-          </Col>
-          <Col>
-            <Row className="name">{user.firstName} {user.lastName}</Row>
-            <Row className="bio">
-              <Col>
-                <h6>Experience</h6>
-                {profile.experience.map(experience => <p className="bio-item">{experience}</p>)}
-              </Col>
-              <Col>
-                <h6>Education</h6>
-                {profile.education.map(education => <p className="bio-item">{education}</p>)}
-              </Col>
-            </Row>
-            <Row className="links">
-              <Button as="a" href={profile.resume} target="_blank" variant="link"><FontAwesomeIcon icon={faFilePdf}/> Resume</Button>
-              <Button as="a" href={`mailto:${user.email}`} variant="link"><FontAwesomeIcon icon={faEnvelope}/> {user.email}</Button>
-            </Row>
-          </Col>
-        </Row>
-        <Row>
-          {_projects.map(project =>
-            <Row key={project.id} className="project">
-              <Row>
-                <Col xs="auto" className="date">{toLongDate(project.displayDate)}</Col>
+        <Col xs={3}>
+          <ProfileLeft/>
+        </Col>
+        <Col xs={9}>
+          <Row>
+            <Col xs="auto">
+              <Image roundedCircle className="logo" src={profile.logo}/>
+            </Col>
+            <Col>
+              <Row className="name">{user.firstName} {user.lastName}</Row>
+              <Row className="bio">
                 <Col>
-                  <Row className="title">{project.title}</Row>
-                  <Row className="description">{project.description}</Row>
-                  <Button variant="link" onClick={() => onExpandClick(project.id)}>
-                    {project.expand && <>Hide project <FontAwesomeIcon icon={faArrowCircleUp}/></>}
-                    {!project.expand && <>Show project <FontAwesomeIcon icon={faArrowCircleDown}/></>}
-                  </Button>
+                  <h6>Experience</h6>
+                  {profile.experience.map(experience => <p className="bio-item">{experience}</p>)}
+                </Col>
+                <Col>
+                  <h6>Education</h6>
+                  {profile.education.map(education => <p className="bio-item">{education}</p>)}
                 </Col>
               </Row>
-              <Collapse in={project.expand}>
+              <Row className="links">
+                <Button as="a" href={profile.resume} target="_blank" variant="link"><FontAwesomeIcon icon={faFilePdf}/> Resume</Button>
+                <Button as="a" href={`mailto:${user.email}`} variant="link"><FontAwesomeIcon icon={faEnvelope}/> {user.email}</Button>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            {_projects.map(project =>
+              <Row key={project.id} className="project">
                 <Row>
-                  {(getContentType(project.content) === 'text') && <div dangerouslySetInnerHTML={{ __html: project.content }}/>}
-                  {(getContentType(project.content) === 'image') && <a href={project.content} target="_blank" rel="noopener noreferrer"><Image src={project.content}/></a>}
-                  {(getContentType(project.content) === 'url') && <a href={project.content} target="_blank" rel="noopener noreferrer">External link</a>}
+                  <Col xs="auto" className="date">{toLongDate(project.displayDate)}</Col>
+                  <Col>
+                    <Row className="title">{project.title}</Row>
+                    <Row className="description">{project.description}</Row>
+                    <Button variant="link" onClick={() => onExpandClick(project.id)}>
+                      {project.expand && <>Hide project <FontAwesomeIcon icon={faArrowCircleUp}/></>}
+                      {!project.expand && <>Show project <FontAwesomeIcon icon={faArrowCircleDown}/></>}
+                    </Button>
+                  </Col>
                 </Row>
-              </Collapse>
-              <hr/>
-            </Row>
-          )}
-        </Row>
+                <Collapse in={project.expand}>
+                  <Row>
+                    {(getContentType(project.content) === 'text') && <div dangerouslySetInnerHTML={{ __html: project.content }}/>}
+                    {(getContentType(project.content) === 'image') && <a href={project.content} target="_blank" rel="noopener noreferrer"><Image src={project.content}/></a>}
+                    {(getContentType(project.content) === 'url') && <a href={project.content} target="_blank" rel="noopener noreferrer">External link</a>}
+                  </Row>
+                </Collapse>
+                <hr/>
+              </Row>
+            )}
+          </Row>
+        </Col>
       </Container>
     </>
   );
