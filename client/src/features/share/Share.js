@@ -12,7 +12,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import ProfileBar from './ProfileBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faEnvelope, faArrowCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faFilePdf, faEnvelope, faArrowCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 
 import { parseDate, getContentType } from '../../common/helpers';
 
@@ -32,13 +32,15 @@ export default function Share() {
 
   return(
     <>
-      <Button as={Link} to="/dashboard" variant="link" className="return">Back to dashboard</Button>
       <Container className="share">
         <Col xs={3}>
           <ProfileBar user={user} profile={{ ...profile, bio: "Yolo's TSLA calls full time" }}/>
         </Col>
         <Col xs={9}>
-          
+          <Row className="share-showcase"></Row>
+          <Row className="share-education"></Row>
+          <Row className="share-experience"></Row>
+          <Row className="share-projects"></Row>
         </Col>
       </Container>
     </>

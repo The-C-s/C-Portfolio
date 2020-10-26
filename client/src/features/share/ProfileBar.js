@@ -2,6 +2,8 @@ import React from 'react';
 
 import Nav from 'react-bootstrap/Nav';
 
+import { faGraduationCap, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+
 import NavLink from '../layout/NavLink';
 import LinkedUL from './LinkedUL';
 
@@ -19,11 +21,11 @@ export default function ProfileBar({ user, profile }) {
             {profile.bio}
           </div>}
         <Nav.Item className="profilebar-item">
-          <NavLink label="Education"/>
+          <NavLink label="Education" icon={faGraduationCap}/>
           <LinkedUL values={profile.education}/>
         </Nav.Item>
         <Nav.Item className="profilebar-item">
-          <NavLink label="Experience"/>
+          <NavLink label="Experience" icon={faBriefcase} iconSize="md"/>
           <LinkedUL values={profile.experience}/>
         </Nav.Item>
       </div>
