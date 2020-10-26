@@ -11,7 +11,7 @@ export default function ProfileBar({ user, profile }) {
 
   return(
     <Nav className="profilebar flex-column col-sm-3 col-lg-2 d-none d-sm-block">
-      <img circle className="profilebar-logo" src={profile.logo} alt="cPortfolio logo"/>
+      <img className="profilebar-logo" src={profile.logo} alt="cPortfolio logo"/>
       <div className="profilebar-content">
         <div className="profilebar-name">
           {user.firstName} {user.lastName}
@@ -25,7 +25,7 @@ export default function ProfileBar({ user, profile }) {
           <LinkedUL values={profile.education}/>
         </Nav.Item>
         <Nav.Item className="profilebar-item">
-          <NavLink label="Experience" icon={faBriefcase} iconSize="md"/>
+          <NavLink label="Experience" icon={faBriefcase} iconSize="sm"/>
           <LinkedUL values={profile.experience}/>
         </Nav.Item>
       </div>
