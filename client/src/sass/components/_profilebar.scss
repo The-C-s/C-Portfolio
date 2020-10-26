@@ -1,0 +1,68 @@
+.profilebar {
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  display: flex !important;
+  align-items: left;
+  padding: 0 1%;
+  align-items: center;
+
+  .profilebar-logo {
+    width: 100px;
+    height: 100px;
+    margin: 20px 0;
+    align-self: center;
+    border-radius: 50%;
+  }
+
+  .profilebar-content {
+    width: 100%;
+
+    .profilebar-item {
+      margin: 10px 0 0 0;
+    }
+  
+    .profilebar-name {
+      text-align: center;
+      font-size: 24px;
+    }
+  
+    .profilebar-headline {
+      text-align: center;
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }
+}
+
+@include sass-themify() {
+
+  .profilebar {
+    background-color: sass-themify-get-color('profilebar-bg');
+  }
+
+  .profilebar-name {
+    color: sass-themify-get-color('profilebar-name');
+  }
+
+  .profilebar-headline {
+    color: sass-themify-get-color('profilebar-headline');
+  }
+
+  .linkedul-li-content {
+    color: sass-themify-get-color('profilebar-fg');
+  }
+
+  .linkedul-li-bullet {
+    background-color: sass-themify-get-color('profilebar-accent');
+  }
+
+  .linkedul-li-bullet:before {
+    border-left: 1px solid sass-themify-get-color('profilebar-fg');
+  }
+}
