@@ -10,6 +10,8 @@ export default function EditUser({show, closeHandler, user}) {
     //const user = useSelector(state => state.user);
 
     const userFromState = useSelector(state => state.user);
+    const [passwordState, setpasswordState] = useState(false);
+    const [passwordInfo, updatePasswordInfo] = useState({"curr" : "", "pass" : "", "confirm" : ""});
 
 
     //Initialised with the user fields.
@@ -26,6 +28,12 @@ export default function EditUser({show, closeHandler, user}) {
     //source of truth for the user details, updated alongside the form when editing
     const onChangeHandler = e => updateDetails({ ..._user, [e.target.id]: e.target.value});
 
+    const onPassChangeHandler = e => updatePasswordInfo({ ..._user, [e.target.id]: e.target.value});
+
+    const passwordToggleHandler = () => {setpasswordState(true)};
+
+    const passwordToggleOffHandler = () => {setpasswordState(false)};
+
     const resetHandler = () => {
       //
       updateDetails(userFromState);
@@ -41,7 +49,9 @@ export default function EditUser({show, closeHandler, user}) {
         <Modal.Header><Modal.Title>Edit User Details</Modal.Title></Modal.Header>
         <Modal.Body>
         <Image src = {userFromState.avatar} alt = "Hello Darkness" roundedCircle className = "rounded mx-auto d-block"/>
+        { !passwordState && (
         <Form>
+          
         <Form.Group controlId = "username">
           <Form.Label>Username</Form.Label>
             <Form.Control as="textarea" rows = "1" value = {_user.username} onChange = {onChangeHandler}/>
@@ -54,7 +64,29 @@ export default function EditUser({show, closeHandler, user}) {
             <Form.Label>Last Name</Form.Label>
             <Form.Control as="textarea" rows="1" value={_user.lastName} onChange={onChangeHandler}/>
           </Form.Group>
+          <Button variant="link" onClick={passwordToggleHandler}>Cancel</Button>
         </Form>
+        
+        )}
+
+        {passwordState && (<Form>
+          
+          <Form.Group controlId = "currPassword">
+            <Form.Label>Current Password</Form.Label>
+              <Form.Control type="password" value = {passwordInfo.curr} onChange = {onPassChangeHandler}/>
+          </Form.Group>
+            <Form.Group controlId="newPassword">
+              <Form.Label>New Password</Form.Label>
+              <Form.Control type="password" value={passwordInfo.pass} onChange={onPassChangeHandler}/>
+            </Form.Group>
+            <Form.Group controlId="passwordConfirm">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control type="password" value={passwordInfo.confirm} onChange={onPassChangeHandler}/>
+            </Form.Group>
+            <Button variant="link" onClick={passwordToggleOffHandler}>Cancel</Button>
+          </Form>)}
+
+
         </Modal.Body>
         <Modal.Footer>
             <Button variant="link" onClick = {resetHandler}>Reset Changes</Button>

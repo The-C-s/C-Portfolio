@@ -5,7 +5,8 @@ import {
   authenticateToken,
   updateUser,
   registerUser,
-  token
+  token,
+  updatePassword
 } from '../../common/api';
 
 export const login = createAsyncThunk(
@@ -22,6 +23,11 @@ export const editUser = createAsyncThunk(
   'user/update',
   updateUser
 );
+
+/*export const updatePassword = createAsyncThunk(
+  'user/update',
+  updatePassword
+); */
 
 export const register = createAsyncThunk(
   'user/register',
