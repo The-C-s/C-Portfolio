@@ -48,11 +48,18 @@ export default function Profile() {
 
   //Will only load the profile if its completely loaded 
   return(
-    <div className="flex-wrap pt-3 pb-2 mb-3">
+    <div>
+      <div>
       <Row>
-        <h1 className="h2 ml-5 mt-5">Your Profile</h1>
+        <div className ="pageheading-rectangle1" ><h1 className="pageheading-heading">Your Profile</h1></div>
+        <div className = "pageheading-rectangleMash"></div>
+        <div className = "pageheading-decoration1"/>
+        <div className = "pageheading-decoration2"/>
       </Row>
+      </div>
+      <div className = "mt-2">
       {isLoaded && <ProfileItem profile = {profile} projects ={projectList} />}
+      </div>
     </div>
   );
 }
