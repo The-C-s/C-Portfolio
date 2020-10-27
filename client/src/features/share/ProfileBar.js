@@ -2,15 +2,15 @@ import React from 'react';
 
 import Nav from 'react-bootstrap/Nav';
 
-import { faGraduationCap, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import NavLink from '../layout/NavLink';
 import LinkedUL from './LinkedUL';
 
-export default function ProfileBar({ user, profile }) {
+export default function ProfileBar({ user, profile, expanded }) {
 
   return(
-    <Nav className="profilebar flex-column col-sm-3 col-lg-2 d-none d-sm-block">
+    <Nav className="profilebar flex-column col-3 col-lg-2">
       <img className="profilebar-logo" src={profile.logo} alt="cPortfolio logo"/>
       <div className="profilebar-content">
         <div className="profilebar-name">
@@ -27,6 +27,9 @@ export default function ProfileBar({ user, profile }) {
         <Nav.Item className="profilebar-item">
           <NavLink label="Experience" icon={faBriefcase} iconSize="sm"/>
           <LinkedUL values={profile.experience}/>
+        </Nav.Item>
+        <Nav.Item className="profilebar-item">
+          <NavLink label="Projects" icon={faEdit} iconSize="sm"/>
         </Nav.Item>
       </div>
     </Nav>

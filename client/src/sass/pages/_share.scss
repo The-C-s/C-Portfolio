@@ -2,26 +2,23 @@
   font-family: 'Open Sans', sans-serif;
   padding: 36px;
 
-  .share-showcase {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    overflow-x: auto;
+  .share-section {
+    margin-bottom: 40px;
+  }
 
-    .share-showcase-item {
-      max-width: 500px;
-      display: inline-block;
-      vertical-align: middle;
+  // Remove when ContentItem is replaced
+  .showcase-item {
+    max-width: 500px;
+    display: inline-block;
+    vertical-align: middle;
+    
+    .contentitem {
+      .contentitem-description, .contentitem-title {
+        @include ellipsis-truncate;
+      }
 
-      // Remove when ContentItem is replaced
-      .contentitem {
-        .contentitem-description, .contentitem-title {
-          @include ellipsis-truncate;
-        }
-  
-        .contentitem-footer, .contentitem-menu {
-          display: none;
-        }
+      .contentitem-footer, .contentitem-menu {
+        display: none;
       }
     }
   }
