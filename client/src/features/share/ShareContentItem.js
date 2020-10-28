@@ -50,11 +50,12 @@ export default function ShareContentItem({ content, clickHandler, closeHandler }
             <Row className="sharecontentitem sharecontentitem-title">{title}</Row>
             <Row className="sharecontentitem sharecontentitem-date">{date}</Row>
           </Col>
-          <Col>
-            <Row className="sharecontentitem sharecontentitem-menu" onClick={closeClickHandler}>
-              goodbye
-            </Row>
-          </Col>
+          {focused &&
+            <Col>
+              <Row className="sharecontentitem sharecontentitem-menu" onClick={closeClickHandler}>
+                <strong>goodbye</strong>
+              </Row>
+            </Col>}
         </Row>
         <Row className="sharecontentitem sharecontentitem-body">
           {image &&
