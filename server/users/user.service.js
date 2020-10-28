@@ -102,9 +102,7 @@ async function create(userParam) {
 
 async function update(id, userParam) {
     const user = await User.findById(id);
-
-    console.log("Got here");
-
+    
     // validate
     if (!user) throw new Error('UserNotFoundError');
     //if request gave username and username isn't the same as it was and the username is in the database

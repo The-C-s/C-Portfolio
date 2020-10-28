@@ -20,25 +20,15 @@ export default function Register() {
   const onSubmitHandler = e => {
     
     e.preventDefault();
-    try {
-      try{
+    
         try{
-          dispatch(register(form));
+          dispatch(register(form))
+          //.then(dispatch(login(form)))
+          .then(() => history.push('/homepage'));
         }
         catch(error){
           throw("Could not register");
         }
-        dispatch(login(form));
-      }
-      catch(error){
-        throw("Could not log in");
-      }
-      dispatch(createProfile);
-      history.push('/homepage');
-    }
-    catch(error){
-      throw("Could not create Profile");
-    }
   }
   
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });

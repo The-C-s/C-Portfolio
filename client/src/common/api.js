@@ -5,8 +5,8 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
   require('../_mockapi/api');
 }
 
-axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:55687';
+//axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:57670';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';

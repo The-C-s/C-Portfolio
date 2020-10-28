@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
 //rich text editor
 import ReactQuill from 'react-quill';
@@ -27,6 +28,7 @@ export default function AddContent({ setView }) {
   const toggleShowFileOn = () => setShowFile(true);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmitHandler = e => {
     // Prevent 'Submit' from actually doing a traditional submit
@@ -43,7 +45,7 @@ export default function AddContent({ setView }) {
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
     dispatch(createContent(data))
       .then(() => dispatch(getContent()))
-      .then(() => setView('dashboard'));
+      .then(() => history.push('/dashboard'));
   }
 
   // Input fields are based on state, so typing in them won't work unless we also change the state
