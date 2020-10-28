@@ -14,7 +14,7 @@ export default function Register() {
   const history = useHistory();
   const registering = useSelector(state => state.app.loading.register);
   const loggingIn = useSelector(state => state.app.loading.login);
-  const [form, updateForm] = useState({ name: '', email: '', password: '', password2: ''});
+  const [form, updateForm] = useState({ name: '', email: '', password: '', confirmPass: ''});
   
   const onSubmitHandler = e => {
     
@@ -65,9 +65,9 @@ export default function Register() {
         <Form.Group>
           <Form.Control
           type="password"  
-          id="password2" 
+          id="confirmPass" 
           placeholder="Confirm Password" 
-          value={form.password2}
+          value={form.confirmPass}
           onChange={onChangeHandler}
           className="form-control"
           />

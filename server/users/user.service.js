@@ -62,10 +62,14 @@ async function create(userParam) {
     if (!userParam.password) {
       throw 'Password is a required field';
     }
+    if (!(userParam.password == userParam.confirmPass)){
+        throw 'Passwords do not match';
+    }
 
     //ignore illegal fields
     delete userParam.hash;
     delete userParam.content;
+    delete userParam.confirmPass;
     delete userParam.profile;
     delete userParam.createdDate;
     delete userParam.avatar;
