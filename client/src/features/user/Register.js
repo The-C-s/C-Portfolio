@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import HashLoader from 'react-spinners/HashLoader';
 
-import { register, login } from './userSlice';
-import {createProfile} from '../profile/profileSlice';
+import { register} from './userSlice';
+//import {createProfile} from '../profile/profileSlice';
 
 export default function Register() {
   
@@ -20,15 +20,10 @@ export default function Register() {
   const onSubmitHandler = e => {
     
     e.preventDefault();
-    
-        try{
           dispatch(register(form))
           //.then(dispatch(login(form)))
           .then(() => history.push('/homepage'));
-        }
-        catch(error){
-          throw("Could not register");
-        }
+        
   }
   
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
