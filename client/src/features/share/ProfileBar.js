@@ -1,37 +1,40 @@
 import React from 'react';
 
-import Nav from 'react-bootstrap/Nav';
-
 import { faGraduationCap, faBriefcase, faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import NavLink from '../layout/NavLink';
+import ProfileBarLink from './ProfileBarLink';
 import LinkedUL from './LinkedUL';
 
-export default function ProfileBar({ user, profile, expanded }) {
+export default function ProfileBar({ user, profile, condensed, condensedTitle, clickHandler, refs }) {
 
   return(
-    <Nav className="profilebar flex-column col-3 col-lg-2">
-      <img className="profilebar-logo" src={profile.logo} alt="cPortfolio logo"/>
+    <div className={`profilebar${condensed ? ' profilebar-condensed' : ''}`}>
+      <div className="profilebar-logo">
+        <img src={profile.logo} alt="Logo"/>
+      </div>
       <div className="profilebar-content">
-        <div className="profilebar-name">
+        <div className="profilebar-title">
+          <span className="separator">/</span><strong>Title</strong>
+        </div>
+        <div className="profilebar-name" onClick={() => clickHandler(refs.showcase)}>
           {user.firstName} {user.lastName}
         </div>
         {profile.bio &&
           <div className="profilebar-headline">
             {profile.bio}
           </div>}
-        <Nav.Item className="profilebar-item">
-          <NavLink label="Education" icon={faGraduationCap}/>
+        <div className="profilebar-item" onClick={() => clickHandler(refs.education)}>
+            <ProfileBarLink label="Education" icon={faGraduationCap}/>
           <LinkedUL values={profile.education}/>
-        </Nav.Item>
-        <Nav.Item className="profilebar-item">
-          <NavLink label="Experience" icon={faBriefcase} iconSize="sm"/>
+        </div>
+        <div className="profilebar-item" onClick={() => clickHandler(refs.experience)}>
+            <ProfileBarLink label="Experience" icon={faBriefcase}/>
           <LinkedUL values={profile.experience}/>
-        </Nav.Item>
-        <Nav.Item className="profilebar-item">
-          <NavLink label="Projects" icon={faEdit} iconSize="sm"/>
-        </Nav.Item>
+        </div>
+        <div className="profilebar-item" onClick={() => clickHandler(refs.projects)}>
+          <ProfileBarLink label="Projects" icon={faEdit} iconSize="sm"/>
+        </div>
       </div>
-    </Nav>
+    </div>
   );
 }
