@@ -51,8 +51,7 @@ export default function Profile() {
     <div>
       <div>
       <Row>
-        <div className ="pageheading-rectangle1" ><h1 className="pageheading-heading">Your Profile</h1></div>
-        <div className = "pageheading-rectangleMash"></div>
+        <div className ="pageheading-rectangle1" ><h1 className="pageheading-heading">Your Profile</h1></div>        <div className = "pageheading-rectangleMash"></div>
         <div className = "pageheading-decoration1"/>
         <div className = "pageheading-decoration2"/>
       </Row>
