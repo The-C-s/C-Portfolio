@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import HashLoader from 'react-spinners/HashLoader';
 
 import { register, login } from './userSlice';
+import {createProfile} from '../profile/profileSlice';
 
 export default function Register() {
   
@@ -22,6 +23,7 @@ export default function Register() {
     
     dispatch(register(form))
       .then(() => dispatch(login(form)))
+      .then(() => dispatch(createProfile))
       .then(() => history.push('/homepage'));
   }
   
