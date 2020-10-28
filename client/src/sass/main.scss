@@ -33,6 +33,9 @@ $theme-map: (
 @import './components/sharecontentitem';
 @import './components/profilebarlink';
 @import './components/quill';
+@import './components/profile'; 
+@import './components/pageheading'; 
+@import './components/addcontent'; 
 
 @import './layout/topnav';
 @import './layout/sidenav';

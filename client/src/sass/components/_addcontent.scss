@@ -1,0 +1,89 @@
+.addcontent{
+    position: absolute; 
+    width: 1000px; 
+    top: 125px; 
+    left: 30px; 
+
+    .title{
+        position: flex;
+        width: auto;
+
+        .title-box{
+            height: 34px;
+            margin-bottom: 20px; 
+    
+            background: #FFC7A8;
+            border-radius: 10px;
+
+            .title-heading{
+                position: flex;
+                padding-top: 7px; 
+                padding-left: 10px; 
+                color: white;  
+            }
+    
+        }
+        .title-input{
+            position: flex; 
+        }
+    }
+
+    .description{ 
+        position: flex; 
+        width: auto;
+
+        .description-box{ 
+            position: flex; 
+            height: 34px;
+            margin-bottom: 20px; 
+    
+            background: #7AD1D0;
+            border-radius: 10px;
+
+            .description-heading{
+                position: flex;
+                padding-top: 7px; 
+                padding-left: 10px; 
+                color: white;  
+            }
+        }
+    }
+
+    .content{ 
+        margin-top: 10px; 
+        .content-box{
+            position: flex; 
+            height: 34px;
+            margin-bottom: 20px; 
+    
+            background: #BEBEBE;
+            border-radius: 10px;
+            .content-heading{
+                position: flex;
+                padding-top: 7px; 
+                padding-left: 10px; 
+                color: white;  
+            }
+        }
+    }
+
+    //Doesn't exist yet 
+    .tags{
+        margin-top: 10px; 
+        .tags-box{
+            position: flex; 
+            height: 34px;
+            margin-bottom: 20px; 
+    
+            background: #FFB2A8;
+            border-radius: 10px;
+
+            .content-heading{
+                position: flex;
+                padding-top: 7px; 
+                padding-left: 10px; 
+                color: white;  
+            }
+        }
+    }
+}
