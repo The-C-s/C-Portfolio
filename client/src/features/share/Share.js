@@ -1,39 +1,32 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { ViewPort, LeftResizable, Fill, Info } from 'react-spaces';
+import { ViewPort, LeftResizable, Fill, Right, Info } from 'react-spaces';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import ProfileBar from './ProfileBar';
 import Showcase from './Showcase';
-import ShareContentItem from './ShareContentItem';
+import ShareContentItem from './ShareContentItem'; // Component probably needs to be edited to suit share view
+import Section from './Section';
 
 import * as fakeData from '../../_mockapi/data';
 
 export default function Share() {
 
   const { user, profile, content } = fakeData;
-  const [view, setView] = useState({ viewingContent: false, title: '' });
-  
-  const handleInfo = info => {
-    if (info.width <= 150 && !view.viewingContent) setView({ viewingContent: true, title: '' });
-    else if (info.width > 150 && view.viewingContent) setView({ viewingContent: false, title: '' });
-  }
 
-  // Refs for scrollTo
-  const refs = {
-    showcase: useRef(null),
-    education: useRef(null),
-    experience: useRef(null),
-    projects: useRef(null)
-  }
-
-  const executeScroll = ref => scrollToRef(ref);
-
-  let scrollToRef;
-  useEffect(() => {
-    scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+  const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
+  const [profilebarWidth, setProfilebarWidth] = useState(300);
+  const [focusedContent, setFocusedContent] = useState({});
+  const [focusedContentWidth, setFocusedContentWidth] = useState(0);
+  const [inFocusedState, setFocusedState] = useState(false);
+  const [viewSection, setViewSection] = useState('showcase');
+  const [viewStates, setViewStates] = useState({
+    showcase: true,
+    education: false,
+    experience: false,
+    projects: false
   });
 
   // Showcase Simulator®
@@ -44,23 +37,85 @@ export default function Share() {
     content[randInt(content.length)],
     content[randInt(content.length)]
   ];
+  
+  // Handler for changing sidebar type when its width is adjusted
+  const handleInfo = info => {
+
+    if (info.width <= 150 && !profilebarState.collapsed) setProfilebarState({ ...profilebarState, collapsed: true });
+    else if (info.width > 150 && profilebarState.collapsed) setProfilebarState({ ...profilebarState, collapsed: false });
+
+    // Fix scroll position if focused on a content item
+    if (inFocusedState) scrollToContentItem(focusedContent.id);
+  }
+
+  // Handler for scrolling to a section by clicking in the sidebar
+  const scrollToSection = section => document.getElementsByClassName(section)[0].scrollIntoView({ behavior: 'smooth' });
+  const scrollToContentItem = id => document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+  
+  // Set sidebar styles depending on what section user has scrolled to
+  const sectionScrollHandler = (section, inView) => {
+
+    const _viewStates = { ...viewStates, [section]: inView };
+
+    setViewStates(_viewStates);
+
+    // Filter sections by order of when they appear
+    const isActive = () => {
+      if (_viewStates.showcase) return 'showcase';
+      if (_viewStates.education) return 'education';
+      if (_viewStates.experience) return 'experience';
+      if (_viewStates.projects) return 'projects';
+    }
+
+    setViewSection(isActive());
+
+    // Set section name if sidebar is collapsed
+    if (profilebarState.collapsed) setProfilebarState({ ...profilebarState, title: isActive() });
+  }
+
+  // Expand content item
+  const handleContentItemClick = _content => {
+    console.log(_content.title);
+    setProfilebarWidth(70);
+    setProfilebarState({ collapsed: true, title: _content.title });
+    setFocusedContentWidth("50%");
+    setFocusedContent(_content);
+    setFocusedState(true);
+
+    // Wait for everything to finish re-sizing, then move it into view
+    setTimeout(() => scrollToContentItem(_content.id), 800);
+  }
+
+  // Close expanded content item
+  const handleContentItemClose = e => {
+
+    e.stopPropagation();
+
+    console.log('close');
+    setProfilebarWidth(300);
+    setProfilebarState({ collapsed: false, title: viewSection });
+    setFocusedContent({});
+    setFocusedContentWidth(0);
+    setFocusedState(false);
+  }
 
   return(
     <>
       <ViewPort className="share">
-        <LeftResizable size={300} maximumSize={350} minimumSize={60} trackSize={true}>
+        <LeftResizable className="share-profilebar" size={profilebarWidth} maximumSize={350} minimumSize={60} trackSize={true}>
           <Info>{handleInfo}</Info>
           <ProfileBar
             user={user}
             profile={{ ...profile, bio: "Yolo's TSLA calls full time" }}
-            condensed={view.viewingContent}
-            condensedTitle={view.title}
-            refs={refs}
-            clickHandler={executeScroll}
+            condensed={profilebarState.collapsed}
+            condensedTitle={profilebarState.title}
+            clickHandler={scrollToSection}
+            section={viewSection}
           />
         </LeftResizable>
-        <Fill className="share-main" scrollable={true}>
-            <Row ref={refs.showcase} className="share-section share-showcase">
+        <Fill className="share-main" scrollable={!inFocusedState}>
+            <Section name="showcase" className="share-showcase" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
                   <h1>Showcase</h1>
@@ -69,8 +124,8 @@ export default function Share() {
                   <Showcase items={showcase}/>
                 </Row>
               </Col>
-            </Row>
-            <Row ref={refs.education} className="share-section share-education">
+            </Section>
+            <Section name="education" className="share-education" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
                   <h1>Education</h1>
@@ -87,8 +142,8 @@ export default function Share() {
                   </Card>
                 </Row>
               </Col>
-            </Row>
-            <Row ref={refs.experience} className="share-section share-experience">
+            </Section>
+            <Section name="experience" className="share-experience" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
                   <h1>Experience</h1>
@@ -105,16 +160,26 @@ export default function Share() {
                   </Card>
                 </Row>
               </Col>
-            </Row>
-            <Row ref={refs.projects} className="share-section share-projects">
+            </Section>
+            <Section name="projects" className="share-projects" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
                   <h1>Projects</h1>
                 </Row>
-                {content.map((contentItem, index) => <ShareContentItem content={contentItem} key={index}/>)}
+                {content.map((contentItem, index) =>
+                  <ShareContentItem
+                    content={contentItem}
+                    key={index}
+                    clickHandler={handleContentItemClick}
+                    closeHandler={handleContentItemClose}
+                  />
+                )}
               </Col>
-            </Row>
+            </Section>
         </Fill>
+        <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
+          {focusedContent.title && <p>{focusedContent.content}</p>}
+        </Right>
       </ViewPort>
     </>
   );

@@ -12,10 +12,6 @@
   padding: 0 1%;
   align-items: center;
 
-  // .profilebar-hidden {
-  //   display: none !important;
-  // }
-
   .profilebar-logo {
     width: 100px;
     height: 100px;
@@ -43,6 +39,7 @@
     .profilebar-name {
       text-align: center;
       font-size: 24px;
+      cursor: pointer;
     }
   
     .profilebar-headline {

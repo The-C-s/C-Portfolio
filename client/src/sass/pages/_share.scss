@@ -8,10 +8,21 @@
 
   .share-main {
     padding: 20px;
+    transition: left 0.8s;
+    transition: right 0.8s;
+    width: 0.8s;
   }
 
   .share-section {
     margin-bottom: 40px;
+  }
+
+  .share-profilebar {
+    transition: width 0.8s;
+  }
+
+  .share-focusedcontent {
+    transition: width 0.8s;
   }
 
   // Remove when ContentItem is replaced
