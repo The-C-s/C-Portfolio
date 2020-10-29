@@ -77,7 +77,7 @@ app.use('/share', shareRoute);
 
 //redirects any other url to default
 app.use(function(req, res){
-       res.redirect('/');
+       res.redirect(req.originalUrl);
    });
 
 // global error handler
