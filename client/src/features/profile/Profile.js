@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getProfile } from '../profile/profileSlice';
 import Row from 'react-bootstrap/Row';
+import Skeleton from 'react-loading-skeleton';
 
 import ProfileItem from '../profile/ProfileItem';
 
@@ -57,7 +58,7 @@ export default function Profile() {
       </Row>
       </div>
       <div className = "mt-2">
-      {isLoaded && <ProfileItem profile = {profile} projects ={projectList} />}
+      {isLoaded ? <ProfileItem profile = {profile} projects ={projectList} />: <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>}
       </div>
     </div>
   );

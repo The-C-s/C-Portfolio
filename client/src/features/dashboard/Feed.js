@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
 
 import ContentItem from '../content/ContentItem';
+import RightNavbar from "../layout/RightNavbar"; 
 
 import { getContent } from '../content/contentSlice';
 
@@ -25,9 +26,12 @@ export default function Feed() {
 
   return(
     <div className="flex-wrap pt-3 pb-2 mb-3">
+      <RightNavbar/>
+      <div className = "content-box">
       {gettingContent
         ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
         : filteredContent.map(item => <ContentItem content={item} key={item.id}/>)}
+        </div>
     </div>
   );
 }
