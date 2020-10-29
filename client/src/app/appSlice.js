@@ -13,35 +13,35 @@ const app = createSlice({
   extraReducers: {
     'user/login/pending': state => { return startLoading(state, 'login') },
     'user/login/fulfilled': state => { stopLoading(state, 'login') },
-    'user/login/rejected': (state, action) => { setError(state, 'login', action.payload) },
+    'user/login/rejected': (state, action) => { return setError(state, 'login', action.error) },
 
     'user/authenticate/pending': state => { return startLoading(state, 'login') },
     'user/authenticate/fulfilled': state => { stopLoading(state, 'login') },
-    'user/authenticate/rejected': (state, action) => { setError(state, 'login', action.payload) },
+    'user/authenticate/rejected': (state, action) => { return setError(state, 'login', action.error) },
 
     'user/update/pending': state => { return startLoading(state, 'update') },
     'user/update/fulfilled': state => { stopLoading(state, 'update') },
-    'user/update/rejected': (state, action) => { setError(state, 'update', action.payload) },
+    'user/update/rejected': (state, action) => { return setError(state, 'update', action.error) },
 
     'user/register/pending': state => { return startLoading(state, 'register') },
     'user/register/fulfilled': state => { stopLoading(state, 'register') },
-    'user/register/rejected': (state, action) => { setError(state, 'register', action.payload) },
+    'user/register/rejected': (state, action) => { return setError(state, 'register', action.error) },
 
     'content/getContent/pending': state => { return startLoading(state, 'getContent') },
     'content/getContent/fulfilled': state => { stopLoading(state, 'getContent') },
-    'content/getContent/rejected': (state, action) => { setError(state, 'getContent', action.payload) },
+    'content/getContent/rejected': (state, action) => { return setError(state, 'getContent', action.error) },
 
     'content/createContent/pending': state => { return startLoading(state, 'createContent')},
     'content/createContent/fulfilled': state => { stopLoading(state, 'createContent') },
-    'content/createContent/rejected': (state, action) => { setError(state, 'createContent', action.payload) },
+    'content/createContent/rejected': (state, action) => { return setError(state, 'createContent', action.error) },
 
     'content/editContent/pending': state => { return startLoading(state, 'editContent') },
     'content/editContent/fulfilled': state => { stopLoading(state, 'editContent') },
-    'content/editContent/rejected': (state, action) => { setError(state, 'editContent', action.payload) },
+    'content/editContent/rejected': (state, action) => { return setError(state, 'editContent', action.error) },
 
     'content/deleteContent/pending': state => { return startLoading(state, 'deleteContent') },
     'content/deleteContent/fulfilled': state => { stopLoading(state, 'deleteContent') },
-    'content/deleteContent/rejected': (state, action) => { setError(state, 'deleteContent', action.payload) }
+    'content/deleteContent/rejected': (state, action) => { return setError(state, 'deleteContent', action.error) }
   }
 });
 
@@ -80,13 +80,13 @@ const stopLoading = (state, action) => delete state.loading[action];
  */
 const setError = (state, action, error) => {
 
-  console.error(`${action}: ${error}`);
+  console.error(`${action}: ${error.message}`);
 
   return {
     ...state,
     errors: {
       ...state.errors,
-      [action]: error
+      [action]: error.message
     }
   }
 };
