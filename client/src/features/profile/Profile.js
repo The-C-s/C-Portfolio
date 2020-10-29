@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getProfile } from '../profile/profileSlice';
 import Row from 'react-bootstrap/Row';
+import Skeleton from 'react-loading-skeleton';
 
 import ProfileItem from '../profile/ProfileItem';
 
@@ -16,11 +17,14 @@ export default function Profile() {
   const content = useSelector(state => state.content); 
   const isLoaded = useSelector(state => state.profile.isLoaded);
 
-  // Reloading profile 
+  // Reloading profile
   useEffect(() => {
-    async function fetch() { dispatch(getProfile(user.profile)) }; 
-    fetch();
-  }, [dispatch, user.profile]);
+
+    async function fetch() { dispatch(getProfile(user.profile)) }
+
+    // Skip loading if already in state
+    if (user.profile && user.profile !== profile.id) fetch();
+  }, [dispatch, user, profile]);
 
   //Alternative solution from making a list of API calls 
   //For each project in the profile, searchs through the content list for a matching id 
@@ -51,14 +55,13 @@ export default function Profile() {
     <div>
       <div>
       <Row>
-        <div className ="pageheading-rectangle1" ><h1 className="pageheading-heading">Your Profile</h1></div>
-        <div className = "pageheading-rectangleMash"></div>
+        <div className ="pageheading-rectangle1" ><h1 className="pageheading-heading">Your Profile</h1></div>        <div className = "pageheading-rectangleMash"></div>
         <div className = "pageheading-decoration1"/>
         <div className = "pageheading-decoration2"/>
       </Row>
       </div>
       <div className = "mt-2">
-      {isLoaded && <ProfileItem profile = {profile} projects ={projectList} />}
+      {isLoaded ? <ProfileItem profile = {profile} projects ={projectList} />: <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>}
       </div>
     </div>
   );

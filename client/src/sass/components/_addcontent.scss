@@ -49,11 +49,13 @@
         }
     }
 
-    .content{ 
+    .content{
+        position: flex;  
         margin-top: 10px; 
         .content-box{
             position: flex; 
             height: 34px;
+            width: 1000px; 
             margin-bottom: 20px; 
     
             background: #BEBEBE;
@@ -86,4 +88,18 @@
             }
         }
     }
+}
+
+.addcontent-next-btn {
+    margin-left: 5px;
+    font-size: 1rem;
+    color: $secondary;
+}
+
+.addcontent-next-btn:hover {
+    color: $secondary;
+}
+
+.addcontent-confirmation-modal {
+    text-align: center;
 }

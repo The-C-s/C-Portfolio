@@ -19,6 +19,8 @@ export default function SideNavbar() {
   const onContentClick = () => toggleContent(!expandContent);
   const onShareClick = () => toggleShare(!expandShare);
 
+  const logoutHandler = () => dispatch(logout());
+
   return(
     <Nav className="sidenav flex-column col-sm-3 col-lg-2 d-none d-sm-block">
       <img className="sidenav-logo" src="/images/logo_white_transparent.png" alt="cPortfolio logo"/>
@@ -98,7 +100,6 @@ export default function SideNavbar() {
           label="Sign out"
           icon={faSignOutAlt}
           activeOnlyWhenExact={true}
-          onClick={() => dispatch(logout())}
         />
       </Nav.Item>
     </Nav>

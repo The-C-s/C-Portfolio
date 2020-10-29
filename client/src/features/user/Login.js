@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -13,14 +14,21 @@ export default function Login({ onLogin }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const loggingIn = useSelector(state => state.app.loading.login);
+  const user = useSelector(state => state.user);
   const [form, updateForm] = useState({ email: '', password: '' });
+
+  useEffect(() => {
+    if (user.isAuthenticated) history.push('/homepage');
+  });
 
   const onSubmitHandler = e => {
 
     e.preventDefault();
 
     dispatch(login(form))
-      .then(() => history.push('/homepage'));
+      .then(unwrapResult)
+      .then(() => history.push('/homepage'))
+      .catch(error => console.log(error));
   }
 
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });

@@ -1,5 +1,6 @@
 @import './vendors/shards';
 @import './vendors/bootstrap';
+@import './vendors/shards';
 @import './vendors/themify';
 
 @import './base/reset';
@@ -36,10 +37,12 @@ $theme-map: (
 @import './components/profile'; 
 @import './components/pageheading'; 
 @import './components/addcontent'; 
+@import './components/homepage'; 
 
 @import './layout/topnav';
 @import './layout/sidenav';
 @import './layout/form';
+@import './layout/rightnav'; 
 
 @import './pages/landing';
 @import './pages/share';
