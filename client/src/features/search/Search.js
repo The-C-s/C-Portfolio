@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouteMatch } from 'react-router-dom';
 
 import {
   InputGroup,
@@ -17,51 +18,28 @@ import { activeSearch, stopSearch } from './searchSlice';
  * content that's currently in the state. Makes a copy of
  * state.content in state.search but filtered by search query.
  * 
- * @param {boolean} show - Whether search bar is available or not. 
+ * @param {boolean} show Whether search bar is available or not. 
  */
 export default function Search({ show }) {
 
+  const dispatch = useDispatch();
   const content = useSelector(state => state.content);
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState('');
-  const dispatch = useDispatch();
 
-  // Use Sets to ignore duplicates
-  const options = {
-    titles: new Set(),
-    tags: new Set()
-  }
+  // Hide search if not on the content feed
+  let match = useRouteMatch({
+    path: '/dashboard/content',
+    exact: true
+  })
 
-  // Make set of all titles and tags
-  content.forEach(_content => {
-
-    options.titles.add(_content.title.toLowerCase());
-
-    _content.tags.forEach(tag => {
-      if (typeof tag === 'string') options.tags.add(tag.toLowerCase());
-      else if ('tag' in tag) options.tags.add(tag.tag.toLowerCase());
-    });
-  });
-
-  // const autoComplete = () => {
-
-  //   let matchedTitles = new Set();
-  //   let matchedTags = new Set();
-    
-  //   options.titles.forEach(title => {
-  //     if (title.includes(query)) matchedTitles.add(title);
-  //   });
-    
-  //   options.tags.forEach(tag => {
-  //     if (tag.includes(query)) matchedTags.add(tag);
-  //   });
-  // }
-
+  // Activate search
   const searchClickHandler = () => {
     document.getElementsByClassName('search-input')[0].focus();
     setShowSearch(true);
   }
 
+  // Deactivate search
   const onFocusOutHandler = () => {
     console.log('focus out');
     if (query === '') setShowSearch(false);
@@ -82,7 +60,7 @@ export default function Search({ show }) {
   }
 
   return(
-    <div className="search">
+    <div className={`search${!match ? ' hidden' : ''}`}>
       <InputGroup seamless>
         <InputGroupAddon type="prepend">
           <InputGroupText>

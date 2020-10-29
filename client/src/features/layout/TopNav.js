@@ -12,8 +12,8 @@ import Search from '../search/Search';
 
 export default function TopNav() {
   
-  const [showUserEdit, setShowUserEdit] = useState(false);
   const user = useSelector(state => state.user);
+  const [showUserEdit, setShowUserEdit] = useState(false);
 
   const handleEditClose = () => setShowUserEdit(false);
 

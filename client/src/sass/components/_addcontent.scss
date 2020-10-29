@@ -89,3 +89,17 @@
         }
     }
 }
+
+.addcontent-next-btn {
+    margin-left: 5px;
+    font-size: 1rem;
+    color: $secondary;
+}
+
+.addcontent-next-btn:hover {
+    color: $secondary;
+}
+
+.addcontent-confirmation-modal {
+    text-align: center;
+}
