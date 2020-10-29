@@ -20,6 +20,14 @@ const search = createSlice({
   }
 });
 
+/**
+ * Searches for the query in the titles and tags of an array of
+ * content objects, and returns a filtered array.
+ * 
+ * @param {String} query Search query.
+ * @param {Array} content Array of content objects to search through.
+ * @return {Array}
+ */
 const searchContent = (query, content) => {
   
   query = query.toLowerCase();
