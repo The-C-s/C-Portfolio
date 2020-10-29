@@ -6,6 +6,8 @@
 @import './base/reset';
 @import './base/typography';
 
+@import './helpers/mixins';
+
 @import './themes/default';
 
 $theme-map: (
@@ -25,6 +27,12 @@ $theme-map: (
 @import './components/navlink';
 @import './components/avatarbutton';
 @import './components/search';
+@import './components/profilebar';
+@import './components/linkedul';
+@import './components/card';
+@import './components/showcase';
+@import './components/sharecontentitem';
+@import './components/profilebarlink';
 @import './components/quill';
 @import './components/profile'; 
 @import './components/pageheading'; 

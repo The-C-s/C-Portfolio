@@ -1,103 +1,215 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Container from 'react-bootstrap/Container';
+import { ViewPort, LeftResizable, Fill, Right, Info } from 'react-spaces';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
+import Card from 'react-bootstrap/Card';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faEnvelope, faArrowCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+import ProfileBar from './ProfileBar';
+//import Showcase from './Showcase';
+import ShareContentItem from './ShareContentItem'; // Component probably needs to be edited to suit share view
+import Section from './Section';
+import Skeleton from 'react-loading-skeleton';
 
-const isUrl = require('is-valid-http-url');
-const isImage = require('is-image');
+import { getShareId } from '../../common/helpers';
+
+import { getSharepage } from '../share/shareSlice';
 
 export default function Share() {
 
-  const { user, profile, content } = useSelector(state => state);
+  const dispatch = useDispatch();
+  const shareid = getShareId(window.location.href);
+  const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
 
-  const [_projects, toggleExpand] = useState(content.map(project => { return { ...project, expand: false } }));
+  // Reloading content
+  useEffect(() => {
+      async function fetch() { dispatch(getSharepage(shareid)) };
+      fetch();
+  }, [dispatch, shareid]);
 
-  const onExpandClick = id => toggleExpand(_projects.map(
-    project => project.id === id
-      ? { ...project, expand: !project.expand }
-      : project
-  ));
+  const share = useSelector(state => state.share);
 
-  const getContentType = userContent => {
+  const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
+  const [profilebarWidth, setProfilebarWidth] = useState(300);
+  const [focusedContent, setFocusedContent] = useState({});
+  const [focusedContentWidth, setFocusedContentWidth] = useState(0);
+  const [inFocusedState, setFocusedState] = useState(false);
+  const [viewSection, setViewSection] = useState('showcase');
+  const [viewStates, setViewStates] = useState({
+    showcase: true,
+    education: false,
+    experience: false,
+    projects: false
+  });
 
-    if (userContent) {
-      if (isUrl(userContent)) {
-        return (isImage(userContent.split('?')[0])) ? 'image' : 'url';
-      } else {
-        return 'text';
-      }
-    }
 
-    return null;
+
+  // Showcase Simulator®
+  /**
+  const randInt = x => Math.floor(Math.random() * x);
+  const showcase = [
+    share.content[randInt(share.content.length)],
+    share.content[randInt(share.content.length)],
+    share.content[randInt(share.content.length)],
+    share.content[randInt(share.content.length)]
+  ];
+  **/
+  
+  // Handler for changing sidebar type when its width is adjusted
+  const handleInfo = info => {
+
+    if (info.width <= 150 && !profilebarState.collapsed) setProfilebarState({ ...profilebarState, collapsed: true });
+    else if (info.width > 150 && profilebarState.collapsed) setProfilebarState({ ...profilebarState, collapsed: false });
+
+    // Fix scroll position if focused on a content item
+    if (inFocusedState) scrollToContentItem(focusedContent.id);
   }
 
-  const toLongDate = date => Intl.DateTimeFormat('en-AU', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  }).format(Date.parse(date));
+  // Handler for scrolling to a section by clicking in the sidebar
+  const scrollToSection = section => document.getElementsByClassName(section)[0].scrollIntoView({ behavior: 'smooth' });
+  const scrollToContentItem = id => document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+
+  // Set sidebar styles depending on what section user has scrolled to
+  const sectionScrollHandler = (section, inView) => {
+
+    const _viewStates = { ...viewStates, [section]: inView };
+
+    setViewStates(_viewStates);
+
+    // Filter sections by order of when they appear
+    const isActive = () => {
+      if (_viewStates.showcase) return 'showcase';
+      if (_viewStates.education) return 'education';
+      if (_viewStates.experience) return 'experience';
+      if (_viewStates.projects) return 'projects';
+    }
+
+    setViewSection(isActive());
+
+    // Set section name if sidebar is collapsed
+    if (profilebarState.collapsed) setProfilebarState({ ...profilebarState, title: isActive() });
+  }
+
+  // Expand content item
+  const handleContentItemClick = _content => {
+    console.log(_content.title);
+    setProfilebarWidth(70);
+    setProfilebarState({ collapsed: true, title: _content.title });
+    setFocusedContentWidth("50%");
+    setFocusedContent(_content);
+    setFocusedState(true);
+
+    // Wait for everything to finish re-sizing, then move it into view
+    setTimeout(() => scrollToContentItem(_content.id), 800);
+  }
+
+  // Close expanded content item
+  const handleContentItemClose = e => {
+
+    e.stopPropagation();
+
+    console.log('close');
+    setProfilebarWidth(300);
+    setProfilebarState({ collapsed: false, title: viewSection });
+    setFocusedContent({});
+    setFocusedContentWidth(0);
+    setFocusedState(false);
+  }
 
   return(
     <>
-      <Button as={Link} to="/dashboard" variant="link" className="return">Back to dashboard</Button>
-      <Container className="share">
-        <Row>
-          <Col xs="auto">
-            <Image roundedCircle className="logo" src={profile.logo}/>
-          </Col>
-          <Col>
-            <Row className="name">{user.firstName} {user.lastName}</Row>
-            <Row className="bio">
+      <ViewPort className="share">
+        <LeftResizable className="share-profilebar" size={profilebarWidth} maximumSize={350} minimumSize={60} trackSize={true}>
+          <Info>{handleInfo}</Info>
+          <ProfileBar
+            user={{"firstName": share.firstName, "lastName": share.lastName}}
+            profile={{ ...{ "logo": share.logo, "education": share.education, "experience": share.experience }, bio: "Yolo's TSLA calls full time" }}
+            condensed={profilebarState.collapsed}
+            condensedTitle={profilebarState.title}
+            clickHandler={scrollToSection}
+            section={viewSection}
+          />
+        </LeftResizable>
+        <Fill className="share-main" scrollable={!inFocusedState}>
+            <Section name="showcase" className="share-showcase" scrollHandler={sectionScrollHandler}>
+                  <Col>
+                    <Row>
+                      <h1>Showcase</h1>
+                    </Row>
+                    <Row>
+                        {gettingSharepage
+                            ? <><h1><Skeleton/></h1><p><Skeleton count={1}/></p></>
+                            : <></>//<><Showcase items={showcase}/></>
+                        }
+                    </Row>
+                  </Col>
+                </Section>
+            <Section name="education" className="share-education" scrollHandler={sectionScrollHandler}>
               <Col>
-                <h6>Experience</h6>
-                {profile.experience.map(experience => <p className="bio-item">{experience}</p>)}
-              </Col>
-              <Col>
-                <h6>Education</h6>
-                {profile.education.map(education => <p className="bio-item">{education}</p>)}
-              </Col>
-            </Row>
-            <Row className="links">
-              <Button as="a" href={profile.resume} target="_blank" variant="link"><FontAwesomeIcon icon={faFilePdf}/> Resume</Button>
-              <Button as="a" href={`mailto:${user.email}`} variant="link"><FontAwesomeIcon icon={faEnvelope}/> {user.email}</Button>
-            </Row>
-          </Col>
-        </Row>
-        <Row>
-          {_projects.map(project =>
-            <Row key={project.id} className="project">
-              <Row>
-                <Col xs="auto" className="date">{toLongDate(project.displayDate)}</Col>
-                <Col>
-                  <Row className="title">{project.title}</Row>
-                  <Row className="description">{project.description}</Row>
-                  <Button variant="link" onClick={() => onExpandClick(project.id)}>
-                    {project.expand && <>Hide project <FontAwesomeIcon icon={faArrowCircleUp}/></>}
-                    {!project.expand && <>Show project <FontAwesomeIcon icon={faArrowCircleDown}/></>}
-                  </Button>
-                </Col>
-              </Row>
-              <Collapse in={project.expand}>
                 <Row>
-                  {(getContentType(project.content) === 'text') && <div dangerouslySetInnerHTML={{ __html: project.content }}/>}
-                  {(getContentType(project.content) === 'image') && <a href={project.content} target="_blank" rel="noopener noreferrer"><Image src={project.content}/></a>}
-                  {(getContentType(project.content) === 'url') && <a href={project.content} target="_blank" rel="noopener noreferrer">External link</a>}
+                  <h1>Education</h1>
                 </Row>
-              </Collapse>
-              <hr/>
-            </Row>
-          )}
-        </Row>
-      </Container>
+                <Row>
+                  <Card>
+                  {gettingSharepage
+                    ? <><h1><Skeleton/></h1><p><Skeleton count={2}/></p></>
+                    : share.education.map((educationItem, index) =>
+                      <div key={index}>
+                        <h3>{educationItem}</h3>
+                        <p>Description of lessons learned.</p>
+                        <p><strong>Awards and achievements</strong> Best</p>
+                        <p><strong>Extracurricular</strong> Longjump</p>
+                      </div>)
+                  }
+                  </Card>
+                </Row>
+              </Col>
+            </Section>
+            <Section name="experience" className="share-experience" scrollHandler={sectionScrollHandler}>
+              <Col>
+                <Row>
+                  <h1>Experience</h1>
+                </Row>
+                <Row>
+                  <Card>
+                  {gettingSharepage
+                    ? <><h1><Skeleton/></h1><p><Skeleton count={2}/></p></>
+                    : share.experience.map((experienceItem, index) =>
+                      <div key={index}>
+                        <h3>{experienceItem}</h3>
+                        <p>Description of experience.</p>
+                        <p><strong>Responsibilities</strong> Smart</p>
+                        <p><strong>Achievements</strong> Longjump</p>
+                      </div>)
+                  }
+                  </Card>
+                </Row>
+              </Col>
+            </Section>
+            <Section name="projects" className="share-projects" scrollHandler={sectionScrollHandler}>
+              <Col>
+                <Row>
+                  <h1>Projects</h1>
+                </Row>
+                {gettingSharepage
+                  ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
+                  : share.content.map((contentItem, index) =>
+                    <ShareContentItem
+                      content={contentItem}
+                      key={index}
+                      clickHandler={handleContentItemClick}
+                      closeHandler={handleContentItemClose}
+                    />)
+                }
+              </Col>
+            </Section>
+        </Fill>
+        <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
+          {focusedContent.title && <p>{focusedContent.content}</p>}
+        </Right>
+      </ViewPort>
     </>
   );
 }

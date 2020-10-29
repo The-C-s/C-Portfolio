@@ -1,0 +1,11 @@
+.showcase-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
+
+  .showcase-item {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
