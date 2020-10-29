@@ -14,7 +14,6 @@ export default function Login({ onLogin }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const loggingIn = useSelector(state => state.app.loading.login);
-  const loginErrors = useSelector(state => state.app.errors.login);
   const user = useSelector(state => state.user);
   const [form, updateForm] = useState({ email: '', password: '' });
 
