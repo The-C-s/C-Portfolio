@@ -1,8 +1,6 @@
-
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-
 
 //rich text editor
 import ReactQuill from "react-quill";
@@ -13,7 +11,7 @@ import { createContent, getContent } from "../content/contentSlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row"; 
-export default function AddContent({ setView }) {
+export default function AddContent() {
   /*
    * useState is a React hook and unrelated to Redux. Creates a little
    * private state inside the component, in this case is used to just handle
@@ -49,8 +47,8 @@ export default function AddContent({ setView }) {
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
     dispatch(createContent(data))
       .then(() => dispatch(getContent()))
-      .then(() => history.push('/dashboard'));
-  }
+      .then(() => history.push('/dashboard/content'));
+  };
 
 
   // Input fields are based on state, so typing in them won't work unless we also change the state
