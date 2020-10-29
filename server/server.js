@@ -11,7 +11,7 @@ const contentRoute = require('./content/content.controller');
 const userRoute = require('./users/users.controller');
 const profileRoute = require('./profile/profile.controller');
 const shareRoute = require('./share/share.controller');
-    
+
 //mongoDB access
 async function testMongoDB() {
   const uri = "mongodb+srv://TheCs:4ZzcZ22pewd6JNy@cluster0.g5g83.mongodb.net/C-Portfolio?retryWrites=true&w=majority"
@@ -76,9 +76,9 @@ app.use('/profile', profileRoute);
 app.use('/share', shareRoute);
 
 //redirects any other url to default
-app.use(function(req, res){
-       res.redirect('/');
-   });
+//app.use(function(req, res){
+//       res.redirect('/');
+//   });
 
 // global error handler
 app.use(errorHandler);
