@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouteMatch } from 'react-router-dom';
 
 import {
   InputGroup,
@@ -21,10 +22,16 @@ import { activeSearch, stopSearch } from './searchSlice';
  */
 export default function Search({ show }) {
 
+  const dispatch = useDispatch();
   const content = useSelector(state => state.content);
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState('');
-  const dispatch = useDispatch();
+
+  // Hide search if not on the content feed
+  let match = useRouteMatch({
+    path: '/dashboard/content',
+    exact: true
+  })
 
   // Activate search
   const searchClickHandler = () => {
@@ -53,7 +60,7 @@ export default function Search({ show }) {
   }
 
   return(
-    <div className="search">
+    <div className={`search${!match ? ' hidden' : ''}`}>
       <InputGroup seamless>
         <InputGroupAddon type="prepend">
           <InputGroupText>
