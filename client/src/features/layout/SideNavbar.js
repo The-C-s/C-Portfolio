@@ -77,7 +77,7 @@ export default function SideNavbar() {
             expanded={expandShare}
             to="/dashboard/sharepages"
             label="Share"
-            icon={faPray}
+            icon={faIdBadge}
             activeOnlyWhenExact={true}
           />
         </Nav.Item>
@@ -88,7 +88,7 @@ export default function SideNavbar() {
                 sub
                 to="/dashboard/sharepages/add"
                 label="New Sharepage"
-                icon={faIdBadge}
+                icon={faFolderPlus}
               />
             </Nav.Item>
           </div>
