@@ -34,6 +34,7 @@ $theme-map: (
 @import './layout/topnav';
 @import './layout/sidenav';
 @import './layout/form';
+@import './layout/rightnav'; 
 
 @import './pages/landing';
 @import './pages/share';
