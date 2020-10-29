@@ -21,14 +21,16 @@ import { getProfile } from "../profile/profileSlice";
 
 export default function Homepage() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
+  const profile = useSelector(state => state.profile);
 
   useEffect(() => {
-    async function fetch() {
-      dispatch(getProfile(user.profile));
-    }
-    fetch();
-  });
+
+    async function fetch() { dispatch(getProfile(user.profile)) }
+
+    // Skip loading if already in state
+    if (user.profile && user.profile !== profile.id) fetch();
+  }, [dispatch, user, profile]);
 
   return (
     <>
