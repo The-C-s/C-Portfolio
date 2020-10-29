@@ -68,7 +68,7 @@ export default function SideNavbar() {
       </Nav.Item>
       <Nav.Item className="sidenav-item">
         <NavLink
-          to="/share"
+          to="/dashboard/sharepages"
           label="Share"
           icon={faPray}
         />

@@ -9,6 +9,7 @@ import Feed from '../features/dashboard/Feed';
 import Profile from '../features/profile/Profile';
 import AddContent from '../features/content/AddContent';
 import Share from '../features/share/Share';
+import ShareList from '../features/share/ShareList';
 
 export const publicRoutes = [
   {
@@ -56,5 +57,11 @@ export const privateRoutes = [
     exact: true,
     page: <Dashboard/>,
     dashboard: <Profile/>
+  },
+  {
+    path: "/dashboard/sharepages",
+    exact: true,
+    page: <Dashboard/>,
+    dashboard: <ShareList/>
   }
 ];

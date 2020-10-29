@@ -52,7 +52,7 @@ export default function Homepage() {
         </Nav.Item>
         <hr/>
         <Nav.Item>
-          <NavLink to="/share" label={<>
+          <NavLink to="/dashboard/sharepages" label={<>
             <Row> <h4 style={{ textDecorationLine: 'underline' }}> Share View </h4> </Row>
             <Row> <h6> See your shared content </h6> </Row>
           </>}/>
