@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
 
 //rich text editor
@@ -12,24 +12,21 @@ import { createContent, getContent } from "../content/contentSlice";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row"; 
-export default function AddContent({ setView }) {
-  /*
-   * useState is a React hook and unrelated to Redux. Creates a little
-   * private state inside the component, in this case is used to just handle
-   * what's in the input fields before we send it off to Redux.
-   */
+import Row from "react-bootstrap/Row";
+import { FormRadio, Modal, ModalBody } from 'shards-react';
+import HashLoader from 'react-spinners/HashLoader';
+
+export default function AddContent() {
+
+  const dispatch = useDispatch();
+
+  const uploading = useSelector(state => state.app.loading.createContent);
 
   const [content, updateContent] = useState({});
   const [richText, updateRichText] = useState("");
   const [file, updateFile] = useState();
-
-  const [showFile, setShowFile] = useState(false);
-  const toggleShowFileOff = () => setShowFile(false);
-  const toggleShowFileOn = () => setShowFile(true);
-
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const [contentIsFile, setContentIsFile] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const onSubmitHandler = (e) => {
     // Prevent 'Submit' from actually doing a traditional submit
@@ -40,24 +37,35 @@ export default function AddContent({ setView }) {
     for (let field in content) {
       data.set(field, content[field]);
     }
-    if (showFile && file) {
+    if (contentIsFile && file) {
       data.set("file", file);
-    } else if (!showFile) {
+    } else if (!contentIsFile) {
       data.set("content", richText);
     }
 
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
     dispatch(createContent(data))
-      .then(() => dispatch(getContent()))
-      .then(() => history.push('/dashboard'));
+      .then(() => {
+        resetForm();
+        toggleConfirmation();
+        dispatch(getContent());
+      });
   }
 
+  const toggleContentType = () => setContentIsFile(!contentIsFile);
 
-  // Input fields are based on state, so typing in them won't work unless we also change the state
-  const onChangeHandler = (e) =>
-    updateContent({ ...content, [e.target.id]: e.target.value });
+  const onChangeHandler = (e) => updateContent({ ...content, [e.target.id]: e.target.value });
+
+  const resetForm = () => {
+    updateContent({ title: '', description: '' });
+    updateRichText('');
+  }
+
   const onContentChangeHandler = (e) => updateRichText(e);
+
   const onFileChosenHandler = (e) => updateFile(e.target.files[0]);
+
+  const toggleConfirmation = () => setShowConfirmation(!showConfirmation);
 
   const enabledTools = [
     [{ header: [1, 2, false] }],
@@ -73,7 +81,15 @@ export default function AddContent({ setView }) {
   ];
 
   return (
-    <React.Fragment>
+    <>
+      <Modal open={showConfirmation} toggle={toggleConfirmation} size="sm">
+        <ModalBody className="addcontent-confirmation-modal">
+          <div className="addcontent-confirmation-modal">
+            Success!
+            <Link className="addcontent-next-btn" to="/dashboard/content"><strong>See content</strong> →</Link>
+          </div>
+        </ModalBody>
+      </Modal>
       <div className="pageheading-rectangle1">
         <h1 className="pageheading-heading">Add Content</h1>
         <div className="pageheading-decoration1" />
@@ -108,13 +124,22 @@ export default function AddContent({ setView }) {
             </Form.Group>
           </div>
           <div className="content">
-          <Button variant="primary" onClick={toggleShowFileOff}>
-            {" "}
-            Text</Button>
-            <Button variant="primary" onClick={toggleShowFileOn}>
-              {" "}
-              File{" "}
-            </Button>
+            <FormRadio
+              inline
+              name="contenttype"
+              checked={!contentIsFile}
+              onChange={toggleContentType}
+            >
+              Text
+            </FormRadio>
+            <FormRadio
+              inline
+              name="contenttype"
+              checked={contentIsFile}
+              onChange={toggleContentType}
+            >
+              File
+            </FormRadio>
             <Row>
             <div>{"\n"}{"\n"}</div>
             </Row>
@@ -122,7 +147,7 @@ export default function AddContent({ setView }) {
             <div className="content-box">
               <div className="content-heading">Content</div>
             </div>
-            {!showFile ? (
+            {!contentIsFile ? (
               <Form.Group controlId="content">
                 <ReactQuill
                   modules={{ toolbar: enabledTools }}
@@ -141,10 +166,12 @@ export default function AddContent({ setView }) {
           </div>
           </div>
           <Button type="submit" variant="info">
-            Create
+            {uploading
+              ? <>Uploading <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={uploading}/></span></>
+              : 'Create'}
           </Button>
         </div>
       </Form>
-    </React.Fragment>
+    </>
   );
 }
