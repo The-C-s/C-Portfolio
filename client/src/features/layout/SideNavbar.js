@@ -94,7 +94,7 @@ export default function SideNavbar() {
           </div>
         </Collapse>
       </div>
-      <Nav.Item className="sidenav-item">
+      <Nav.Item className="sidenav-item" onClick={logoutHandler}>
         <NavLink
           to="/"
           label="Sign out"

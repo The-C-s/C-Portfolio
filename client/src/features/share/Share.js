@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import ProfileBar from './ProfileBar';
-import Showcase from './Showcase';
+//import Showcase from './Showcase';
 import ShareContentItem from './ShareContentItem'; // Component probably needs to be edited to suit share view
 import Section from './Section';
 import Skeleton from 'react-loading-skeleton';
@@ -15,7 +15,6 @@ import Skeleton from 'react-loading-skeleton';
 import { getShareId } from '../../common/helpers';
 
 import { getSharepage } from '../share/shareSlice';
-import * as fakeData from '../../_mockapi/data';
 
 export default function Share() {
 
@@ -47,6 +46,7 @@ export default function Share() {
 
 
   // Showcase Simulator®
+  /**
   const randInt = x => Math.floor(Math.random() * x);
   const showcase = [
     share.content[randInt(share.content.length)],
@@ -54,7 +54,8 @@ export default function Share() {
     share.content[randInt(share.content.length)],
     share.content[randInt(share.content.length)]
   ];
-
+  **/
+  
   // Handler for changing sidebar type when its width is adjusted
   const handleInfo = info => {
 
@@ -69,7 +70,7 @@ export default function Share() {
   const scrollToSection = section => document.getElementsByClassName(section)[0].scrollIntoView({ behavior: 'smooth' });
   const scrollToContentItem = id => document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 
-  
+
   // Set sidebar styles depending on what section user has scrolled to
   const sectionScrollHandler = (section, inView) => {
 
