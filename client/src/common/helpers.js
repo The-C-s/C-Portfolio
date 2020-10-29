@@ -23,3 +23,12 @@ export const getContentType = userContent => {
 
   return null;
 }
+
+export const getShareId = url => {
+    //if this isn't a sharepage return null
+    if (!url.includes("share")) {
+        return null;
+    }
+    const id = url.split('/').pop();
+    return id;
+}

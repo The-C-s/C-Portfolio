@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { authenticate } from '../features/user/userSlice';
 import { getProfile } from '../features/profile/profileSlice';
 import { getContent } from '../features/content/contentSlice';
+import { getSharepage } from '../features/share/shareSlice';
 import { token } from '../common/api';
 import { publicRoutes, privateRoutes } from '../common/routes';
 

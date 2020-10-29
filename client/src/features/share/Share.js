@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { ViewPort, LeftResizable, Fill, Right, Info } from 'react-spaces';
 import Row from 'react-bootstrap/Row';
@@ -9,12 +10,28 @@ import ProfileBar from './ProfileBar';
 import Showcase from './Showcase';
 import ShareContentItem from './ShareContentItem'; // Component probably needs to be edited to suit share view
 import Section from './Section';
+import Skeleton from 'react-loading-skeleton';
 
+import { getShareId } from '../../common/helpers';
+
+import { getSharepage } from '../share/shareSlice';
 import * as fakeData from '../../_mockapi/data';
 
 export default function Share() {
 
-  const { user, profile, content } = fakeData;
+  const dispatch = useDispatch();
+  const shareid = getShareId(window.location.href);
+  //dispatch(getSharepage(shareid));
+  const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
+
+  // Reloading content
+  useEffect(() => {
+      async function fetch() { dispatch(getSharepage(shareid)) };
+      fetch();
+  }, [dispatch, shareid]);
+
+  const { user, profile } = fakeData;
+  const content = useSelector(state => state.share);
 
   const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
   const [profilebarWidth, setProfilebarWidth] = useState(300);
@@ -28,6 +45,8 @@ export default function Share() {
     experience: false,
     projects: false
   });
+
+
 
   // Showcase Simulator®
   const randInt = x => Math.floor(Math.random() * x);
@@ -116,15 +135,18 @@ export default function Share() {
         </LeftResizable>
         <Fill className="share-main" scrollable={!inFocusedState}>
             <Section name="showcase" className="share-showcase" scrollHandler={sectionScrollHandler}>
-              <Col>
-                <Row>
-                  <h1>Showcase</h1>
-                </Row>
-                <Row>
-                  <Showcase items={showcase}/>
-                </Row>
-              </Col>
-            </Section>
+                  <Col>
+                    <Row>
+                      <h1>Showcase</h1>
+                    </Row>
+                    <Row>
+                        {gettingSharepage
+                            ? <><h1><Skeleton/></h1><p><Skeleton count={1}/></p></>
+                            : <></>//<><Showcase items={showcase}/></>
+                        }
+                    </Row>
+                  </Col>
+                </Section>
             <Section name="education" className="share-education" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
@@ -166,14 +188,16 @@ export default function Share() {
                 <Row>
                   <h1>Projects</h1>
                 </Row>
-                {content.map((contentItem, index) =>
-                  <ShareContentItem
-                    content={contentItem}
-                    key={index}
-                    clickHandler={handleContentItemClick}
-                    closeHandler={handleContentItemClose}
-                  />
-                )}
+                {gettingSharepage
+                  ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
+                  : content.map((contentItem, index) =>
+                    <ShareContentItem
+                      content={contentItem}
+                      key={index}
+                      clickHandler={handleContentItemClick}
+                      closeHandler={handleContentItemClose}
+                    />)
+                }
               </Col>
             </Section>
         </Fill>

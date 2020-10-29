@@ -22,6 +22,11 @@ export const publicRoutes = [
     exact: true,
     page: <Landing/>,
     landing: <Register/>
+  },
+  {
+    path: "/share",
+    exact: false,
+    page: <Share/>
   }
 ];
 
@@ -51,10 +56,5 @@ export const privateRoutes = [
     exact: true,
     page: <Dashboard/>,
     dashboard: <Profile/>
-  },
-  {
-    path: "/share",
-    exact: true,
-    page: <Share/>
   }
 ];
