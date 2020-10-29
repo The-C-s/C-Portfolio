@@ -17,6 +17,8 @@ export default function SideNavbar() {
 
   const onContentClick = () => toggleContent(!expandContent);
 
+  const logoutHandler = () => dispatch(logout());
+
   return(
     <Nav className="sidenav flex-column col-sm-3 col-lg-2 d-none d-sm-block">
       <img className="sidenav-logo" src="/images/logo_white_transparent.png" alt="cPortfolio logo"/>
@@ -73,13 +75,12 @@ export default function SideNavbar() {
           icon={faPray}
         />
       </Nav.Item>
-      <Nav.Item className="sidenav-item">
+      <Nav.Item className="sidenav-item" onClick={logoutHandler}>
         <NavLink
           to="/"
           label="Sign out"
           icon={faSignOutAlt}
           activeOnlyWhenExact={true}
-          onClick={() => dispatch(logout())}
         />
       </Nav.Item>
     </Nav>

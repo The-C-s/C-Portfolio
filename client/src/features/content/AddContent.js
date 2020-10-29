@@ -50,6 +50,7 @@ export default function AddContent() {
       .then(() => history.push('/dashboard/content'));
   };
 
+
   // Input fields are based on state, so typing in them won't work unless we also change the state
   const onChangeHandler = (e) =>
     updateContent({ ...content, [e.target.id]: e.target.value });
