@@ -16,11 +16,14 @@ export default function Profile() {
   const content = useSelector(state => state.content); 
   const isLoaded = useSelector(state => state.profile.isLoaded);
 
-  // Reloading profile 
+  // Reloading profile
   useEffect(() => {
-    async function fetch() { dispatch(getProfile(user.profile)) }; 
-    fetch();
-  }, [dispatch, user.profile]);
+
+    async function fetch() { dispatch(getProfile(user.profile)) }
+
+    // Skip loading if already in state
+    if (user.profile && user.profile !== profile.id) fetch();
+  }, [dispatch, user, profile]);
 
   //Alternative solution from making a list of API calls 
   //For each project in the profile, searchs through the content list for a matching id 
