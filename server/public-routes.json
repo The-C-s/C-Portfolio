@@ -7,6 +7,11 @@
 		"/test",
 		"/database",
     	"/users",
-    	"/dashboard/profile"
+    	"/dashboard",
+    	"/dashboard/profile",
+    	"/dashboard/content",
+    	"/dashboard/content/add",
+    	"/dashboard/content/upload",
+    	"homepage",
 	]
 }
