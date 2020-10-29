@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "interweave": "^12.5.0",
     "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.0",
@@ -38,6 +39,9 @@
     "passport-jwt": "^4.0.0",
     "popper.js": "^1.16.1",
     "prettier": "^2.1.2",
+    "react": "^17.0.1",
+    "react-markdown": "^5.0.2",
+    "remark-gfm": "^1.0.0",
     "request": "^2.88.2",
     "shards": "^1.0.3"
   }

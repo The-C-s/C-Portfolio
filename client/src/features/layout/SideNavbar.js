@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Nav from 'react-bootstrap/Nav';
 import Collapse from 'react-bootstrap/Collapse';
 
-import { faAddressCard, faPray, faFolderPlus, faSignOutAlt, faStream, faHotTub } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faIdBadge, faFolderPlus, faSignOutAlt, faStream, faBorderAll } from '@fortawesome/free-solid-svg-icons';
 
 import NavLink from './NavLink';
 
@@ -28,7 +28,7 @@ export default function SideNavbar() {
         <NavLink
           to="/homepage"
           label="Overview"
-          icon={faHotTub}
+          icon={faBorderAll}
         />
       </Nav.Item>
       <div className={`sidenav-group${expandContent ? ' sidenav-group-expanded' : ''}`}>
@@ -88,7 +88,7 @@ export default function SideNavbar() {
                 sub
                 to="/dashboard/sharepages/add"
                 label="New Sharepage"
-                icon={faFolderPlus}
+                icon={faIdBadge}
               />
             </Nav.Item>
           </div>
