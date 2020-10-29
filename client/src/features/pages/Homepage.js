@@ -132,7 +132,7 @@ export default function Homepage() {
             </Nav.Item>
             <Nav.Item>
               <NavLink
-                to="/share"
+                to="/dashboard/sharepages"
                 label={
                   <>
                     <div className="share">
