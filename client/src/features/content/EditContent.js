@@ -69,7 +69,7 @@ export default function EditContent({ content, show, closeHandler }) {
             <Form.Label>Title</Form.Label>
             <Form.Control type="text" value={_content.title} onChange={onChangeHandler}/>
           </Form.Group>
-          <Form.Group controlId="username">
+          <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control type="text" value={_content.description} onChange={onChangeHandler}/>
           </Form.Group>

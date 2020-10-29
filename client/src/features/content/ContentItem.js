@@ -3,6 +3,8 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Interweave from 'interweave';
+
 
 import Tag from './Tag';
 import ContentItemMenu from './ContentItemMenu';
@@ -51,17 +53,21 @@ export default function ContentItem({ content }) {
           </Col>
         </Row>
         <Row className="contentitem contentitem-body">
-          {image &&
-            <Col className="contentitem contentitem-image-container" md={3}>
+          {image && 
+            (<Col className="contentitem contentitem-image-container" md={3}>
               <Row className="contentitem contentitem-image-container">
                 <img className="contentitem contentitem-image" src={content.content} alt={title}></img>
               </Row>
-            </Col>}
+          </Col>)}
           <Col>
             <Row>
               <p className="contentitem contentitem-description">{description}</p>
             </Row>
+            <Row>
+            {!image && <div><hr></hr><Interweave content={content.content}/></div>} 
+            </Row>
           </Col>
+          
         </Row>
         <Row className="contentitem contentitem-footer">
           <div className="contentitem contentitem-container contentitem-tags">

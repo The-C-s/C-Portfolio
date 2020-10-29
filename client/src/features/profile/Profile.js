@@ -57,9 +57,11 @@ export default function Profile() {
         <div className = "pageheading-decoration2"/>
       </Row>
       </div>
+      <Row>
       <div className = "mt-2">
       {isLoaded ? <ProfileItem profile = {profile} projects ={projectList} />: <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>}
       </div>
+      </Row>
     </div>
   );
 }
