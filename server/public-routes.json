@@ -12,6 +12,6 @@
     	"/dashboard/content",
     	"/dashboard/content/add",
     	"/dashboard/content/upload",
-    	"homepage"
+    	"/homepage"
 	]
 }
