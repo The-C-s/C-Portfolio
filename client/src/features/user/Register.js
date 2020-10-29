@@ -6,7 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import HashLoader from 'react-spinners/HashLoader';
 
-import { register, login } from './userSlice';
+import { register} from './userSlice';
+//import {createProfile} from '../profile/profileSlice';
 
 export default function Register() {
   
@@ -14,15 +15,15 @@ export default function Register() {
   const history = useHistory();
   const registering = useSelector(state => state.app.loading.register);
   const loggingIn = useSelector(state => state.app.loading.login);
-  const [form, updateForm] = useState({ name: '', email: '', password: '', password2: ''});
+  const [form, updateForm] = useState({ name: '', email: '', password: '', confirmPass: ''});
   
   const onSubmitHandler = e => {
     
     e.preventDefault();
-    
-    dispatch(register(form))
-      .then(() => dispatch(login(form)))
-      .then(() => history.push('/homepage'));
+          dispatch(register(form))
+          //.then(dispatch(login(form)))
+          .then(() => history.push('/homepage'));
+        
   }
   
   const onChangeHandler = e => updateForm({ ...form, [e.target.id]: e.target.value });
@@ -65,9 +66,9 @@ export default function Register() {
         <Form.Group>
           <Form.Control
           type="password"  
-          id="password2" 
+          id="confirmPass" 
           placeholder="Confirm Password" 
-          value={form.password2}
+          value={form.confirmPass}
           onChange={onChangeHandler}
           className="form-control"
           />

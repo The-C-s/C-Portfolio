@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -13,7 +13,12 @@ export default function Login({ onLogin }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const loggingIn = useSelector(state => state.app.loading.login);
+  const user = useSelector(state => state.user);
   const [form, updateForm] = useState({ email: '', password: '' });
+
+  useEffect(() => {
+    if (user.isAuthenticated) history.push('/homepage');
+  });
 
   const onSubmitHandler = e => {
 

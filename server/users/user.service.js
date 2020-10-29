@@ -62,10 +62,14 @@ async function create(userParam) {
     if (!userParam.password) {
       throw 'Password is a required field';
     }
+    if (!(userParam.password == userParam.confirmPass)){
+        throw 'Passwords do not match';
+    }
 
     //ignore illegal fields
     delete userParam.hash;
     delete userParam.content;
+    delete userParam.confirmPass;
     delete userParam.profile;
     delete userParam.createdDate;
     delete userParam.avatar;
@@ -98,9 +102,7 @@ async function create(userParam) {
 
 async function update(id, userParam) {
     const user = await User.findById(id);
-
-    console.log("Got here");
-
+    
     // validate
     if (!user) throw new Error('UserNotFoundError');
     //if request gave username and username isn't the same as it was and the username is in the database
