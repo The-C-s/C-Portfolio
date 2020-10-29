@@ -22,6 +22,10 @@
   }
 }
 
+.hidden {
+  display: none;
+}
+
 @include sass-themify() {
   .search-icon {
     color: sass-themify-get-color('topnav-fg');
