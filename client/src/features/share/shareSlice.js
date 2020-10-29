@@ -12,13 +12,19 @@ export const getSharepage = createAsyncThunk(
 //Stores profile in state.profile
 const share = createSlice({
     name: 'share',
-    initialState: [],
+    initialState: { content: [], education: [], experience: [] },
     reducers: {},
     extraReducers: {
         //Resets state on logout (think its necessary)
         'user/logout': () => { return {}},
-        //Returns profile data
-        [getSharepage.fulfilled]: (_, action) => { console.log("share data"); console.log(action.payload.data); return [...action.payload.data] }
+        //Returns share data
+        //[getSharepage.fulfilled]: (_, action) => { console.log("share data"); console.log(action.payload.data); return [...action.payload.data] }
+        [getSharepage.fulfilled]: (state, action) => {
+            return {
+                ...state,
+                ...action.payload.data
+            }
+        }
     }
   });
 

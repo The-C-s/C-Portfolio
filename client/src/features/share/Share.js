@@ -21,7 +21,6 @@ export default function Share() {
 
   const dispatch = useDispatch();
   const shareid = getShareId(window.location.href);
-  //dispatch(getSharepage(shareid));
   const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
 
   // Reloading content
@@ -30,8 +29,7 @@ export default function Share() {
       fetch();
   }, [dispatch, shareid]);
 
-  const { user, profile } = fakeData;
-  const content = useSelector(state => state.share);
+  const share = useSelector(state => state.share);
 
   const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
   const [profilebarWidth, setProfilebarWidth] = useState(300);
@@ -51,12 +49,12 @@ export default function Share() {
   // Showcase Simulator®
   const randInt = x => Math.floor(Math.random() * x);
   const showcase = [
-    content[randInt(content.length)],
-    content[randInt(content.length)],
-    content[randInt(content.length)],
-    content[randInt(content.length)]
+    share.content[randInt(share.content.length)],
+    share.content[randInt(share.content.length)],
+    share.content[randInt(share.content.length)],
+    share.content[randInt(share.content.length)]
   ];
-  
+
   // Handler for changing sidebar type when its width is adjusted
   const handleInfo = info => {
 
@@ -125,8 +123,8 @@ export default function Share() {
         <LeftResizable className="share-profilebar" size={profilebarWidth} maximumSize={350} minimumSize={60} trackSize={true}>
           <Info>{handleInfo}</Info>
           <ProfileBar
-            user={user}
-            profile={{ ...profile, bio: "Yolo's TSLA calls full time" }}
+            user={{"firstName": share.firstName, "lastName": share.lastName}}
+            profile={{ ...{ "logo": share.logo, "education": share.education, "experience": share.experience }, bio: "Yolo's TSLA calls full time" }}
             condensed={profilebarState.collapsed}
             condensedTitle={profilebarState.title}
             clickHandler={scrollToSection}
@@ -154,13 +152,16 @@ export default function Share() {
                 </Row>
                 <Row>
                   <Card>
-                    {profile.education.map((educationItem, index) => 
+                  {gettingSharepage
+                    ? <><h1><Skeleton/></h1><p><Skeleton count={2}/></p></>
+                    : share.education.map((educationItem, index) =>
                       <div key={index}>
                         <h3>{educationItem}</h3>
                         <p>Description of lessons learned.</p>
                         <p><strong>Awards and achievements</strong> Best</p>
                         <p><strong>Extracurricular</strong> Longjump</p>
-                      </div>)}
+                      </div>)
+                  }
                   </Card>
                 </Row>
               </Col>
@@ -172,13 +173,16 @@ export default function Share() {
                 </Row>
                 <Row>
                   <Card>
-                    {profile.experience.map((experienceItem, index) => 
+                  {gettingSharepage
+                    ? <><h1><Skeleton/></h1><p><Skeleton count={2}/></p></>
+                    : share.experience.map((experienceItem, index) =>
                       <div key={index}>
                         <h3>{experienceItem}</h3>
                         <p>Description of experience.</p>
                         <p><strong>Responsibilities</strong> Smart</p>
                         <p><strong>Achievements</strong> Longjump</p>
-                      </div>)}
+                      </div>)
+                  }
                   </Card>
                 </Row>
               </Col>
@@ -190,7 +194,7 @@ export default function Share() {
                 </Row>
                 {gettingSharepage
                   ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
-                  : content.map((contentItem, index) =>
+                  : share.content.map((contentItem, index) =>
                     <ShareContentItem
                       content={contentItem}
                       key={index}
