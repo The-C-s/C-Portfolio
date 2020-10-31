@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {editUser} from './userSlice';
+import Row from 'react-bootstrap/Row'; 
+import {editUser, uploadUserAvatar, uploadUserBackground, authenticate} from './userSlice';
 import Modal from 'react-bootstrap/esm/Modal';
 import Image from 'react-bootstrap/Image';
 
@@ -13,13 +14,43 @@ export default function EditUser({show, closeHandler, user}) {
 
 
     //Initialised with the user fields.
+    const dispatch = useDispatch();
 
     const [_user, updateDetails] = useState(user);
-    const dispatch = useDispatch();
+    const [_avatar, updateAvatar] = useState();
+    const [_background, updateBackground] = useState();
+
+    //Uploads to redux 
+    const onAvatarUploadHandler = (e) => updateAvatar(e.target.files[0]);
+    const onBackgroundUploadHandler = (e) => updateBackground(e.target.files[0]);
+
+    //Deletes redux states 
+    const deleteAvatarHandler = () => updateAvatar("undefined");
+    const deleteBackgroundHandler = () => updateBackground("undefined");
+  
+    //Makes API Calls
+    const saveAvatarHandler = () => {
+      const _data = new FormData();
+      _data.set("file", _avatar);
+      _data.set("username", "");
+      dispatch(uploadUserAvatar(_data))
+        .then(() => dispatch(authenticate()))
+        .then(() => closeHandler());
+    };
+
+    const saveBackgroundHandler = () => {
+      const _data = new FormData();
+      _data.set("file", _background);
+      _data.set("username", ""); 
+      dispatch(uploadUserBackground(_data))
+        .then(() => dispatch(authenticate()))
+        .then(() => closeHandler());
+    };
 
     //submits the new user details to the server to update in the database
     const handleEditUser = () => {
         dispatch(editUser(_user))
+        .then(() => dispatch(authenticate()))
         .then(closeHandler);
     };
 
@@ -29,8 +60,6 @@ export default function EditUser({show, closeHandler, user}) {
     const resetHandler = () => {
       //
       updateDetails(userFromState);
-      console.log(_user);
-      console.log(userFromState);
     }
     
     //<img src="..." class="rounded mx-auto d-block" alt="...">
@@ -40,7 +69,32 @@ export default function EditUser({show, closeHandler, user}) {
         <Modal show = {show} onHide = {closeHandler}>
         <Modal.Header><Modal.Title>Edit User Details</Modal.Title></Modal.Header>
         <Modal.Body>
+          <Row>
         <Image src = {userFromState.avatar} alt = "Hello Darkness" roundedCircle className = "rounded mx-auto d-block"/>
+        </Row>
+        <br />
+          <Form.Group controlId="avatar">
+          <Form.Label>Avatar</Form.Label>
+          <br />
+          <input className="mb-3" type="file" name="avatar" onChange={onAvatarUploadHandler} />
+          <br/>
+          </Form.Group>
+        <Row>
+          <Button className="ml-2" onClick={saveAvatarHandler}>Save Avatar</Button>
+          <Button className="ml-3" onClick={deleteAvatarHandler}>Delete Avatar</Button> 
+          </Row>
+          <br/>
+          <Form.Group controlId="background">
+          <Form.Label>Background</Form.Label>
+          <br />
+          <input className="mb-3" type="file" name="background" onChange={onBackgroundUploadHandler} />
+          <br/>
+          </Form.Group>
+        <Row>
+          <Button className="ml-2" onClick={saveBackgroundHandler}>Save Background</Button>
+          <Button className="ml-3" onClick={deleteBackgroundHandler}>Delete Background</Button> 
+          </Row>
+          <br/>
         <Form>
         <Form.Group controlId = "username">
           <Form.Label>Username</Form.Label>

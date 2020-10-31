@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userService = require('./user.service');
 const uploadFile = require('../_helpers/file-upload');
+const verify = require('../_helpers/jwt'); 
 
 // routes
 router.post('/authenticate', authenticate);
