@@ -41,13 +41,17 @@ const app = createSlice({
 
     'content/deleteContent/pending': state => { return startLoading(state, 'deleteContent') },
     'content/deleteContent/fulfilled': state => { stopLoading(state, 'deleteContent') },
-    'content/deleteContent/rejected': (state, action) => { return setError(state, 'deleteContent', action.error) }
+    'content/deleteContent/rejected': (state, action) => { setError(state, 'deleteContent', action.payload) },
+
+    'share/getSharepage/pending': state => { return startLoading(state, 'getSharepage') },
+    'share/getSharepage/fulfilled': state => { stopLoading(state, 'getSharepage') },
+    'share/getSharepage/rejected': (state, action) => { setError(state, 'getSharepage', action.payload) }
   }
 });
 
 /**
  * Sets state.app.loading.action to true.
- * @param {*} state 
+ * @param {*} state
  * @param {*} action - The action name without the feature name, i.e. 'login' for 'user/login'.
  * @return The modified state.
  */
@@ -66,14 +70,14 @@ const startLoading = (state, action) => {
 
 /**
  * Removes state.app.loading.action from the state.
- * @param {*} state 
+ * @param {*} state
  * @param {*} action - The action name without the feature name, i.e. 'login' for 'user/login'.
  */
 const stopLoading = (state, action) => delete state.loading[action];
 
 /**
  * Sets state.app.errors.action to the error string and outputs the error to the console.
- * @param {*} state 
+ * @param {*} state
  * @param {*} action - The action name without the feature name, i.e. 'login' for 'user/login'.
  * @param {String} error - An associated error code or message.
  * @return The modified state.
@@ -93,7 +97,7 @@ const setError = (state, action, error) => {
 
 /**
  * Removes state.app.errors.action from the state.
- * @param {*} state 
+ * @param {*} state
  * @param {*} action - The action name without the feature name, i.e. 'login' for 'user/login'.
  */
 const removeError = (state, action) => delete state.errors[action];

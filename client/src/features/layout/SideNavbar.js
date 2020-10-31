@@ -14,8 +14,10 @@ export default function SideNavbar() {
 
   const dispatch = useDispatch();
   const [expandContent, toggleContent] = useState(false);
+  const [expandShare, toggleShare] = useState(false);
 
   const onContentClick = () => toggleContent(!expandContent);
+  const onShareClick = () => toggleShare(!expandShare);
 
   const logoutHandler = () => dispatch(logout());
 
@@ -68,13 +70,30 @@ export default function SideNavbar() {
           icon={faAddressCard}
         />
       </Nav.Item>
-      <Nav.Item className="sidenav-item">
-        <NavLink
-          to="/share"
-          label="Share"
-          icon={faIdBadge}
-        />
-      </Nav.Item>
+      <div className={`sidenav-group${expandShare ? ' sidenav-group-expanded' : ''}`}>
+        <Nav.Item className="sidenav-item" onClick={onShareClick}>
+          <NavLink
+            dropdown
+            expanded={expandShare}
+            to="/dashboard/sharepages"
+            label="Share"
+            icon={faIdBadge}
+            activeOnlyWhenExact={true}
+          />
+        </Nav.Item>
+        <Collapse in={expandShare}>
+          <div className="collapse-group">
+            <Nav.Item className="sidenav-item">
+              <NavLink
+                sub
+                to="/dashboard/sharepages/add"
+                label="New Sharepage"
+                icon={faFolderPlus}
+              />
+            </Nav.Item>
+          </div>
+        </Collapse>
+      </div>
       <Nav.Item className="sidenav-item" onClick={logoutHandler}>
         <NavLink
           to="/"

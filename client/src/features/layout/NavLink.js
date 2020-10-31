@@ -11,6 +11,7 @@ export default function NavLink({
   to,
   activeOnlyWhenExact,
   icon,
+  iconSize,
   dropdown,
   expanded,
   sub
@@ -35,14 +36,14 @@ export default function NavLink({
         }`
       }
     >
-        {icon &&
+      {icon &&
         <FontAwesomeIcon
           className={`navlink-icon${match ? ' navlink-icon-active' : ''}`}
           icon={icon}
-          size="lg"
+          size={iconSize ? iconSize : "lg"}
         />}
-        {label}
-        {dropdown &&
+          {label}
+          {dropdown &&
         <FontAwesomeIcon
           className={`navlink-chevron ${expanded ? 'fa-rotate-180' : ''}`}
           icon={faChevronDown}

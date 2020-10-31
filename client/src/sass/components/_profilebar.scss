@@ -1,0 +1,121 @@
+.profilebar {
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  display: flex !important;
+  flex-direction: column;
+  align-items: left;
+  padding: 0 1%;
+  align-items: center;
+
+  .profilebar-logo {
+    width: 100px;
+    height: 100px;
+    align-self: center;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+
+    img {
+      display: inline;
+      height: 100%;
+    }
+  }
+
+  .profilebar-content {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+
+    .profilebar-item {
+      margin: 10px 0 0 0;
+    }
+  
+    .profilebar-name {
+      text-align: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  
+    .profilebar-headline {
+      text-align: center;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .profilebar-title {
+      display: none;
+      writing-mode: sideways-lr;
+      font-size: 24px;
+      
+      .separator {
+        margin: 10px;
+      }
+    }
+  }
+}
+
+.profilebar-condensed {
+  .profilebar-item {
+    display: none;
+  }
+
+  .profilebar-headline {
+    display: none;
+  }
+
+  .profilebar-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .profilebar-content {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .profilebar-name {
+    writing-mode: sideways-lr;
+  }
+
+  .profilebar-title {
+    display: block !important;
+  }
+}
+
+@include sass-themify() {
+
+  .profilebar {
+    background-color: sass-themify-get-color('profilebar-bg');
+  }
+
+  .profilebar-name {
+    color: sass-themify-get-color('profilebar-name');
+  }
+
+  .profilebar-title {
+    color: sass-themify-get-color('profilebar-name');
+  }
+
+  .profilebar-headline {
+    color: sass-themify-get-color('profilebar-headline');
+  }
+
+  .linkedul-li-content {
+    color: sass-themify-get-color('profilebar-fg');
+  }
+
+  .linkedul-li-bullet {
+    background-color: sass-themify-get-color('profilebar-accent');
+  }
+
+  .linkedul-li-bullet:before {
+    border-left: 1px solid sass-themify-get-color('profilebar-fg');
+  }
+}

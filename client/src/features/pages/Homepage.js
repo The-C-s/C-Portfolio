@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Row from "react-bootstrap/Row";
 import TopNav from "../layout/TopNav";
-import SideNavbar from "../layout/SideNavbar"; 
-import RightNavbar from "../layout/RightNavbar"; 
+import SideNavbar from "../layout/SideNavbar";
+import RightNavbar from "../layout/RightNavbar";
 
 import Nav from "react-bootstrap/Nav";
 import NavLink from "../layout/NavLink";
@@ -132,7 +132,7 @@ export default function Homepage() {
             </Nav.Item>
             <Nav.Item>
               <NavLink
-                to="/share"
+                to="/dashboard/sharepages"
                 label={
                   <>
                     <div className="share">
