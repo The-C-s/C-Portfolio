@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import { authenticate } from '../features/user/userSlice';
+import { getProfile } from '../features/profile/profileSlice';
+import { getContent } from '../features/content/contentSlice';
 import { token } from '../common/api';
 import { publicRoutes, privateRoutes } from '../common/routes';
 
@@ -14,7 +16,14 @@ export default function App() {
   const authenticated = useSelector(state => state.user.isAuthenticated);
 
   useEffect(() => {
-    async function fetch() { if (token.get() !== null) dispatch(authenticate()) }
+    async function fetch() {
+
+      if (token.get() !== null) {
+        dispatch(authenticate())
+          .then(() => dispatch(getProfile()))
+          .then(() => dispatch(getContent()))
+      }
+    }
     fetch();
   });
 

@@ -2,6 +2,8 @@ const db = require('../_helpers/db');
 const Content = db.Content;
 const User = db.User;
 const Share = db.Share;
+const Profile = db.Profile;
+
 module.exports = {
     create,
     getById,
@@ -25,9 +27,12 @@ async function create(userid) {
 
 async function getById(shareid) {
     const sharePage = await Share.findById(shareid);
+    const user = await User.findOne({ email: sharePage.user });
+    const profile = await Profile.findById(user.profile);
 
-    //check if the share page exists
+    //check if the share page and user exist
     if (!sharePage) throw new Error('SharePageNotFoundError');
+    if (!user) throw new Error('UserNotFoundError');
 
     //get all the posts in this sharepage
     var post;
@@ -39,7 +44,14 @@ async function getById(shareid) {
         posts.push(post);
     }
 
-    return posts;
+    return {
+        "content": posts,
+        "education": profile.education,
+        "experience": profile.experience,
+        "logo": profile.logo,
+        "firstName": user.firstName,
+        "lastName": user.lastName
+    };
 }
 
 //Updates the content of a share page

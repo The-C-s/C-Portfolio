@@ -20,6 +20,7 @@ export const ADD_RESUME = '/profile/addResume';
 export const UPDATE_USER = '/users/update';
 export const UPLOAD_AVATAR = '/users/avatar'; 
 export const UPLOAD_BACKGROUND = '/users/background'; 
+export const SHARE = '/share/';
 
 export const token = {
   get: () => localStorage.getItem('token'),
@@ -84,3 +85,5 @@ export const updateUser = async userParams => await axios.put(UPDATE_USER, userP
 export const uploadAvatar = async avatar => await axios.put(UPLOAD_AVATAR, avatar); 
 
 export const uploadBackground = async background => await axios.put(UPLOAD_BACKGROUND, background); 
+
+export const getSharepage = async id => await axios.get(`${SHARE}${id}`);

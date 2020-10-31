@@ -1,0 +1,34 @@
+.profilebarlink {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+
+  .profilebarlink-icon {
+    margin-right: 10px;
+    width: 18px;
+    transition: 0.2s;
+  }
+}
+
+@include sass-themify() {
+
+  .profilebarlink {
+    color: sass-themify-get-color('profilebar-fg');
+  }
+
+  .profilebarlink-active {
+    color: sass-themify-get-color('profilebar-name');
+  }
+
+  .profilebarlink-icon {
+    color: sass-themify-get-color('profilebar-fg');
+  }
+
+  .profilebarlink-icon-active {
+    color: sass-themify-get-color('profilebar-accent');
+  }
+
+  .profilebarlink:hover .profilebarlink-icon {
+    color: sass-themify-get-color('profilebar-accent');
+  }
+}
