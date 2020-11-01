@@ -50,6 +50,11 @@ async function create(userid, userParam, file) {
         //Sets the user of the post to the person who created it 
         const user = await User.findById(userid); 
         post.user = user.email; 
+        //illegal fields, ignore them
+        delete userParam.file;
+        if(!userParam.content){ 
+            delete userParam.content; 
+        }
         //Saves url of image/file if there is one
         if(typeof file !== 'undefined'){
             post.content = file.path;
@@ -81,7 +86,7 @@ async function update(userid, postid, userParam, file) {
         if(user.email == post.user){ 
             //Updates the specified post with the input 
             Object.assign(post, userParam);
-            if(typeof file !== 'undefined'){
+            if(file){
                 //Updates content's file path if file exists
                 post.content = file.path;
             }

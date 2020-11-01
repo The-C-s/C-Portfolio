@@ -39,6 +39,10 @@ export default function AddContent({isFile}) {
     for (let field in content) {
       data.set(field, content[field]);
     }
+    for(var i = 0; i < content.tags.length; i++){ 
+      data.delete("tags"); 
+      data.append("tags[]", content.tags[i]); 
+    }
     if (contentIsFile && file) {
       data.set("file", file);
     } else if (!contentIsFile) {

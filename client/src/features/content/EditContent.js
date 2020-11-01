@@ -43,6 +43,10 @@ export default function EditContent({ content, show, closeHandler }) {
     for (let field in _content) {
       _data.set(field, _content[field]);
     }
+    for(var i = 0; i < _content.tags.length; i++){ 
+      _data.delete("tags"); 
+      _data.append("tags[]", _content.tags[i]); 
+    }
     if (showFile && _file) {
       _data.set("file", _file);
       _data.delete("content");
