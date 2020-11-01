@@ -81,3 +81,5 @@ export const addResume = async resume => await axios.put(ADD_RESUME, resume);
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
 
 export const getSharepage = async id => await axios.get(`${SHARE}${id}`);
+
+export const editSharepage = async shareParams => { console.log(shareParams); await axios.put(`${SHARE}${shareParams.id}`, shareParams); }

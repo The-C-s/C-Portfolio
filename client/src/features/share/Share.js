@@ -11,24 +11,81 @@ import ProfileBar from './ProfileBar';
 import ShareContentItem from './ShareContentItem'; // Component probably needs to be edited to suit share view
 import Section from './Section';
 import Skeleton from 'react-loading-skeleton';
+import Button from 'react-bootstrap/Button';
 
 import { getShareId } from '../../common/helpers';
 
-import { getSharepage } from '../share/shareSlice';
+import { getSharepage, editSharepage } from '../share/shareSlice';
 
 export default function Share() {
 
   const dispatch = useDispatch();
   const shareid = getShareId(window.location.href);
   const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
+  const gettingContent = useSelector(state => state.app.loading.getContent);
+  const user = useSelector(state => state.user);
+
+  //this will be empty if user isn't logged in
+  const allContent = useSelector(state => state.content);
 
   // Reloading content
   useEffect(() => {
       async function fetch() { dispatch(getSharepage(shareid)) };
       fetch();
+
   }, [dispatch, shareid]);
 
   const share = useSelector(state => state.share);
+
+  //the selected posts
+  const [selectedPosts, setSelectedPosts] = useState({});
+
+  const [editing, setEditing] = useState(false);
+  const stopEditing = () => {
+      setEditing(false);
+      var newContent = []
+      for(var post of allContent) {
+          if(selectedPosts[post.id]) {
+              newContent.push(post.id);
+          }
+      }
+      //send new content
+      dispatch(editSharepage({"id": shareid, "content": newContent}))
+        .then(() => dispatch(getSharepage(shareid)));
+  }
+  const startEditing = () => {
+      setEditing(true);
+
+      var _selectedPosts = {};
+      //add all the posts with initial value false
+      var contentPost;
+      for(contentPost of allContent) {
+          _selectedPosts[contentPost.id] = false;
+      }
+
+      //change the values of the posts in the share view to true
+      var sharedPost;
+      for (sharedPost of share.content) {
+          _selectedPosts[sharedPost.id] = true;
+      }
+
+      setSelectedPosts(_selectedPosts);
+  }
+
+
+
+  const togglePost = (id) => {
+      var _selectedPosts = { ...selectedPosts, [id]: !selectedPosts[id] };
+      setSelectedPosts(_selectedPosts);
+  }
+
+  /**
+  const setInitialSelectedPosts = () => {
+
+  }
+  **/
+
+
 
   const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
   const [profilebarWidth, setProfilebarWidth] = useState(300);
@@ -55,7 +112,7 @@ export default function Share() {
     share.content[randInt(share.content.length)]
   ];
   **/
-  
+
   // Handler for changing sidebar type when its width is adjusted
   const handleInfo = info => {
 
@@ -193,18 +250,38 @@ export default function Share() {
                 <Row>
                   <h1>Projects</h1>
                 </Row>
-                {gettingSharepage
-                  ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
-                  : share.content.map((contentItem, index) =>
-                    <ShareContentItem
-                      content={contentItem}
-                      key={index}
-                      clickHandler={handleContentItemClick}
-                      closeHandler={handleContentItemClose}
-                    />)
+                {editing
+                    ? gettingContent
+                      ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
+                      : allContent.map((contentItem, index) =>
+                        <ShareContentItem
+                          content={contentItem}
+                          key={index}
+                          clickHandler={handleContentItemClick}
+                          closeHandler={handleContentItemClose}
+                          editing={true}
+                          selected={selectedPosts[contentItem.id]}
+                          toggleSelection={togglePost}
+                        />)
+                    : gettingSharepage
+                      ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
+                      : share.content.map((contentItem, index) =>
+                        <ShareContentItem
+                          content={contentItem}
+                          key={index}
+                          editing={false}
+                          clickHandler={handleContentItemClick}
+                          closeHandler={handleContentItemClose}
+                        />)
                 }
+
               </Col>
             </Section>
+            {user.isAuthenticated &&
+                editing
+                    ? <Button onClick={stopEditing} variant="link"> Save </Button>
+                    : <Button onClick={startEditing} variant="link"> Edit </Button>
+            }
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
           {focusedContent.title && <p>{focusedContent.content}</p>}
