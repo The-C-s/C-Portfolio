@@ -7,6 +7,7 @@ import NavLink from '../layout/NavLink';
 export default function Share() {
 
   const user = useSelector(state => state.user);
+  const gettingUser = useSelector(state => state.app.loading.login);
 
   return(
       <>
@@ -14,7 +15,7 @@ export default function Share() {
         <Nav className="flex-column">
         <h1> Sharepages: </h1>
           <>
-          {user.sharePages.map((sharepage, index) => (
+          {!gettingUser && user.sharePages.map((sharepage, index) => (
             <>
             <hr/>
             <Nav.Item>
