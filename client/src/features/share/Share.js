@@ -22,7 +22,7 @@ export default function Share() {
 
   const dispatch = useDispatch();
 
-  const [shareid, setShareId] = useState(getShareId(window.location.href));
+  const shareid = getShareId(window.location.href);
   const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
   const gettingContent = useSelector(state => state.app.loading.getContent);
   const user = useSelector(state => state.user);
