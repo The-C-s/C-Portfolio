@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
 }
 
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:58809';
+// axios.defaults.baseURL = 'http://localhost:64248';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
@@ -21,7 +21,8 @@ export const UPDATE_USER = '/users/update';
 export const UPLOAD_AVATAR = '/users/avatar';
 export const UPLOAD_BACKGROUND = '/users/background';
 export const SHARE = '/share/';
-export const CREATE_SHARE = '/share/create'
+export const CREATE_SHARE = '/share/create'; 
+
 
 export const token = {
   get: () => localStorage.getItem('token'),

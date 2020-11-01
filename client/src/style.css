@@ -18995,14 +18995,16 @@ body, h1, h2, h3, h4, h5, h6, .btn,
   font-family: "Open Sans", sans-serif;
 }
 
-.btn-login {
+.login-form .btn-login {
   display: flex;
   align-items: center;
 }
-
-.spinner-login {
+.login-form .spinner-login {
   display: inline-block;
   margin-left: 10px;
+}
+.login-form small {
+  margin-bottom: 10px;
 }
 
 .contentitem .row, .contentitem [class^=col] {
@@ -19855,6 +19857,7 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   color: white;
 }
 .addcontent .tags {
+  position: flex;
   margin-top: 10px;
 }
 .addcontent .tags .tags-box {
@@ -19865,22 +19868,6 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   border-radius: 10px;
 }
 .addcontent .tags .tags-box .content-heading {
-  position: flex;
-  padding-top: 7px;
-  padding-left: 10px;
-  color: white;
-}
-.addcontent .time {
-  margin-top: 10px;
-}
-.addcontent .time .time-box {
-  position: flex;
-  height: 34px;
-  margin-bottom: 20px;
-  background: #78C5DC;
-  border-radius: 10px;
-}
-.addcontent .time .time-box .time-heading {
   position: flex;
   padding-top: 7px;
   padding-left: 10px;
@@ -20331,6 +20318,13 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
 .register .register-password {
   margin-bottom: 7px;
 }
+.register .btn-submit {
+  display: flex;
+}
+.register .btn-submit .spinner-login {
+  display: inline-block;
+  margin-left: 10px;
+}
 
 .ReactPasswordStrength {
   border: none;
@@ -20499,6 +20493,58 @@ body > #root > div {
   transition: right 0.8s;
   width: 0.8s;
 }
+.share .share-main .share-projects .heading {
+  margin-bottom: 120px;
+}
+.share .share-main .share-showcase {
+  min-height: 300px;
+  position: sticky;
+  top: 0;
+}
+.share .share-main .showcase-box {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  z-index: 1;
+}
+.share .share-main .showcase-box .showcase-avatar {
+  position: absolute;
+  right: 0px;
+  width: 250px;
+  height: 250px;
+  margin-right: 0px;
+  z-index: 3;
+  transition: all 0.5s ease-out;
+}
+.share .share-main .showcase-box .showcase-avatar-condensed {
+  width: 100px !important;
+  height: 100px !important;
+}
+.share .share-main .showcase-box .showcase-background {
+  position: absolute;
+  overflow: hidden;
+  object-fit: cover;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 250px;
+  margin: -20px -20px 0 -20px;
+  z-index: 2;
+  mask-image: linear-gradient(black, transparent);
+  transition: all 0.5s ease-out;
+}
+.share .share-main .showcase-box .showcase-background-condensed {
+  height: 100px !important;
+}
+.share .section-top {
+  margin: 0 !important;
+}
+.share .share-education {
+  width: auto;
+}
+.share .share-education .share-center {
+  margin: auto;
+}
 .share .share-section {
   margin-bottom: 40px;
 }
@@ -20513,11 +20559,13 @@ body > #root > div {
   display: inline-block;
   vertical-align: middle;
 }
-.share .showcase-item .contentitem .contentitem-description, .share .showcase-item .contentitem .contentitem-title {
+.share .showcase-item .contentitem .contentitem-description,
+.share .showcase-item .contentitem .contentitem-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.share .showcase-item .contentitem .contentitem-footer, .share .showcase-item .contentitem .contentitem-menu {
+.share .showcase-item .contentitem .contentitem-footer,
+.share .showcase-item .contentitem .contentitem-menu {
   display: none;
 }

@@ -6,6 +6,15 @@
   .register-password {
     margin-bottom: 7px;
   }
+
+  .btn-submit {
+    display: flex;
+
+    .spinner-login {
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
 }
 
 .ReactPasswordStrength {
