@@ -3,19 +3,10 @@
   align-items: center;
   white-space: nowrap;
   overflow-x: auto;
-  color: hotpink; 
 
   .showcase-item {
     display: inline-block;
     vertical-align: middle;
   }
 
-  .showcase-background{ 
-    z-index: 1
-  }
-  .showcase-avatar{ 
-    display: inline-block; 
-    width: 200px; 
-    height: 200px; 
-  }
 }

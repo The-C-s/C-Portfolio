@@ -19425,19 +19425,10 @@ body.theme-default .linkedul-li-bullet:before {
   align-items: center;
   white-space: nowrap;
   overflow-x: auto;
-  color: hotpink;
 }
 .showcase-content .showcase-item {
   display: inline-block;
   vertical-align: middle;
-}
-.showcase-content .showcase-background {
-  z-index: 1;
-}
-.showcase-content .showcase-avatar {
-  display: inline-block;
-  width: 200px;
-  height: 200px;
 }
 
 .sharecontentitem {
@@ -20468,6 +20459,36 @@ body > #root > div {
   transition: right 0.8s;
   width: 0.8s;
 }
+.share .share-main .showcase-box {
+  position: flex;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  z-index: 1;
+}
+.share .share-main .showcase-box .showcase-avatar {
+  position: absolute;
+  right: 0px;
+  width: 250px;
+  height: 250px;
+  margin-right: 0px;
+  z-index: 3;
+}
+.share .share-main .showcase-box .showcase-background {
+  position: absolute;
+  overflow: hidden;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 50%;
+  z-index: 2;
+}
+.share .share-education {
+  width: auto;
+}
+.share .share-education .share-center {
+  margin: auto;
+}
 .share .share-section {
   margin-bottom: 40px;
 }
@@ -20482,11 +20503,13 @@ body > #root > div {
   display: inline-block;
   vertical-align: middle;
 }
-.share .showcase-item .contentitem .contentitem-description, .share .showcase-item .contentitem .contentitem-title {
+.share .showcase-item .contentitem .contentitem-description,
+.share .showcase-item .contentitem .contentitem-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.share .showcase-item .contentitem .contentitem-footer, .share .showcase-item .contentitem .contentitem-menu {
+.share .showcase-item .contentitem .contentitem-footer,
+.share .showcase-item .contentitem .contentitem-menu {
   display: none;
 }

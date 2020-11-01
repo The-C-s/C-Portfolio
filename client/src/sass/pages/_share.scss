@@ -1,5 +1,5 @@
 .share {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 36px;
 
   .row {
@@ -11,6 +11,43 @@
     transition: left 0.8s;
     transition: right 0.8s;
     width: 0.8s;
+
+    .showcase-box {
+      position: flex;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      z-index: 1;
+      
+      .showcase-avatar {
+        position: absolute;
+        right: 0px; 
+        width: 250px;
+        height: 250px;
+        margin-right: 0px;
+        //align-self: center;
+        z-index: 3;
+      }
+
+      .showcase-background {
+        position: absolute;
+        overflow: hidden;
+        //background-size:cover;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 50%;
+        //height: 20%;
+        z-index: 2;
+      }
+    }
+  }
+
+  .share-education{ 
+    width: auto; 
+    .share-center{ 
+        margin: auto;
+    }
   }
 
   .share-section {
@@ -30,13 +67,15 @@
     max-width: 500px;
     display: inline-block;
     vertical-align: middle;
-    
+
     .contentitem {
-      .contentitem-description, .contentitem-title {
+      .contentitem-description,
+      .contentitem-title {
         @include ellipsis-truncate;
       }
 
-      .contentitem-footer, .contentitem-menu {
+      .contentitem-footer,
+      .contentitem-menu {
         display: none;
       }
     }
