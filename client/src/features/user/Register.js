@@ -22,8 +22,8 @@ export default function Register() {
     
     e.preventDefault();
           dispatch(register(form))
-          .then(() => dispatch(login(form)))
-          .then(() => dispatch(createProfile(form.email)))
+          .then(() => {dispatch(login({email: form.email, password: form.password}))})
+          .then(() => dispatch(createProfile({email: form.email})))
           .then(() => history.push('/homepage')); 
         
   }
