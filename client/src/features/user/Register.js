@@ -20,7 +20,7 @@ export default function Register() {
   
   const onSubmitHandler = e => {
     
-    e.preventDefault();
+    //e.preventDefault();
           dispatch(register(form))
           .then(() => {dispatch(login({email: form.email, password: form.password}))})
           .then(() => dispatch(createProfile({email: form.email})))
