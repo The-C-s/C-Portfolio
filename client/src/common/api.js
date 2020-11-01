@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
 }
 
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:62541';
+//axios.defaults.baseURL = 'http://localhost:52081';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
@@ -24,6 +24,8 @@ export const token = {
   set: _token => localStorage.setItem('token', _token),
   delete: () => localStorage.removeItem('token')
 }
+
+
 
 // Takes email and password as an object and returns the user's details and token
 export const authenticateCredentials = async user => await axios.post(AUTH_USER, user);

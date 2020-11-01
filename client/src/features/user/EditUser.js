@@ -88,11 +88,17 @@ export default function EditUser({show, closeHandler, user}) {
 
 
         </Modal.Body>
-        <Modal.Footer>
+        {!passwordState && (<Modal.Footer>
             <Button variant="link" onClick = {resetHandler}>Reset Changes</Button>
             <Button variant="warning" onClick = {handleEditUser}>Save changes</Button>
             <Button variant="link" onClick={closeHandler}>Cancel</Button>
-        </Modal.Footer>
+        </Modal.Footer>)}
+        {passwordState && (<Modal.Footer>
+            <Button variant="link" onClick = {resetHandler}>Reset Changes</Button>
+            <Button variant="warning" onClick = {handleEditUser}>Save changes</Button>
+            <Button variant="link" onClick={closeHandler}>Cancel</Button>
+        </Modal.Footer>)}
+        
         </Modal>
         
     </React.Fragment>
