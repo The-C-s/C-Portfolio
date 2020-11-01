@@ -5,6 +5,8 @@ import {
   authenticateToken,
   updateUser,
   registerUser,
+  uploadBackground, 
+  uploadAvatar,
   token
 } from '../../common/api';
 
@@ -26,6 +28,16 @@ export const editUser = createAsyncThunk(
 export const register = createAsyncThunk(
   'user/register',
   registerUser
+);
+
+export const uploadUserAvatar = createAsyncThunk(
+  'user/avatar', 
+  uploadAvatar
+);
+
+export const uploadUserBackground = createAsyncThunk(
+  'user/background', 
+  uploadBackground
 );
 
 const user = createSlice({

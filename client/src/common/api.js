@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
 }
 
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:57670';
+//axios.defaults.baseURL = 'http://localhost:56202';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
@@ -18,6 +18,8 @@ export const PROFILE = '/profile/';
 export const ADD_LOGO = '/profile/addLogo';
 export const ADD_RESUME = '/profile/addResume'; 
 export const UPDATE_USER = '/users/update';
+export const UPLOAD_AVATAR = '/users/avatar'; 
+export const UPLOAD_BACKGROUND = '/users/background'; 
 export const SHARE = '/share/';
 
 export const token = {
@@ -79,5 +81,9 @@ export const addLogo = async logo => await axios.put(ADD_LOGO, logo);
 export const addResume = async resume => await axios.put(ADD_RESUME, resume);  
 
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
+
+export const uploadAvatar = async avatar => await axios.put(UPLOAD_AVATAR, avatar); 
+
+export const uploadBackground = async background => await axios.put(UPLOAD_BACKGROUND, background); 
 
 export const getSharepage = async id => await axios.get(`${SHARE}${id}`);
