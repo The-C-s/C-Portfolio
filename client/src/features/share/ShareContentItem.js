@@ -64,9 +64,13 @@ export default function ShareContentItem({ content, clickHandler, closeHandler, 
           </Col>
           {focused &&
             <Col>
-              <Row className="sharecontentitem sharecontentitem-menu" onClick={toggleSelectedClickHandler}>
-                {selected ? "Remove from sharepage" : "Add to sharepage"}
-              </Row>
+              {editing &&
+                  <>
+                  <Row className="sharecontentitem sharecontentitem-menu" onClick={toggleSelectedClickHandler}>
+                    {selected ? "Remove from sharepage" : "Add to sharepage"}
+                  </Row>
+                  </>
+              }
               <Row className="sharecontentitem sharecontentitem-menu" onClick={closeClickHandler}>
                 <strong>later skater</strong>
               </Row>
