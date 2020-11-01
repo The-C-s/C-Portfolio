@@ -12,6 +12,7 @@ import ShareContentItem from './ShareContentItem'; // Component probably needs t
 import Section from './Section';
 import Skeleton from 'react-loading-skeleton';
 import Button from 'react-bootstrap/Button';
+import DeleteShare from '../share/DeleteShare';
 
 import { getShareId } from '../../common/helpers';
 
@@ -20,7 +21,8 @@ import { getSharepage, editSharepage } from '../share/shareSlice';
 export default function Share() {
 
   const dispatch = useDispatch();
-  const shareid = getShareId(window.location.href);
+
+  const [shareid, setShareId] = useState(getShareId(window.location.href));
   const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
   const gettingContent = useSelector(state => state.app.loading.getContent);
   const user = useSelector(state => state.user);
@@ -74,6 +76,13 @@ export default function Share() {
 
       setSelectedPosts(_selectedPosts);
   }
+
+  const [showDelete, setShowDelete] = useState(false);
+  const clickDelete = () => {
+      console.log(shareid);
+      setShowDelete(true);
+  }
+  const handleDeleteClose = () => setShowDelete(false);
 
   const togglePost = (id) => {
       var _selectedPosts = { ...selectedPosts, [id]: !selectedPosts[id] };
@@ -185,6 +194,7 @@ export default function Share() {
           />
         </LeftResizable>
         <Fill className="share-main" scrollable={!inFocusedState}>
+            <DeleteShare share={{"id": shareid}} show={showDelete} closeHandler={handleDeleteClose}/>
             <Section name="showcase" className="share-showcase" scrollHandler={sectionScrollHandler}>
                   <Col>
                     <Row>
@@ -278,7 +288,10 @@ export default function Share() {
                         <Button onClick={saveEdit} variant="primary"> Save </Button>
                         <Button onClick={cancelEdit} variant="danger"> Cancel </Button>
                       </>
-                    : <Button onClick={startEdit} variant="primary"> Edit </Button>
+                    : <>
+                        <Button onClick={startEdit} variant="primary"> Edit </Button>
+                        <Button onClick={clickDelete} variant="danger"> Delete </Button>
+                      </>
             )}
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>

@@ -3,7 +3,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
     getSharepage as apiGetSharepage,
     editSharepage as apiEditSharepage,
-    addSharepage as apiAddSharepage
+    addSharepage as apiAddSharepage,
+    deleteSharepage as apiDeleteSharepage
 } from '../../common/api';
 
 //API calls
@@ -20,6 +21,11 @@ export const editSharepage = createAsyncThunk(
 export const addSharepage = createAsyncThunk(
     'share/addSharepage',
     apiAddSharepage
+)
+
+export const deleteSharepage = createAsyncThunk(
+    'share/deleteSharepage',
+    apiDeleteSharepage
 )
 
 //Stores profile in state.profile
