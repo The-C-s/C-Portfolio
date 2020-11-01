@@ -48,9 +48,14 @@ export const privateRoutes = [
     dashboard: <Feed/>
   },
   {
-    path: "/dashboard/content/add",
+    path: "/dashboard/content/addFile",
     exact: true,
-    dashboard: <AddContent/>
+    dashboard: <AddContent isFile={true}/>
+  },
+  {
+    path: "/dashboard/content/addContent",
+    exact: true,
+    dashboard: <AddContent isFile={false}/>
   },
   {
     path: "/dashboard/profile",

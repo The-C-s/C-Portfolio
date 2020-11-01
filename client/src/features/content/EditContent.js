@@ -13,6 +13,7 @@ import Button from "react-bootstrap/Button";
 import DatePicker from "react-datepicker";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import {FormRadio } from "shards-react";
 import { parseISO } from "date-fns";
 
 export default function EditContent({ content, show, closeHandler }) {
@@ -29,13 +30,9 @@ export default function EditContent({ content, show, closeHandler }) {
   const [_date, updateDate] = useState(parseISO(_content.displayDate));
 
   const [showFile, setShowFile] = useState(false);
-  const toggleShowFileOff = () => {
-    setShowFile(false);
-    updateFile("undefined");
-  };
-  const toggleShowFileOn = () => {
-    setShowFile(true);
-  };
+
+  const toggleContentType = () => setShowFile(!showFile);
+
 
   const dispatch = useDispatch();
   const editClickHandler = () => {
@@ -135,14 +132,24 @@ export default function EditContent({ content, show, closeHandler }) {
               onChange={onChangeHandler}
             />
           </Form.Group>
-          <Button variant="primary" onClick={toggleShowFileOff}>
-            {" "}
-            Text{" "}
-          </Button>
-          <Button variant="primary" onClick={toggleShowFileOn}>
-            {" "}
-            File{" "}
-          </Button>
+          <div className="content">
+            <FormRadio
+              inline
+              name="contenttype"
+              checked={!showFile}
+              onChange={toggleContentType}
+            >
+              Text
+            </FormRadio>
+            <FormRadio
+              inline
+              name="filetype"
+              checked={showFile}
+              onChange={toggleContentType}
+            >
+              File
+            </FormRadio>
+            </div>
           {!showFile ? (
             <Form.Group controlId="content">
               <Form.Label>Content</Form.Label>
