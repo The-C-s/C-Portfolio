@@ -97,7 +97,7 @@ export default function Homepage() {
               </Nav.Item>
               <Nav.Item>
                 <NavLink
-                  to="/dashboard/content/add"
+                  to="/dashboard/content/addContent"
                   label={
                     <>
                       <div className="add-content">
@@ -115,7 +115,7 @@ export default function Homepage() {
             </Row>
             <Nav.Item>
               <NavLink
-                to="/dashboard/content/add"
+                to="/dashboard/content/addFile"
                 label={
                   <>
                     <div className="add-file">

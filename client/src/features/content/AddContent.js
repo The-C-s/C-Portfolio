@@ -11,12 +11,12 @@ import { createContent, getContent } from "../content/contentSlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import { FormRadio, Modal, ModalBody } from "shards-react";
+import {Modal, ModalBody } from "shards-react";
 import HashLoader from "react-spinners/HashLoader";
 import InputGroup from "react-bootstrap/InputGroup";
 import DatePicker from "react-datepicker";
 
-export default function AddContent() {
+export default function AddContent({isFile}) {
   const dispatch = useDispatch();
 
   const uploading = useSelector((state) => state.app.loading.createContent);
@@ -25,9 +25,12 @@ export default function AddContent() {
   const [tags, updateTags] = useState([]);
   const [richText, updateRichText] = useState("");
   const [file, updateFile] = useState();
-  const [contentIsFile, setContentIsFile] = useState(false);
+  const contentIsFile = isFile; 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [date, updateDate] = useState();
+
+  console.log(contentIsFile); 
+  console.log(isFile); 
   const onSubmitHandler = (e) => {
     // Prevent 'Submit' from actually doing a traditional submit
     e.preventDefault();
@@ -48,8 +51,6 @@ export default function AddContent() {
       dispatch(getContent());
     });
   };
-
-  const toggleContentType = () => setContentIsFile(!contentIsFile);
 
   const onChangeHandler = (e) =>
     updateContent({ ...content, [e.target.id]: e.target.value });
@@ -153,24 +154,6 @@ export default function AddContent() {
                 onChange={onChangeHandler}
               />
             </Form.Group>
-          </div>
-          <div className="content">
-            <FormRadio
-              inline
-              name="contenttype"
-              checked={!contentIsFile}
-              onChange={toggleContentType}
-            >
-              Text
-            </FormRadio>
-            <FormRadio
-              inline
-              name="contenttype"
-              checked={contentIsFile}
-              onChange={toggleContentType}
-            >
-              File
-            </FormRadio>
             <Row>
               <div>
                 {"\n"}

@@ -47,7 +47,7 @@ export default function SideNavbar() {
             <Nav.Item className="sidenav-item">
               <NavLink
                 sub
-                to="/dashboard/content/add"
+                to="/dashboard/content/addContent"
                 label="New project"
                 icon={faFolderPlus}
               />
@@ -55,7 +55,7 @@ export default function SideNavbar() {
             <Nav.Item className="sidenav-item">
               <NavLink
                 sub
-                to="/dashboard/content/upload"
+                to="/dashboard/content/addFile"
                 label="New file upload"
                 icon={faFolderPlus}
               />
