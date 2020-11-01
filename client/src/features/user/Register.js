@@ -6,7 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import HashLoader from 'react-spinners/HashLoader';
 
-import { register} from './userSlice';
+import { register, login} from './userSlice';
+import { createProfile } from '../profile/profileSlice'; 
 //import {createProfile} from '../profile/profileSlice';
 
 export default function Register() {
@@ -21,8 +22,9 @@ export default function Register() {
     
     e.preventDefault();
           dispatch(register(form))
-          //.then(dispatch(login(form)))
-          .then(() => history.push('/homepage'));
+          .then(dispatch(login(form)))
+          .then(dispatch(createProfile({email: form.email})))
+          .then(() => history.push('/homepage')); 
         
   }
   

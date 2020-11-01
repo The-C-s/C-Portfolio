@@ -14,18 +14,18 @@
     "bootstrap": "^4.5.2",
     "bootswatch": "^4.5.2",
     "classnames": "^2.2.6",
-    "interweave" :"^12.5.0",
+    "interweave": "^12.5.0",
     "is-empty": "^1.2.0",
     "is-image": "^3.0.0",
     "is-valid-http-url": "^1.0.3",
     "jquery": "^3.5.1",
     "jwt-decode": "^3.0.0-beta.2",
-    "node-sass": "git+https://github.com/sass/node-sass.git",
     "polished": "^3.6.6",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
+    "react-datepicker": "^3.3.0",
     "react-intersection-observer": "^8.29.1",
     "react-list": "^0.8.16",
     "react-loading-skeleton": "^2.1.1",
@@ -39,16 +39,15 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "sass-loader": "^10.0.4",
     "sass-themify": "^2.0.0",
     "shards-react": "^1.0.3",
     "typescript": "^4.0.3",
     "uuid": "^8.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node src/render.js && react-scripts start",
     "start:mockapi": "REACT_APP_API=mock npm start",
-    "build": "react-scripts build",
+    "build": "node src/render.js && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -69,6 +68,9 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.18.2",
-    "redux-mock-store": "^1.5.4"
+    "node-sass": "^5.0.0",
+    "readline": "^1.3.0",
+    "redux-mock-store": "^1.5.4",
+    "sass": "^1.28.0"
   }
 }

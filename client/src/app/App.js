@@ -8,7 +8,7 @@ import { getContent } from '../features/content/contentSlice';
 import { token } from '../common/api';
 import { publicRoutes, privateRoutes } from '../common/routes';
 
-import '../sass/main.scss';
+import '../style.css';
 
 export default function App() {
 
