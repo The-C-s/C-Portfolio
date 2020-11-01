@@ -5,8 +5,8 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
   require('../_mockapi/api');
 }
 
-axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:52081';
+//axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:55435';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
@@ -81,4 +81,7 @@ export const addResume = async resume => await axios.put(ADD_RESUME, resume);
 
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
 
+export const updatePassword = async passwordInfo => {
+  await axios.put(UPDATE_USER, passwordInfo);
+}
 

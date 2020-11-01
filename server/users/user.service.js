@@ -99,8 +99,6 @@ async function create(userParam) {
 async function update(id, userParam) {
     const user = await User.findById(id);
 
-    console.log("Got here");
-
     // validate
     if (!user) throw new Error('UserNotFoundError');
     //if request gave username and username isn't the same as it was and the username is in the database
@@ -125,6 +123,16 @@ async function update(id, userParam) {
         userParam.hash = bcrypt.hashSync(userParam.password, 10);
     }
 
+    if(userParam.curr && userParam.pass && userParam.confirm){
+        if (bcrypt.compareSync(curr, user.hash) && userParam.pass == userParam.confirm) {
+            userParam.hash = bcrypt.hashSync(userParam.pass);
+        }
+    }
+
+    delete userParam.pass;
+    delete userParam.confirm;
+    delete userParam.curr;
+
     /*
     if (!userParam.firstName) {
         userParam.firstName = "Joshua";
@@ -135,8 +143,6 @@ async function update(id, userParam) {
     */
 
     //userParam = {"firstName" : "Direct Set"};
-
-    const firstNameUpdate = {"firstName" : "New Object"};
 
     // copy userParam properties to user
     Object.assign(user, userParam);

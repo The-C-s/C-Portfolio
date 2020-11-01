@@ -34,6 +34,11 @@ export const register = createAsyncThunk(
   registerUser
 );
 
+export const changePassword = createAsyncThunk(
+  'user/update', 
+  updatePassword
+)
+
 const user = createSlice({
   name: 'user',
   initialState: { isAuthenticated: token.get() !== null },

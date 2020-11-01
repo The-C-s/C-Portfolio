@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {editUser} from './userSlice';
+import {editUser, changePassword} from './userSlice';
 import Modal from 'react-bootstrap/esm/Modal';
 import Image from 'react-bootstrap/Image';
 
@@ -33,6 +33,8 @@ export default function EditUser({show, closeHandler, user}) {
     const passwordToggleHandler = () => {setpasswordState(true)};
 
     const passwordToggleOffHandler = () => {setpasswordState(false)};
+
+    const passwordSubmitHandler = () => {changePassword(userFromState._id, passwordInfo)};
 
     const resetHandler = () => {
       //
@@ -94,8 +96,7 @@ export default function EditUser({show, closeHandler, user}) {
             <Button variant="link" onClick={closeHandler}>Cancel</Button>
         </Modal.Footer>)}
         {passwordState && (<Modal.Footer>
-            <Button variant="link" onClick = {resetHandler}>Reset Changes</Button>
-            <Button variant="warning" onClick = {handleEditUser}>Save changes</Button>
+            <Button variant="warning" onClick = {passwordSubmitHandler}>Reset Password</Button>
             <Button variant="link" onClick={closeHandler}>Cancel</Button>
         </Modal.Footer>)}
         
