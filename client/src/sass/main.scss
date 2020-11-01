@@ -7,6 +7,7 @@
 @import './base/typography';
 
 @import './helpers/mixins';
+@import './helpers/variables';
 
 @import './themes/default';
 
@@ -34,10 +35,11 @@ $theme-map: (
 @import './components/sharecontentitem';
 @import './components/profilebarlink';
 @import './components/quill';
-@import './components/profile'; 
-@import './components/pageheading'; 
-@import './components/addcontent'; 
-@import './components/homepage'; 
+@import './components/profile';
+@import './components/pageheading';
+@import './components/addcontent';
+@import './components/homepage';
+@import './components/register';
 
 @import './layout/topnav';
 @import './layout/sidenav';
