@@ -18995,14 +18995,16 @@ body, h1, h2, h3, h4, h5, h6, .btn,
   font-family: "Open Sans", sans-serif;
 }
 
-.btn-login {
+.login-form .btn-login {
   display: flex;
   align-items: center;
 }
-
-.spinner-login {
+.login-form .spinner-login {
   display: inline-block;
   margin-left: 10px;
+}
+.login-form small {
+  margin-bottom: 10px;
 }
 
 .contentitem .row, .contentitem [class^=col] {
@@ -19855,6 +19857,7 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   color: white;
 }
 .addcontent .tags {
+  position: flex;
   margin-top: 10px;
 }
 .addcontent .tags .tags-box {
@@ -19865,22 +19868,6 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   border-radius: 10px;
 }
 .addcontent .tags .tags-box .content-heading {
-  position: flex;
-  padding-top: 7px;
-  padding-left: 10px;
-  color: white;
-}
-.addcontent .time {
-  margin-top: 10px;
-}
-.addcontent .time .time-box {
-  position: flex;
-  height: 34px;
-  margin-bottom: 20px;
-  background: #78C5DC;
-  border-radius: 10px;
-}
-.addcontent .time .time-box .time-heading {
   position: flex;
   padding-top: 7px;
   padding-left: 10px;
