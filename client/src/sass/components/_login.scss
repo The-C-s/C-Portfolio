@@ -1,9 +1,16 @@
-.btn-login {
-  display: flex;
-  align-items: center;
-}
+.login-form {
 
-.spinner-login {
-  display: inline-block;
-  margin-left: 10px;
+  .btn-login {
+    display: flex;
+    align-items: center;
+  }
+  
+  .spinner-login {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  small {
+    margin-bottom: 10px;
+  }
 }

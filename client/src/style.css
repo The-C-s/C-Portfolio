@@ -19871,6 +19871,22 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   padding-left: 10px;
   color: white;
 }
+.addcontent .time {
+  margin-top: 10px;
+}
+.addcontent .time .time-box {
+  position: flex;
+  height: 34px;
+  margin-bottom: 20px;
+  background: #78C5DC;
+  border-radius: 10px;
+}
+.addcontent .time .time-box .time-heading {
+  position: flex;
+  padding-top: 7px;
+  padding-left: 10px;
+  color: white;
+}
 
 .addcontent-next-btn {
   margin-left: 5px;
@@ -20308,6 +20324,31 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   opacity: 0.3;
   border-radius: 10px;
   transform: rotate(-41.38deg);
+}
+
+.register small {
+  margin-left: 5px;
+}
+.register .register-password {
+  margin-bottom: 7px;
+}
+
+.ReactPasswordStrength {
+  border: none;
+  font-family: "Open Sans", sans-serif;
+}
+
+.ReactPasswordStrength-strength-desc {
+  display: none;
+}
+
+.ReactPasswordStrength-strength-bar {
+  margin: 7px 5px 0 5px;
+  max-width: 98% !important;
+}
+
+body.theme-default .ReactPasswordStrength.is-strength-2 .ReactPasswordStrength-strength-bar, body.theme-default .ReactPasswordStrength.is-strength-3 .ReactPasswordStrength-strength-bar {
+  background-color: #764cf2;
 }
 
 .topnav {

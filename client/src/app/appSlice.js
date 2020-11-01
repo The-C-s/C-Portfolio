@@ -27,6 +27,10 @@ const app = createSlice({
     'user/register/fulfilled': state => { stopLoading(state, 'register') },
     'user/register/rejected': (state, action) => { return setError(state, 'register', action.error) },
 
+    'profile/createProfile/pending': state => { return startLoading(state, 'createProfile') },
+    'profile/createProfile/fulfilled': state => { stopLoading(state, 'createProfile') },
+    'profile/createProfile/rejected': (state, action) => { return setError(state, 'createProfile', action.error) },
+
     'content/getContent/pending': state => { return startLoading(state, 'getContent') },
     'content/getContent/fulfilled': state => { stopLoading(state, 'getContent') },
     'content/getContent/rejected': (state, action) => { return setError(state, 'getContent', action.error) },
@@ -57,13 +61,15 @@ const app = createSlice({
  */
 const startLoading = (state, action) => {
 
-  removeError(state, action);
-
   return {
     ...state,
     loading: {
       ...state.loading,
       [action]: true
+    },
+    errors: {
+      ...state.errors,
+      [action]: ''
     }
   }
 };
@@ -88,18 +94,15 @@ const setError = (state, action, error) => {
 
   return {
     ...state,
+    loading: {
+      ...state.loading,
+      [action]: false
+    },
     errors: {
       ...state.errors,
       [action]: error.message
     }
   }
 };
-
-/**
- * Removes state.app.errors.action from the state.
- * @param {*} state
- * @param {*} action - The action name without the feature name, i.e. 'login' for 'user/login'.
- */
-const removeError = (state, action) => delete state.errors[action];
 
 export default app.reducer;
