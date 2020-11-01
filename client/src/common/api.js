@@ -21,6 +21,7 @@ export const UPDATE_USER = '/users/update';
 export const UPLOAD_AVATAR = '/users/avatar'; 
 export const UPLOAD_BACKGROUND = '/users/background'; 
 export const SHARE = '/share/';
+export const CREATE_SHARE = '/share/create'; 
 
 export const token = {
   get: () => localStorage.getItem('token'),
@@ -88,4 +89,6 @@ export const uploadBackground = async background => await axios.put(UPLOAD_BACKG
 
 export const getSharepage = async id => await axios.get(`${SHARE}${id}`);
 
-export const editSharepage = async shareParams => { console.log(shareParams); await axios.put(`${SHARE}${shareParams.id}`, shareParams); }
+export const editSharepage = async shareParams => await axios.put(`${SHARE}${shareParams.id}`, shareParams);
+
+export const addSharepage = async () => await axios.post(CREATE_SHARE);
