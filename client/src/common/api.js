@@ -21,6 +21,7 @@ export const UPDATE_USER = '/users/update';
 export const UPLOAD_AVATAR = '/users/avatar';
 export const UPLOAD_BACKGROUND = '/users/background';
 export const SHARE = '/share/';
+export const CREATE_SHARE = '/share/create'
 
 export const token = {
   get: () => localStorage.getItem('token'),
