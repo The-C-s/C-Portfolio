@@ -32,9 +32,10 @@ export default function ProfileBar({
         <div className="profilebar-name" onClick={() => clickHandler('share-showcase')}>
           {user.firstName} {user.lastName}
         </div>
-        {profile.bio &&
+        {profile.resume &&
           <div className="profilebar-headline">
-            {profile.bio}
+            <div>{profile.email}</div>
+            <a href={profile.resume}>Resume</a>
           </div>}
         <div className="profilebar-item" onClick={() => clickHandler('share-education')}>
             <ProfileBarLink label="Education" icon={faGraduationCap} active={activeSection === 'education'}/>

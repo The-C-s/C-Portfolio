@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "gem": "^2.4.3",
     "interweave": "^12.5.0",
     "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
@@ -42,9 +43,9 @@
     "react": "^17.0.1",
     "react-datepicker": "^3.3.0",
     "react-markdown": "^5.0.2",
-    "react-time-picker": "^4.0.1",
     "remark-gfm": "^1.0.0",
     "request": "^2.88.2",
+    "sass": "^1.28.0",
     "shards": "^1.0.3"
   }
 }

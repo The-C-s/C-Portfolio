@@ -5,6 +5,7 @@ import { ViewPort, LeftResizable, Fill, Right, Info } from 'react-spaces';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image'; 
 
 import ProfileBar from './ProfileBar';
 //import Showcase from './Showcase';
@@ -185,7 +186,7 @@ export default function Share() {
           <Info>{handleInfo}</Info>
           <ProfileBar
             user={{"firstName": share.firstName, "lastName": share.lastName}}
-            profile={{ ...{ "logo": share.logo, "education": share.education, "experience": share.experience }, bio: "Yolo's TSLA calls full time" }}
+            profile={{ ...{ "logo": share.logo, "education": share.education, "experience": share.experience }, resume: share.resume, email: share.email }}
             condensed={profilebarState.collapsed}
             condensedTitle={profilebarState.title}
             clickHandler={scrollToSection}
@@ -199,6 +200,10 @@ export default function Share() {
                       <h1>Showcase</h1>
                     </Row>
                     <Row>
+                    <Image className = "showcase-background" src = {share.background}/>
+                      <Image roundedCircle className ="showcase-avatar" src = {share.avatar}/>
+                    </Row>
+                    <Row>
                         {gettingSharepage
                             ? <><h1><Skeleton/></h1><p><Skeleton count={1}/></p></>
                             : <></>//<><Showcase items={showcase}/></>
@@ -209,18 +214,15 @@ export default function Share() {
             <Section name="education" className="share-education" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
-                  <h1>Education</h1>
+                  <h2>Education</h2>
                 </Row>
                 <Row>
                   <Card>
                   {gettingSharepage
-                    ? <><h1><Skeleton/></h1><p><Skeleton count={2}/></p></>
+                    ? <><h2><Skeleton/></h2><p><Skeleton count={2}/></p></>
                     : share.education.map((educationItem, index) =>
                       <div key={index}>
-                        <h3>{educationItem}</h3>
-                        <p>Description of lessons learned.</p>
-                        <p><strong>Awards and achievements</strong> Best</p>
-                        <p><strong>Extracurricular</strong> Longjump</p>
+                        <p>{educationItem}</p>
                       </div>)
                   }
                   </Card>
@@ -230,18 +232,15 @@ export default function Share() {
             <Section name="experience" className="share-experience" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
-                  <h1>Experience</h1>
+                  <h2>Experience</h2>
                 </Row>
                 <Row>
                   <Card>
                   {gettingSharepage
-                    ? <><h1><Skeleton/></h1><p><Skeleton count={2}/></p></>
+                    ? <><h2><Skeleton/></h2><p><Skeleton count={2}/></p></>
                     : share.experience.map((experienceItem, index) =>
                       <div key={index}>
-                        <h3>{experienceItem}</h3>
-                        <p>Description of experience.</p>
-                        <p><strong>Responsibilities</strong> Smart</p>
-                        <p><strong>Achievements</strong> Longjump</p>
+                        <p>{experienceItem}</p>
                       </div>)
                   }
                   </Card>
@@ -251,31 +250,17 @@ export default function Share() {
             <Section name="projects" className="share-projects" scrollHandler={sectionScrollHandler}>
               <Col>
                 <Row>
-                  <h1>Projects</h1>
+                  <h2>Projects</h2>
                 </Row>
-                {editing
-                    ? gettingContent
-                      ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
-                      : allContent.map((contentItem, index) =>
-                        <ShareContentItem
-                          content={contentItem}
-                          key={index}
-                          clickHandler={handleContentItemClick}
-                          closeHandler={handleContentItemClose}
-                          editing={true}
-                          selected={selectedPosts[contentItem.id]}
-                          toggleSelection={togglePost}
-                        />)
-                    : gettingSharepage
-                      ? <><h1><Skeleton/></h1><p><Skeleton count={3}/></p></>
-                      : share.content.map((contentItem, index) =>
-                        <ShareContentItem
-                          content={contentItem}
-                          key={index}
-                          editing={false}
-                          clickHandler={handleContentItemClick}
-                          closeHandler={handleContentItemClose}
-                        />)
+                {gettingSharepage
+                  ? <><h2><Skeleton/></h2><p><Skeleton count={3}/></p></>
+                  : share.content.map((contentItem, index) =>
+                    <ShareContentItem
+                      content={contentItem}
+                      key={index}
+                      clickHandler={handleContentItemClick}
+                      closeHandler={handleContentItemClose}
+                    />)
                 }
 
               </Col>

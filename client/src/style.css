@@ -19425,10 +19425,19 @@ body.theme-default .linkedul-li-bullet:before {
   align-items: center;
   white-space: nowrap;
   overflow-x: auto;
+  color: hotpink;
 }
 .showcase-content .showcase-item {
   display: inline-block;
   vertical-align: middle;
+}
+.showcase-content .showcase-background {
+  z-index: 1;
+}
+.showcase-content .showcase-avatar {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
 }
 
 .sharecontentitem {
@@ -19855,6 +19864,7 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   color: white;
 }
 .addcontent .tags {
+  position: flex;
   margin-top: 10px;
 }
 .addcontent .tags .tags-box {
