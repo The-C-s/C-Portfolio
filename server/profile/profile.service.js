@@ -31,6 +31,7 @@ async function create(userid, userParam) {
         //Gets user email and saves it 
         profile.email = user.email; 
         user.profile = profile.id; 
+        await user.save(); 
         await profile.save();
         return profile;  
     } catch(error) {

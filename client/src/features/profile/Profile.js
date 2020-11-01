@@ -17,6 +17,8 @@ export default function Profile() {
   const content = useSelector(state => state.content); 
   const isLoaded = useSelector(state => state.profile.isLoaded);
 
+  console.log(profile);
+  console.log(user); 
   // Reloading profile
   useEffect(() => {
 
