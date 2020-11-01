@@ -20325,21 +20325,28 @@ body.theme-default .profilebarlink:hover .profilebarlink-icon {
   transform: rotate(-41.38deg);
 }
 
+.register small {
+  margin-left: 5px;
+}
+.register .register-password {
+  margin-bottom: 7px;
+}
+
 .ReactPasswordStrength {
   border: none;
   font-family: "Open Sans", sans-serif;
 }
 
 .ReactPasswordStrength-strength-desc {
-  font-size: 12px;
-  color: #8a8d91;
+  display: none;
 }
 
 .ReactPasswordStrength-strength-bar {
-  margin: 2px 5px;
+  margin: 7px 5px 0 5px;
+  max-width: 98% !important;
 }
 
-body.theme-default .ReactPasswordStrength-strength-bar {
+body.theme-default .ReactPasswordStrength.is-strength-2 .ReactPasswordStrength-strength-bar, body.theme-default .ReactPasswordStrength.is-strength-3 .ReactPasswordStrength-strength-bar {
   background-color: #764cf2;
 }
 
