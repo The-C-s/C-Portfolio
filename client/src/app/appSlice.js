@@ -41,11 +41,11 @@ const app = createSlice({
 
     'content/deleteContent/pending': state => { return startLoading(state, 'deleteContent') },
     'content/deleteContent/fulfilled': state => { stopLoading(state, 'deleteContent') },
-    'content/deleteContent/rejected': (state, action) => { setError(state, 'deleteContent', action.payload) },
+    'content/deleteContent/rejected': (state, action) => { return setError(state, 'deleteContent', action.error) },
 
     'share/getSharepage/pending': state => { return startLoading(state, 'getSharepage') },
     'share/getSharepage/fulfilled': state => { stopLoading(state, 'getSharepage') },
-    'share/getSharepage/rejected': (state, action) => { setError(state, 'getSharepage', action.payload) }
+    'share/getSharepage/rejected': (state, action) => { return setError(state, 'getSharepage', action.error) }
   }
 });
 

@@ -116,7 +116,7 @@ export default function Share() {
        image = true;
       }
     }
-  }
+  };
 
 
   // Showcase Simulator®
@@ -289,7 +289,7 @@ export default function Share() {
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
           {focusedContent.title && <p>
-            {<Image src={focusedContent.content}/>}
+            {image && <Image src={focusedContent.content}/>}
             </p>}
         </Right>
       </ViewPort>
