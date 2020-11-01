@@ -27,11 +27,10 @@ export default function AddContent() {
   const [file, updateFile] = useState();
   const [contentIsFile, setContentIsFile] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
+  const [date, updateDate] = useState();
   const onSubmitHandler = (e) => {
     // Prevent 'Submit' from actually doing a traditional submit
     e.preventDefault();
-
     //convert to FormData so we can send files
     const data = new FormData();
     for (let field in content) {
@@ -42,7 +41,6 @@ export default function AddContent() {
     } else if (!contentIsFile) {
       data.set("content", richText);
     }
-
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
     dispatch(createContent(data)).then(() => {
       resetForm();
@@ -55,8 +53,12 @@ export default function AddContent() {
 
   const onChangeHandler = (e) =>
     updateContent({ ...content, [e.target.id]: e.target.value });
-  const onDateChangeHandler = (date) =>
-    updateContent({ ...content, displayDate: date });
+
+  const onDateChangeHandler = (date) => {
+    updateDate(date);
+    const isoDate = content.displayDate;
+    updateContent({ ...content, displayDate: isoDate });
+  };
 
   const resetForm = () => {
     updateContent({ title: "", description: "" });
@@ -233,14 +235,14 @@ export default function AddContent() {
               </div>
             </Row>
           </div>
-          <div className="time">
-            <div className="time-box">
-              <div className="time-heading">Date</div>
+          <div className="title">
+            <div className="title-box">
+              <div className="title-heading">Date</div>
             </div>
           </div>
           <div className="mb-3">
             <DatePicker
-              selected={content.displayDate}
+              selected={date}
               onSelect={(date) => onDateChangeHandler(date)}
             />
           </div>

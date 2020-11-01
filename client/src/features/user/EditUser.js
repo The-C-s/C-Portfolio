@@ -11,6 +11,7 @@ import {
 } from "./userSlice";
 import Modal from "react-bootstrap/esm/Modal";
 import Image from "react-bootstrap/Image";
+import InputGroup from "react-bootstrap/InputGroup";
 
 export default function EditUser({ show, closeHandler, user }) {
   //const user = useSelector(state => state.user);
@@ -23,6 +24,7 @@ export default function EditUser({ show, closeHandler, user }) {
   const [_user, updateDetails] = useState(user);
   const [_avatar, updateAvatar] = useState();
   const [_background, updateBackground] = useState();
+  const [_emails, updateEmails] = useState(user.emails ? user.emails : []);
 
   //Uploads to redux
   const onAvatarUploadHandler = (e) => updateAvatar(e.target.files[0]);
@@ -65,6 +67,28 @@ export default function EditUser({ show, closeHandler, user }) {
   const resetHandler = () => {
     //
     updateDetails(userFromState);
+  };
+
+  const onChangeEmailsHandler = (e) => {
+    //Copy and updates tmp array
+    const tmp = [..._emails];
+    tmp[e.target.id] = e.target.value;
+    updateEmails(tmp);
+    updateDetails({ ..._user, emails: tmp });
+  };
+
+  const addEmailsField = () => {
+    const tmp = [..._emails, ""];
+    updateEmails(tmp);
+    updateDetails({ ..._user, emails: tmp });
+  };
+
+  const deleteEmailsField = (id) => {
+    const tmp = [..._emails];
+    //Removes index
+    tmp.splice(id, 1);
+    updateEmails(tmp);
+    updateDetails({ ..._user, emails: tmp });
   };
 
   //<img src="..." class="rounded mx-auto d-block" alt="...">
@@ -153,6 +177,40 @@ export default function EditUser({ show, closeHandler, user }) {
                 onChange={onChangeHandler}
               />
             </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>Main Email</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={_user.email}
+                onChange={onChangeHandler}
+              />
+            </Form.Group>
+            <Form.Group className="mt-3" controlId="emails">
+              <Form.Label>Additional Emails</Form.Label>
+            </Form.Group>
+            {_emails.map((emails, i) => (
+              <Form.Group controlId={i}>
+                <InputGroup className="mb-3">
+                  <Form.Control
+                    as="textarea"
+                    rows="1"
+                    value={emails}
+                    onChange={onChangeEmailsHandler}
+                  />
+                  <InputGroup.Append>
+                    <Button
+                      variant="outline-secondary"
+                      id={i}
+                      onClick={(e) => deleteEmailsField(i)}
+                    >
+                      Delete
+                    </Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Form.Group>
+            ))}
+            <Button onClick={addEmailsField}>Add Additional Email</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>

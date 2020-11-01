@@ -50,7 +50,7 @@ export default function Project({
               <option id={content.id} key={content.id} value = {content.id}>{content.title}</option>
             ))}
           </Form.Control>
-          {"\n"}
+          <br/>
           <Button onClick={addProjectHandler}> Add </Button>
         </Form.Group>
       </Form>
