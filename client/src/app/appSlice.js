@@ -45,7 +45,11 @@ const app = createSlice({
 
     'share/getSharepage/pending': state => { return startLoading(state, 'getSharepage') },
     'share/getSharepage/fulfilled': state => { stopLoading(state, 'getSharepage') },
-    'share/getSharepage/rejected': (state, action) => { setError(state, 'getSharepage', action.payload) }
+    'share/getSharepage/rejected': (state, action) => { setError(state, 'getSharepage', action.payload) },
+
+    'share/addSharepage/pending': state => { return startLoading(state, 'addSharepage') },
+    'share/addSharepage/fulfilled': state => { stopLoading(state, 'addSharepage') },
+    'share/addSharepage/rejected': (state, action) => { setError(state, 'addSharepage', action.payload) }
   }
 });
 
