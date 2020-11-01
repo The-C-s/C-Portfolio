@@ -120,7 +120,7 @@ export default function Register() {
         <h2>Register</h2>
         <hr/>
         <Form.Group>
-          {formStatus.userExists || formStatus.userError &&
+          {(formStatus.userExists || formStatus.userError) &&
               <small className="form-text text-danger">
                 {formStatus.userComment}
               </small>}
