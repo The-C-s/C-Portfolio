@@ -12,6 +12,7 @@ import ShareContentItem from './ShareContentItem'; // Component probably needs t
 import Section from './Section';
 import Skeleton from 'react-loading-skeleton';
 import Button from 'react-bootstrap/Button';
+import DeleteShare from '../share/DeleteShare';
 
 import { getContentType, getShareId } from '../../common/helpers';
 
@@ -26,6 +27,8 @@ import { getSharepage, editSharepage } from '../share/shareSlice';
 export default function Share() {
 
   const dispatch = useDispatch();
+
+  const shareid = getShareId(window.location.href);
   const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
   const gettingContent = useSelector(state => state.app.loading.getContent);
   const shareid = getShareId(window.location.href);
@@ -73,6 +76,7 @@ export default function Share() {
       _selectedPosts[contentPost.id] = false;
     }
 
+
     //change the values of the posts in the share view to true
     var sharedPost;
     for (sharedPost of share.content) {
@@ -82,6 +86,14 @@ export default function Share() {
     setSelectedPosts(_selectedPosts);
   };
 
+  const [showDelete, setShowDelete] = useState(false);
+  const clickDelete = () => {
+      console.log(shareid);
+      setShowDelete(true);
+  }
+  const handleDeleteClose = () => setShowDelete(false);
+
+
   const togglePost = (id) => {
     var _selectedPosts = { ...selectedPosts, [id]: !selectedPosts[id] };
     setSelectedPosts(_selectedPosts);
@@ -90,6 +102,8 @@ export default function Share() {
   /**
    * Following code is for handling UI manipulation and animations.
    */
+
+  const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
   const [profilebarWidth, setProfilebarWidth] = useState(300);
   const [focusedContent, setFocusedContent] = useState({});
   const [focusedContentWidth, setFocusedContentWidth] = useState(0);
@@ -205,6 +219,7 @@ export default function Share() {
           />
         </LeftResizable>
         <Fill className="share-main" scrollable={!inFocusedState}>
+          <DeleteShare share={{"id": shareid}} show={showDelete} closeHandler={handleDeleteClose}/>
           <Section name="top" className="section-top" scrollHandler={sectionScrollHandler}/>
           <Section
             name="showcase"
@@ -296,22 +311,18 @@ export default function Share() {
                 )}
               </Col>
             </Row>
-          </Section>
-          {user.isAuthenticated &&
-            (editing ? (
-              <>
-                <Button onClick={saveEdit} variant="primary">
-                  Save
-                </Button>
-                <Button onClick={cancelEdit} variant="danger">
-                  Cancel
-                </Button>
-              </>
-            ) : (
-              <Button onClick={startEdit} variant="primary">
-                Edit
-              </Button>
-            ))}
+            </Section>
+            {user.isAuthenticated && (
+                editing
+                    ? <>
+                        <Button onClick={saveEdit} variant="primary"> Save </Button>
+                        <Button onClick={cancelEdit} variant="danger"> Cancel </Button>
+                      </>
+                    : <>
+                        <Button onClick={startEdit} variant="primary"> Edit </Button>
+                        <Button onClick={clickDelete} variant="danger"> Delete </Button>
+                      </>
+            )}
         </Fill>
         <Right
           className="share-focusedcontent"
