@@ -20,7 +20,7 @@
     "is-valid-http-url": "^1.0.3",
     "jquery": "^3.5.1",
     "jwt-decode": "^3.0.0-beta.2",
-    "node-sass": "git+https://github.com/sass/node-sass.git",
+    "node-sass": "^5.0.0",
     "polished": "^3.6.6",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
