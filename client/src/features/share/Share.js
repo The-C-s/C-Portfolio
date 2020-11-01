@@ -277,11 +277,11 @@ export default function Share() {
 
               </Col>
             </Section>
-            {user.isAuthenticated &&
+            {user.isAuthenticated && (
                 editing
-                    ? <Button onClick={stopEditing} variant="link"> Save </Button>
-                    : <Button onClick={startEditing} variant="link"> Edit </Button>
-            }
+                    ? <Button onClick={stopEditing} variant="primary"> Save </Button>
+                    : <Button onClick={startEditing} variant="primary"> Edit </Button>
+            )}
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
           {focusedContent.title && <p>{focusedContent.content}</p>}
