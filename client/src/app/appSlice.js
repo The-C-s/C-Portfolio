@@ -45,11 +45,11 @@ const app = createSlice({
 
     'content/deleteContent/pending': state => { return startLoading(state, 'deleteContent') },
     'content/deleteContent/fulfilled': state => { stopLoading(state, 'deleteContent') },
-    'content/deleteContent/rejected': (state, action) => { setError(state, 'deleteContent', action.payload) },
+    'content/deleteContent/rejected': (state, action) => { return setError(state, 'deleteContent', action.error) },
 
     'share/getSharepage/pending': state => { return startLoading(state, 'getSharepage') },
     'share/getSharepage/fulfilled': state => { stopLoading(state, 'getSharepage') },
-    'share/getSharepage/rejected': (state, action) => { setError(state, 'getSharepage', action.payload) }
+    'share/getSharepage/rejected': (state, action) => { return setError(state, 'getSharepage', action.error) }
   }
 });
 
@@ -61,13 +61,15 @@ const app = createSlice({
  */
 const startLoading = (state, action) => {
 
-  removeError(state, action);
-
   return {
     ...state,
     loading: {
       ...state.loading,
       [action]: true
+    },
+    errors: {
+      ...state.errors,
+      [action]: ''
     }
   }
 };
@@ -102,12 +104,5 @@ const setError = (state, action, error) => {
     }
   }
 };
-
-/**
- * Removes state.app.errors.action from the state.
- * @param {*} state
- * @param {*} action - The action name without the feature name, i.e. 'login' for 'user/login'.
- */
-const removeError = (state, action) => delete state.errors[action];
 
 export default app.reducer;
