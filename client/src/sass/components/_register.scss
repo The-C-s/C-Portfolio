@@ -1,19 +1,31 @@
+.register {
+  small {
+    margin-left: 5px;
+  }
+
+  .register-password {
+    margin-bottom: 7px;
+  }
+}
+
 .ReactPasswordStrength {
   border: none;
   font-family: $font-default;
 }
 
 .ReactPasswordStrength-strength-desc {
-  font-size: 12px;
-  color: #8a8d91;
+  display: none;
 }
 
 .ReactPasswordStrength-strength-bar {
-  margin: 2px 5px;
+  margin: 7px 5px 0 5px;
+  max-width: 98% !important;
 }
 
 @include sass-themify() {
-  .ReactPasswordStrength-strength-bar {
-    background-color: sass-themify-get-color('accent');
+  .ReactPasswordStrength.is-strength-2, .ReactPasswordStrength.is-strength-3 {
+      .ReactPasswordStrength-strength-bar {
+      background-color: sass-themify-get-color('accent');
+    }
   }
 }
