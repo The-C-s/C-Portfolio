@@ -75,18 +75,10 @@ export default function Share() {
       setSelectedPosts(_selectedPosts);
   }
 
-
-
   const togglePost = (id) => {
       var _selectedPosts = { ...selectedPosts, [id]: !selectedPosts[id] };
       setSelectedPosts(_selectedPosts);
   }
-
-  /**
-  const setInitialSelectedPosts = () => {
-
-  }
-  **/
 
 
 
