@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image'; 
+import Interweave from 'interweave';
 
 import ProfileBar from './ProfileBar';
 //import Showcase from './Showcase';
@@ -257,16 +258,31 @@ export default function Share() {
                 <Row>
                   <h2>Projects</h2>
                 </Row>
-                {gettingSharepage
-                  ? <><h2><Skeleton/></h2><p><Skeleton count={3}/></p></>
-                  : share.content.map((contentItem, index) =>
-                    <ShareContentItem
-                      content={contentItem}
-                      key={index}
-                      clickHandler={handleContentItemClick}
-                      closeHandler={handleContentItemClose}
-                    />)
+                {editing
+                    ? gettingContent
+                      ? <><h2><Skeleton/></h2><p><Skeleton count={3}/></p></>
+                      : allContent.map((contentItem, index) =>
+                        <ShareContentItem
+                          content={contentItem}
+                          key={index}
+                          clickHandler={handleContentItemClick}
+                          closeHandler={handleContentItemClose}
+                          editing={true}
+                          selected={selectedPosts[contentItem.id]}
+                          toggleSelection={togglePost}
+                        />)
+                    : gettingSharepage
+                      ? <><h2><Skeleton/></h2><p><Skeleton count={3}/></p></>
+                      : share.content.map((contentItem, index) =>
+                        <ShareContentItem
+                          content={contentItem}
+                          key={index}
+                          editing={false}
+                          clickHandler={handleContentItemClick}
+                          closeHandler={handleContentItemClose}
+                        />)
                 }
+
 
               </Col>
             </Section>
@@ -281,7 +297,13 @@ export default function Share() {
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
           {focusedContent.title && <p>
-            {image && <Image src={focusedContent.content}/>}
+            <hr/>
+            <strong>{focusedContent.title}</strong>
+            <hr/>
+            {focusedContent.description}
+            <hr/>
+            {image && <Image src={focusedContent.content} fluid/>}
+            {!image && <div><Interweave content={focusedContent.content}/></div>}
             </p>}
         </Right>
       </ViewPort>

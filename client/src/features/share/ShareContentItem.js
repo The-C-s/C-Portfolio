@@ -74,6 +74,8 @@ export default function ShareContentItem({ content, clickHandler, closeHandler, 
               }
               <Row className="sharecontentitem sharecontentitem-menu" onClick={closeClickHandler}>
                 <strong>Return</strong>
+                <hr/>
+                <br/>
               </Row>
             </Col>}
         </Row>
