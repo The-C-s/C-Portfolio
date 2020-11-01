@@ -1,17 +1,18 @@
 const fs = require('fs');
 const sass = require('sass');
 
-const filePath = './src/sass/main.scss'
+const sassFile = './src/sass/main.scss';
+const cssFile = './src/style.css';
 
 const result = sass.renderSync({
-  file: filePath,
+  file: sassFile,
   includePaths: ['./node_modules/']
 });
 
-console.log("Sass rendered successfully, output to " + filePath);
+console.log("Sass rendered successfully, output to " + cssFile);
 
 try {
-  fs.writeFileSync('./src/style.css', result.css.toString());
+  fs.writeFileSync(cssFile, result.css.toString());
 } catch (err) {
   console.error(err.message);
 }
