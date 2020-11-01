@@ -23,7 +23,7 @@ export default function Register() {
     e.preventDefault();
           dispatch(register(form))
           .then(() => dispatch(login(form)))
-          .then(() => dispatch(createProfile(form.user)))
+          .then(() => dispatch(createProfile(form.email)))
           .then(() => history.push('/homepage')); 
         
   }
