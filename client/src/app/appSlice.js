@@ -92,6 +92,10 @@ const setError = (state, action, error) => {
 
   return {
     ...state,
+    loading: {
+      ...state.loading,
+      [action]: false
+    },
     errors: {
       ...state.errors,
       [action]: error.message
