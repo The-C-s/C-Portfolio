@@ -20,10 +20,10 @@ export default function Register() {
   
   const onSubmitHandler = e => {
     
-    //e.preventDefault();
+    e.preventDefault();
           dispatch(register(form))
-          //.then(() => {dispatch(login(form))})
-          //.then(() => dispatch(createProfile({email: form.email})))
+          .then(() => {dispatch(login(form))})
+          .then(() => dispatch(createProfile({email: form.email})))
           .then(() => history.push('/homepage')); 
         
   }
