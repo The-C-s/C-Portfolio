@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 import Nav from 'react-bootstrap/Nav';
 import NavLink from '../layout/NavLink';
@@ -12,7 +12,7 @@ import { authenticate } from '../user/userSlice';
 export default function Share() {
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  //const history = useHistory();
   const user = useSelector(state => state.user);
   const gettingUser = useSelector(state => state.app.loading.login);
 
