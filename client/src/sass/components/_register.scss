@@ -1,0 +1,19 @@
+.ReactPasswordStrength {
+  border: none;
+  font-family: $font-default;
+}
+
+.ReactPasswordStrength-strength-desc {
+  font-size: 12px;
+  color: #8a8d91;
+}
+
+.ReactPasswordStrength-strength-bar {
+  margin: 2px 5px;
+}
+
+@include sass-themify() {
+  .ReactPasswordStrength-strength-bar {
+    background-color: sass-themify-get-color('accent');
+  }
+}
