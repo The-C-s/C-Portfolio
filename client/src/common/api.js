@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
 }
 
 axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:57707';
+//axios.defaults.baseURL = 'http://localhost:58809';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
@@ -92,3 +92,5 @@ export const getSharepage = async id => await axios.get(`${SHARE}${id}`);
 export const editSharepage = async shareParams => await axios.put(`${SHARE}${shareParams.id}`, shareParams);
 
 export const addSharepage = async () => await axios.post(CREATE_SHARE);
+
+export const deleteSharepage = async id => await axios.delete(`${SHARE}${id}`);
