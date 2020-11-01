@@ -69,7 +69,6 @@
         }
     }
 
-    //Doesn't exist yet 
     .tags{
         margin-top: 10px; 
         .tags-box{
@@ -81,6 +80,25 @@
             border-radius: 10px;
 
             .content-heading{
+                position: flex;
+                padding-top: 7px; 
+                padding-left: 10px; 
+                color: white;  
+            }
+        }
+    }
+
+    .time{
+        margin-top: 10px; 
+        .time-box{
+            position: flex; 
+            height: 34px;
+            margin-bottom: 20px; 
+    
+            background: #78C5DC;
+            border-radius: 10px;
+
+            .time-heading{
                 position: flex;
                 padding-top: 7px; 
                 padding-left: 10px; 
