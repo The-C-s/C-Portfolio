@@ -21,12 +21,12 @@ export const editSharepage = createAsyncThunk(
 export const addSharepage = createAsyncThunk(
     'share/addSharepage',
     apiAddSharepage
-)
+);
 
 export const deleteSharepage = createAsyncThunk(
     'share/deleteSharepage',
     apiDeleteSharepage
-)
+);
 
 //Stores profile in state.profile
 const share = createSlice({
