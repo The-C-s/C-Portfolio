@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 //rich text editor
 import ReactQuill from "react-quill";
@@ -11,16 +11,18 @@ import { createContent, getContent } from "../content/contentSlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import { FormRadio, Modal, ModalBody } from 'shards-react';
-import HashLoader from 'react-spinners/HashLoader';
+import { FormRadio, Modal, ModalBody } from "shards-react";
+import HashLoader from "react-spinners/HashLoader";
+import InputGroup from "react-bootstrap/InputGroup";
+import DatePicker from "react-datepicker";
 
 export default function AddContent() {
-
   const dispatch = useDispatch();
 
-  const uploading = useSelector(state => state.app.loading.createContent);
+  const uploading = useSelector((state) => state.app.loading.createContent);
 
   const [content, updateContent] = useState({});
+  const [tags, updateTags] = useState([]);
   const [richText, updateRichText] = useState("");
   const [file, updateFile] = useState();
   const [contentIsFile, setContentIsFile] = useState(false);
@@ -42,22 +44,24 @@ export default function AddContent() {
     }
 
     // Send API call, then re-fetch content and change dashboard view back to default (currently 'dashboard')
-    dispatch(createContent(data))
-      .then(() => {
-        resetForm();
-        toggleConfirmation();
-        dispatch(getContent());
-      });
-  }
+    dispatch(createContent(data)).then(() => {
+      resetForm();
+      toggleConfirmation();
+      dispatch(getContent());
+    });
+  };
 
   const toggleContentType = () => setContentIsFile(!contentIsFile);
 
-  const onChangeHandler = (e) => updateContent({ ...content, [e.target.id]: e.target.value });
+  const onChangeHandler = (e) =>
+    updateContent({ ...content, [e.target.id]: e.target.value });
+  const onDateChangeHandler = (date) =>
+    updateContent({ ...content, displayDate: date });
 
   const resetForm = () => {
-    updateContent({ title: '', description: '' });
-    updateRichText('');
-  }
+    updateContent({ title: "", description: "" });
+    updateRichText("");
+  };
 
   const onContentChangeHandler = (e) => updateRichText(e);
 
@@ -78,13 +82,40 @@ export default function AddContent() {
     ["clean"],
   ];
 
+  //Adds an empty tag field
+  const addTagField = () => {
+    const tmp = [...tags, ""];
+    updateTags(tmp);
+    updateContent({ ...content, tags: tmp });
+  };
+
+  //Deletes a tag field
+  const deleteTagField = (id) => {
+    const tmp = [...tags];
+    //Removes index
+    tmp.splice(id, 1);
+    updateTags(tmp);
+    updateContent({ ...content, tags: tmp });
+  };
+
+  const onChangeTagField = (e) => {
+    //Copy and updates tmp array
+    const tmp = [...tags];
+    tmp[e.target.id] = e.target.value;
+    //Updates education array and profile in react state
+    updateTags(tmp);
+    updateContent({ ...content, tags: tmp });
+  };
+
   return (
     <>
       <Modal open={showConfirmation} toggle={toggleConfirmation} size="sm">
         <ModalBody className="addcontent-confirmation-modal">
           <div className="addcontent-confirmation-modal">
             Success!
-            <Link className="addcontent-next-btn" to="/dashboard/content"><strong>See content</strong> →</Link>
+            <Link className="addcontent-next-btn" to="/dashboard/content">
+              <strong>See content</strong> →
+            </Link>
           </div>
         </ModalBody>
       </Modal>
@@ -139,34 +170,91 @@ export default function AddContent() {
               File
             </FormRadio>
             <Row>
-            <div>{"\n"}{"\n"}</div>
+              <div>
+                {"\n"}
+                {"\n"}
+              </div>
             </Row>
             <div className="content">
-            <div className="content-box">
-              <div className="content-heading">Content</div>
+              <div className="content-box">
+                <div className="content-heading">Content</div>
+              </div>
+              {!contentIsFile ? (
+                <Form.Group controlId="content">
+                  <ReactQuill
+                    modules={{ toolbar: enabledTools }}
+                    theme="snow"
+                    value={richText}
+                    onChange={onContentChangeHandler}
+                  />
+                </Form.Group>
+              ) : (
+                <Form.Group controlId="file">
+                  <Form.Label>File</Form.Label>
+                  <br />
+                  <input
+                    type="file"
+                    name="file"
+                    onChange={onFileChosenHandler}
+                  />
+                </Form.Group>
+              )}
             </div>
-            {!contentIsFile ? (
-              <Form.Group controlId="content">
-                <ReactQuill
-                  modules={{ toolbar: enabledTools }}
-                  theme="snow"
-                  value={richText}
-                  onChange={onContentChangeHandler}
-                />
+            <div className="tags">
+              <div className="tags-box">
+                <div className="content-heading">Tags</div>
+              </div>
+            </div>
+            {tags.map((tag, i) => (
+              <Form.Group controlId={i}>
+                <InputGroup className="mb-3">
+                  <Form.Control
+                    as="textarea"
+                    rows="1"
+                    value={tag}
+                    onChange={onChangeTagField}
+                  />
+                  <InputGroup.Append>
+                    <Button
+                      variant="outline-secondary"
+                      id={i}
+                      onClick={(e) => deleteTagField(i)}
+                    >
+                      Delete
+                    </Button>
+                  </InputGroup.Append>
+                </InputGroup>
               </Form.Group>
-            ) : (
-              <Form.Group controlId="file">
-                <Form.Label>File</Form.Label>
+            ))}
+            <Row className="ml-1 mb-3">
+              <div>
+                <Button onClick={addTagField}>Add Tag</Button>
                 <br />
-                <input type="file" name="file" onChange={onFileChosenHandler} />
-              </Form.Group>
-            )}
+              </div>
+            </Row>
           </div>
+          <div className="time">
+            <div className="time-box">
+              <div className="time-heading">Date</div>
+            </div>
+          </div>
+          <div className="mb-3">
+            <DatePicker
+              selected={content.displayDate}
+              onSelect={(date) => onDateChangeHandler(date)}
+            />
           </div>
           <Button type="submit" variant="info">
-            {uploading
-              ? <>Uploading <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={uploading}/></span></>
-              : 'Create'}
+            {uploading ? (
+              <>
+                Uploading{" "}
+                <span className="spinner-login">
+                  <HashLoader size={20} color={"#ffffff"} loading={uploading} />
+                </span>
+              </>
+            ) : (
+              "Create"
+            )}
           </Button>
         </div>
       </Form>
