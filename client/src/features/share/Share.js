@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { ViewPort, LeftResizable, Fill, Right, Info } from "react-spaces";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
-import Interweave from "interweave";
+import { ViewPort, LeftResizable, Fill, Right, Info } from 'react-spaces';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import Interweave from 'interweave';
 
-import ProfileBar from "./ProfileBar";
-//import Showcase from './Showcase';
-import ShareContentItem from "./ShareContentItem"; // Component probably needs to be edited to suit share view
-import Section from "./Section";
-import Skeleton from "react-loading-skeleton";
-import Button from "react-bootstrap/Button";
+import ProfileBar from './ProfileBar';
+import ShareContentItem from './ShareContentItem'; // Component probably needs to be edited to suit share view
+import Section from './Section';
+import Skeleton from 'react-loading-skeleton';
+import Button from 'react-bootstrap/Button';
 
-import { getShareId } from "../../common/helpers";
+import { getContentType, getShareId } from '../../common/helpers';
 
-import { getSharepage, editSharepage } from "../share/shareSlice";
+import { getSharepage, editSharepage } from '../share/shareSlice';
 
-const isUrl = require("is-valid-http-url");
-const isImage = require("is-image");
-
+/**
+ * Main Share page.
+ * 
+ * Current issues:
+ *  - Accesses state.user for avatar and background, need to be accessible by public url.
+ */
 export default function Share() {
+
   const dispatch = useDispatch();
+  const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
+  const gettingContent = useSelector(state => state.app.loading.getContent);
   const shareid = getShareId(window.location.href);
-  const gettingSharepage = useSelector(
-    (state) => state.app.loading.getSharepage
-  );
-  const gettingContent = useSelector((state) => state.app.loading.getContent);
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
+  const share = useSelector(state => state.share);
 
   //this will be empty if user isn't logged in
   const allContent = useSelector((state) => state.content);
@@ -41,8 +42,6 @@ export default function Share() {
     }
     fetch();
   }, [dispatch, shareid]);
-
-  const share = useSelector((state) => state.share);
 
   //the selected posts
   const [selectedPosts, setSelectedPosts] = useState({});
@@ -88,42 +87,24 @@ export default function Share() {
     setSelectedPosts(_selectedPosts);
   };
 
-  const [profilebarState, setProfilebarState] = useState({
-    collapsed: false,
-    title: "showcase",
-  });
+  /**
+   * Following code is for handling UI manipulation and animations.
+   */
   const [profilebarWidth, setProfilebarWidth] = useState(300);
   const [focusedContent, setFocusedContent] = useState({});
   const [focusedContentWidth, setFocusedContentWidth] = useState(0);
   const [inFocusedState, setFocusedState] = useState(false);
   const [viewSection, setViewSection] = useState("showcase");
+  const [profilebarState, setProfilebarState] = useState({
+    collapsed: false,
+    title: "showcase",
+  });
   const [viewStates, setViewStates] = useState({
     showcase: true,
     education: false,
     experience: false,
     projects: false,
   });
-
-  //Determine variant of ContentItem to use
-  let image = false;
-  if (focusedContent.content) {
-    if (isUrl(focusedContent.content)) {
-      if (isImage(focusedContent.content.split("?")[0])) {
-        image = true;
-      }
-    }
-  }
-
-  // Showcase Simulator®
-  /**
-  const randInt = x => Math.floor(Math.random() * x);
-  const showcase = [
-    share.content[randInt(share.content.length)],
-    share.content[randInt(share.content.length)],
-    share.content[randInt(share.content.length)],
-    share.content[randInt(share.content.length)]
-  ];
-  **/
 
   // Handler for changing sidebar type when its width is adjusted
   const handleInfo = (info) => {
@@ -137,15 +118,19 @@ export default function Share() {
   };
 
   // Handler for scrolling to a section by clicking in the sidebar
-  const scrollToSection = (section) =>
+  const scrollToSection = section =>
     document
       .getElementsByClassName(section)[0]
       .scrollIntoView({ behavior: "smooth" });
-  const scrollToContentItem = (id) =>
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      
+  const scrollToContentItem = id =>
+    document
+      .getElementById(id)
+      .scrollIntoView({ behavior: "smooth" });
 
   // Set sidebar styles depending on what section user has scrolled to
   const sectionScrollHandler = (section, inView) => {
+
     const _viewStates = { ...viewStates, [section]: inView };
 
     setViewStates(_viewStates);
@@ -189,6 +174,9 @@ export default function Share() {
     setFocusedContentWidth(0);
     setFocusedState(false);
   };
+  /**
+   * End of fancy UI code
+   */
 
   return (
     <>
@@ -204,11 +192,9 @@ export default function Share() {
           <ProfileBar
             user={{ firstName: share.firstName, lastName: share.lastName }}
             profile={{
-              ...{
-                logo: share.logo,
-                education: share.education,
-                experience: share.experience,
-              },
+              logo: share.logo,
+              education: share.education,
+              experience: share.experience,
               resume: share.resume,
               email: share.email,
             }}
@@ -219,64 +205,76 @@ export default function Share() {
           />
         </LeftResizable>
         <Fill className="share-main" scrollable={!inFocusedState}>
+          <Section name="top" className="section-top" scrollHandler={sectionScrollHandler}/>
           <Section
             name="showcase"
-            className="share-showcase"
+            className={`share-showcase ${inFocusedState ? 'hidden' : ''}`}
             scrollHandler={sectionScrollHandler}
           >
             <Col>
               <Row>
-                <h1>Showcase</h1>
-              </Row>
-              <Row>
                 <div className="showcase-box">
                   <Image
                     roundedCircle
-                    className="showcase-avatar"
-                    src={share.avatar}
+                    className={`showcase-avatar ${!viewStates.top ? 'showcase-avatar-condensed' : ''}`}
+                    src={user.avatar}
                   />
                   <Image
-                    className="showcase-background"
-                    src={share.background}
+                    className={`showcase-background ${!viewStates.top ? 'showcase-background-condensed' : ''}`}
+                    src={user.background}
                   />
                 </div>
               </Row>
-              {
-                gettingSharepage ? (
-                  <>
-                    <h1>
-                      <Skeleton />
-                    </h1>
-                    <p>
-                      <Skeleton count={1} />
-                    </p>
-                  </>
-                ) : (
-                  <></>
-                ) //<><Showcase items={showcase}/></>
+              {gettingSharepage &&
+                <>
+                  <h1>
+                    <Skeleton/>
+                  </h1>
+                  <p>
+                    <Skeleton count={1}/>
+                  </p>
+                </>
               }
             </Col>
           </Section>
-          <Row>
-            <div className="pageheading-rectangle1">
-              <h1 className="pageheading-heading">Projects</h1>
-              <div className="pageheading-decoration1" />
-              <div className="pageheading-decoration2" />
-            </div>
-            <br />
-          </Row>
-          <br />
-          <br />
-          <br />
-          <br />
           <Section
             name="projects"
             className="share-projects"
             scrollHandler={sectionScrollHandler}
           >
-            <Col>
-              {editing ? (
-                gettingContent ? (
+            <Row className="heading">
+              <div className="pageheading-rectangle1">
+                <h1 className="pageheading-heading">Projects</h1>
+                <div className="pageheading-decoration1" />
+                <div className="pageheading-decoration2" />
+              </div>
+            </Row>
+            <Row>
+              <Col>
+                {editing ? (
+                  gettingContent ? (
+                    <>
+                      <h2>
+                        <Skeleton />
+                      </h2>
+                      <p>
+                        <Skeleton count={3} />
+                      </p>
+                    </>
+                  ) : (
+                    allContent.map((contentItem, index) => (
+                      <ShareContentItem
+                        content={contentItem}
+                        key={index}
+                        clickHandler={handleContentItemClick}
+                        closeHandler={handleContentItemClose}
+                        editing={true}
+                        selected={selectedPosts[contentItem.id]}
+                        toggleSelection={togglePost}
+                      />
+                    ))
+                  )
+                ) : gettingSharepage ? (
                   <>
                     <h2>
                       <Skeleton />
@@ -286,56 +284,32 @@ export default function Share() {
                     </p>
                   </>
                 ) : (
-                  allContent.map((contentItem, index) => (
+                  share.content.map((contentItem, index) => (
                     <ShareContentItem
                       content={contentItem}
                       key={index}
+                      editing={false}
                       clickHandler={handleContentItemClick}
                       closeHandler={handleContentItemClose}
-                      editing={true}
-                      selected={selectedPosts[contentItem.id]}
-                      toggleSelection={togglePost}
                     />
                   ))
-                )
-              ) : gettingSharepage ? (
-                <>
-                  <h2>
-                    <Skeleton />
-                  </h2>
-                  <p>
-                    <Skeleton count={3} />
-                  </p>
-                </>
-              ) : (
-                share.content.map((contentItem, index) => (
-                  <ShareContentItem
-                    content={contentItem}
-                    key={index}
-                    editing={false}
-                    clickHandler={handleContentItemClick}
-                    closeHandler={handleContentItemClose}
-                  />
-                ))
-              )}
-            </Col>
+                )}
+              </Col>
+            </Row>
           </Section>
           {user.isAuthenticated &&
             (editing ? (
               <>
                 <Button onClick={saveEdit} variant="primary">
-                  {" "}
-                  Save{" "}
+                  Save
                 </Button>
                 <Button onClick={cancelEdit} variant="danger">
-                  {" "}
-                  Cancel{" "}
+                  Cancel
                 </Button>
               </>
             ) : (
               <Button onClick={startEdit} variant="primary">
-                {" "}
-                Edit{" "}
+                Edit
               </Button>
             ))}
         </Fill>
@@ -351,12 +325,8 @@ export default function Share() {
               <hr />
               {focusedContent.description}
               <hr />
-              {image && <Image src={focusedContent.content} fluid />}
-              {!image && (
-                <div>
-                  <Interweave content={focusedContent.content} />
-                </div>
-              )}
+              {getContentType(focusedContent.content) === 'image' && <Image src={focusedContent.content} fluid/>}
+              {getContentType(focusedContent.content) === 'text' && <Interweave content={focusedContent.content}/>}
             </p>
           )}
         </Right>
