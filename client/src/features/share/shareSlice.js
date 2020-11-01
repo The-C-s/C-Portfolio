@@ -2,7 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
     getSharepage as apiGetSharepage,
-    editSharepage as apiEditSharepage
+    editSharepage as apiEditSharepage,
+    addSharepage as apiAddSharepage,
+    deleteSharepage as apiDeleteSharepage
+
 } from '../../common/api';
 
 //API calls
@@ -16,6 +19,16 @@ export const editSharepage = createAsyncThunk(
     apiEditSharepage
 );
 
+export const addSharepage = createAsyncThunk(
+    'share/addSharepage',
+    apiAddSharepage
+);
+
+export const deleteSharepage = createAsyncThunk(
+    'share/deleteSharepage',
+    apiDeleteSharepage
+);
+
 //Stores profile in state.profile
 const share = createSlice({
     name: 'share',
@@ -25,7 +38,6 @@ const share = createSlice({
         //Resets state on logout (think its necessary)
         'user/logout': () => { return {}},
         //Returns share data
-        //[getSharepage.fulfilled]: (_, action) => { console.log("share data"); console.log(action.payload.data); return [...action.payload.data] }
         [getSharepage.fulfilled]: (state, action) => {
             return {
                 ...state,

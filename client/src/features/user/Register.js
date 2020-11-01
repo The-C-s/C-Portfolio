@@ -175,11 +175,10 @@ export default function Register() {
               Passwords don't match
             </small>}
         </Form.Group>
-        <Button type="submit" onClick={onSubmitHandler} variant="primary">
+        <Button className="btn-submit" type="submit" onClick={onSubmitHandler} variant="primary">
         {registering || loggingIn || creatingProfile
-          ? <>
-              {creatingProfile ? 'Creating your profile' : loggingIn ? 'Logging you in' : 'Signing you up'}
-              <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={registering || loggingIn || creatingProfile}/></span>
+          ? <>{creatingProfile ? 'Creating your profile' : loggingIn ? 'Logging you in' : 'Signing you up'
+          } <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={registering || loggingIn || creatingProfile}/></span>
             </>
           : "Sign up"}
         </Button>

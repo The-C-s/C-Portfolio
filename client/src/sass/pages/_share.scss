@@ -1,5 +1,5 @@
 .share {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 36px;
 
   .row {
@@ -11,6 +11,69 @@
     transition: left 0.8s;
     transition: right 0.8s;
     width: 0.8s;
+
+    .share-projects {
+      .heading {
+        margin-bottom: 120px;
+      }
+    }
+
+    .share-showcase {
+      min-height: 300px;
+      position: sticky;
+      top: 0;
+    }
+
+    .showcase-box {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      z-index: 1;
+      
+      .showcase-avatar {
+        position: absolute;
+        right: 0px; 
+        width: 250px;
+        height: 250px;
+        margin-right: 0px;
+        z-index: 3;
+        transition: all 0.5s ease-out;
+      }
+
+      .showcase-avatar-condensed {
+        width: 100px !important;
+        height: 100px !important;
+      }
+
+      .showcase-background {
+        position: absolute;
+        overflow: hidden;
+        object-fit: cover;
+        left: 0px;
+        top: 0px;
+        width: 100vw;
+        height: 250px;
+        margin: -20px -20px 0 -20px;
+        z-index: 2;
+        mask-image: linear-gradient(rgba(0, 0, 0, 1.0), transparent);
+        transition: all 0.5s ease-out;
+      }
+
+      .showcase-background-condensed {
+        height: 100px !important;
+      }
+    }
+  }
+
+  .section-top {
+    margin: 0 !important;
+  }
+
+  .share-education{ 
+    width: auto; 
+    .share-center{ 
+        margin: auto;
+    }
   }
 
   .share-section {
@@ -30,13 +93,15 @@
     max-width: 500px;
     display: inline-block;
     vertical-align: middle;
-    
+
     .contentitem {
-      .contentitem-description, .contentitem-title {
+      .contentitem-description,
+      .contentitem-title {
         @include ellipsis-truncate;
       }
 
-      .contentitem-footer, .contentitem-menu {
+      .contentitem-footer,
+      .contentitem-menu {
         display: none;
       }
     }

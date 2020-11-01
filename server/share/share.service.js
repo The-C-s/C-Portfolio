@@ -49,8 +49,12 @@ async function getById(shareid) {
         "education": profile.education,
         "experience": profile.experience,
         "logo": profile.logo,
+        "resume": profile.resume, 
         "firstName": user.firstName,
-        "lastName": user.lastName
+        "lastName": user.lastName, 
+        "background": user.background,
+        "avatar": user.avatar, 
+        "email": user.email
     };
 }
 
