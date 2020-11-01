@@ -5,21 +5,21 @@ if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API) {
   require('../_mockapi/api');
 }
 
-axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
-//axios.defaults.baseURL = 'http://localhost:56202';
+//axios.defaults.baseURL = 'https://cportfolio.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:57707';
 
 export const AUTH_USER = '/users/authenticate';
 export const REGISTER_USER = '/users/register';
 export const CURRENT_USER = '/users/current';
 export const CONTENT = '/content/';
-export const CREATE_CONTENT = '/content/create'; 
-export const CREATE_PROFILE = '/profile/create'; 
-export const PROFILE = '/profile/'; 
+export const CREATE_CONTENT = '/content/create';
+export const CREATE_PROFILE = '/profile/create';
+export const PROFILE = '/profile/';
 export const ADD_LOGO = '/profile/addLogo';
-export const ADD_RESUME = '/profile/addResume'; 
+export const ADD_RESUME = '/profile/addResume';
 export const UPDATE_USER = '/users/update';
-export const UPLOAD_AVATAR = '/users/avatar'; 
-export const UPLOAD_BACKGROUND = '/users/background'; 
+export const UPLOAD_AVATAR = '/users/avatar';
+export const UPLOAD_BACKGROUND = '/users/background';
 export const SHARE = '/share/';
 
 export const token = {
@@ -40,8 +40,8 @@ export const authenticateToken = async () => await axios.get(CURRENT_USER);
 // Uses an existing token if user is logged in and returns all their content (as a list, not an object)
 export const getAllContent = async () => await axios.get(CONTENT);
 
-//Gets one post from an id 
-//const getSingleContent = async id => await axios.get(`${CONTENT}${id}`); 
+//Gets one post from an id
+//const getSingleContent = async id => await axios.get(`${CONTENT}${id}`);
 
 // Takes a content object and authorises with existing token
 export const createContent = async content => await axios.post(CREATE_CONTENT, content);
@@ -63,28 +63,28 @@ export const editContent = async content => {
 // Takes just the content id (as a string) and authorises with existing token
 export const deleteContent = async id => await axios.delete(`${CONTENT}${id}`);
 
-// Takes profile object and authorises with existing token 
-export const createProfile = async profile => await axios.post(CREATE_PROFILE, profile); 
+// Takes profile object and authorises with existing token
+export const createProfile = async profile => await axios.post(CREATE_PROFILE, profile);
 
 // Takes a profile object (text only) and id and authorises with existing token
-export const editProfile = async profile => await axios.put(`${PROFILE}${profile.id}`, profile); 
+export const editProfile = async profile => await axios.put(`${PROFILE}${profile.id}`, profile);
 
-// Takes a profile id and authorises with existing token 
-export const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`); 
+// Takes a profile id and authorises with existing token
+export const deleteProfile = async id => await axios.delete(`${PROFILE}${id}`);
 
 // Takes a profile id and authorises with existing token, returns profile
-export const getProfile = async id => await axios.get(`${PROFILE}${id}`); 
+export const getProfile = async id => await axios.get(`${PROFILE}${id}`);
 
-//Takes a profile id and authorises with existing token 
-export const addLogo = async logo => await axios.put(ADD_LOGO, logo);  
+//Takes a profile id and authorises with existing token
+export const addLogo = async logo => await axios.put(ADD_LOGO, logo);
 
-export const addResume = async resume => await axios.put(ADD_RESUME, resume);  
+export const addResume = async resume => await axios.put(ADD_RESUME, resume);
 
 export const updateUser = async userParams => await axios.put(UPDATE_USER, userParams);
 
-export const uploadAvatar = async avatar => await axios.put(UPLOAD_AVATAR, avatar); 
+export const uploadAvatar = async avatar => await axios.put(UPLOAD_AVATAR, avatar);
 
-export const uploadBackground = async background => await axios.put(UPLOAD_BACKGROUND, background); 
+export const uploadBackground = async background => await axios.put(UPLOAD_BACKGROUND, background);
 
 export const getSharepage = async id => await axios.get(`${SHARE}${id}`);
 
