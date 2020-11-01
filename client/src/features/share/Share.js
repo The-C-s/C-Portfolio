@@ -31,7 +31,6 @@ export default function Share() {
   const shareid = getShareId(window.location.href);
   const gettingSharepage = useSelector(state => state.app.loading.getSharepage);
   const gettingContent = useSelector(state => state.app.loading.getContent);
-  const shareid = getShareId(window.location.href);
   const user = useSelector(state => state.user);
   const share = useSelector(state => state.share);
 
@@ -103,7 +102,6 @@ export default function Share() {
    * Following code is for handling UI manipulation and animations.
    */
 
-  const [profilebarState, setProfilebarState] = useState({ collapsed: false, title: 'showcase' });
   const [profilebarWidth, setProfilebarWidth] = useState(300);
   const [focusedContent, setFocusedContent] = useState({});
   const [focusedContentWidth, setFocusedContentWidth] = useState(0);
