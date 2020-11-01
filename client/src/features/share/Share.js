@@ -41,7 +41,7 @@ export default function Share() {
   const [selectedPosts, setSelectedPosts] = useState({});
 
   const [editing, setEditing] = useState(false);
-  const stopEditing = () => {
+  const saveEdit = () => {
       setEditing(false);
       var newContent = []
       for(var post of allContent) {
@@ -53,7 +53,10 @@ export default function Share() {
       dispatch(editSharepage({"id": shareid, "content": newContent}))
         .then(() => dispatch(getSharepage(shareid)));
   }
-  const startEditing = () => {
+  const cancelEdit = () => {
+      setEditing(false);
+  }
+  const startEdit = () => {
       setEditing(true);
 
       var _selectedPosts = {};
@@ -279,8 +282,11 @@ export default function Share() {
             </Section>
             {user.isAuthenticated && (
                 editing
-                    ? <Button onClick={stopEditing} variant="primary"> Save </Button>
-                    : <Button onClick={startEditing} variant="primary"> Edit </Button>
+                    ? <>
+                        <Button onClick={saveEdit} variant="primary"> Save </Button>
+                        <Button onClick={cancelEdit} variant="danger"> Cancel </Button>
+                      </>
+                    : <Button onClick={startEdit} variant="primary"> Edit </Button>
             )}
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
