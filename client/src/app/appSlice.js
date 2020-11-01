@@ -27,6 +27,10 @@ const app = createSlice({
     'user/register/fulfilled': state => { stopLoading(state, 'register') },
     'user/register/rejected': (state, action) => { return setError(state, 'register', action.error) },
 
+    'profile/createProfile/pending': state => { return startLoading(state, 'createProfile') },
+    'profile/createProfile/fulfilled': state => { stopLoading(state, 'createProfile') },
+    'profile/createProfile/rejected': (state, action) => { return setError(state, 'createProfile', action.error) },
+
     'content/getContent/pending': state => { return startLoading(state, 'getContent') },
     'content/getContent/fulfilled': state => { stopLoading(state, 'getContent') },
     'content/getContent/rejected': (state, action) => { return setError(state, 'getContent', action.error) },
