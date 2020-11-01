@@ -87,3 +87,5 @@ export const uploadAvatar = async avatar => await axios.put(UPLOAD_AVATAR, avata
 export const uploadBackground = async background => await axios.put(UPLOAD_BACKGROUND, background); 
 
 export const getSharepage = async id => await axios.get(`${SHARE}${id}`);
+
+export const editSharepage = async shareParams => { console.log(shareParams); await axios.put(`${SHARE}${shareParams.id}`, shareParams); }

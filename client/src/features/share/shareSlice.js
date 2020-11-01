@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
-    getSharepage as apiGetSharepage
+    getSharepage as apiGetSharepage,
+    editSharepage as apiEditSharepage
 } from '../../common/api';
 
 //API calls
@@ -9,6 +10,12 @@ export const getSharepage = createAsyncThunk(
     'share/getSharepage',
     apiGetSharepage
 );
+
+export const editSharepage = createAsyncThunk(
+    'share/editSharepage',
+    apiEditSharepage
+);
+
 //Stores profile in state.profile
 const share = createSlice({
     name: 'share',

@@ -9,7 +9,7 @@ import { parseDate } from '../../common/helpers';
 const isUrl = require('is-valid-http-url');
 const isImage = require('is-image');
 
-export default function ShareContentItem({ content, clickHandler, closeHandler }) {
+export default function ShareContentItem({ content, clickHandler, closeHandler, editing, selected, toggleSelection }) {
 
   const { id, title, description, displayDate } = content;
   const [focused, setFocus] = useState(false);
@@ -37,14 +37,26 @@ export default function ShareContentItem({ content, clickHandler, closeHandler }
     setFocus(false);
   }
 
+  const toggleSelectedClickHandler = e => {
+      toggleSelection(id);
+      selected = !selected;
+      console.log(selected);
+  }
+
+  const getBackgroundColor = () => {
+      if(selected) return "lightblue";
+      return "white";
+  }
+
   return(
+    <>
     <Container
       id={id}
       className={`sharecontentitem sharecontentitem-container${focused ? '-focused' : ''}`}
       key={id}
       onClick={contentClickHandler}
     >
-      <div className="sharecontentitem sharecontentitem-card">
+      <div id="contentdiv" className="sharecontentitem sharecontentitem-card" style={{ backgroundColor: getBackgroundColor() }}>
         <Row className="sharecontentitem sharecontentitem-head">
           <Col xs={11}>
             <Row className="sharecontentitem sharecontentitem-title">{title}</Row>
@@ -52,8 +64,15 @@ export default function ShareContentItem({ content, clickHandler, closeHandler }
           </Col>
           {focused &&
             <Col>
+              {editing &&
+                  <>
+                  <Row className="sharecontentitem sharecontentitem-menu" onClick={toggleSelectedClickHandler}>
+                    {selected ? "Remove from sharepage" : "Add to sharepage"}
+                  </Row>
+                  </>
+              }
               <Row className="sharecontentitem sharecontentitem-menu" onClick={closeClickHandler}>
-                <strong>goodbye</strong>
+                <strong>later skater</strong>
               </Row>
             </Col>}
         </Row>
@@ -70,7 +89,9 @@ export default function ShareContentItem({ content, clickHandler, closeHandler }
             </Row>
           </Col>
         </Row>
+
       </div>
     </Container>
+    </>
   );
 }
