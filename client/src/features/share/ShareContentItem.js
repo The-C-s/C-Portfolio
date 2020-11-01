@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image'; 
 
 import { parseDate } from '../../common/helpers';
 
@@ -72,7 +73,7 @@ export default function ShareContentItem({ content, clickHandler, closeHandler, 
                   </>
               }
               <Row className="sharecontentitem sharecontentitem-menu" onClick={closeClickHandler}>
-                <strong>later skater</strong>
+                <strong>Return</strong>
               </Row>
             </Col>}
         </Row>
@@ -80,7 +81,7 @@ export default function ShareContentItem({ content, clickHandler, closeHandler, 
           {image &&
             <Col className="sharecontentitem sharecontentitem-image-container" md={3}>
               <Row className="sharecontentitem sharecontentitem-image-container">
-                <img className="sharecontentitem sharecontentitem-image" src={content.content} alt={title}></img>
+                <Image className="sharecontentitem sharecontentitem-image" src={content.content} alt={title}></Image>
               </Row>
             </Col>}
           <Col>

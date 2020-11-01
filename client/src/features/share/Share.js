@@ -18,6 +18,9 @@ import { getShareId } from '../../common/helpers';
 
 import { getSharepage, editSharepage } from '../share/shareSlice';
 
+const isUrl = require('is-valid-http-url');
+const isImage = require('is-image');
+
 export default function Share() {
 
   const dispatch = useDispatch();
@@ -28,6 +31,7 @@ export default function Share() {
 
   //this will be empty if user isn't logged in
   const allContent = useSelector(state => state.content);
+
 
   // Reloading content
   useEffect(() => {
@@ -104,6 +108,15 @@ export default function Share() {
     projects: false
   });
 
+  //Determine variant of ContentItem to use
+  let image = false;
+  if (focusedContent.content) {
+    if (isUrl(focusedContent.content)) {
+      if (isImage(focusedContent.content.split('?')[0])) {
+       image = true;
+      }
+    }
+  }
 
 
   // Showcase Simulator®
@@ -275,7 +288,9 @@ export default function Share() {
             )}
         </Fill>
         <Right className="share-focusedcontent" size={focusedContentWidth} scrollable={true}>
-          {focusedContent.title && <p>{focusedContent.content}</p>}
+          {focusedContent.title && <p>
+            {<Image src={focusedContent.content}/>}
+            </p>}
         </Right>
       </ViewPort>
     </>
