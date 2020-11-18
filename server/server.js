@@ -75,10 +75,9 @@ app.use('/profile', profileRoute);
 //Redirects requests to /share to the share controller
 app.use('/share', shareRoute);
 
-//redirects any other url to default
-app.use(function(req, res){
-       res.redirect('/');
-   });
+app.get('/*', (req, res) => {
+    res.sendFile('client/build/index.html', { root: '.' });
+}); 
 
 // global error handler
 app.use(errorHandler);

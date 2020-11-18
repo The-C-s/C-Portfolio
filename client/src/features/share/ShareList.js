@@ -33,7 +33,7 @@ export default function Share() {
             <>
             <hr/>
             <Nav.Item>
-                <NavLink to={`/share/${sharepage}`} activeOnlyWhenExact={true} label={<>
+                <NavLink to={`/shared/${sharepage}`} activeOnlyWhenExact={true} label={<>
                     <h4 style={{ textDecorationLine: 'underline' }}> {sharepage} </h4>
                 </>}/>
             </Nav.Item>
