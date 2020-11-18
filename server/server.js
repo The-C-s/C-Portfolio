@@ -49,16 +49,17 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }));
 app.use(cors());
-app.use(jwt.jwt()); 
+
 
 //Think i need something here to run the home page?
+/*
 app.get('/', (req, res) => {
     console.log(`URL: ${req.url}`);
     
     res.send({
     	message: 'Invalid path, is METHOD correct?'
     });
-});
+});*/
 
 // user functions
 app.use('/users', userRoute);
@@ -74,19 +75,10 @@ app.use('/share', shareRoute);
 
 //https://create-react-app.dev/docs/deployment/#netlify-https-wwwnetlifycom 
 //Redirects other requests to index 
-app.get('/register', (req, res) => {
-    res.sendFile('client/build/index.html', { root: '.' });
-}); 
-
-app.get('/shared', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile('client/build/index.html', { root: '.' });
 }); 
   
-//redirects any other url to default
-app.use(function(req, res){
-    res.redirect('/');
-});
-
 // global error handler
 app.use(errorHandler);
 
