@@ -230,11 +230,11 @@ export default function Share() {
                   <Image
                     roundedCircle
                     className={`showcase-avatar ${!viewStates.top ? 'showcase-avatar-condensed' : ''}`}
-                    src={user.avatar}
+                    src={share.avatar}
                   />
                   <Image
                     className={`showcase-background ${!viewStates.top ? 'showcase-background-condensed' : ''}`}
-                    src={user.background}
+                    src={share.background}
                   />
                 </div>
               </Row>

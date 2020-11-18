@@ -13,8 +13,8 @@
     	"/dashboard/content",
     	"/dashboard/content/add",
     	"/dashboard/content/upload",
-		"/homepage", 
-		"/shared", 
-		"/register"
+		  "/homepage", 
+		  "/shared", 
+		  "/register"
 	]
 }

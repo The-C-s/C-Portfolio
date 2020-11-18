@@ -53,12 +53,11 @@ app.use(cors());
 // use JWT auth to secure the api
 app.use(jwt.jwt());
 
-
 //Think i need something here to run the home page?
 /*
 app.get('/', (req, res) => {
     console.log(`URL: ${req.url}`);
-
+    
     res.send({
     	message: 'Invalid path, is METHOD correct?'
     });
@@ -76,6 +75,8 @@ app.use('/profile', profileRoute);
 //Redirects requests to /share to the share controller
 app.use('/share', shareRoute);
 
+//https://create-react-app.dev/docs/deployment/#netlify-https-wwwnetlifycom 
+//Redirects other requests to index 
 app.get('/*', (req, res) => {
     res.sendFile('client/build/index.html', { root: '.' });
 }); 
@@ -84,7 +85,7 @@ app.get('/*', (req, res) => {
 app.use(function(req, res){
     res.redirect('/');
 });*/
-
+  
 // global error handler
 app.use(errorHandler);
 
