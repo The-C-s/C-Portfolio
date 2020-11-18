@@ -40,6 +40,8 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
+app.use(jwt.jwt());
+
 //Used to run react
 app.use(express.static('client/build'));
 
