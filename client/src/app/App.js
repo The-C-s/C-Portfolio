@@ -43,7 +43,7 @@ export default function App() {
           <PrivateRoute
             key={index}
             exact={route.exact}
-            path={route.path}
+            path={route.path} 
             test={authenticated}
             fallback="/"
             children={route.page}

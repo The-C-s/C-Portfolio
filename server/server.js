@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // use JWT auth to secure the api
-app.use(jwt.jwt());
+//app.use(jwt.jwt());
 
 
 //Think i need something here to run the home page?
@@ -79,8 +79,9 @@ app.use('/share', shareRoute);
 //https://create-react-app.dev/docs/deployment/#netlify-https-wwwnetlifycom 
 //Redirects other requests to index 
 app.get('/*', (req, res) => {
-    console.log(`URL: ${req.url}`);
-    res.sendFile(path.join('client', 'build', 'index.html'));
+    //console.log(`URL: ${req.url}`);
+    //res.send("hi"); 
+    res.sendFile('client/build/index.html', { root: '.' });
 }); 
   
 //redirects any other url to default
@@ -89,7 +90,7 @@ app.get('/*', (req, res) => {
   // });
 
 // global error handler
-app.use(errorHandler);
+//app.use(errorHandler);
 
 // Start the server
 const server = app.listen(process.env.PORT, (error) => {
