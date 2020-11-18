@@ -57,7 +57,7 @@ app.use(jwt.jwt());
 //Think i need something here to run the home page?
 app.get('/', (req, res) => {
     console.log(`URL: ${req.url}`);
-
+    
     res.send({
     	message: 'Invalid path, is METHOD correct?'
     });
@@ -75,6 +75,11 @@ app.use('/profile', profileRoute);
 //Redirects requests to /share to the share controller
 app.use('/share', shareRoute);
 
+//Redirects other requests to index 
+app.get('*', (req, res) => {
+    res.sendFile('client/build/index.html');
+  }); 
+  
 //redirects any other url to default
 app.use(function(req, res){
        res.redirect('/');
