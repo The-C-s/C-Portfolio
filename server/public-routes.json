@@ -13,6 +13,7 @@
     	"/dashboard/content",
     	"/dashboard/content/add",
     	"/dashboard/content/upload",
+		"/dashboard/sharepages",
     	"/homepage"
 	]
 }

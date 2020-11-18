@@ -9,7 +9,7 @@ const app = createSlice({
     errors: {},
     loading: {}
   },
-  reduers: {},
+  reducers: {},
   extraReducers: {
     'user/login/pending': state => { return startLoading(state, 'login') },
     'user/login/fulfilled': state => { stopLoading(state, 'login') },
