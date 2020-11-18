@@ -8,6 +8,7 @@
 		"/database",
     	"/users",
     	"/dashboard",
+		"dashboard/sharepages",
     	"/dashboard/profile",
     	"/dashboard/content",
     	"/dashboard/content/add",
