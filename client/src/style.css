@@ -20345,6 +20345,10 @@ body.theme-default .ReactPasswordStrength.is-strength-2 .ReactPasswordStrength-s
 }
 
 .topnav {
+  margin: 10px 0;
+}
+
+.topnav {
   min-height: 0 !important;
   height: 40px;
   width: auto;

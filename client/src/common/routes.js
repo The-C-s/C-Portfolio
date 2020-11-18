@@ -26,7 +26,7 @@ export const publicRoutes = [
     landing: <Register/>
   },
   {
-    path: "/share",
+    path: "/shared",
     exact: false,
     page: <Share/>
   }
