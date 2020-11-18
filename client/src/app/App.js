@@ -33,7 +33,6 @@ export default function App() {
         {publicRoutes.map((route, index) =>
           <Route
             key={index}
-            restricted={false}
             exact={route.exact}
             path={route.path}
             children={route.page}
