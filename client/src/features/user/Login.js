@@ -102,7 +102,7 @@ export default function Login({ onLogin }) {
         </Form.Group>
         <Button className="btn-login" type="submit" variant="primary">
           {loggingIn
-            ? <>Pogging in <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={loggingIn}/></span></>
+            ? <>Logging in <span className="spinner-login"><HashLoader size={20} color={"#ffffff"} loading={loggingIn}/></span></>
             : "Log in"}
         </Button>
         <div className="text-center"> Don't have an account? <Button as={Link} to="/register" variant="link">Register</Button></div>
