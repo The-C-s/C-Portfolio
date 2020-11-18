@@ -50,6 +50,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
+// use JWT auth to secure the api
+app.use(jwt.jwt());
 
 //Think i need something here to run the home page?
 /*
@@ -78,6 +80,11 @@ app.use('/share', shareRoute);
 app.get('/*', (req, res) => {
     res.sendFile('client/build/index.html', { root: '.' });
 }); 
+
+/*
+app.use(function(req, res){
+    res.redirect('/');
+});*/
   
 // global error handler
 app.use(errorHandler);
