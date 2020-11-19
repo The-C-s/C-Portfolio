@@ -1,5 +1,9 @@
 ![Logo](/readme-images/Portfolio_cropped_new.png)
 
+## Website 
+
+[cPortfolio](https://cportfolio.herokuapp.com/) 
+
 ## Creators
 
 * [Brodie](https://github.com/bxvd) 
@@ -12,25 +16,23 @@
 
 cPortfolio was developed by Brodie, Joshua, Newaz, Victoria and Hugh for the capstone subject [COMP30022](https://handbook.unimelb.edu.au/2020/subjects/comp30022) at the University of Melbourne. It was created using agile development methodologies and is primarily a React based web app.
 
-cPortfolio is a electronic Portfolio for users to catalogue and share pdfs, user profiles like LinkedIn, collectibles and other artefacts with other students, academics and scholars.
+cPortfolio is a electronic Portfolio for users to share their own experiences, education and content with other students, academics and employers.
 
-The is the repository for cPortfolio's frontend. You can find the repository for cPortfolio's backend server here.
-
-## Features
-
-### Quick Demo
+The files for cPortfolio's frontend can be found in the [client](https://github.com/The-C-s/C-Portfolio/tree/master/client) folder. 
+The files for cPortfolio's backend can be found in the [server](https://github.com/The-C-s/C-Portfolio/tree/master/server) folder.
 
 ## Background
 
-Most universities conduct semesters twice or thrice a year and want to have a platform that helps engage student, academics and peers for enhanced learning and also bridge the gap between each other. University of Melbourne has taken such an initiative to address and tackle the issues while conducting every subject. 
-
-This ePortfolio system will be able to allow students, lecturers and other cohorts to submit individual guest lecture reports and end-ofsubject individual reflections as well as a team reports. The ePortfolio website also helps keep a profile based network among students and academics with a dedicated portfolio for students and lecturers linking their other important portfolio based sites like LinkedIn, GitHub, Kaggle to name a few. Even researchers can be benefitted from this website by reaching out to their fit candidates for the intended project roles.
+The purpose of cPortfolio was to create a platform that allows users to create and send a portfolio that allowed them to express their skills and capabilities to prospective employers, educators and other people of interest. The features and development of this project was created with respect to our client requirements. The main goal of this project was to allow users the ability to customize and tailor a portfolio page with specific content relevant to the jobs they are applying for, which is achieved through the creation of unique share pages. 
 
 ## Technologies Used
 ![Stack](/readme-images/stack.png)
 
 ## How to run
 
+```
 npm install 
 
-npm run
+npm start
+```
+
